@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Books Are Ready | Zokario</title>
+<meta name="description" content="Order confirmed — your Zokario digital books are ready to read online or download.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#171210">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario — home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
+        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
+        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
+        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
+        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
+      </svg>
+      <span class="brand-name">Zokario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="about.html">About</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+  <section class="order-hero container">
+    <div class="order-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <p class="eyebrow center-eyebrow">Order confirmed</p>
+    <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Your digital books<br>are <em>ready.</em></h1>
+    <p class="order-num" id="orderNum" style="margin-top:1.2rem">Order —</p>
+    <p class="lead" style="margin:1.2rem auto 0" id="emailNote">A receipt and download links are on their way to your inbox.</p>
+
+    <div class="order-card" id="orderCard"></div>
+
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem">
+      <a class="btn btn-gold btn-lg" href="account.html">Go to my downloads</a>
+      <a class="btn btn-ghost btn-lg" href="shop.html">Browse more books</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const orderNo = new URLSearchParams(location.search).get("order");
+  const orders = ZKStore.orders();
+  const order = orders.find(o => o.no === orderNo) || orders[0];
+  const card = document.getElementById("orderCard");
+
+  if (!order) {
+    document.getElementById("orderNum").textContent = "No recent order found";
+    document.getElementById("emailNote").textContent = "If you completed a purchase, open My Downloads — your library remembers.";
+    card.innerHTML = `<p style="color:var(--muted);text-align:center">Nothing here yet. Your next book is one click away.</p>`;
+    return;
+  }
+
+  document.getElementById("orderNum").textContent = "Order " + order.no;
+  document.getElementById("emailNote").textContent =
+    `A receipt and access links ${order.email ? "are on their way to " + order.email : "are on their way to your inbox"}. Your titles are already unlocked below.`;
+
+  card.innerHTML =
+    order.items.map(id => {
+      const p = ZK.byId(id);
+      if (!p) return "";
+      return `<div class="co-mini-item" style="align-items:center">
+        <span class="co-mini-thumb">${zkCoverFace(p)}</span>
+        <span style="min-width:0"><h4>${zkEsc(p.title)}</h4><span>${p.category} · digital ${p.type}</span></span>
+        <span style="margin-left:auto;display:flex;gap:1.2rem;flex-wrap:wrap">
+          <a class="btn-text" style="font-size:.7rem" href="reader.html?id=${p.id}">Read online</a>
+          <button class="btn-text" style="font-size:.7rem" onclick="zkDownload('${p.id}')">Download</button>
+        </span>
+      </div>`;
+    }).join("") +
+    `<div class="sum-row total" style="margin-top:1rem"><span>Paid</span><b>${ZK.fmt(order.total)}</b></div>
+     <p style="font-size:.8rem;color:var(--muted-2);margin-top:1rem">Formats: PDF · ePub · online reader. Your purchases live permanently in <a href="account.html">My Shelf</a>.</p>`;
+});
+</script>
+</body>
+</html>

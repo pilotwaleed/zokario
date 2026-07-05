@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reader | Zokario</title>
+<meta name="description" content="The Zokario online reader — your purchased books, beautifully typeset on any device.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#171210">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>body{display:block}</style>
+</head>
+<body class="reader-page" id="readerPage">
+
+  <div class="reader-topbar">
+    <a href="account.html">← My Shelf</a>
+    <button class="rt-btn" id="tocToggle" aria-label="Chapters" title="Chapters">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+    </button>
+    <span class="rt-title" id="rtTitle">Zokario Reader</span>
+    <div class="rt-tools">
+      <button class="rt-btn" id="fontMinus" aria-label="Smaller text" title="Smaller text">A−</button>
+      <button class="rt-btn" id="fontPlus" aria-label="Larger text" title="Larger text">A+</button>
+      <button class="rt-btn" data-theme-set="sepia" aria-label="Sepia theme" title="Sepia">◐</button>
+      <button class="rt-btn" data-theme-set="light" aria-label="Light theme" title="Light">○</button>
+      <button class="rt-btn" data-theme-set="dark" aria-label="Dark theme" title="Dark">●</button>
+      <button class="rt-btn bookmark-btn" id="bmBtn" aria-label="Bookmark this chapter" title="Bookmark chapter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10v18l-5-4-5 4V3Z"/></svg>
+      </button>
+      <button class="rt-btn" id="dlBtn" aria-label="Download" title="Download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="reader-body">
+    <aside class="reader-toc" id="readerToc" aria-label="Chapters">
+      <h4>Contents</h4>
+      <div id="tocList"></div>
+    </aside>
+    <div class="reader-content" id="readerContent"></div>
+  </div>
+
+  <div class="reader-footbar">
+    <span id="chLabel"></span>
+    <div class="reader-progress"><i id="rProgress"></i></div>
+    <span id="pctLabel">0%</span>
+  </div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const id = new URLSearchParams(location.search).get("id");
+  const p = ZK.byId(id);
+  const content = document.getElementById("readerContent");
+  const page = document.getElementById("readerPage");
+
+  if (!p) { location.replace("shop.html"); return; }
+
+  /* Access control: full reader is for owned titles */
+  if (!ZKStore.owns(p.id)) {
+    document.querySelector(".reader-body").innerHTML = `
+      <div style="margin:auto;text-align:center;padding:4rem 1.5rem;max-width:560px">
+        <span class="lock-ico" style="margin:0 auto 1.6rem;width:56px;height:56px;border-radius:50%;border:1px solid var(--r-kick);display:grid;place-items:center;color:var(--r-kick)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        </span>
+        <h1 style="font-family:var(--font-display);color:var(--r-head);font-size:1.8rem;margin-bottom:.8rem">This book isn’t on your shelf yet</h1>
+        <p style="color:var(--r-ink);margin-bottom:2rem">“${zkEsc(p.title)}” unlocks here the moment you own it. Until then, the opening chapters are free to read.</p>
+        <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-gold" href="product.html?id=${p.id}#preview">Read the free preview</a>
+          <a class="btn btn-dark" href="product.html?id=${p.id}">View this edition</a>
+        </div>
+      </div>`;
+    document.getElementById("rtTitle").textContent = p.title;
+    document.querySelector(".reader-footbar").style.display = "none";
+    return;
+  }
+
+  /* ---------- state ---------- */
+  const prefs = ZKStore.read("zk_reader_prefs", { theme: "sepia", fs: 1 });
+  page.dataset.theme = prefs.theme;
+  content.style.setProperty("--fs", prefs.fs);
+  document.getElementById("rtTitle").textContent = p.title;
+  document.title = p.title + " — Reader | Zokario";
+
+  const savePrefs = () => ZKStore.write("zk_reader_prefs", prefs);
+
+  /* ---------- render chapters ---------- */
+  content.innerHTML = p.chapters.map((ch, i) => `
+    <div class="rp-chapter" data-ch="${i}" id="ch-${i}">
+      <p class="rp-kicker">${zkEsc(ch.kicker)}</p>
+      <h2>${zkEsc(ch.t)}</h2>
+      ${ch.paras.map(x => `<p>${zkEsc(x)}</p>`).join("")}
+      ${i < p.chapters.length - 1 ? '<div class="rp-divider">✦ ✦ ✦</div>' : `
+        <div style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--r-line);text-align:center">
+          <p class="rp-kicker">End of this edition</p>
+          <p style="font-size:.95rem!important">Thank you for reading. Your download formats are always available from the toolbar above, and this page remembers exactly where you stopped.</p>
+          <a class="btn btn-gold" style="margin-top:1rem" href="shop.html">Find your next book</a>
+        </div>`}
+    </div>`).join("");
+
+  /* ---------- table of contents + bookmarks ---------- */
+  const tocList = document.getElementById("tocList");
+  const toc = document.getElementById("readerToc");
+  function renderToc(currentIdx) {
+    const bms = ZKStore.bookmarks(p.id);
+    tocList.innerHTML = p.chapters.map((ch, i) =>
+      `<button data-goto="${i}" class="${i === currentIdx ? "current" : ""}">${i + 1}. ${zkEsc(ch.t)}${bms.includes(i) ? '<span class="bm">🔖</span>' : ""}</button>`
+    ).join("");
+  }
+  tocList.addEventListener("click", e => {
+    const b = e.target.closest("[data-goto]");
+    if (!b) return;
+    const el = document.getElementById("ch-" + b.dataset.goto);
+    const top = el.getBoundingClientRect().top - content.getBoundingClientRect().top + content.scrollTop - 20;
+    content.scrollTo({ top, behavior: "smooth" });
+    if (innerWidth < 900) toc.classList.remove("open");
+  });
+  document.getElementById("tocToggle").addEventListener("click", () => toc.classList.toggle("open"));
+
+  /* ---------- progress + current chapter tracking ---------- */
+  let current = 0;
+  const chEls = [...content.querySelectorAll(".rp-chapter")];
+  function onScroll() {
+    const max = content.scrollHeight - content.clientHeight;
+    const ratio = max > 0 ? content.scrollTop / max : 0;
+    document.getElementById("rProgress").style.width = ratio * 100 + "%";
+    document.getElementById("pctLabel").textContent = Math.round(ratio * 100) + "%";
+    ZKStore.setProgress(p.id, ratio);
+
+    const mid = content.scrollTop + content.clientHeight * 0.35;
+    let idx = 0;
+    chEls.forEach((el, i) => { if (el.offsetTop <= mid) idx = i; });
+    if (idx !== current) {
+      current = idx;
+      document.getElementById("chLabel").textContent = p.chapters[idx].t;
+      renderToc(idx);
+      updateBmBtn();
+    }
+  }
+  content.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---------- bookmarks ---------- */
+  const bmBtn = document.getElementById("bmBtn");
+  function updateBmBtn() {
+    bmBtn.classList.toggle("active", ZKStore.bookmarks(p.id).includes(current));
+  }
+  bmBtn.addEventListener("click", () => {
+    let bms = ZKStore.bookmarks(p.id);
+    if (bms.includes(current)) { bms = bms.filter(x => x !== current); zkToast("Bookmark removed"); }
+    else { bms.push(current); zkToast("Chapter bookmarked"); }
+    ZKStore.setBookmarks(p.id, bms);
+    renderToc(current); updateBmBtn();
+  });
+
+  /* ---------- tools ---------- */
+  document.querySelectorAll("[data-theme-set]").forEach(b =>
+    b.addEventListener("click", () => { prefs.theme = b.dataset.themeSet; page.dataset.theme = prefs.theme; savePrefs(); }));
+  document.getElementById("fontPlus").addEventListener("click", () => {
+    prefs.fs = Math.min(1.4, +(prefs.fs + 0.08).toFixed(2));
+    content.style.setProperty("--fs", prefs.fs); savePrefs();
+  });
+  document.getElementById("fontMinus").addEventListener("click", () => {
+    prefs.fs = Math.max(0.8, +(prefs.fs - 0.08).toFixed(2));
+    content.style.setProperty("--fs", prefs.fs); savePrefs();
+  });
+  document.getElementById("dlBtn").addEventListener("click", () => zkDownload(p.id));
+
+  /* ---------- continue reading ---------- */
+  renderToc(0);
+  document.getElementById("chLabel").textContent = p.chapters[0].t;
+  const saved = ZKStore.progress()[p.id] || 0;
+  if (saved > 0.01 && saved < 0.98) {
+    requestAnimationFrame(() => {
+      content.scrollTop = saved * (content.scrollHeight - content.clientHeight);
+      zkToast("Welcome back — resuming where you left off");
+    });
+  }
+  onScroll();
+});
+</script>
+</body>
+</html>

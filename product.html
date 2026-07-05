@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zokario — Edition</title>
+<meta name="description" content="A premium Zokario digital edition — preview it free, read online instantly, download in PDF & ePub.">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Zokario">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta name="theme-color" content="#171210">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario — home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
+        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
+        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
+        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
+        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
+      </svg>
+      <span class="brand-name">Zokario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="about.html">About</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main id="productMain" style="padding-top:var(--header-h)">
+  <!-- rendered by JS -->
+</main>
+
+<!-- Preview reader modal -->
+<div class="reader-modal" id="previewModal" role="dialog" aria-modal="true" aria-label="Book preview">
+  <div class="reader-backdrop" data-close-preview></div>
+  <div class="reader-shell">
+    <div class="reader-bar">
+      <span class="rb-tag">Free preview</span>
+      <span class="rb-title" id="pvTitle"></span>
+      <button class="rb-close" data-close-preview aria-label="Close preview">✕</button>
+    </div>
+    <div class="reader-progress"><i id="pvProgress"></i></div>
+    <div class="reader-pages" id="pvPages"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Zokario — home">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
+            <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
+            <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
+            <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
+            <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
+          </svg>
+          <span class="brand-name">Zokario</span>
+        </a>
+        <p>A digital-first publishing house. Premium books, templates and notebooks — made with speed, finished with taste.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html">All titles</a>
+        <a href="shop.html?type=book">Books</a>
+        <a href="shop.html?type=template">Templates</a>
+        <a href="shop.html?type=notebook">Notebooks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Readers</h4>
+        <a href="account.html">My shelf</a>
+        <a href="cart.html">Cart</a>
+        <a href="refunds.html">Refund policy</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const id = new URLSearchParams(location.search).get("id");
+  const p = ZK.byId(id);
+  const main = document.getElementById("productMain");
+
+  if (!p) {
+    main.innerHTML = `<section class="section center container">
+      <p class="eyebrow center-eyebrow">Not found</p>
+      <h1 class="h2">This edition slipped off the shelf</h1>
+      <p class="lead" style="margin:1rem auto 2rem">It may have been moved, renamed, or retired.</p>
+      <a class="btn btn-gold" href="shop.html">Return to the Library</a></section>`;
+    return;
+  }
+
+  const owned = ZKStore.owns(p.id);
+  const typeName = p.type === "book" ? "Book" : p.type === "template" ? "Template" : "Notebook";
+
+  /* SEO */
+  document.title = `${p.title} — ${typeName} | Zokario`;
+  document.querySelector('meta[name="description"]').content = `${p.subtitle} Preview free, read online, download PDF & ePub. ${ZK.fmt(p.price)}.`;
+  const ld = document.createElement("script");
+  ld.type = "application/ld+json";
+  ld.textContent = JSON.stringify({
+    "@context": "https://schema.org", "@type": "Product",
+    name: p.title, description: p.subtitle, category: p.category,
+    brand: { "@type": "Brand", name: "Zokario" },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: p.rating, reviewCount: p.ratings },
+    offers: { "@type": "Offer", price: p.price, priceCurrency: "USD", availability: "https://schema.org/InStock", url: location.href }
+  });
+  document.head.appendChild(ld);
+
+  const learnHTML = p.learn?.length ? `
+    <div class="reveal" style="margin-top:4rem">
+      <div class="section-label"><h3>What you’ll learn</h3></div>
+      <ul class="list-check">${p.learn.map(x => `<li>${zkEsc(x)}</li>`).join("")}</ul>
+    </div>` : "";
+
+  const related = ZK.products.filter(x => x.id !== p.id && (x.category === p.category || x.type === p.type)).slice(0, 3);
+
+  main.innerHTML = `
+  <section class="section-tight" style="padding-top:2.5rem">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span><a href="shop.html">Library</a></span>
+        <span><a href="shop.html?cat=${encodeURIComponent(p.category)}">${p.category}</a></span>
+        <span>${zkEsc(p.title)}</span>
+      </nav>
+      <div class="product-top">
+        <div>
+          <div class="product-stage" id="pStage">
+            <div class="book-wrap book-float">${zkBook3d(p)}</div>
+            <div class="book-shadow"></div>
+          </div>
+          <div class="center" style="margin-top:1.5rem">
+            <button class="btn btn-ghost" id="openPreview2">Open the book — free preview</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="pcard-cat">${p.category} · ${typeName}</p>
+          <h1 class="h2">${zkEsc(p.title)}</h1>
+          <p class="product-sub">${zkEsc(p.subtitle)}</p>
+          ${zkStars(p)}
+          <div class="price-line">${zkPrice(p)}<span style="font-size:.8rem;color:var(--muted-2);letter-spacing:.1em">ONE-TIME · YOURS FOREVER</span></div>
+          <div class="buy-row">
+            ${owned
+              ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">Read the full ${typeName.toLowerCase()}</a>
+                 <button class="btn btn-ghost btn-lg" onclick="zkDownload('${p.id}')">Download</button>`
+              : `<button class="btn btn-gold btn-lg" id="buyNow">Buy now — ${ZK.fmt(p.price)}</button>
+                 <button class="btn btn-ghost btn-lg" data-add="${p.id}">Add to cart</button>`}
+          </div>
+          <button class="btn-text" id="openPreview">Read a free preview</button>
+          <div class="meta-chips">
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6"/></svg>${p.pages} pages</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${p.readTime}</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>PDF · ePub</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6c3-1.5 6-1.5 9 0 3-1.5 6-1.5 9 0v13c-3-1.5-6-1.5-9 0-3-1.5-6-1.5-9 0V6Z"/><path d="M12 6v13"/></svg>Online reader</span>
+          </div>
+          <div class="trust-row" style="gap:1.2rem 2rem">
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>Instant delivery</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>14-day guarantee</span>
+          </div>
+          ${learnHTML}
+          ${p.audience?.length ? `
+          <div class="reveal" style="margin-top:3.5rem">
+            <div class="section-label"><h3>Who it’s for</h3></div>
+            <ul class="list-check">${p.audience.map(x => `<li>${zkEsc(x)}</li>`).join("")}</ul>
+          </div>` : ""}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" id="inside">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem" id="insideGrid">
+      <div class="reveal">
+        <p class="eyebrow">Inside the ${typeName.toLowerCase()}</p>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Contents</h2>
+        <ol class="toc-list" style="margin-top:1.5rem">${p.contents.map(c => `<li>${zkEsc(c)}</li>`).join("")}</ol>
+      </div>
+      <div class="reveal reveal-d1">
+        <p class="eyebrow">About this edition</p>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Publisher’s note</h2>
+        <div class="prose" style="margin-top:1.5rem">
+          ${p.desc.map(d => `<p>${zkEsc(d)}</p>`).join("")}
+          <p style="font-family:var(--font-display);font-style:italic">— The Zokario editorial desk</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preview">
+    <div class="container center reveal">
+      <p class="eyebrow center-eyebrow">Try before you buy</p>
+      <h2 class="h2">Read the opening <em>free</em></h2>
+      <p class="lead" style="margin:1rem auto 2.4rem">The first ${p.previewCount === 1 ? "chapter is" : p.previewCount + " chapters are"} open to everyone. If it doesn’t hold you, it doesn’t deserve you.</p>
+      <button class="btn btn-gold btn-lg" id="openPreview3">Read the preview</button>
+    </div>
+  </section>
+
+  ${p.faq?.length ? `
+  <section class="section-tight">
+    <div class="container" style="max-width:820px">
+      <div class="center reveal"><p class="eyebrow center-eyebrow">Questions</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Before you decide</h2></div>
+      <div class="accordion" style="margin-top:2.5rem">
+        ${p.faq.map(f => `<div class="acc-item"><button class="acc-head" aria-expanded="false">${zkEsc(f.q)}</button><div class="acc-body"><p>${zkEsc(f.a)}</p></div></div>`).join("")}
+      </div>
+    </div>
+  </section>` : ""}
+
+  ${related.length ? `
+  <section class="section">
+    <div class="container">
+      <div class="reveal"><p class="eyebrow">Keep browsing</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Readers also <em>kept</em></h2></div>
+      <div class="grid-books related-rail" style="margin-top:2.5rem">${related.map((r, i) => zkCard(r, i)).join("")}</div>
+    </div>
+  </section>` : ""}
+  `;
+
+  /* Buy now */
+  document.getElementById("buyNow")?.addEventListener("click", () => {
+    ZKStore.add(p.id);
+    location.href = "checkout.html";
+  });
+
+  /* ---------- Preview modal ---------- */
+  const modal = document.getElementById("previewModal");
+  const pages = document.getElementById("pvPages");
+  document.getElementById("pvTitle").textContent = p.title;
+
+  const previewChs = p.chapters.slice(0, p.previewCount);
+  const lockedChs = p.chapters.slice(p.previewCount);
+  const lockedTitles = p.contents.slice(p.previewCount);
+
+  const teaser = (lockedChs[0]?.paras?.slice(0, 2)) || [
+    "The next chapter continues beyond the preview edge, where the full edition carries the argument into territory the sample can only gesture toward.",
+    "Every remaining page is typeset with the same care as the ones you have just read — and they are waiting."
+  ];
+
+  pages.innerHTML =
+    previewChs.map(ch => `
+      <div class="rp-chapter">
+        <p class="rp-kicker">${zkEsc(ch.kicker)}</p>
+        <h2>${zkEsc(ch.t)}</h2>
+        ${ch.paras.map(x => `<p>${zkEsc(x)}</p>`).join("")}
+        <div class="rp-divider">✦ ✦ ✦</div>
+      </div>`).join("") +
+    `<div class="reader-locked">
+      <div class="locked-preview" aria-hidden="true">
+        <p class="rp-kicker" style="filter:blur(4px)">${zkEsc(lockedChs[0]?.kicker || "Next chapter")}</p>
+        ${teaser.map(x => `<p>${zkEsc(x)}</p>`).join("")}
+      </div>
+      <div class="locked-overlay">
+        <span class="lock-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+        <h3>You’ve reached the end of the preview</h3>
+        <p>Unlock the full ${typeName.toLowerCase()} to continue reading — instantly, on this page or any device.</p>
+        ${lockedTitles.length ? `<div class="locked-includes">
+          ${lockedTitles.slice(0, 4).map(t => `<span>${zkEsc(t)}</span>`).join("")}
+          ${lockedTitles.length > 4 ? `<span>+ ${lockedTitles.length - 4} more</span>` : ""}
+        </div>` : ""}
+        ${owned
+          ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">Continue in your library</a>`
+          : `<button class="btn btn-gold btn-lg" id="unlockBtn">Unlock the full ${typeName.toLowerCase()} — ${ZK.fmt(p.price)}</button>`}
+        <p style="font-size:.78rem;color:#8A7B66;margin-top:1rem">Full version includes ${p.pages} pages · PDF &amp; ePub · lifetime online reading</p>
+      </div>
+    </div>`;
+
+  function openPreview() {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    pages.scrollTop = 0;
+  }
+  function closePreview() {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  ["openPreview", "openPreview2", "openPreview3"].forEach(i =>
+    document.getElementById(i)?.addEventListener("click", openPreview));
+  modal.addEventListener("click", e => { if (e.target.closest("[data-close-preview]")) closePreview(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closePreview(); });
+  if (location.hash === "#preview") setTimeout(openPreview, 400);
+
+  document.getElementById("unlockBtn")?.addEventListener("click", () => {
+    ZKStore.add(p.id);
+    location.href = "checkout.html";
+  });
+
+  /* preview progress bar */
+  pages.addEventListener("scroll", () => {
+    const max = pages.scrollHeight - pages.clientHeight;
+    document.getElementById("pvProgress").style.width = (max > 0 ? (pages.scrollTop / max) * 100 : 0) + "%";
+  }, { passive: true });
+
+  /* responsive inside grid */
+  const fix = () => {
+    const g = document.getElementById("insideGrid");
+    if (g) g.style.gridTemplateColumns = innerWidth < 900 ? "1fr" : "1fr 1fr";
+  };
+  fix(); addEventListener("resize", fix);
+});
+</script>
+</body>
+</html>

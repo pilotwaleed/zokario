@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /thank-you.html
+Disallow: /account.html
+Disallow: /reader.html
+
+Sitemap: https://zokario.com/sitemap.xml

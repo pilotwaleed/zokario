@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__1941741d-5b0f-406f-a865-2237f64ec512__models_explore",
+      "mcp__1941741d-5b0f-406f-a865-2237f64ec512__generate_image",
+      "mcp__1941741d-5b0f-406f-a865-2237f64ec512__job_display",
+      "Bash(curl -sL -o hero-book.png \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_190612_0618bbf5-3e3f-47cc-872c-d50363be8bd8.png\")",
+      "Bash(curl -sL -o logo-mark.png \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_190625_6a968e65-d728-4bb8-9595-505af4bc014e.png\")",
+      "mcp__1941741d-5b0f-406f-a865-2237f64ec512__generate_video",
+      "Bash(sips -s format jpeg -s formatOptions 72 hero-book.png --out hero-book.jpg)",
+      "Bash(sips -s format jpeg -s formatOptions 80 -z 630 1200 hero-book.png --out og-cover.jpg)",
+      "Bash(sips -s format jpeg -s formatOptions 78 -Z 1600 logo-mark.png --out logo-mark.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight hero-book.jpg og-cover.jpg)",
+      "Bash(curl -sL -o hero-orbit.mp4 \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_192029_b5b7ee98-9de3-4a5d-9c77-4d86f2f27d55.mp4\")",
+      "Bash(curl -sL -o library.mp4 \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_192042_98c6da7e-e863-4f5d-ba2d-5f4a703e9e1c.mp4\")",
+      "Bash(curl -sL -o pages-macro.mp4 \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_192054_28e8f1f1-1b20-4835-ac31-175b34de53fb.mp4\")",
+      "Bash(curl -sL -o collection.mp4 \"https://d8j0ntlcm91z4.cloudfront.net/user_3Fb0h4H6FlcbSaieiM161jwTxV4/hf_20260705_192928_5b391b20-d965-46df-90fe-bd5643a3f3f5.mp4\")",
+      "Bash(avconvert --preset Preset1280x720 --source hero-orbit.mp4 --output hero-orbit-720.mp4 --replace)",
+      "Bash(ls -R /Users/waleedalansari/Desktop/website | head -50 && echo \"---\" && du -sh /Users/waleedalansari/Desktop/website/assets && grep -c \"credits\" /dev/null 2>/dev/null; true)",
+      "mcp__1941741d-5b0f-406f-a865-2237f64ec512__balance",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(git add *)"
+    ]
+  }
+}

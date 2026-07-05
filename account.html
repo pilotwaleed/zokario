@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Shelf — Library &amp; Downloads | Zokario</title>
+<meta name="description" content="Your Zokario shelf — every purchased book, template and notebook. Read online, download PDF & ePub, continue where you left off.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#171210">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario — home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
+        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
+        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
+        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
+        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
+      </svg>
+      <span class="brand-name">Zokario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="about.html">About</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>My Shelf</span></nav>
+      <p class="eyebrow">Your private library</p>
+      <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.4rem)">My <em>Shelf</em></h1>
+    </div>
+  </section>
+
+  <!-- Signed-out -->
+  <section class="section-tight" id="authView" hidden>
+    <div class="container">
+      <div class="auth-card">
+        <h2 class="h3">Open your shelf</h2>
+        <p>Enter the email you purchase with. In this demo build, your shelf lives securely in this browser — no password needed yet.</p>
+        <form id="authForm">
+          <div class="field">
+            <label for="authEmail">Email address</label>
+            <input class="input" type="email" id="authEmail" required placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="authName">First name <span style="opacity:.5">(optional)</span></label>
+            <input class="input" id="authName" placeholder="What should we call you?" autocomplete="given-name">
+          </div>
+          <button class="btn btn-gold btn-block" type="submit">Continue</button>
+        </form>
+        <p style="font-size:.78rem;color:var(--muted-2);margin-top:1.4rem">Production note: this connects to real account authentication (email magic-link or password) when the backend is attached — see README.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signed-in -->
+  <section class="section-tight" id="libView" hidden>
+    <div class="container">
+      <div class="account-head">
+        <div>
+          <h2 class="h3" id="helloLine">Welcome back</h2>
+          <p id="accountMeta"></p>
+        </div>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+          <a class="btn btn-ghost btn-sm" href="contact.html">Support</a>
+          <button class="btn btn-ghost btn-sm" id="signOut">Sign out</button>
+        </div>
+      </div>
+
+      <div id="continueWrap" hidden style="margin-bottom:3rem">
+        <div class="section-label"><h3>Continue reading</h3></div>
+        <div id="continueCard"></div>
+      </div>
+
+      <div class="section-label"><h3>Your titles</h3></div>
+      <div class="lib-grid" id="libGrid"></div>
+
+      <div class="empty-state" id="libEmpty" hidden style="margin-top:1rem">
+        <h3 class="h3">Your shelf is waiting for its first book</h3>
+        <p>Everything you buy appears here — readable online, downloadable forever.</p>
+        <a class="btn btn-gold" href="shop.html">Explore the Library</a>
+      </div>
+
+      <div style="margin-top:4rem" id="ordersWrap" hidden>
+        <div class="section-label"><h3>Order history</h3></div>
+        <div id="ordersList"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const authView = document.getElementById("authView");
+  const libView = document.getElementById("libView");
+
+  function show() {
+    const user = ZKStore.user();
+    authView.hidden = !!user;
+    libView.hidden = !user;
+    if (user) renderLib(user);
+  }
+
+  document.getElementById("authForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("authEmail").value.trim();
+    if (!email) return;
+    ZKStore.setUser({ email, name: document.getElementById("authName").value.trim() });
+    zkToast("Shelf unlocked");
+    show();
+  });
+
+  document.getElementById("signOut").addEventListener("click", () => {
+    ZKStore.setUser(null);
+    zkToast("Signed out");
+    show();
+  });
+
+  function renderLib(user) {
+    document.getElementById("helloLine").textContent = user.name ? `Welcome back, ${user.name}` : "Welcome back";
+    const orders = ZKStore.orders();
+    document.getElementById("accountMeta").textContent =
+      `${user.email} · ${orders.length} ${orders.length === 1 ? "order" : "orders"}`;
+
+    const owned = ZKStore.purchasedIds().map(ZK.byId).filter(Boolean);
+    const progress = ZKStore.progress();
+    const grid = document.getElementById("libGrid");
+    const empty = document.getElementById("libEmpty");
+
+    grid.innerHTML = owned.map(p => {
+      const order = orders.find(o => o.items.includes(p.id));
+      const date = order ? new Date(order.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
+      const pct = Math.round((progress[p.id] || 0) * 100);
+      return `<div class="lib-card">
+        <a class="lib-thumb" href="reader.html?id=${p.id}">${zkCoverFace(p)}</a>
+        <div class="lib-body">
+          <h3>${zkEsc(p.title)}</h3>
+          <span class="lib-date">Purchased ${date}</span>
+          <div class="lib-progress" title="${pct}% read"><i style="width:${pct}%"></i></div>
+          <div class="lib-actions">
+            <a href="reader.html?id=${p.id}">${pct > 0 && pct < 100 ? "Continue reading · " + pct + "%" : "Read online"}</a>
+            <button onclick="zkDownload('${p.id}')">Download</button>
+          </div>
+        </div>
+      </div>`;
+    }).join("");
+    grid.style.display = owned.length ? "" : "none";
+    empty.hidden = owned.length > 0;
+
+    /* continue reading hero card */
+    const inProgress = owned.filter(p => (progress[p.id] || 0) > 0 && (progress[p.id] || 0) < 0.98)
+      .sort((a, b) => (progress[b.id] || 0) - (progress[a.id] || 0))[0];
+    const cw = document.getElementById("continueWrap");
+    if (inProgress) {
+      cw.hidden = false;
+      const pct = Math.round(progress[inProgress.id] * 100);
+      document.getElementById("continueCard").innerHTML = `
+        <div class="lib-card" style="max-width:560px">
+          <a class="lib-thumb" href="reader.html?id=${inProgress.id}">${zkCoverFace(inProgress)}</a>
+          <div class="lib-body">
+            <h3>${zkEsc(inProgress.title)}</h3>
+            <span class="lib-date">You’re ${pct}% through</span>
+            <div class="lib-progress"><i style="width:${pct}%"></i></div>
+            <div class="lib-actions"><a class="btn btn-gold btn-sm" style="color:#241A0E;text-align:center" href="reader.html?id=${inProgress.id}">Pick up where you left off</a></div>
+          </div>
+        </div>`;
+    } else cw.hidden = true;
+
+    /* orders */
+    const ow = document.getElementById("ordersWrap");
+    if (orders.length) {
+      ow.hidden = false;
+      document.getElementById("ordersList").innerHTML = orders.map(o => `
+        <div class="co-mini-item">
+          <span><h4 style="font-family:var(--font-display);font-style:italic">${o.no}</h4>
+          <span>${new Date(o.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} · ${o.items.length} ${o.items.length === 1 ? "title" : "titles"}${o.demo ? " · demo order" : ""}</span></span>
+          <span class="price" style="margin-left:auto">${ZK.fmt(o.total)}</span>
+        </div>`).join("");
+    } else ow.hidden = true;
+  }
+
+  show();
+});
+</script>
+</body>
+</html>

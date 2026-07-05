@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local server
+.claude/serve.mjs.log
+
+# Editor config (optional, remove if you want to commit)
+.vscode/
+.idea/
+
+# Node (if using npm later)
+node_modules/
+package-lock.json
+
+# Stripe test keys (keep placeholders only)
+# .env with real keys should never be committed
