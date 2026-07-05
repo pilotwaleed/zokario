@@ -20,7 +20,9 @@
       "mcp__1941741d-5b0f-406f-a865-2237f64ec512__balance",
       "Bash(git init *)",
       "Bash(git config *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m 'Initial commit: Zokario luxury bookstore — complete static site with HTML/CSS/JS, 17-product catalog, full e-commerce flow, cinematic Higgsfield assets, Stripe-ready checkout skeleton. *)",
+      "Bash(git commit -m 'Update Claude Code settings for preview server configuration *)"
     ]
   }
 }
