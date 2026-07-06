@@ -8,31 +8,27 @@
 <meta property="og:type" content="product">
 <meta property="og:site_name" content="Zokario">
 <meta property="og:image" content="assets/og-cover.jpg">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html" aria-label="Zokario — home">
-      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-      </svg>
-      <span class="brand-name">Zokario</span>
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
       <a href="about.html">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -53,6 +49,9 @@
   <button class="close-nav">Close</button>
   <a href="index.html">Home</a>
   <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -84,22 +83,16 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="Zokario — home">
-          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-            <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-            <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-            <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-            <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-          </svg>
-          <span class="brand-name">Zokario</span>
+          <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
         </a>
         <p>A digital-first publishing house. Premium books, templates and notebooks — made with speed, finished with taste.</p>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
         <a href="shop.html">All titles</a>
-        <a href="shop.html?type=book">Books</a>
-        <a href="shop.html?type=template">Templates</a>
-        <a href="shop.html?type=notebook">Notebooks</a>
+        <a href="books.html">Books</a>
+        <a href="templates.html">Templates</a>
+        <a href="notebooks.html">Notebooks</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -128,7 +121,9 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const id = new URLSearchParams(location.search).get("id");
@@ -163,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const learnHTML = p.learn?.length ? `
     <div class="reveal" style="margin-top:4rem">
-      <div class="section-label"><h3>What you’ll learn</h3></div>
+      <div class="section-label"><h3>${ZKT("p.learn")}</h3></div>
       <ul class="list-check">${p.learn.map(x => `<li>${zkEsc(x)}</li>`).join("")}</ul>
     </div>` : "";
 
@@ -173,8 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="section-tight" style="padding-top:2.5rem">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="index.html">Home</a><span><a href="shop.html">Library</a></span>
-        <span><a href="shop.html?cat=${encodeURIComponent(p.category)}">${p.category}</a></span>
+        <a href="index.html">${ZKT("p.home")}</a><span><a href="shop.html">${ZKT("p.library")}</a></span>
+        <span><a href="shop.html?cat=${encodeURIComponent(p.category)}">${zkCat(p.category)}</a></span>
         <span>${zkEsc(p.title)}</span>
       </nav>
       <div class="product-top">
@@ -184,38 +179,38 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="book-shadow"></div>
           </div>
           <div class="center" style="margin-top:1.5rem">
-            <button class="btn btn-ghost" id="openPreview2">Open the book — free preview</button>
+            <button class="btn btn-ghost" id="openPreview2">${ZKT("p.openPreview")}</button>
           </div>
         </div>
         <div class="product-info">
-          <p class="pcard-cat">${p.category} · ${typeName}</p>
+          <p class="pcard-cat">${zkCat(p.category)} · ${typeName}</p>
           <h1 class="h2">${zkEsc(p.title)}</h1>
           <p class="product-sub">${zkEsc(p.subtitle)}</p>
           ${zkStars(p)}
-          <div class="price-line">${zkPrice(p)}<span style="font-size:.8rem;color:var(--muted-2);letter-spacing:.1em">ONE-TIME · YOURS FOREVER</span></div>
+          <div class="price-line">${zkPrice(p)}<span style="font-size:.8rem;color:var(--muted-2);letter-spacing:.1em">${ZKT("p.oneTime").toUpperCase()}</span></div>
           <div class="buy-row">
             ${owned
-              ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">Read the full ${typeName.toLowerCase()}</a>
-                 <button class="btn btn-ghost btn-lg" onclick="zkDownload('${p.id}')">Download</button>`
-              : `<button class="btn btn-gold btn-lg" id="buyNow">Buy now — ${ZK.fmt(p.price)}</button>
-                 <button class="btn btn-ghost btn-lg" data-add="${p.id}">Add to cart</button>`}
+              ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">${ZKT("p.ownedRead")}</a>
+                 <button class="btn btn-ghost btn-lg" onclick="zkDownload('${p.id}')">${ZKT("p.ownedDl")}</button>`
+              : `<button class="btn btn-gold btn-lg" id="buyNow">${ZKT("p.buyNow", { p: ZK.fmt(p.price) })}</button>
+                 <button class="btn btn-ghost btn-lg" data-add="${p.id}">${ZKT("c.addcart")}</button>`}
           </div>
-          <button class="btn-text" id="openPreview">Read a free preview</button>
+          <button class="btn-text" id="openPreview">${ZKT("p.readFree")}</button>
           <div class="meta-chips">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6"/></svg>${p.pages} pages</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18H6z"/><path d="M9 7h6M9 11h6"/></svg>${ZKT("p.pages", { n: p.pages })}</span>
             <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>${p.readTime}</span>
             <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>PDF · ePub</span>
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6c3-1.5 6-1.5 9 0 3-1.5 6-1.5 9 0v13c-3-1.5-6-1.5-9 0-3-1.5-6-1.5-9 0V6Z"/><path d="M12 6v13"/></svg>Online reader</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6c3-1.5 6-1.5 9 0 3-1.5 6-1.5 9 0v13c-3-1.5-6-1.5-9 0-3-1.5-6-1.5-9 0V6Z"/><path d="M12 6v13"/></svg>${ZKT("p.reader")}</span>
           </div>
           <div class="trust-row" style="gap:1.2rem 2rem">
-            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout</span>
-            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>Instant delivery</span>
-            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>14-day guarantee</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>${ZKT("p.secure")}</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>${ZKT("p.instant")}</span>
+            <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>${ZKT("p.guarantee")}</span>
           </div>
           ${learnHTML}
           ${p.audience?.length ? `
           <div class="reveal" style="margin-top:3.5rem">
-            <div class="section-label"><h3>Who it’s for</h3></div>
+            <div class="section-label"><h3>${ZKT("p.who")}</h3></div>
             <ul class="list-check">${p.audience.map(x => `<li>${zkEsc(x)}</li>`).join("")}</ul>
           </div>` : ""}
         </div>
@@ -225,16 +220,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <section class="section paper" id="inside">
     <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem" id="insideGrid">
-      <div class="reveal">
+      ${p.contents?.length ? `<div class="reveal">
         <p class="eyebrow">Inside the ${typeName.toLowerCase()}</p>
-        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Contents</h2>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.contents")}</h2>
         <ol class="toc-list" style="margin-top:1.5rem">${p.contents.map(c => `<li>${zkEsc(c)}</li>`).join("")}</ol>
-      </div>
-      <div class="reveal reveal-d1">
+      </div>` : ""}
+      <div class="reveal reveal-d1"${p.contents?.length ? "" : ' style="grid-column:1/-1;max-width:720px"'}>
         <p class="eyebrow">About this edition</p>
-        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Publisher’s note</h2>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.note")}</h2>
         <div class="prose" style="margin-top:1.5rem">
-          ${p.desc.map(d => `<p>${zkEsc(d)}</p>`).join("")}
+          ${(p.desc || []).map(d => `<p>${zkEsc(d)}</p>`).join("")}
           <p style="font-family:var(--font-display);font-style:italic">— The Zokario editorial desk</p>
         </div>
       </div>
@@ -243,31 +238,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <section class="section" id="preview">
     <div class="container center reveal">
-      <p class="eyebrow center-eyebrow">Try before you buy</p>
-      <h2 class="h2">Read the opening <em>free</em></h2>
-      <p class="lead" style="margin:1rem auto 2.4rem">The first ${p.previewCount === 1 ? "chapter is" : p.previewCount + " chapters are"} open to everyone. If it doesn’t hold you, it doesn’t deserve you.</p>
-      <button class="btn btn-gold btn-lg" id="openPreview3">Read the preview</button>
+      <p class="eyebrow center-eyebrow">${ZKT("p.tryEyebrow")}</p>
+      <h2 class="h2">${ZKT("p.tryTitle")}</h2>
+      <p class="lead" style="margin:1rem auto 2.4rem">${ZKT("p.tryLead1")}</p>
+      <button class="btn btn-gold btn-lg" id="openPreview3">${ZKT("p.tryBtn")}</button>
     </div>
   </section>
 
   ${p.faq?.length ? `
   <section class="section-tight">
     <div class="container" style="max-width:820px">
-      <div class="center reveal"><p class="eyebrow center-eyebrow">Questions</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Before you decide</h2></div>
+      <div class="center reveal"><p class="eyebrow center-eyebrow">${ZKT("p.qEyebrow")}</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.qTitle")}</h2></div>
       <div class="accordion" style="margin-top:2.5rem">
         ${p.faq.map(f => `<div class="acc-item"><button class="acc-head" aria-expanded="false">${zkEsc(f.q)}</button><div class="acc-body"><p>${zkEsc(f.a)}</p></div></div>`).join("")}
       </div>
     </div>
   </section>` : ""}
 
+  <section class="section-tight" id="reviews">
+    <div class="container reviews-wrap">
+      <div class="reveal">
+        <p class="eyebrow">${ZKT("rv.eyebrow")}</p>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("rv.title")}</h2>
+      </div>
+      <div id="rvList" style="margin-top:.5rem"></div>
+      <div id="rvGate"></div>
+    </div>
+  </section>
+
   ${related.length ? `
   <section class="section">
     <div class="container">
-      <div class="reveal"><p class="eyebrow">Keep browsing</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">Readers also <em>kept</em></h2></div>
+      <div class="reveal"><p class="eyebrow">${ZKT("p.kbEyebrow")}</p><h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.kbTitle")}</h2></div>
       <div class="grid-books related-rail" style="margin-top:2.5rem">${related.map((r, i) => zkCard(r, i)).join("")}</div>
     </div>
   </section>` : ""}
   `;
+
+  /* ---------- reviews: verified owners only ---------- */
+  function renderReviews() {
+    const list = ZKReviews.list(p.id);
+    document.getElementById("rvList").innerHTML = list.length
+      ? list.map(r => `<div class="review">
+          <span class="rv-avatar">${zkEsc(r.avatar || "📖")}</span>
+          <div>
+            <div class="rv-head"><b>${zkEsc(r.name)}</b><span class="rv-verified">${ZKT("rv.verified")}</span><span class="rv-date">${zkEsc(r.date)}</span></div>
+            <div class="rv-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
+            ${r.text ? `<p>${zkEsc(r.text)}</p>` : ""}
+          </div>
+        </div>`).join("")
+      : `<p style="color:var(--muted-2);font-size:.94rem;padding:1.2rem 0">${ZKT("rv.empty")}</p>`;
+
+    const gate = ZKReviews.gate(p.id);
+    const g = document.getElementById("rvGate");
+    const lock = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>';
+    if (gate === "buy") g.innerHTML = `<div class="review-gate">${lock}<span>${ZKT("rv.gateBuy")}</span></div>`;
+    else if (gate === "signin") g.innerHTML = `<div class="review-gate">${lock}<span>${ZKT("rv.gateSignin")} <a href="account.html">${ZKT("au.login")}</a></span></div>`;
+    else if (gate === "done") g.innerHTML = `<div class="review-gate"><span style="color:var(--ok)">✓</span><span>${ZKT("rv.done")}</span></div>`;
+    else g.innerHTML = `
+      <form class="review-form" id="rvForm">
+        <p class="field-label">${ZKT("rv.yourRating")}</p>
+        <div class="star-input" id="rvStars">${[1,2,3,4,5].map(n => `<button type="button" data-star="${n}" aria-label="${n}★">★</button>`).join("")}</div>
+        <div class="field">
+          <textarea class="input" id="rvText" maxlength="900" placeholder="${ZKT("rv.placeholder")}"></textarea>
+        </div>
+        <button class="btn btn-gold" type="submit">${ZKT("rv.submit")}</button>
+      </form>`;
+
+    let stars = 5;
+    const paint = () => document.querySelectorAll("#rvStars button").forEach(b => b.classList.toggle("on", +b.dataset.star <= stars));
+    if (document.getElementById("rvStars")) {
+      paint();
+      document.getElementById("rvStars").addEventListener("click", e => {
+        const b = e.target.closest("[data-star]");
+        if (b) { stars = +b.dataset.star; paint(); }
+      });
+      document.getElementById("rvForm").addEventListener("submit", e => {
+        e.preventDefault();
+        ZKReviews.add(p.id, stars, document.getElementById("rvText").value);
+        zkToast(ZKT("rv.thanks"));
+        renderReviews();
+      });
+    }
+  }
+  renderReviews();
 
   /* Buy now */
   document.getElementById("buyNow")?.addEventListener("click", () => {

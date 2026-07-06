@@ -116,8 +116,8 @@ function zkPrice(p) {
 }
 
 function zkBadge(p) {
-  if (p.badges?.includes("bestseller")) return `<span class="pcard-badge">Bestseller</span>`;
-  if (p.badges?.includes("new")) return `<span class="pcard-badge">New</span>`;
+  if (p.badges?.includes("bestseller")) return `<span class="pcard-badge">${ZKT("c.bestseller")}</span>`;
+  if (p.badges?.includes("new")) return `<span class="pcard-badge">${ZKT("c.new")}</span>`;
   return "";
 }
 
@@ -125,13 +125,13 @@ function zkCard(p, delay) {
   return `<article class="pcard reveal ${delay ? "reveal-d" + delay : ""}">
     ${zkBadge(p)}
     <a class="pcard-stage" href="product.html?id=${p.id}" aria-label="${zkEsc(p.title)}">${zkBook3d(p)}</a>
-    <div class="pcard-cat">${zkEsc(p.category)}</div>
+    <div class="pcard-cat">${zkEsc(zkCat(p.category))}</div>
     <h3><a href="product.html?id=${p.id}">${zkEsc(p.title)}</a></h3>
     <p class="pcard-hook">${zkEsc(p.hook)}</p>
     <div class="pcard-meta">${zkStars(p)}<span>${zkPrice(p)}</span></div>
     <div class="pcard-actions">
-      <a class="btn btn-ghost btn-sm" href="product.html?id=${p.id}#preview">Preview</a>
-      <button class="btn btn-gold btn-sm" data-add="${p.id}">Add to Cart</button>
+      <a class="btn btn-ghost btn-sm" href="product.html?id=${p.id}#preview">${ZKT("c.preview")}</a>
+      <button class="btn btn-gold btn-sm" data-add="${p.id}">${ZKT("c.addcart")}</button>
     </div>
   </article>`;
 }
@@ -187,25 +187,47 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!btn) return;
     const p = ZK.byId(btn.dataset.add);
     if (!p) return;
-    if (ZKStore.add(p.id)) zkToast(`“${p.title}” added to your cart`);
-    else zkToast(`“${p.title}” is already in your cart`);
+    if (ZKStore.add(p.id)) zkToast(ZKT("c.toastAdded", { t: p.title }));
+    else zkToast(ZKT("c.toastInCart", { t: p.title }));
   });
 
-  /* 3D tilt on cards (pointer devices only) */
+  /* 3D tilt on cards — lerped via rAF so it glides instead of fighting CSS transitions */
   if (matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const tilts = new WeakMap(); /* book -> {x,y,tx,ty,raf,off} */
+    const tick = book => {
+      const t = tilts.get(book);
+      if (!t) return;
+      t.x += (t.tx - t.x) * 0.16;
+      t.y += (t.ty - t.y) * 0.16;
+      book.style.transform = `rotateY(${-22 + t.x * 26}deg) rotateX(${4 - t.y * 14}deg)`;
+      if (t.off && Math.abs(t.tx - t.x) < 0.002 && Math.abs(t.ty - t.y) < 0.002) {
+        book.style.transition = ""; book.style.transform = ""; tilts.delete(book); return;
+      }
+      t.raf = requestAnimationFrame(() => tick(book));
+    };
     document.body.addEventListener("pointermove", e => {
       const stage = e.target.closest(".pcard-stage, .product-stage, .tilt-book");
       if (!stage) return;
       const book = stage.querySelector(".book3d");
       if (!book) return;
       const r = stage.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      book.style.transform = `rotateY(${-22 + x * 26}deg) rotateX(${4 - y * 14}deg)`;
+      let t = tilts.get(book);
+      if (!t) {
+        t = { x: 0, y: 0, tx: 0, ty: 0, raf: 0, off: false };
+        tilts.set(book, t);
+        book.style.transition = "none";
+        t.raf = requestAnimationFrame(() => tick(book));
+      }
+      t.off = false;
+      t.tx = (e.clientX - r.left) / r.width - 0.5;
+      t.ty = (e.clientY - r.top) / r.height - 0.5;
     });
     document.body.addEventListener("pointerout", e => {
       const stage = e.target.closest(".pcard-stage, .product-stage, .tilt-book");
-      if (stage) { const b = stage.querySelector(".book3d"); if (b) b.style.transform = ""; }
+      if (!stage) return;
+      const book = stage.querySelector(".book3d");
+      const t = book && tilts.get(book);
+      if (t) { t.off = true; t.tx = 0; t.ty = 0; }
     });
   }
 
@@ -218,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const list = ZKStore.read("zk_newsletter", []);
       if (!list.includes(email)) { list.push(email); ZKStore.write("zk_newsletter", list); }
       f.reset();
-      zkToast("Welcome to the private reading list");
+      zkToast(ZKT("c.toastNews"));
     });
   });
 
@@ -316,3 +338,97 @@ ${chapters}<p class="note">This is your Zokario digital edition preview file. In
   URL.revokeObjectURL(a.href);
   zkToast("Your edition is downloading");
 }
+
+/* =========================================================
+   Margin notes — literary quotes met on the way
+   ========================================================= */
+const ZK_QUOTES = {
+  en: [
+    { q: "I have always imagined that Paradise will be a kind of library.", a: "Jorge Luis Borges" },
+    { q: "A room without books is like a body without a soul.", a: "Cicero" },
+    { q: "A book must be the axe for the frozen sea within us.", a: "Franz Kafka" },
+    { q: "The reading of all good books is like a conversation with the finest minds of past centuries.", a: "René Descartes" },
+    { q: "Books are a uniquely portable magic.", a: "Stephen King" },
+    { q: "There is no friend as loyal as a book.", a: "Ernest Hemingway" },
+    { q: "We read to know we are not alone.", a: "William Nicholson" },
+    { q: "A reader lives a thousand lives before he dies.", a: "George R. R. Martin" }
+  ],
+  ar: [
+    { q: "الكتابُ هو الجليس الذي لا يُطريك، والصديق الذي لا يُغريك.", a: "الجاحظ" },
+    { q: "أعزُّ مكانٍ في الدُّنى سرجُ سابحٍ، وخيرُ جليسٍ في الزمانِ كتابُ.", a: "المتنبي" },
+    { q: "العلمُ صيدٌ والكتابةُ قيدُه؛ قيِّد صيودَك بالحبال الواثقة.", a: "الإمام الشافعي" },
+    { q: "القراءة وحدها هي التي تعطي الإنسان أكثر من حياةٍ واحدة.", a: "عباس محمود العقاد" },
+    { q: "الكتابُ وعاءٌ مُلئ علماً، وظرفٌ حُشي ظَرفاً.", a: "الجاحظ" },
+    { q: "لم أرَ واعظاً أبلغَ من كتاب.", a: "من حكم العرب" },
+    { q: "الكتب هي الحياة التي لم نعشها بعد.", a: "طه حسين" },
+    { q: "نِعم الأنيسُ إذا خلوتَ كتابُ.", a: "من الشعر العربي" }
+  ],
+  fr: [
+    { q: "Une heure de lecture est le souverain remède contre les dégoûts de la vie.", a: "Montesquieu" },
+    { q: "La lecture est une amitié.", a: "Marcel Proust" },
+    { q: "Lisez pour vivre.", a: "Gustave Flaubert" },
+    { q: "Le paradis, je l’ai toujours imaginé comme une bibliothèque.", a: "Jorge Luis Borges" },
+    { q: "On ne lit jamais un livre : on se lit à travers les livres.", a: "Romain Rolland" },
+    { q: "Un livre est un ami qui ne trompe jamais.", a: "Guilbert de Pixérécourt" },
+    { q: "La lecture agrandit l’âme.", a: "Voltaire" },
+    { q: "Chaque lecture est une seconde vie.", a: "Proverbe de lecteur" }
+  ]
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  /* quote bands: each slot gets its own quote, never twice the same on one page */
+  const slots = document.querySelectorAll("[data-quote]");
+  if (slots.length) {
+    const lang = typeof ZKLang !== "undefined" ? ZKLang.code() : "en";
+    const pool = [...(ZK_QUOTES[lang] || ZK_QUOTES.en)];
+    slots.forEach(slot => {
+      if (!pool.length) return;
+      const pick = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+      slot.innerHTML = `<div class="container quote-inner reveal">
+        <span class="q-orn" aria-hidden="true">✦</span>
+        <blockquote>${zkEsc(pick.q)}</blockquote>
+        <cite>— ${zkEsc(pick.a)}</cite>
+      </div>`;
+    });
+  }
+
+  /* videos breathe in instead of popping */
+  document.querySelectorAll(".hero-media video, .room-media video").forEach(v => {
+    const on = () => v.classList.add("on");
+    if (!v.paused && v.readyState >= 2) on();
+    v.addEventListener("playing", on, { once: true });
+    setTimeout(on, 1600); /* autoplay blocked → show poster rather than nothing */
+  });
+
+  /* fly-to-cart: a little gilded book arcs into the bag */
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.body.addEventListener("click", e => {
+      const btn = e.target.closest("[data-add]");
+      const cart = document.querySelector('.icon-btn[href="cart.html"]');
+      if (!btn || !cart) return;
+      const b = btn.getBoundingClientRect(), c = cart.getBoundingClientRect();
+      const fly = document.createElement("span");
+      fly.className = "fly-book";
+      fly.style.left = b.left + b.width / 2 + "px";
+      fly.style.top = b.top + b.height / 2 + "px";
+      document.body.appendChild(fly);
+      fly._gc = setTimeout(() => fly.remove(), 1400); /* safety if animation is cancelled */
+      const dx = c.left + c.width / 2 - (b.left + b.width / 2);
+      const dy = c.top + c.height / 2 - (b.top + b.height / 2);
+      fly.animate([
+        { transform: "translate(-50%,-50%) rotate(0deg) scale(1)", opacity: 1, offset: 0 },
+        { transform: `translate(calc(-50% + ${dx * 0.5}px), calc(-50% + ${dy - 90}px)) rotate(-14deg) scale(.85)`, opacity: 1, offset: 0.55 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(8deg) scale(.15)`, opacity: 0.2, offset: 1 }
+      ], { duration: 750, easing: "cubic-bezier(.3,.7,.25,1)" }).onfinish = () => {
+        fly.remove();
+        clearTimeout(fly._gc);
+        const badge = cart.querySelector(".cart-count");
+        if (badge) {
+          badge.animate([
+            { transform: "scale(1)" }, { transform: "scale(1.5)" }, { transform: "scale(1)" }
+          ], { duration: 380, easing: "cubic-bezier(.34,1.56,.64,1)" });
+        }
+      };
+    });
+  }
+});

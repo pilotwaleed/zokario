@@ -6,12 +6,13 @@
 <title>Page Not Found | Zokario</title>
 <meta name="description" content="This page slipped off the shelf. Return to the Zokario library.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
@@ -26,29 +27,31 @@
               <span class="cover-motif">
                 <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="40" r="26"/><path d="M32 34c.5-3 3-5 8-5s7.5 2.5 7.5 5.5c0 4.5-7.5 4.5-7.5 9.5M40 52h.01"/></svg>
               </span>
-              <span class="cover-title">The Missing Chapter</span>
-              <span class="cover-sub">Zokario Editions</span>
+              <span class="cover-title" data-i18n="nf.coverTitle">The Missing Chapter</span>
+              <span class="cover-sub" data-i18n="nf.coverSub">Zokario Editions</span>
             </div>
           </div>
           <div class="b3-back"></div>
-          <div class="b3-spine"><span>Lost &amp; Found</span></div>
+          <div class="b3-spine"><span data-i18n="nf.spine">Lost &amp; Found</span></div>
           <div class="b3-pages"></div>
           <div class="b3-top"></div>
         </div>
       </div>
       <div class="book-shadow"></div>
     </div>
-    <p class="err-code">Error · 404</p>
-    <h1 class="display" style="font-size:clamp(2.2rem,5.4vw,3.8rem)">This page slipped<br>off the <em>shelf.</em></h1>
-    <p class="lead" style="margin:1.4rem auto 2.6rem">It may have been moved, renamed, or quietly retired to the archives.</p>
+    <p class="err-code" data-i18n="nf.errCode">Error · 404</p>
+    <h1 class="display" style="font-size:clamp(2.2rem,5.4vw,3.8rem)" data-i18n="nf.heroTitle">This page slipped<br>off the <em>shelf.</em></h1>
+    <p class="lead" style="margin:1.4rem auto 2.6rem" data-i18n="nf.lead">It may have been moved, renamed, or quietly retired to the archives.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a class="btn btn-gold btn-lg" href="shop.html">Return to Library</a>
-      <a class="btn btn-ghost btn-lg" href="index.html">Go home</a>
+      <a class="btn btn-gold btn-lg" href="shop.html" data-i18n="nf.btnLibrary">Return to Library</a>
+      <a class="btn btn-ghost btn-lg" href="index.html" data-i18n="nf.btnHome">Go home</a>
     </div>
   </div>
 </main>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 </body>
 </html>

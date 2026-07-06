@@ -12,34 +12,31 @@
 <meta property="og:description" content="Premium digital books, templates and notebooks. Read online instantly, download forever.">
 <meta property="og:image" content="assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-book.jpg" fetchpriority="high">
 <link rel="stylesheet" href="css/main.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Zokario","url":"https://zokario.com/","logo":"https://zokario.com/assets/logo-mark.jpg","description":"Digital-first publishing house — premium digital books, templates and notebooks.","sameAs":[]}
 </script>
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html" aria-label="Zokario — home">
-      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-      </svg>
-      <span class="brand-name">Zokario</span>
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
       <a href="about.html">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -60,6 +57,9 @@
   <button class="close-nav">Close</button>
   <a href="index.html">Home</a>
   <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -80,18 +80,18 @@
     <canvas id="dust" aria-hidden="true"></canvas>
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow reveal in">A digital-first publishing house</p>
-        <h1 class="display reveal in">Books from<br>the <em>future.</em></h1>
-        <p class="lead reveal in reveal-d1">Premium digital books, templates and notebooks — written with care, finished with taste, and delivered the moment you decide.</p>
+        <p class="eyebrow reveal in" data-i18n="h.eyebrow">A digital-first publishing house</p>
+        <h1 class="display reveal in" data-i18n="h.title">Books from<br>the <em>future.</em></h1>
+        <p class="lead reveal in reveal-d1" data-i18n="h.lead">Premium digital books, templates and notebooks — written with care, finished with taste, and delivered the moment you decide.</p>
         <div class="hero-ctas reveal in reveal-d2">
-          <a class="btn btn-gold btn-lg" href="shop.html">Explore the Library</a>
-          <a class="btn btn-ghost btn-lg" href="product.html?id=the-last-lighthouse#preview">Read a Preview</a>
+          <a class="btn btn-gold btn-lg" href="shop.html" data-i18n="h.ctaExplore">Explore the Library</a>
+          <a class="btn btn-ghost btn-lg" href="product.html?id=the-last-lighthouse#preview" data-i18n="h.ctaPreview">Read a Preview</a>
         </div>
         <div class="trust-row reveal in reveal-d3">
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>Instant download</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6c3-1.5 6-1.5 9 0 3-1.5 6-1.5 9 0v13c-3-1.5-6-1.5-9 0-3-1.5-6-1.5-9 0V6Z"/><path d="M12 6v13"/></svg>Read online</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.5 5.4 5.5.7-4 4 1 5.9-5-3-5 3 1-5.9-4-4 5.5-.7L12 3Z"/></svg>Premium editions</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg><span data-i18n="h.trust1">Instant download</span></span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span data-i18n="h.trust2">Secure checkout</span></span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6c3-1.5 6-1.5 9 0 3-1.5 6-1.5 9 0v13c-3-1.5-6-1.5-9 0-3-1.5-6-1.5-9 0V6Z"/><path d="M12 6v13"/></svg><span data-i18n="h.trust3">Read online</span></span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.5 5.4 5.5.7-4 4 1 5.9-5-3-5 3 1-5.9-4-4 5.5-.7L12 3Z"/></svg><span data-i18n="h.trust4">Premium editions</span></span>
         </div>
       </div>
       <div class="hero-stage" id="heroStage"></div>
@@ -102,8 +102,8 @@
   <!-- ============ MARQUEE ============ -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Business &amp; Money</span><span>Self-Improvement</span><span>Stories &amp; Fiction</span><span>AI &amp; Technology</span><span>Health &amp; Fitness</span><span>Travel &amp; Lifestyle</span><span>Relationships</span><span>Productivity</span>
-      <span>Business &amp; Money</span><span>Self-Improvement</span><span>Stories &amp; Fiction</span><span>AI &amp; Technology</span><span>Health &amp; Fitness</span><span>Travel &amp; Lifestyle</span><span>Relationships</span><span>Productivity</span>
+      <span data-i18n="cat.Business & Money">Business &amp; Money</span><span data-i18n="cat.Self-Improvement">Self-Improvement</span><span data-i18n="cat.Stories & Fiction">Stories &amp; Fiction</span><span data-i18n="cat.AI & Technology">AI &amp; Technology</span><span data-i18n="cat.Health & Fitness">Health &amp; Fitness</span><span data-i18n="cat.Travel & Lifestyle">Travel &amp; Lifestyle</span><span data-i18n="cat.Relationships">Relationships</span><span data-i18n="cat.Productivity">Productivity</span>
+      <span data-i18n="cat.Business & Money">Business &amp; Money</span><span data-i18n="cat.Self-Improvement">Self-Improvement</span><span data-i18n="cat.Stories & Fiction">Stories &amp; Fiction</span><span data-i18n="cat.AI & Technology">AI &amp; Technology</span><span data-i18n="cat.Health & Fitness">Health &amp; Fitness</span><span data-i18n="cat.Travel & Lifestyle">Travel &amp; Lifestyle</span><span data-i18n="cat.Relationships">Relationships</span><span data-i18n="cat.Productivity">Productivity</span>
     </div>
   </div>
 
@@ -111,13 +111,13 @@
   <section class="section" id="featured">
     <div class="container">
       <div class="center reveal">
-        <p class="eyebrow center-eyebrow">The front table</p>
-        <h2 class="h2">This season’s <em>editions</em></h2>
-        <p class="lead" style="margin-inline:auto;margin-top:1rem">Six titles our readers keep finishing — and quoting.</p>
+        <p class="eyebrow center-eyebrow" data-i18n="h.frontEyebrow">The front table</p>
+        <h2 class="h2" data-i18n="h.frontTitle">This season’s <em>editions</em></h2>
+        <p class="lead" style="margin-inline:auto;margin-top:1rem" data-i18n="h.frontLead">Six titles our readers keep finishing — and quoting.</p>
       </div>
       <div class="grid-books" id="featuredGrid" style="margin-top:3.5rem"></div>
       <div class="center reveal" style="margin-top:3rem">
-        <a class="btn-text" href="shop.html">Browse the full library</a>
+        <a class="btn-text" href="shop.html" data-i18n="h.browseAll">Browse the full library</a>
       </div>
     </div>
   </section>
@@ -126,25 +126,25 @@
   <section class="section paper">
     <div class="container">
       <div class="center reveal">
-        <p class="eyebrow center-eyebrow">Why Zokario reads differently</p>
-        <h2 class="h2">Speed is a tool.<br><em>Taste</em> is the product.</h2>
-        <p class="lead" style="margin-inline:auto;margin-top:1.2rem">Modern tools give us speed. Human taste gives the books their value. Every Zokario edition passes through both — and you can feel the difference by page two.</p>
+        <p class="eyebrow center-eyebrow" data-i18n="h.whyEyebrow">Why Zokario reads differently</p>
+        <h2 class="h2" data-i18n="h.whyTitle">Speed is a tool.<br><em>Taste</em> is the product.</h2>
+        <p class="lead" style="margin-inline:auto;margin-top:1.2rem" data-i18n="h.whyLead">Modern tools give us speed. Human taste gives the books their value. Every Zokario edition passes through both — and you can feel the difference by page two.</p>
       </div>
       <div class="grid-3" style="margin-top:3.5rem">
         <div class="pillar reveal">
           <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a6 6 0 0 1 6 6c0 2.5-1.5 4-3 5.5V17h-6v-2.5C7.5 13 6 11.5 6 9a6 6 0 0 1 6-6Z"/><path d="M9 21h6"/></svg></div>
-          <h3>Researched at depth</h3>
-          <p>Each title begins with wide, structured research — more sources, more angles, more rigour than a deadline usually allows.</p>
+          <h3 data-i18n="h.p1t">Researched at depth</h3>
+          <p data-i18n="h.p1p">Each title begins with wide, structured research — more sources, more angles, more rigour than a deadline usually allows.</p>
         </div>
         <div class="pillar reveal reveal-d1">
           <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z"/></svg></div>
-          <h3>Edited by hand</h3>
-          <p>Human editors shape every argument, cut every soft paragraph, and sign off on every chapter. Nothing ships on autopilot.</p>
+          <h3 data-i18n="h.p2t">Edited by hand</h3>
+          <p data-i18n="h.p2p">Human editors shape every argument, cut every soft paragraph, and sign off on every chapter. Nothing ships on autopilot.</p>
         </div>
         <div class="pillar reveal reveal-d2">
           <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2Zm0 0a2 2 0 0 1 2-2h13"/></svg></div>
-          <h3>Designed to be kept</h3>
-          <p>Considered typography, beautiful covers, PDF &amp; ePub downloads, and an online reader that makes screens feel like paper.</p>
+          <h3 data-i18n="h.p3t">Designed to be kept</h3>
+          <p data-i18n="h.p3p">Considered typography, beautiful covers, PDF &amp; ePub downloads, and an online reader that makes screens feel like paper.</p>
         </div>
       </div>
     </div>
@@ -157,18 +157,58 @@
     </video>
     <figcaption class="cinema-overlay">
       <div class="container cinema-caption">
-        <h2 class="h2">A library that <em>lives</em> with you</h2>
-        <p>Every purchase joins your private shelf — readable on any device, downloadable forever, updated when editions improve.</p>
+        <h2 class="h2" data-i18n="h.cinemaTitle">A library that <em>lives</em> with you</h2>
+        <p data-i18n="h.cinemaLead">Every purchase joins your private shelf — readable on any device, downloadable forever, updated when editions improve.</p>
       </div>
     </figcaption>
   </figure>
 
-  <!-- ============ CATEGORIES ============ -->
+  <!-- ============ THE THREE ROOMS ============ -->
   <section class="section">
     <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow center-eyebrow" data-i18n="h.houseEyebrow">The house</p>
+        <h2 class="h2" data-i18n="h.houseTitle">Three rooms. Choose a <em>door.</em></h2>
+        <p class="lead" style="margin-inline:auto;margin-top:1rem" data-i18n="h.houseLead">Books to read, systems to run, pages to keep. Each room has its own light.</p>
+      </div>
+      <div class="rooms-grid" style="margin-top:3.5rem">
+        <a class="room-door reveal" href="books.html">
+          <img decoding="async" src="assets/hero-book.jpg" alt="" loading="lazy">
+          <span class="door-copy">
+            <span class="door-num" data-i18n="h.room1n">Room I</span>
+            <h3 data-i18n="h.room1">The Reading Room</h3>
+            <p id="doorBooks">Editions to read</p>
+            <span class="door-enter">Enter the room →</span>
+          </span>
+        </a>
+        <a class="room-door reveal reveal-d1" href="templates.html">
+          <img decoding="async" src="assets/studio-poster.jpg" alt="" loading="lazy">
+          <span class="door-copy">
+            <span class="door-num" data-i18n="h.room2n">Room II</span>
+            <h3 data-i18n="h.room2">The Studio</h3>
+            <p id="doorTpl">Systems to run</p>
+            <span class="door-enter">Enter the room →</span>
+          </span>
+        </a>
+        <a class="room-door reveal reveal-d2" href="notebooks.html">
+          <img decoding="async" src="assets/paper-poster.jpg" alt="" loading="lazy">
+          <span class="door-copy">
+            <span class="door-num" data-i18n="h.room3n">Room III</span>
+            <h3 data-i18n="h.room3">The Paper Room</h3>
+            <p id="doorNb">Pages to keep</p>
+            <span class="door-enter">Enter the room →</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
       <div class="reveal">
-        <p class="eyebrow">The stacks</p>
-        <h2 class="h2">Eight rooms, <em>one</em> library</h2>
+        <p class="eyebrow" data-i18n="h.stacksEyebrow">The stacks</p>
+        <h2 class="h2" data-i18n="h.stacksTitle">Eight rooms, <em>one</em> library</h2>
       </div>
       <div class="grid-cats" style="margin-top:3rem" id="catGrid"></div>
     </div>
@@ -178,23 +218,23 @@
   <section class="section paper">
     <div class="container">
       <div class="reveal">
-        <p class="eyebrow">The standard</p>
-        <h2 class="h2">What “premium” means <em>here</em></h2>
+        <p class="eyebrow" data-i18n="h.stdEyebrow">The standard</p>
+        <h2 class="h2" data-i18n="h.stdTitle">What “premium” means <em>here</em></h2>
       </div>
       <div class="grid-3" style="margin-top:3rem;align-items:start">
         <ul class="list-check reveal" style="grid-column:span 1">
-          <li>Clear structure — chapters that earn their place</li>
-          <li>Premium formatting in every format</li>
-          <li>Covers designed like objects, not thumbnails</li>
+          <li data-i18n="h.std1">Clear structure — chapters that earn their place</li>
+          <li data-i18n="h.std2">Premium formatting in every format</li>
+          <li data-i18n="h.std3">Covers designed like objects, not thumbnails</li>
         </ul>
         <ul class="list-check reveal reveal-d1">
-          <li>PDF &amp; ePub downloads, no lock-in</li>
-          <li>Read online instantly on any device</li>
-          <li>Updated editions when it matters — free</li>
+          <li data-i18n="h.std4">PDF &amp; ePub downloads, no lock-in</li>
+          <li data-i18n="h.std5">Read online instantly on any device</li>
+          <li data-i18n="h.std6">Updated editions when it matters — free</li>
         </ul>
         <div class="prose reveal reveal-d2">
-          <p>We publish less than we could, so everything we publish is something we’d keep. If a book doesn’t deserve your shelf, it never reaches the store.</p>
-          <a class="btn-text" href="how-it-works.html">How a Zokario edition is made</a>
+          <p data-i18n="h.stdProse">We publish less than we could, so everything we publish is something we’d keep. If a book doesn’t deserve your shelf, it never reaches the store.</p>
+          <a class="btn-text" href="how-it-works.html" data-i18n="h.stdLink">How a Zokario edition is made</a>
         </div>
       </div>
       <div class="cinema-duo" style="margin-top:3.5rem">
@@ -234,20 +274,22 @@
     </div>
   </section>
 
+  <div class="quote-band" data-quote aria-label="Quote"></div>
+
   <!-- ============ NEWSLETTER ============ -->
   <section class="section-tight news-band">
     <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center" id="newsGrid">
       <div class="reveal">
-        <p class="eyebrow">The private reading list</p>
-        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.3rem)">One letter a month.<br>New editions first, quiet <em>discounts</em>, no noise.</h2>
+        <p class="eyebrow" data-i18n="h.newsEyebrow">The private reading list</p>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.3rem)" data-i18n="h.newsTitle">One letter a month.<br>New editions first, quiet <em>discounts</em>, no noise.</h2>
         <form class="news-form" data-newsletter>
-          <input class="input" type="email" required placeholder="Your email address" aria-label="Email address">
-          <button class="btn btn-gold" type="submit">Join the list</button>
+          <input class="input" type="email" required placeholder="Your email address" aria-label="Email address" data-i18n-ph="h.newsPh">
+          <button class="btn btn-gold" type="submit" data-i18n="h.newsBtn">Join the list</button>
         </form>
-        <p class="form-note">Unsubscribe anytime. We’d rather be missed than muted.</p>
+        <p class="form-note" data-i18n="h.newsNote">Unsubscribe anytime. We’d rather be missed than muted.</p>
       </div>
       <div class="reveal reveal-d1" style="text-align:center">
-        <img src="assets/logo-mark.jpg" alt="Zokario logo — a letter Z formed from the fanned pages of an open book" loading="lazy" style="max-width:230px;margin:0 auto;border-radius:14px;box-shadow:var(--shadow-lg)">
+        <img decoding="async" src="assets/logo-mark.jpg" alt="Zokario logo — a letter Z formed from the fanned pages of an open book" loading="lazy" style="max-width:230px;margin:0 auto;border-radius:14px;box-shadow:var(--shadow-lg)">
       </div>
     </div>
   </section>
@@ -255,10 +297,10 @@
   <!-- ============ FINAL CTA ============ -->
   <section class="section center" style="background:radial-gradient(ellipse 60% 80% at 50% 110%,rgba(200,169,106,.12),transparent 60%),var(--bg0)">
     <div class="container reveal">
-      <p class="eyebrow center-eyebrow">Begin tonight</p>
-      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.8rem)">Start your digital <em>shelf.</em></h2>
-      <p class="lead" style="margin:1.4rem auto 2.6rem">Your first book is thirty seconds away — and it never goes out of print.</p>
-      <a class="btn btn-gold btn-lg" href="shop.html">Explore the Library</a>
+      <p class="eyebrow center-eyebrow" data-i18n="h.finalEyebrow">Begin tonight</p>
+      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.8rem)" data-i18n="h.finalTitle">Start your digital <em>shelf.</em></h2>
+      <p class="lead" style="margin:1.4rem auto 2.6rem" data-i18n="h.finalLead">Your first book is thirty seconds away — and it never goes out of print.</p>
+      <a class="btn btn-gold btn-lg" href="shop.html" data-i18n="h.ctaExplore">Explore the Library</a>
     </div>
   </section>
 
@@ -269,22 +311,16 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="Zokario — home">
-          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-            <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-            <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-            <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-            <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-          </svg>
-          <span class="brand-name">Zokario</span>
+          <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
         </a>
         <p>A digital-first publishing house. Premium books, templates and notebooks — made with speed, finished with taste.</p>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
         <a href="shop.html">All titles</a>
-        <a href="shop.html?type=book">Books</a>
-        <a href="shop.html?type=template">Templates</a>
-        <a href="shop.html?type=notebook">Notebooks</a>
+        <a href="books.html">Books</a>
+        <a href="templates.html">Templates</a>
+        <a href="notebooks.html">Notebooks</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -313,7 +349,9 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   /* featured grid */
@@ -343,9 +381,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const roman = ["I","II","III","IV","V","VI","VII","VIII"];
   document.getElementById("catGrid").innerHTML = ZK.categories.map((c, i) =>
     `<a class="cat-tile reveal reveal-d${i % 4}" href="shop.html?cat=${encodeURIComponent(c)}">
-      <span class="cat-num">${roman[i]}</span><h3>${c}</h3>
-      <span>${counts[c] || 0} ${(counts[c] || 0) === 1 ? "title" : "titles"}</span></a>`
+      <span class="cat-num">${roman[i]}</span><h3>${zkCat(c)}</h3>
+      <span>${counts[c] || 0} ${(counts[c] || 0) === 1 ? ZKT("h.titlesOne") : ZKT("h.titlesMany")}</span></a>`
   ).join("");
+
+  /* room door counts */
+  const nType = t => ZK.products.filter(p => p.type === t).length;
+  document.getElementById("doorBooks").textContent = ZKT("h.doorBooks", { n: nType("book") });
+  document.getElementById("doorTpl").textContent = ZKT("h.doorTpl", { n: nType("template") });
+  document.getElementById("doorNb").textContent = ZKT("h.doorNb", { n: nType("notebook") });
 
   /* dust + hero video fallback */
   zkDust("dust");

@@ -11,31 +11,27 @@
 <meta property="og:title" content="Contact Zokario">
 <meta property="og:description" content="Questions, order help, or ideas — a human replies within one business day.">
 <meta property="og:image" content="assets/og-cover.jpg">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html" aria-label="Zokario — home">
-      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-      </svg>
-      <span class="brand-name">Zokario</span>
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
       <a href="about.html">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -56,6 +52,9 @@
   <button class="close-nav">Close</button>
   <a href="index.html">Home</a>
   <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -67,10 +66,10 @@
 <main>
   <section class="page-hero">
     <div class="container">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>Contact</span></nav>
-      <p class="eyebrow">The front desk</p>
-      <h1 class="display" style="font-size:clamp(2.4rem,5.4vw,4rem)">Talk to a <em>human</em></h1>
-      <p class="lead">Order help, reading trouble, refund requests, or an idea for the shelf — all welcome.</p>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html" data-i18n="p.home">Home</a><span data-i18n="nav.contact">Contact</span></nav>
+      <p class="eyebrow" data-i18n="ct.eyebrow">The front desk</p>
+      <h1 class="display" style="font-size:clamp(2.4rem,5.4vw,4rem)" data-i18n="ct.heroTitle">Talk to a <em>human</em></h1>
+      <p class="lead" data-i18n="ct.heroLead">Order help, reading trouble, refund requests, or an idea for the shelf — all welcome.</p>
     </div>
   </section>
 
@@ -79,50 +78,50 @@
       <div>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          <div><b>Email</b><a href="mailto:support@zokario.com">support@zokario.com</a><p style="font-size:.8rem;color:var(--muted-2)">Replace with your support inbox before launch.</p></div>
+          <div><b data-i18n="ct.emailLabel">Email</b><a href="mailto:support@zokario.com">support@zokario.com</a><p style="font-size:.8rem;color:var(--muted-2)" data-i18n="ct.emailNote">Replace with your support inbox before launch.</p></div>
         </div>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          <div><b>Response time</b><p>Within one business day — usually a few hours.</p></div>
+          <div><b data-i18n="ct.responseLabel">Response time</b><p data-i18n="ct.responseText">Within one business day — usually a few hours.</p></div>
         </div>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5c.5-1.5 2-2 3-1.5s1.5 1.7.5 2.7c-.8.8-1.5 1-1.5 2.3M12 17h.01"/></svg>
-          <div><b>Quick answers</b><p>Most questions are already answered in the <a href="faq.html">FAQ</a>.</p></div>
+          <div><b data-i18n="ct.quickLabel">Quick answers</b><p data-i18n="ct.quickText">Most questions are already answered in the <a href="faq.html">FAQ</a>.</p></div>
         </div>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><b>Refunds</b><p>14-day guarantee on every edition — <a href="refunds.html">the policy</a> is short and kind.</p></div>
+          <div><b data-i18n="ct.refundsLabel">Refunds</b><p data-i18n="ct.refundsText">14-day guarantee on every edition — <a href="refunds.html">the policy</a> is short and kind.</p></div>
         </div>
       </div>
 
       <form class="summary-card" id="contactForm" style="position:static">
-        <h3>Write to us</h3>
+        <h3 data-i18n="ct.formTitle">Write to us</h3>
         <div class="field">
-          <label for="cfName">Your name</label>
+          <label for="cfName" data-i18n="ct.labelName">Your name</label>
           <input class="input" id="cfName" required autocomplete="name">
         </div>
         <div class="field">
-          <label for="cfEmail">Email</label>
+          <label for="cfEmail" data-i18n="ct.labelEmail">Email</label>
           <input class="input" type="email" id="cfEmail" required autocomplete="email">
         </div>
         <div class="field">
-          <label for="cfTopic">Topic</label>
+          <label for="cfTopic" data-i18n="ct.labelTopic">Topic</label>
           <select class="input" id="cfTopic" required>
-            <option value="">Choose a topic…</option>
-            <option>Order or download help</option>
-            <option>Reading problem</option>
-            <option>Refund request</option>
-            <option>A question about a book</option>
-            <option>Partnership or press</option>
-            <option>Something else</option>
+            <option value="" data-i18n="ct.optChoose">Choose a topic…</option>
+            <option data-i18n="ct.optOrder">Order or download help</option>
+            <option data-i18n="ct.optReading">Reading problem</option>
+            <option data-i18n="ct.optRefund">Refund request</option>
+            <option data-i18n="ct.optBook">A question about a book</option>
+            <option data-i18n="ct.optPress">Partnership or press</option>
+            <option data-i18n="ct.optOther">Something else</option>
           </select>
         </div>
         <div class="field">
-          <label for="cfMsg">Message</label>
-          <textarea class="input" id="cfMsg" required placeholder="Tell us everything — order numbers help."></textarea>
+          <label for="cfMsg" data-i18n="ct.labelMsg">Message</label>
+          <textarea class="input" id="cfMsg" required placeholder="Tell us everything — order numbers help." data-i18n-ph="ct.phMsg"></textarea>
         </div>
-        <button class="btn btn-gold btn-block" type="submit">Send message</button>
-        <p style="font-size:.76rem;color:var(--muted-2);margin-top:1rem">Production note: connect this form to your email service or a form endpoint before launch — see README.</p>
+        <button class="btn btn-gold btn-block" type="submit" data-i18n="ct.btnSend">Send message</button>
+        <p style="font-size:.76rem;color:var(--muted-2);margin-top:1rem" data-i18n="ct.prodNote">Production note: connect this form to your email service or a form endpoint before launch — see README.</p>
       </form>
     </div>
   </section>
@@ -133,22 +132,16 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="Zokario — home">
-          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-            <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-            <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-            <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-            <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-          </svg>
-          <span class="brand-name">Zokario</span>
+          <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
         </a>
         <p>A digital-first publishing house. Premium books, templates and notebooks — made with speed, finished with taste.</p>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
         <a href="shop.html">All titles</a>
-        <a href="shop.html?type=book">Books</a>
-        <a href="shop.html?type=template">Templates</a>
-        <a href="shop.html?type=notebook">Notebooks</a>
+        <a href="books.html">Books</a>
+        <a href="templates.html">Templates</a>
+        <a href="notebooks.html">Notebooks</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -177,7 +170,9 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 <script>
 document.getElementById("contactForm").addEventListener("submit", e => {
   e.preventDefault();

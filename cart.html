@@ -6,31 +6,27 @@
 <title>Your Cart | Zokario</title>
 <meta name="description" content="Review your Zokario cart — digital delivery, no shipping required. Secure checkout with instant access to your books.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html" aria-label="Zokario — home">
-      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-      </svg>
-      <span class="brand-name">Zokario</span>
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
       <a href="about.html">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
@@ -51,6 +47,9 @@
   <button class="close-nav">Close</button>
   <a href="index.html">Home</a>
   <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -63,8 +62,8 @@
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>Cart</span></nav>
-      <p class="eyebrow">Almost yours</p>
-      <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.4rem)">Your <em>cart</em></h1>
+      <p class="eyebrow" data-i18n="k.eyebrow">Almost yours</p>
+      <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.4rem)" data-i18n="k.title">Your <em>cart</em></h1>
     </div>
   </section>
 
@@ -75,16 +74,16 @@
         <aside class="summary-card" id="summaryCard">
           <h3>Order summary</h3>
           <div class="coupon-row">
-            <input class="input" id="couponInput" placeholder="Coupon code" aria-label="Coupon code">
-            <button class="btn btn-ghost btn-sm" id="applyCoupon">Apply</button>
+            <input class="input" id="couponInput" placeholder="Coupon code" aria-label="Coupon code" data-i18n-ph="k.coupon">
+            <button class="btn btn-ghost btn-sm" id="applyCoupon" data-i18n="k.apply">Apply</button>
           </div>
           <p class="coupon-msg" id="couponMsg" role="status"></p>
-          <div class="sum-row"><span>Subtotal</span><span id="sumSub"></span></div>
-          <div class="sum-row" id="sumDiscountRow" hidden><span>Discount <span id="sumCode" style="font-size:.75rem;letter-spacing:.1em"></span></span><span class="discount" id="sumDiscount"></span></div>
+          <div class="sum-row"><span data-i18n="k.subtotal">Subtotal</span><span id="sumSub"></span></div>
+          <div class="sum-row" id="sumDiscountRow" hidden><span><span data-i18n="k.discount">Discount</span> <span id="sumCode" style="font-size:.75rem;letter-spacing:.1em"></span></span><span class="discount" id="sumDiscount"></span></div>
           <div class="sum-row"><span>Delivery</span><span style="color:var(--ok)">Instant · Free</span></div>
-          <div class="sum-row total"><span>Total</span><b id="sumTotal"></b></div>
-          <a class="btn btn-gold btn-block btn-lg" href="checkout.html" id="checkoutBtn" style="margin-top:1.4rem">Proceed to checkout</a>
-          <a class="btn btn-ghost btn-block" href="shop.html" style="margin-top:.7rem">Continue shopping</a>
+          <div class="sum-row total"><span data-i18n="k.total">Total</span><b id="sumTotal"></b></div>
+          <a class="btn btn-gold btn-block btn-lg" href="checkout.html" id="checkoutBtn" style="margin-top:1.4rem" data-i18n="k.checkout">Proceed to checkout</a>
+          <a class="btn btn-ghost btn-block" href="shop.html" style="margin-top:.7rem" data-i18n="k.continue">Continue shopping</a>
           <div class="digital-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
             Digital delivery. No shipping required — your titles unlock the moment payment completes.
@@ -101,7 +100,7 @@
           <div class="b3-front"><div class="cover-face" style="--c1:#2A2018;--c2:#171210;--acc:#C8A96A"><span class="cover-pub">Zokario</span><span class="cover-motif"></span><span class="cover-title">Your next favourite is still on the shelf</span></div></div>
           <div class="b3-back"></div><div class="b3-spine"><span>Zokario</span></div><div class="b3-pages"></div><div class="b3-top"></div>
         </div></div></div>
-        <h3 class="h3">Your cart is empty</h3>
+        <h3 class="h3" data-i18n="k.empty">Your cart is empty</h3>
         <p>Every great shelf starts with one book.</p>
         <a class="btn btn-gold" href="shop.html">Explore the Library</a>
       </div>
@@ -123,7 +122,9 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const itemsEl = document.getElementById("cartItems");
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="cart-item-right">
           <span class="price">${ZK.fmt(p.price)}</span><br>
-          <button class="remove-link" data-remove="${p.id}">Remove</button>
+          <button class="remove-link" data-remove="${p.id}">${ZKT("c.remove")}</button>
         </div>
       </div>`).join("");
 
@@ -171,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = e.target.closest("[data-remove]");
     if (!btn) return;
     ZKStore.remove(btn.dataset.remove);
-    zkToast("Removed from your cart");
+    zkToast(ZKT("c.toastRemoved"));
     render();
   });
 

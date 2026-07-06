@@ -6,11 +6,11 @@
 <title>Secure Checkout | Zokario</title>
 <meta name="description" content="Zokario secure checkout — instant digital delivery, no shipping. Pay securely by card.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#171210">
+<meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <!--
   ════════════════════════════════════════════════════════════════
@@ -28,19 +28,14 @@
   See stripe-backend/README.md for the complete server flow.
   ════════════════════════════════════════════════════════════════
 -->
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html" aria-label="Zokario — home">
-      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="#C8A96A">
-        <path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/>
-        <path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/>
-        <path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/>
-        <path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/>
-      </svg>
-      <span class="brand-name">Zokario</span>
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <div class="header-actions">
       <span class="trust-item" style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout</span>
@@ -52,8 +47,8 @@
   <section class="page-hero" style="padding-bottom:2rem">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span><a href="cart.html">Cart</a></span><span>Checkout</span></nav>
-      <p class="eyebrow">One page, then your library</p>
-      <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.4rem)">Secure <em>checkout</em></h1>
+      <p class="eyebrow" data-i18n="o.eyebrow">One page, then your library</p>
+      <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.4rem)" data-i18n="o.title">Secure <em>checkout</em></h1>
     </div>
   </section>
 
@@ -62,27 +57,27 @@
       <form class="checkout-layout" id="checkoutForm" novalidate>
         <div>
           <div class="co-block">
-            <h3><span class="co-num">1</span>Contact</h3>
+            <h3><span class="co-num">1</span><span data-i18n="o.contact">Contact</span></h3>
             <div class="field">
-              <label for="coEmail">Email — your books are delivered here</label>
+              <label for="coEmail" data-i18n="o.emailLong">Email — your books are delivered here</label>
               <input class="input" type="email" id="coEmail" required placeholder="you@example.com" autocomplete="email">
             </div>
           </div>
 
           <div class="co-block">
-            <h3><span class="co-num">2</span>Billing details</h3>
+            <h3><span class="co-num">2</span><span data-i18n="o.billing">Billing details</span></h3>
             <div class="field-row">
               <div class="field">
-                <label for="coFirst">First name</label>
+                <label for="coFirst" data-i18n="o.first">First name</label>
                 <input class="input" id="coFirst" required autocomplete="given-name">
               </div>
               <div class="field">
-                <label for="coLast">Last name</label>
+                <label for="coLast" data-i18n="o.last">Last name</label>
                 <input class="input" id="coLast" required autocomplete="family-name">
               </div>
             </div>
             <div class="field">
-              <label for="coCountry">Country / region</label>
+              <label for="coCountry" data-i18n="o.country">Country / region</label>
               <select class="input" id="coCountry" required autocomplete="country-name">
                 <option value="">Select country…</option>
                 <option>United States</option><option>United Kingdom</option><option>Canada</option>
@@ -95,7 +90,7 @@
           </div>
 
           <div class="co-block">
-            <h3><span class="co-num">3</span>Payment</h3>
+            <h3><span class="co-num">3</span><span data-i18n="o.payment">Payment</span></h3>
             <!-- STRIPE ELEMENTS MOUNTS HERE.
                  With keys configured, replace this .stripe-box with:
                  <div id="payment-element"></div>
@@ -109,13 +104,13 @@
             </div>
             <label class="checkline" style="margin-top:1.4rem">
               <input type="checkbox" id="coTerms" required>
-              <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and the <a href="refunds.html" target="_blank" rel="noopener">Refund Policy</a>, and I understand my digital titles unlock immediately.</span>
+              <span data-i18n="o.terms2">I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and the <a href="refunds.html" target="_blank" rel="noopener">Refund Policy</a>, and I understand my digital titles unlock immediately.</span>
             </label>
           </div>
         </div>
 
         <aside class="summary-card">
-          <h3>Your order</h3>
+          <h3 data-i18n="o.order">Your order</h3>
           <div id="coItems"></div>
           <div class="coupon-row">
             <input class="input" id="couponInput" placeholder="Coupon code" aria-label="Coupon code">
@@ -127,7 +122,7 @@
           <div class="sum-row total"><span>Total</span><b id="sumTotal"></b></div>
           <button class="btn btn-gold btn-block btn-lg" type="submit" id="payBtn" style="margin-top:1.4rem">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-            Pay securely
+            <span data-i18n="au.paySecurely">Pay securely</span>
           </button>
           <div class="digital-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
@@ -164,7 +159,9 @@
 </footer>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/auth.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("checkoutForm");

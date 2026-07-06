@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Reading Room — Premium Digital Books | Zokario</title>
+<meta name="description" content="Eleven digital editions, one standard. Business, fiction, self-improvement and more — every book previewable before you buy, yours forever after.">
+<link rel="canonical" href="https://zokario.com/books.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zokario">
+<meta property="og:title" content="The Reading Room — Premium Digital Books | Zokario">
+<meta property="og:description" content="Eleven digital editions, one standard. Pull one from the shelf.">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario — home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="about.html">About</a>
+  <a href="how-it-works.html">How It Works</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+
+  <!-- ============ ROOM HERO ============ -->
+  <section class="room-hero">
+    <div class="room-media" aria-hidden="true">
+      <video muted loop playsinline autoplay poster="assets/hero-book.jpg" id="roomVideo">
+        <source src="assets/library.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container">
+      <span class="room-index reveal in" data-i18n="b.index">Room I · The Reading Room</span>
+      <h1 class="display reveal in" data-i18n="b.title">Three shelves.<br>Three <em>languages.</em></h1>
+      <p class="lead reveal in reveal-d1" data-i18n="b.lead">Arabic, English and French editions side by side — every book here earned its shelf space, and every one opens free before you pay.</p>
+      <div class="hero-ctas reveal in reveal-d2">
+        <a class="btn btn-gold btn-lg" href="#shelf" data-i18n="b.cta1">Browse the shelves</a>
+        <a class="btn btn-ghost btn-lg" href="shop.html?type=book" data-i18n="b.cta2">View as a list</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE SHELVES (signature) ============ -->
+  <section class="section shelf-section" id="shelf">
+    <div class="container center reveal">
+      <p class="eyebrow center-eyebrow" data-i18n="b.shelfEyebrow">The shelves</p>
+      <h2 class="h2" data-i18n="b.shelfTitle">Pull one <em>out.</em></h2>
+    </div>
+    <div id="shelvesWrap"></div>
+    <p class="shelf-hint reveal" data-i18n="b.hint">Every spine is real — <b>hover to pull an edition from the shelf</b>, click to open it</p>
+  </section>
+
+  <!-- ============ START HERE ============ -->
+  <section class="section" style="padding-top:3rem">
+    <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow center-eyebrow" data-i18n="b.startEyebrow">If you're new</p>
+        <h2 class="h2" data-i18n="b.startTitle">Start with <em>these</em></h2>
+        <p class="lead" style="margin-inline:auto;margin-top:1rem" data-i18n="b.startLead">The three editions readers finish fastest — and gift most often.</p>
+      </div>
+      <div class="grid-books" id="startGrid" style="margin-top:3.5rem"></div>
+    </div>
+  </section>
+
+  <!-- ============ EDITORIAL STANDARD (paper) ============ -->
+  <section class="section paper">
+    <div class="container">
+      <div class="sys-row" style="border:none;padding-bottom:0">
+        <div class="reveal">
+          <p class="eyebrow" data-i18n="b.stdEyebrow">The standard</p>
+          <h2 class="h2" data-i18n="b.stdTitle">How a book earns<br>this <em>room</em></h2>
+          <p class="lead" style="margin-top:1.2rem" data-i18n="b.stdLead">We publish less than we could. Every edition passes structured research, a human edit that cuts every soft paragraph, and a final read-aloud pass — because prose you can hear is prose you can trust.</p>
+          <a class="btn-text" style="margin-top:1.6rem" href="how-it-works.html" data-i18n="b.stdLink">How a Zokario edition is made</a>
+        </div>
+        <div class="reveal reveal-d1">
+          <ul class="list-check">
+            <li data-i18n="b.chk1">Genuine preview chapters — read before you pay</li>
+            <li data-i18n="b.chk2">PDF &amp; ePub downloads with no lock-in</li>
+            <li data-i18n="b.chk3">An online reader that remembers your page</li>
+            <li data-i18n="b.chk4">Free updated editions, forever</li>
+            <li data-i18n="b.chk5">14-day reading guarantee on every title</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-band" data-quote aria-label="Quote"></div>
+
+  <!-- ============ FULL COLLECTION BY ROOM ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <p class="eyebrow" data-i18n="b.collEyebrow">The full collection</p>
+        <h2 class="h2" data-i18n="b.collTitle">Every edition, by <em>shelf</em></h2>
+      </div>
+      <div id="collectionGroups"></div>
+    </div>
+  </section>
+
+  <!-- ============ THE OTHER ROOMS ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="center reveal">
+        <p class="eyebrow center-eyebrow" data-i18n="b.moreEyebrow">Keep walking</p>
+        <h2 class="h2" data-i18n="b.moreTitle">The other <em>rooms</em></h2>
+      </div>
+      <div class="mini-doors" style="margin-top:3rem">
+        <a class="mini-door reveal" href="templates.html">
+          <img decoding="async" src="assets/studio-poster.jpg" alt="" loading="lazy">
+          <span class="door-copy">
+            <h3 data-i18n="h.room2">The Studio</h3>
+            <p data-i18n="b.moreTpl">Systems to run</p>
+          </span>
+        </a>
+        <a class="mini-door reveal reveal-d1" href="notebooks.html">
+          <img decoding="async" src="assets/paper-poster.jpg" alt="" loading="lazy">
+          <span class="door-copy">
+            <h3 data-i18n="h.room3">The Paper Room</h3>
+            <p data-i18n="b.moreNb">Pages to keep</p>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section center" style="background:radial-gradient(ellipse 60% 80% at 50% 110%,rgba(200,169,106,.12),transparent 60%),var(--bg0)">
+    <div class="container reveal">
+      <p class="eyebrow center-eyebrow" data-i18n="b.ctaEyebrow">Tonight's chapter one</p>
+      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)" data-i18n="b.ctaTitle">Take one <em>home.</em></h2>
+      <p class="lead" style="margin:1.4rem auto 2.6rem" data-i18n="b.ctaLead">Every book opens free. The good ones refuse to close.</p>
+      <a class="btn btn-gold btn-lg" href="#shelf" data-i18n="b.ctaBtn">Back to the shelves</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Zokario — home">
+          <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+        </a>
+        <p>A digital-first publishing house. Premium books, templates and notebooks — made with speed, finished with taste.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html">All titles</a>
+        <a href="books.html">Books</a>
+        <a href="templates.html">Templates</a>
+        <a href="notebooks.html">Notebooks</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Readers</h4>
+        <a href="account.html">My shelf</a>
+        <a href="cart.html">Cart</a>
+        <a href="refunds.html">Refund policy</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const books = ZK.products.filter(p => p.type === "book");
+
+  /* ---- Three language shelves: real spines, thickness from page count ---- */
+  const heights = [286, 258, 272, 246, 280, 252, 266, 290, 248, 276, 260];
+  const spine = (p, i) => {
+    const bd = Math.max(26, Math.min(44, Math.round(18 + p.pages / 12)));
+    const bh = heights[i % heights.length];
+    const bw = Math.round(bh * 0.69);
+    return `<a class="shelf-slot" href="product.html?id=${p.id}"
+      style="--bw:${bw}px;--bh:${bh}px;--bd:${bd}px"
+      aria-label="${zkEsc(p.title)} — ${ZK.fmt(p.price)}">${zkBook3d(p)}</a>`;
+  };
+  const SHELVES = [
+    { lang: "ar", key: "b.shelfAr", flag: "العربية", dir: "rtl" },
+    { lang: "en", key: "b.shelfEn", flag: "English", dir: "ltr" },
+    { lang: "fr", key: "b.shelfFr", flag: "Français", dir: "ltr" }
+  ];
+  document.getElementById("shelvesWrap").innerHTML = SHELVES.map(s => {
+    const list = books.filter(p => (p.lang || "en") === s.lang);
+    if (!list.length) return "";
+    return `<div class="shelf-lang">
+      <div class="shelf-lang-head reveal">
+        <span class="sl-flag">${s.flag}</span>
+        <h3>${ZKT(s.key)}</h3>
+        <span class="sl-count">${list.length} ${list.length === 1 ? ZKT("c.edition") : ZKT("c.editions")}</span>
+      </div>
+      <div class="shelf-wrap">
+        <div class="shelf-row" dir="${s.dir}">${list.map(spine).join("")}</div>
+        <div class="shelf-board"></div>
+        <div class="shelf-glow"></div>
+      </div>
+    </div>`;
+  }).join("");
+
+  /* ---- Start here: top bestsellers ---- */
+  const start = books.filter(p => p.badges?.includes("bestseller")).slice(0, 3);
+  document.getElementById("startGrid").innerHTML = start.map((p, i) => zkCard(p, i)).join("");
+
+  /* ---- Full collection grouped by category ---- */
+  const groups = {};
+  books.forEach(p => (groups[p.category] = groups[p.category] || []).push(p));
+  document.getElementById("collectionGroups").innerHTML = Object.entries(groups).map(([cat, list]) => `
+    <div style="margin-top:3.5rem">
+      <h3 class="h3 reveal" style="margin-bottom:1.8rem;display:flex;align-items:baseline;gap:1rem">${zkEsc(zkCat(cat))}
+        <span style="font-family:var(--font-body);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2);font-weight:400">${list.length} ${list.length === 1 ? ZKT("c.edition") : ZKT("c.editions")}</span></h3>
+      <div class="grid-books">${list.map((p, i) => zkCard(p, i % 3)).join("")}</div>
+    </div>`).join("");
+
+  /* video nudge */
+  const v = document.getElementById("roomVideo");
+  v.addEventListener("error", () => v.remove(), true);
+  const nudge = () => { if (v.paused) v.play().catch(() => {}); };
+  v.addEventListener("loadeddata", nudge);
+  ["pointerdown", "scroll", "touchstart", "keydown"].forEach(ev =>
+    addEventListener(ev, nudge, { once: true, passive: true }));
+});
+</script>
+</body>
+</html>

@@ -963,6 +963,422 @@ const ZK = {
       ]}
     ]
   }
+,
+
+  /* ---------------- ARABIC & FRENCH SHELVES ---------------- */
+  {
+    "id": "rasail-muntasaf-al-layl",
+    "type": "book",
+    "lang": "ar",
+    "title": "رسائل منتصف الليل",
+    "subtitle": "حارسُ ليلٍ يكتب إلى قارئٍ لا يعرفه، عن الكتب المفتوحة والمدن بعد أن تنام.",
+    "category": "Stories & Fiction",
+    "price": 11,
+    "rating": 4.9,
+    "ratings": 132,
+    "pages": 168,
+    "readTime": "4 ساعات",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#25202E",
+      "c2": "#100E16",
+      "acc": "#D8C08B",
+      "motif": "moon"
+    },
+    "hook": "من يترك الكتب مفتوحة في مكتبةٍ تُطفأ أنوارها كل ليلة؟",
+    "desc": [
+      "في مكتبةٍ عريقة تنام في قلب المدينة، يبدأ الحارس الليلي جولته المعتادة بين الرفوف، فيجد كتابًا مفتوحًا على صفحةٍ بعينها، وتحت السطر الأخير خطٌّ رفيع بقلم رصاص. في الليلة التالية كتابٌ آخر، وصفحةٌ أخرى، وإشارةٌ لا يفهمها. هكذا تبدأ المراسلة الأغرب: رسائل قصيرة يتركها الحارس بين الصفحات لقارئٍ مجهول لا يظهر أبدًا، لكنه يجيب دائمًا بطريقته الخاصة، كتابًا مفتوحًا يقول ما لا تقوله الكلمات.",
+      "هذا الكتاب أدبُ رسائل بنفَسٍ حكائي رقيق، وتأملٌ هادئ في القراءة بوصفها صداقةً بين غرباء، وفي الوحدة حين تصير مسكونةً بالكتب، وفي المدن بعد أن تنام وتصفو أصواتها. لغةٌ فصيحة دافئة لا تتكلف، ورسائل قصيرة تُقرأ واحدةً في الليلة أو دفعةً واحدة حتى الفجر. وبين رسالةٍ وأخرى تتكشف حكايةٌ صغيرة لا ترفع صوتها، عن وحشة الحارس وسرّ القارئ الغائب. كتابٌ لمن يعرف أن بعض أجمل المحادثات تجري بين شخصين لم يلتقيا قط."
+    ],
+    "learn": [
+      "حكاية كاملة تُروى على مهل عبر رسائل قصيرة، من أول خيطٍ إلى آخر مفاجأة",
+      "تأملات صافية في القراءة: لماذا نفتح الكتب، وماذا تفعل بنا الصفحات التي تُترك مفتوحة",
+      "بورتريه حميم للمدينة بعد منتصف الليل، بشوارعها الخالية ونوافذها القليلة المضيئة",
+      "لغة عربية فصيحة دافئة بلا تكلف، تصلح للقراءة بصوتٍ عالٍ قبل النوم",
+      "خاتمة تعيد ترتيب الحكاية كلها، وتجعل العودة إلى الرسائل الأولى قراءةً جديدة"
+    ],
+    "audience": [
+      "عشاق أدب الرسائل والحكايات الهادئة التي تُروى همسًا",
+      "قرّاء الليل الذين يعرفون سحر المكتبات بعد أن تُغلق أبوابها",
+      "من يبحث عن نص عربي فصيح يُقرأ على مهل، رسالةً كل ليلة",
+      "كل من راسل غريبًا يومًا، أو تمنى لو فعل"
+    ],
+    "faq": [
+      {
+        "q": "بأي صيغة يصلني الكتاب؟",
+        "a": "فور إتمام الشراء تصلك نسختان بصيغتي PDF وePub، تقرأهما على أي جهازٍ أو تطبيق قراءة تفضّله."
+      },
+      {
+        "q": "هل أستطيع القراءة دون تحميل ملفات؟",
+        "a": "نعم، الكتاب متاح كاملًا في القارئ الإلكتروني على موقعنا، فتتابع الرسائل من متصفحك أينما كنت وتُحفظ صفحتك تلقائيًا."
+      },
+      {
+        "q": "هل أحصل على الطبعات المنقحة لاحقًا؟",
+        "a": "كل تحديثٍ أو طبعة منقحة تصلك مجانًا مدى الحياة، وتجدها في مكتبتك دون أي خطوة إضافية."
+      }
+    ],
+    "contents": ["الرسالة الأولى: إلى من يترك الكتب مفتوحة","الرسالة الثانية: عن الرفوف العليا","الرسالة الثالثة: قارئة الساعة الثالثة","الرسالة الرابعة: الكتاب الذي لم يُعَد","الرسالة الخامسة: نافذة تُضاء في الجهة الأخرى","الرسالة السادسة: عن الغبار والذاكرة","الرسالة السابعة: ليلة انقطاع الكهرباء","الرسالة الثامنة: الاسم على بطاقة الاستعارة","الرسالة الأخيرة: الفجر"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "الرسالة الأولى",
+        "t": "إلى من يترك الكتب مفتوحة",
+        "paras": [
+          "سيدي، أو سيدتي، أو أيًّا كان الاسم الذي تحمله حين يحملك الليل إلى هنا: أكتب إليك من الطاولة الطويلة قرب النافذة الغربية، حيث يُبقي مصباح الحراسة دائرةً صغيرة من الضوء لا تتجاوز حجم كتاب. أنا الحارس الليلي لهذه المكتبة منذ أحد عشر عامًا، وأعرف أصواتها كما يعرف الطبيب نبض مريضه: أنين الخشب حين يبرد، وتنهيدة الساعة الجدارية في القاعة الشرقية، وخطوات القطط على السطح. لكنني منذ شهر أسمع صوتًا جديدًا لا أعرفه؛ صوت ورقةٍ تُقلب في مكانٍ ما، ثم صمت. وفي الصباح أجد ما تتركه لي: كتابًا مفتوحًا على صفحةٍ بعينها، كأنه رسالة.",
+          "أوّل مرة ظننتها مصادفة: كتابُ رحلاتٍ قديم على الطاولة نفسها، مفتوح على وصف مدينةٍ ساحلية لم أسمع بها، وتحت سطرٍ واحد خطٌّ رفيع بقلم رصاص: «المدنُ التي لا يزورها أحد تنتظر أيضًا». أعدته إلى رفّه وواصلتُ جولتي، وقلت لنفسي إن قارئًا نهاريًّا نسيَه. لكن في الليلة التالية وجدت ديوانًا مفتوحًا على قصيدة عن النوافذ المضاءة، وبعدها كتابَ فلكٍ مفتوحًا على خريطة الوجه المظلم من القمر. عشرون ليلة وعشرون كتابًا، ولا أثر لك: لا باب فُتح، ولا نافذة كُسرت، ولا صورة على شاشات الكاميرات إلا الرفوف واقفةً في عتمتها كأشجار شتوية. لو كنتَ لصًّا لكنتَ أغرب لصٍّ في التاريخ: لا تأخذ شيئًا، بل تترك.",
+          "كان يجب أن أبلّغ الإدارة، أعرف. لكن قل لي: كيف أشرح لهم أن أحدًا يقتحم المكتبة كل ليلة ليقرأ؟ سيغيّرون الأقفال، ويضاعفون الكاميرات، وينتهي كل شيء. والحقيقة التي أعترف بها لك وحدك أنني لم أعد أحتمل انتهاء أي شيء. المدينة بعد منتصف الليل تشبه بيتًا كبيرًا نام أهله ونسوا مصباحًا مضاءً؛ وأنا ذلك المصباح منذ أحد عشر عامًا. أمشي بين الرفوف فأسمع نداء آلاف الكتب التي لم يفتحها أحد منذ سنين، وأفكر في كتّابها الذين ظنوا أنهم يكلمون المستقبل. ثم جئتَ أنت، تفتح واحدًا منها كل ليلة، فتشعر المكتبة كلها — وأنا معها — بأن أحدًا في هذا العالم ما زال يصغي.",
+          "لذلك سأترك هذه الرسالة حيث تعرف أن تجد: بين صفحتي مئة وأربعين ومئة وإحدى وأربعين من كتاب الرحلات ذاته، عند وصف المدينة التي تنتظر. لن أطلب اسمك، ولن أراقب الممرات، ولن أرفع عيني عن كتابي إن سمعتُ حفيف خطاك؛ فبعض الصداقات لا تحتمل الضوء الكامل. فقط أجب بالطريقة التي تجيد: افتح لي كتابًا. وسأنتظر كما تنتظر المدنُ التي لا يزورها أحد: بلا عجلة، وبنافذةٍ واحدة مضاءة. — عند هذا الحد تنتهي المعاينة المجانية؛ وفي النسخة الكاملة تتوالى الرسائل ليلةً بعد ليلة، ويبدأ القارئ المجهول في الردّ بطرقٍ لم يتوقعها الحارس، حتى تتكشف حكايةٌ عن المكتبة وسرٍّ قديم بين رفوفها."
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "fann-al-julus-maa-al-nafs",
+    "type": "book",
+    "lang": "ar",
+    "title": "فنّ الجلوس مع النفس",
+    "subtitle": "دعوةٌ هادئة إلى عشر دقائق من الخلوة الصادقة، بعيدًا عن الشاشات وضجيج التحسين.",
+    "category": "Self-Improvement",
+    "price": 14,
+    "rating": 4.8,
+    "ratings": 98,
+    "pages": 152,
+    "readTime": "4 ساعات",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#2E2418",
+      "c2": "#171008",
+      "acc": "#E0CBA0",
+      "motif": "rings"
+    },
+    "hook": "عشر دقائق في اليوم، بلا شاشة، بلا تبرير، بلا أحد سواك.",
+    "desc": [
+      "في زمنٍ صار فيه الانشغال وسامًا، يقترح هذا الكتاب فعلًا صغيرًا يكاد يكون منسيًّا: أن تجلس مع نفسك عشر دقائق كلّ يوم، بلا هاتف، ولا مهمّة، ولا نيّة تحسين. لا يعدك «فنّ الجلوس مع النفس» بحياةٍ جديدة خلال أسبوع، ولا يمنحك قائمة عادات لتطاردها؛ إنما يعيد إليك عادة أقدم من كلّ ذلك: أن تكون حاضرًا حيث أنت، وأن تسمع ما يقوله داخلك حين يهدأ الخارج.",
+      "على امتداد فصوله، يمضي الكتاب بخطوات عملية هادئة: كيف تبدأ، وكيف تصمد أمام الملل الأول، وماذا تفعل حين تصعد الأفكار المزعجة التي طالما هربت منها. لغته فصيحة معاصرة، ونبرته نبرة صديق لا مدرّب، وتمارينه قليلة مقصودة، تُنجز في دقائق ولا تحتاج إلى شيء سوى كرسيّ ونافذة وصدق. كتاب صغير الحجم، لكنه يفتح في اليوم مساحة كانت مغلقة منذ سنوات، وتتسع كلّما عدت إليها."
+    ],
+    "learn": [
+      "كيف تقتطع عشر دقائق يومية للخلوة الصادقة، وتحميها من زحام الجدول.",
+      "طريقة عملية للجلوس بلا شاشة ولا مشتّت، من الدقيقة الأولى إلى الأخيرة.",
+      "كيف تستقبل الأفكار المزعجة دون أن تحاكمها أو تهرب منها.",
+      "الفرق بين الانتباه الحقيقي وضجيج التطوير الذاتي وشعاراته الصاخبة.",
+      "كيف تحوّل الخلوة القصيرة إلى عادة تدوم، بلا تشدّد ولا جلد للذات."
+    ],
+    "audience": [
+      "من أرهقته كتب التطوير الذاتي ووعودها الصاخبة.",
+      "المنشغلون الذين لا يجدون في يومهم دقيقة صمت واحدة.",
+      "من يشعر أنه يعرف الجميع ولا يكاد يعرف نفسه.",
+      "الباحثون عن ممارسة تأمل بسيطة بلغة عربية رصينة، بلا طقوس معقّدة."
+    ],
+    "faq": [
+      {
+        "q": "بأي صيغة أحصل على الكتاب بعد الشراء؟",
+        "a": "يصلك الكتاب فور إتمام الشراء بصيغتَي PDF وePub معًا، لتقرأه على أي جهاز تفضّله."
+      },
+      {
+        "q": "هل أحتاج إلى تحميل الملفات لأبدأ القراءة؟",
+        "a": "لا؛ يمكنك البدء فورًا عبر القارئ الإلكتروني على موقعنا، وتبقى نسختا التحميل متاحتين لك في أي وقت."
+      },
+      {
+        "q": "ماذا لو صدرت طبعة منقّحة من الكتاب لاحقًا؟",
+        "a": "كل التحديثات والطبعات المنقّحة تصلك مجانًا مدى الحياة، دون أي رسوم إضافية."
+      }
+    ],
+    "contents": ["الفصل الأول: الغرفة التي لا تدخلها","الفصل الثاني: عشر دقائق","الفصل الثالث: ضجيج التحسين","الفصل الرابع: الملل بابٌ لا عدوّ","الفصل الخامس: ما يصعد حين تهدأ","الفصل السادس: الجسد يجلس أولًا","الفصل السابع: خلوة وسط الزحام","الفصل الثامن: دفتر الجلسات","خاتمة: صداقة طويلة مع النفس"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "الفصل الأول",
+        "t": "الغرفة التي لا تدخلها",
+        "paras": [
+          "في البيت الذي تسكنه غرفةٌ لا تدخلها. تمرّ بها كلّ يوم، تلمح بابها من طرف عينك، ثم تسرع الخطى كأنّ في الداخل شيئًا يؤجَّل. تلك الغرفة هي أنت. نحن نقضي العمر في زيارة الآخرين: نطرق أبوابهم، نجيب رسائلهم، نحفظ مواعيدهم وأسماء أطفالهم، ونعود آخر الليل إلى أنفسنا كما يعود مسافر إلى فندق: ننام في المكان ولا نعرفه. لست بحاجة إلى رحلة بعيدة لتلتقي نفسك، ولا إلى معتكفٍ في جبل، ولا إلى معلّم يبيعك الطمأنينة في عبوات. تحتاج إلى كرسيّ، وإلى عشر دقائق، وإلى قرار صغير يشبه فتح نافذة في غرفة مغلقة منذ سنوات: أن تجلس، فقط، ولا تفعل شيئًا آخر.",
+          "ستكتشف في الدقيقة الأولى أنّ الجلوس أصعب مما يبدو. اليد تبحث عن الهاتف كما يبحث المدخّن عن سيجارته، والذهن يقترح عليك أعمالًا عاجلة لم تكن عاجلة قبل لحظة. هذا طبيعي؛ فأنت تفطم نفسك عن ضجيج طالما ظننته حياةً. لا تقاوم ولا تؤنّب. اجلس حيث يصلك ضوء النهار إن أمكن، وضَع الهاتف في غرفة أخرى لا في جيبك، ودَع يديك فارغتين. لست هنا لتتأمل تأمّلًا عظيمًا، ولا لتصل إلى صفاءٍ تحدّث به الناس. أنت هنا لتشهد فقط: هذا قلبي يخفق، هذا نَفَسي يدخل ويخرج، هذه أفكاري تعبر كسحابٍ لا يستأذن. الشهادة وحدها، من غير حكم ولا تحسين، هي الباب الذي أُغلق طويلًا.",
+          "في اليوم الثالث أو الرابع، سيصعد من الأعماق ما كنت تدفنه بالانشغال: حديث مؤجَّل، خسارة لم تُبكَ كما ينبغي، سؤال عن الطريق الذي تمشيه ولا تعرف لماذا. لا تفزع؛ فهذه ليست علامة فشل، بل علامة أنّ الماء بدأ يصفو حتى صار القاع مرئيًّا. كلّ ما يُطلب منك أن تبقى جالسًا، وأن تنظر إلى ما صعد كما تنظر إلى ضيف قديم: تعرفه، وتتركه يقول ما جاء ليقوله، ثم تدعه ينصرف حين يشاء. ستدهشك حقيقة بسيطة: أنّ أكثر ما نخافه في دواخلنا يذبل حين نمنحه النظر، وأنّ الهرب هو الذي كان يغذّيه طوال هذه السنين. الجلوس ليس مواجهة؛ إنه مصالحة بطيئة، على دفعات صغيرة، بحجم عشر دقائق.",
+          "لن أعدك بأن تصبح شخصًا آخر؛ فالكتب التي تعد بذلك كثيرة، وأرففها مزدحمة. أعدك بشيء أقلّ بريقًا وأصدق أثرًا: أن تعود إلى نفسك جارًا حسن الجوار، تعرف متى تطرق بابها ومتى تتركها لصمتها. عشر دقائق في اليوم لا تُرى في جدول أحد، لكنها مع الأيام تحفر مجرى هادئًا يتغيّر به مذاق اليوم كلّه: تُبطئ قبل أن تغضب، وتسمع قبل أن تجيب، وتلاحظ الضوء على الجدار وكأنك تراه أول مرة. هنا تنتهي المعاينة المجانية من هذا الكتاب؛ ويمضي الكتاب الكامل بعدها خطوة خطوة: كيف تهيّئ خلوتك الأولى، وكيف تعبر أسبوع الملل، وكيف تصغي إلى ما يصعد من الداخل، حتى تصير العشر دقائق أصدق مواعيد يومك."
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "kharait-al-mudun-al-qadima",
+    "type": "book",
+    "lang": "ar",
+    "title": "خرائط المدن القديمة",
+    "subtitle": "رحلات مشيٍ بطيئة في أزقة المدن العربية القديمة، حيث تحفظ الجدران ما ينساه العابرون.",
+    "category": "Travel & Lifestyle",
+    "price": 12,
+    "rating": 4.7,
+    "ratings": 76,
+    "pages": 190,
+    "readTime": "5 ساعات",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#1F2A26",
+      "c2": "#0E1512",
+      "acc": "#CBB689",
+      "motif": "compass"
+    },
+    "hook": "امشِ ببطء؛ فالمدن القديمة لا تبوح إلا لمن يتمهّل.",
+    "desc": [
+      "هذا كتابٌ في المشي قبل أن يكون كتابًا في السفر. خمس مدن عربية قديمة — فاس وصنعاء ودمشق والقاهرة والكويت القديمة — نعبرها زقاقًا زقاقًا، لا بحثًا عن المعالم الكبيرة، بل عن التفاصيل الصغيرة التي تسبقها: مقبض بابٍ نحاسي لمّعته الأيادي، رائحة خبزٍ تتسلّل من فرنٍ حجري، ظلّ عريشةٍ يتكسّر على جدارٍ طيني. في كل فصلٍ نبطئ الخطى حتى تستيقظ الحواس، ونصغي إلى ما تقوله المدينة حين نكفّ عن استعجالها.",
+      "بين هذه الصفحات خرائطُ من نوعٍ آخر: خرائط الروائح والأصوات والظلال، ترسمها القدمان قبل العينين. نجالس النجّار في فاس، ونصعد سطوح صنعاء عند المغيب، ونتبع ماء بردى تحت أقواس دمشق، ونضيع عمدًا في حواري الجمالية، ونبحث في فرجان الكويت القديمة عن بيوتٍ ما زال يسكنها البحر. وفي ختام كل رحلةٍ مسارُ مشيٍ مقترح لمن أراد أن يجرّب الدرب بقدميه. أدبُ رحلاتٍ تأملي يذكّرك أن المدينة ليست ما نراه فيها، بل ما تتركه فينا حين نغادرها."
+    ],
+    "learn": [
+      "فنّ المشي البطيء: كيف تقرأ المدينة بقدميك قبل عينيك",
+      "مسارات مقترحة في أزقة فاس وصنعاء ودمشق والقاهرة والكويت القديمة",
+      "كيف تفتح حواسك على الروائح والأصوات والظلال التي تسبق المعالم",
+      "قراءة العمارة القديمة: الأبواب والمشربيات والأفنية وما ترويه من ذاكرة",
+      "تدوين الرحلة: تحويل الملاحظات الصغيرة إلى نصوصٍ تستحق القراءة"
+    ],
+    "audience": [
+      "عشّاق أدب الرحلات والكتابة التأملية",
+      "المسافرون الذين يفضّلون الأزقة على قوائم المعالم",
+      "المهتمون بالعمارة والتراث العمراني العربي",
+      "من يبحث عن قراءةٍ هادئة تبطئ إيقاع أيامه"
+    ],
+    "faq": [
+      {
+        "q": "بأي صيغة أحصل على الكتاب بعد الشراء؟",
+        "a": "يصلك الكتاب فور إتمام الشراء بصيغتَي PDF وePub معًا، لتقرأه على أي جهازٍ تفضّله."
+      },
+      {
+        "q": "هل أستطيع القراءة دون تحميل أي ملفات؟",
+        "a": "نعم، يمكنك قراءة الكتاب كاملًا عبر القارئ الإلكتروني على موقعنا من أي متصفح، ويُحفظ موضع قراءتك تلقائيًا أينما توقفت."
+      },
+      {
+        "q": "ماذا لو أُضيفت مسارات أو فصول جديدة لاحقًا؟",
+        "a": "جميع التحديثات المستقبلية مجانية مدى الحياة؛ كلما أضفنا مسارًا أو فصلًا جديدًا وصلتك النسخة المحدّثة دون أي تكلفة إضافية."
+      }
+    ],
+    "contents": ["مدخل: المشي بوصفه قراءة","فاس: الأزقة التي تعرف أسماءها","صنعاء: نوافذ القمرية","دمشق: ياسمين الجدران المتعبة","القاهرة: مقاهي الظهيرة","الكويت القديمة: بيوت البحر","طنجة: المدينة التي تودّع","خاتمة: خريطة لا تكتمل"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "الفصل الأول",
+        "t": "فاس: أن تضيع كما ينبغي",
+        "paras": [
+          "تدخل فاس كما تدخل كتابًا قديمًا لم يفرغ أحدٌ من قراءته بعد. عند باب بوجلود يقف الصباح لحظةً كأنه يستأذن، ثم ينسكب الضوء على الزليج الأزرق فتتذكّر أن لهذه المدينة عادةً في تحويل كل شيءٍ إلى بدايةٍ للحكاية. لا تسأل عن الطريق؛ فالسؤال هنا نوعٌ من الاستعجال، والاستعجال خطيئة المشّائين. خذ أول زقاقٍ يضيق بك، ودَع كتفيك يتعلّمان لغة الجدران: انحناءةٌ هنا، والتفاتةٌ هناك، ثم ذلك الانفراج المفاجئ حين تنفتح ساحةٌ صغيرة كأنها نَفَسٌ أخذته المدينة بعد جملةٍ طويلة. في فاس تفهم مبكرًا أن الخريطة الحقيقية لا تُطوى في الجيب، بل تُكتب على مهلٍ بباطن القدمين.",
+          "الروائح في فاس تسبق الأسماء. قبل أن تعرف أنك اقتربت من سوق العطارين، يخبرك الهواء: قرفةٌ وكمّونٌ وماء زهرٍ وشيءٌ من دخان خشب الأرز يتصاعد من ورشة نجّارٍ لم يرفع رأسه منذ الفجر. أبطئ هنا. ضع يدك على مقبضٍ نحاسي لمّعته آلاف الأيادي قبل يدك، وأصغِ إلى إيقاع المطارق في ساحة الصفارين يعلو ويخفت كأنه نبض المدينة نفسه. عربةُ بغلٍ تمرّ فيلتصق الجميع بالجدران في حركةٍ واحدةٍ متوارثة، ثم يعود الزقاق إلى سيرته الأولى. لا أحد هنا يمشي وحده؛ أنت تمشي مع كل من مشوا قبلك، وآثار خطاهم محفورةٌ في الحجر انخفاضاتٍ ناعمةً تلمع تحت الضوء الشحيح.",
+          "في ساحة الصفارين جلستُ على عتبةٍ حجرية أراقب شيخًا يطرق إناءً نحاسيًا ويعيد إليه استدارته الأولى. سألته منذ متى وهو هنا، فأشار إلى الجدار خلفه وقال: اسأله، فهو أقدم مني وأحفظ للحكاية. ضحك ثم أضاف بصوتٍ أخفض: نحن نمرّ يا ولدي، والجدران تبقى؛ لهذا نحسن إليها الصنعة. تلك الجملة مشت معي بقية النهار. صرتُ أرى الجدران بعينٍ أخرى: هذا الجصّ المتشقق دفترُ حساباتِ قرنٍ كامل، وهذه الحفرة أثرُ مزلاجٍ لبابٍ لم يعد له وجود، وذاك السواد فوق القوس دخانُ قناديل أطفأتها الكهرباء ولم تمحُها. المدينة القديمة لا تخبّئ ذاكرتها في المتاحف؛ إنها تعلّقها على الجدران لمن يرفع رأسه.",
+          "قرب العصر صعدتُ إلى سطحٍ يطلّ على مدابغ الشوارة، حيث تنبسط أحواض الصباغة تحتك كلوحة ألوانٍ تركها رسّامٌ على عجل. من فوق، تبدو فاس بحرًا من السطوح الطينية تتخلله مآذن خضراء، ولا أثر للأزقة التي تُهتَ فيها طوال النهار؛ كأن المدينة تخفي ممراتها عمّن ينظر إليها من علٍ، ولا تمنحها إلا لمن ينزل إليها ماشيًا. أدركتُ حينها أن الضياع في فاس ليس خطأً في القراءة، بل هو طريقة القراءة الوحيدة. غدًا سأعود إلى باب بوجلود وأبدأ من جديد، بزقاقٍ لم أجرّبه. هنا تنتهي المعاينة المجانية؛ ويتابع الكتاب الكامل الرحلة في بقية أزقة فاس، ثم يحملك إلى سطوح صنعاء، وياسمين دمشق، وحواري القاهرة، وفرجان الكويت القديمة."
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "la-bibliotheque-de-minuit",
+    "type": "book",
+    "lang": "fr",
+    "title": "La Bibliothèque de minuit",
+    "subtitle": "Un court roman sur une bibliothèque qui n'ouvre qu'à minuit, et sur ceux que la nuit tient éveillés.",
+    "category": "Stories & Fiction",
+    "price": 12,
+    "rating": 4.8,
+    "ratings": 114,
+    "pages": 176,
+    "readTime": "4 heures",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#232837",
+      "c2": "#0F1219",
+      "acc": "#D6BE8C",
+      "motif": "bookmark"
+    },
+    "hook": "Elle prête à chacun le livre dont il ne savait avoir besoin.",
+    "desc": [
+      "Dans une ville sans nom, une bibliothèque de quartier n'ouvre ses portes qu'entre minuit et l'aube. On y croise une infirmière qui rentre de garde, un veuf qui parle aux rayonnages, une adolescente qui a peur d'éteindre la lumière. Derrière le comptoir, madame Solane ne demande jamais de carte : elle observe, elle écoute, puis elle prête à chacun le livre dont il ne savait pas avoir besoin. Élias, qui ne dort plus depuis deux cent onze nuits, va recevoir le sien.",
+      "Écrit dans une langue simple et lumineuse, La Bibliothèque de minuit est un roman court sur l'insomnie, le deuil et la douceur têtue des lieux qui restent ouverts quand tout ferme. Un réalisme à peine déplacé, où le merveilleux tient en une étiquette manuscrite et une lampe qu'on n'éteint pas. Cent soixante-seize pages à lire une nuit où le sommeil ne vient pas — ou à garder pour celles qui viendront."
+    ],
+    "learn": [
+      "Un court roman complet, à lire en une ou deux nuits blanches",
+      "Une galerie d'insomniaques attachants, croqués avec tendresse et précision",
+      "Une bibliothécaire mystérieuse dont chaque prêt cache une intention",
+      "Une écriture au réalisme doux, entre mélancolie et lumière",
+      "Une méditation discrète sur le deuil, la lecture et les lieux qui consolent"
+    ],
+    "audience": [
+      "Les lecteurs qui aiment les romans courts à l'atmosphère enveloppante",
+      "Les insomniaques qui cherchent une compagnie plutôt qu'un remède",
+      "Les amoureux des bibliothèques, des librairies et des lieux habités par les livres",
+      "Ceux qui ont aimé les récits où le quotidien glisse doucement vers l'étrange"
+    ],
+    "faq": [
+      {
+        "q": "Dans quels formats le livre est-il disponible ?",
+        "a": "Le roman est livré en PDF et en ePub, sans protection contraignante, pour le lire sur liseuse, tablette ou ordinateur."
+      },
+      {
+        "q": "Puis-je lire sans rien télécharger ?",
+        "a": "Oui, votre achat inclut l'accès à notre lecteur en ligne : le livre vous suit sur tous vos appareils, votre page retenue d'une nuit à l'autre."
+      },
+      {
+        "q": "L'édition sera-t-elle mise à jour ?",
+        "a": "Les mises à jour sont offertes à vie : si le texte est corrigé ou enrichi d'une préface, vous recevez la nouvelle édition sans frais."
+      }
+    ],
+    "contents": ["Chapitre un : L’heure des insomniaques","Chapitre deux : La bibliothécaire","Chapitre trois : Le lecteur du mardi","Chapitre quatre : Livres prêtés, jamais rendus","Chapitre cinq : La salle du fond","Chapitre six : L’inventaire des absences","Chapitre sept : Une ville qui dort mal","Chapitre huit : L’aube"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "Chapitre premier",
+        "t": "Ceux qui ne dorment pas",
+        "paras": [
+          "Personne ne se souvenait d'avoir vu madame Solane arriver. À minuit moins le quart, les fenêtres de la bibliothèque de la rue des Remparts s'allumaient une à une, d'une lumière jaune et patiente, comme on rallume une mémoire. Le quartier dormait, ou faisait semblant. Seuls les insomniaques savaient — et les insomniaques se reconnaissent entre eux à cette façon qu'ils ont de marcher la nuit, sans hâte, les mains dans les poches, en évitant leur propre reflet dans les vitrines. Ils venaient de partout : de la cité des Lilas, des immeubles cossus du boulevard, de la chambre de bonne où l'on entend trop bien respirer la ville. Ils poussaient la porte vitrée, et la porte ne grinçait jamais.",
+          "À l'intérieur, il faisait la température exacte des souvenirs d'enfance. Madame Solane se tenait derrière son comptoir de bois sombre, ni jeune ni vieille, avec ce visage qu'on oublie dès qu'on le quitte et qu'on reconnaît pourtant toute sa vie. Elle ne demandait jamais de carte. Elle demandait autre chose — comment était la nuit, si l'on avait mangé, depuis quand on ne pleurait plus. Puis elle disparaissait entre les rayonnages, longtemps parfois, et revenait avec un seul livre qu'elle posait sur le comptoir sans un mot. Ce n'était jamais celui qu'on serait venu chercher. C'était toujours, on le comprenait plus tard, celui qu'il fallait.",
+          "Cette nuit de novembre, il tombait une pluie fine qui ne mouillait presque pas, une pluie pour la forme. Élias entra à minuit vingt, le col relevé, ses trente-quatre ans portés comme un manteau trop grand. Cela faisait deux cent onze nuits qu'il ne dormait plus — il les comptait, c'était devenu sa manière à lui de prier. Il venait pour la chaleur, se disait-il, pour les lampes, pour le bruit des pages tournées par d'autres mains. Il s'assit à sa place habituelle, près de la fenêtre d'où l'on voyait le carrefour désert et son feu tricolore qui continuait, imperturbable, à régler la circulation de personne.",
+          "Il ne l'entendit pas approcher. Madame Solane posa devant lui un petit volume à la couverture fatiguée, sans titre apparent, dont la tranche gardait la trace d'un ruban jaune. « Celui-ci vous attendait », dit-elle simplement, avant de regagner son comptoir comme si de rien n'était. Élias regarda longtemps le livre sans y toucher. Il connaissait cette écriture, sur l'étiquette. Il l'aurait reconnue entre mille : c'était celle de sa mère, morte au printemps, qui de toute sa vie n'avait jamais mis les pieds dans une bibliothèque. Dehors, le feu passa au vert pour personne. L'extrait gratuit s'achève ici ; le roman complet continue avec la première nuit d'Élias parmi les insomniaques, et le secret des livres que madame Solane ne prête qu'une seule fois."
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "l-art-de-finir",
+    "type": "book",
+    "lang": "fr",
+    "title": "L'Art de finir",
+    "subtitle": "Un essai sur la discipline discrète de l'achèvement, à l'usage des collectionneurs de commencements.",
+    "category": "Productivity",
+    "price": 15,
+    "rating": 4.9,
+    "ratings": 87,
+    "pages": 148,
+    "readTime": "4 heures",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#33221F",
+      "c2": "#170E0C",
+      "acc": "#DDBE7F",
+      "motif": "check"
+    },
+    "hook": "Commencer est une ivresse. Finir est un art.",
+    "desc": [
+      "Nous vivons entourés de commencements. Le roman abandonné à la page quarante, la langue apprise jusqu'à la troisième leçon, le projet qui dort dans un dossier soigneusement nommé. Commencer nous flatte : c'est le moment où tout est encore possible, où rien n'a encore déçu. Cet essai examine avec une tendresse lucide notre collection d'élans interrompus, et ce qu'elle dit de nous — moins une paresse qu'une peur élégamment déguisée en enthousiasme.",
+      "Puis il propose autre chose : une discipline de l'achèvement, patiente et presque artisanale. Finir n'est pas une performance ; c'est un rapport au temps, au réel, à soi. Au fil de pages précises et sans jargon, l'auteur montre comment le geste de conclure — un texte, un chantier, une conversation — transforme le travail en œuvre et l'agitation en trajectoire. Un livre bref, à terminer d'une traite, pour changer durablement la manière dont on mène tout le reste."
+    ],
+    "learn": [
+      "Pourquoi l'esprit préfère l'ivresse du début à la sobriété de la fin",
+      "Distinguer les projets à finir de ceux qu'il faut abandonner franchement",
+      "Traverser le dernier kilomètre, cette zone où tout semble soudain médiocre",
+      "Faire de l'achèvement une habitude discrète plutôt qu'un exploit occasionnel",
+      "Ce que finir change vraiment : la confiance, la réputation, le rapport au temps"
+    ],
+    "audience": [
+      "Les collectionneurs de débuts — projets, livres, formations — qui commencent à s'en lasser",
+      "Les indépendants et les créatifs dont le travail ne compte que livré",
+      "Les perfectionnistes qui confondent l'inachevé et le perfectible",
+      "Tout lecteur qui préfère un essai élégant à un manuel de méthodes"
+    ],
+    "faq": [
+      {
+        "q": "Sous quels formats le livre est-il disponible ?",
+        "a": "Vous recevez le livre en PDF et en ePub, sans protection contraignante, pour le lire confortablement sur tous vos appareils."
+      },
+      {
+        "q": "Puis-je le lire sans rien télécharger ?",
+        "a": "Oui. Chaque achat inclut l'accès à notre liseuse en ligne, qui conserve votre progression d'un appareil à l'autre."
+      },
+      {
+        "q": "Le livre évoluera-t-il après l'achat ?",
+        "a": "Chaque édition révisée vous est offerte : les mises à jour sont gratuites, à vie, sans jamais rien racheter."
+      }
+    ],
+    "contents": ["Chapitre un : Le culte du commencement","Chapitre deux : Pourquoi nous abandonnons","Chapitre trois : La dernière ligne droite","Chapitre quatre : Finir petit","Chapitre cinq : L’ennui du milieu","Chapitre six : Rituels d’achèvement","Chapitre sept : Savoir abandonner, parfois","Conclusion : La bibliothèque des choses finies"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "Chapitre premier",
+        "t": "La collection des commencements",
+        "paras": [
+          "Il faudrait un jour dresser l'inventaire de nos débuts. Le cahier neuf dont seules les trois premières pages portent une écriture appliquée. La méthode d'italien arrêtée au passé composé. Le meuble poncé sur une seule face, qui attend dans le garage une main qui ne reviendra pas. Nous croyons collectionner des projets ; nous collectionnons en réalité des promesses faites à nous-mêmes, et soigneusement rompues. L'étrange est que cette collection ne nous accable pas. Elle nous rassure. Chaque début inachevé conserve intacte sa perfection possible : tant que le roman n'est pas écrit, il demeure un chef-d'œuvre. C'est l'achèvement qui prend le risque de la médiocrité. Commencer, c'est se choisir un avenir flatteur ; finir, c'est accepter un présent exact.",
+          "Notre époque a fait du commencement une vertu cardinale. On célèbre le lancement, l'élan, la première pierre ; on photographie les inaugurations, jamais les livraisons. Le vocabulaire lui-même a pris parti : entreprendre sonne comme une aventure, terminer comme une formalité. Il y a pourtant une injustice dans cette hiérarchie. Le premier jour ne coûte presque rien — l'enthousiasme paie tout. C'est le quarantième jour qui exige quelque chose de nous, quand la nouveauté s'est éteinte et qu'il ne reste que le travail, nu, sans musique. Ceux qui finissent ne sont pas plus doués que les autres. Ils ont simplement appris à travailler sans applaudissements intérieurs, à avancer dans cette zone tempérée où rien n'exalte et rien n'empêche. Une compétence modeste, presque invisible, qui décide pourtant de tout.",
+          "J'ai longtemps cru que mes abandons étaient des accidents. Un imprévu, une fatigue, un autre projet plus urgent — il y avait toujours une explication locale, raisonnable, irréprochable. Puis j'ai remarqué la régularité du phénomène : je m'arrêtais toujours au même endroit. Pas au début, où l'élan porte encore ; pas à la fin, que je n'atteignais jamais ; mais aux deux tiers, précisément là où l'ouvrage devient assez réel pour être jugé. Tant qu'une chose est en cours, elle bénéficie d'un sursis. Achevée, elle témoigne. Mes abandons n'étaient pas des accidents : c'étaient des acquittements. Je fuyais moins l'effort que le verdict. Cette découverte, humiliante et libératrice, est le point de départ de ce livre.",
+          "Ce livre ne vous demandera pas de devenir quelqu'un d'autre. Il ne promet ni matin miraculeux ni méthode en sept étapes — le monde n'a pas besoin d'une méthode de plus, il a besoin de choses finies. Il propose un déplacement du regard : cesser de juger nos journées à ce qu'elles ouvrent, commencer à les juger à ce qu'elles ferment. C'est un critère plus sévère, et curieusement plus doux ; on s'y découvre moins dispersé qu'on ne le craignait, et plus capable qu'on ne l'espérait. Finir est un art mineur en apparence, majeur en conséquence. L'extrait gratuit s'achève ici ; le livre complet se poursuit avec l'anatomie de l'abandon, la règle du dernier kilomètre et l'apprentissage patient des fins."
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "cafes-et-autres-refuges",
+    "type": "book",
+    "lang": "fr",
+    "title": "Cafés et autres refuges",
+    "subtitle": "De Vienne à Paris, l'éloge discret du droit de s'attarder devant une tasse vide.",
+    "category": "Travel & Lifestyle",
+    "price": 11,
+    "rating": 4.7,
+    "ratings": 65,
+    "pages": 132,
+    "readTime": "4 heures",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#2A2E1F",
+      "c2": "#13160E",
+      "acc": "#D2BC8C",
+      "motif": "arch"
+    },
+    "hook": "Personne, ici, ne vous demandera de partir.",
+    "desc": [
+      "Il existe des lieux où le temps consent à ralentir. De Vienne à Lisbonne, de Trieste à Paris, ce livre s'attarde dans les cafés d'Europe — non pour en dresser l'inventaire, mais pour écouter ce qu'ils murmurent à qui sait s'asseoir. On y croise des habitués silencieux, des serveurs philosophes, des lumières d'hiver posées sur le marbre des tables. Chaque chapitre est une halte, chaque page une tasse qu'on ne finit pas trop vite.",
+      "Contre la hâte qui gouverne nos journées, ces pages défendent un droit ancien : celui de rester assis longtemps devant une tasse vide, sans autre projet que de regarder. On y apprend à lire une salle comme on lit un visage, à reconnaître la grammaire secrète des banquettes et des miroirs, à goûter cette solitude peuplée qui ne ressemble à aucune autre. Un livre à emporter en voyage, ou à ouvrir chez soi quand le monde va trop vite."
+    ],
+    "learn": [
+      "Lire l'âme d'une ville dans la salle de ses cafés",
+      "L'art d'être un habitué, même de passage",
+      "Ce que la tasse vide dit du temps retrouvé",
+      "Observer sans déranger : petite grammaire du regard",
+      "Vienne, Lisbonne, Trieste, Paris : quatre manières d'habiter la lenteur"
+    ],
+    "audience": [
+      "Les voyageurs qui préfèrent une table d'angle aux files de musée",
+      "Les lecteurs de littérature de voyage intime, du feuilleton viennois au carnet lisboète",
+      "Ceux qui écrivent, rêvent ou lisent mieux dans le murmure d'une salle",
+      "Quiconque a déjà commandé un second café pour ne pas avoir à partir"
+    ],
+    "faq": [
+      {
+        "q": "Dans quels formats le livre est-il proposé ?",
+        "a": "Vous recevez le livre en PDF et en ePub, lisibles sur tous vos appareils. Les deux formats sont inclus dans le prix, sans supplément."
+      },
+      {
+        "q": "Le livre sera-t-il enrichi au fil du temps ?",
+        "a": "Oui, les mises à jour sont gratuites à vie. Chaque édition révisée ou augmentée vous est offerte automatiquement, sans rien racheter."
+      },
+      {
+        "q": "Puis-je lire sans rien télécharger ?",
+        "a": "Bien sûr. Notre liseuse en ligne vous permet de commencer la lecture dès l'achat, depuis n'importe quel navigateur, où que vous soyez."
+      }
+    ],
+    "contents": ["Vienne : Le marbre et le temps","Lisbonne : Une bica au comptoir","Trieste : La ville qui lit","Paris : Les habitués","Rome : Le bar d’angle","Istanbul : Le thé et la Corne d’Or","Éloge de la tasse vide"],
+    "previewCount": 1,
+    "chapters": [
+      {
+        "kicker": "Chapitre premier",
+        "t": "Vienne, l'heure du marbre",
+        "paras": [
+          "À Vienne, on n'entre pas dans un café : on y revient. Même la première fois. La porte à tambour du Sperl tourne lentement, comme si elle voulait vous laisser le temps de changer d'avis, puis vous dépose dans une lumière qui n'appartient à aucune heure du jour. Les banquettes de velours ont la couleur exacte d'un automne qui aurait décidé de durer. Un serveur en veste noire s'approche sans hâte — la hâte, ici, serait une faute de goût — et pose devant vous un verre d'eau sur un petit plateau d'argent. C'est un pacte. L'eau dit : restez. Elle sera renouvelée sans que vous demandiez rien, aussi longtemps que vous tiendrez votre poste. Certains habitués tiennent le leur depuis trente ans.",
+          "J'ai passé un hiver à observer l'homme de la table sept. Il arrivait à neuf heures avec deux journaux dont il ne lisait, m'a-t-il semblé, que les titres, puis il regardait la rue. Pas distraitement : avec l'attention scrupuleuse d'un homme qui vérifie que le monde continue. Son mélange refroidissait à côté de lui, à peine entamé. Un matin, j'ai compris qu'il ne venait pas pour le café. Il venait pour la place. Pour cette portion de fenêtre qui lui appartenait par usage, comme certains bancs appartiennent aux vieux messieurs des jardins publics. Le café ne vend pas une boisson ; il loue, pour le prix d'une tasse, un point de vue sur l'existence des autres. C'est la transaction la plus honnête que je connaisse.",
+          "On me demandera ce que je faisais là, moi, pendant tout ce temps. Rien, précisément. C'est un métier plus difficile qu'il n'y paraît. Les premières semaines, je sortais un carnet pour me donner une contenance ; puis le carnet est resté fermé, puis il est resté à l'hôtel. Ma tasse était vide dès dix heures et personne, jamais, n'est venu la remporter avec ce regard qui, ailleurs, signifie qu'il serait temps de céder la table. À Vienne, une tasse vide n'est pas une fin : c'est une preuve de résidence. J'ai appris là ce que ce livre voudrait transmettre — qu'il existe encore, en Europe, des lieux où l'on peut être quelqu'un simplement parce qu'on est assis quelque part.",
+          "Le dernier jour, l'homme de la table sept m'a salué d'un signe de tête. Rien de plus — mais à Vienne, c'est un serment. J'ai quitté le Sperl comme on quitte une maison où l'on a été heureux sans bruit, en emportant cette certitude : nos vies pressées ont besoin de ces salles lentes comme les phrases ont besoin de virgules. Le train de nuit m'attendait, et au bout des rails, Lisbonne, ses comptoirs de bois sombre et ses bicas bues debout — une tout autre grammaire de la lenteur. L'extrait gratuit s'achève ici ; le livre complet poursuit le voyage vers Lisbonne, Trieste et Paris, et vers tous ceux qui, devant une tasse vide, refusent encore de se lever."
+        ]
+      }
+    ]
+  }
 
   ]
 };
