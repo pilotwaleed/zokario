@@ -391,12 +391,22 @@ const ZKI18N = {
     "au.welcomeSub": "Your shelf is open. Every preview, every page, every purchase — remembered.",
     "au.welcomeSkip": "Tap anywhere to enter",
     "c.toastRemoved": "Removed from your cart",
+    "sr.label": "Search",
+    "sr.placeholder": "Search books, templates, notebooks…",
+    "sr.hint": "Type to search the whole library — titles, topics, categories, in any language.",
+    "sr.empty": "Nothing on the shelves for “{q}” — try another word.",
+    "sr.all": "See all results in the Library →",
     /* language names */
     "lang.ar": "العربية", "lang.en": "English", "lang.fr": "Français"
   },
 
   /* ---------------- ARABIC (merged at build) ---------------- */
   ar: {
+    "sr.label": "بحث",
+    "sr.placeholder": "ابحث في الكتب والقوالب والدفاتر…",
+    "sr.hint": "اكتب لتبحث في المكتبة كلها — العناوين والمواضيع والتصنيفات، بأي لغة.",
+    "sr.empty": "لا شيء على الرفوف عن «{q}» — جرّب كلمة أخرى.",
+    "sr.all": "← كل النتائج في المكتبة",
     "au.welcomeTitle": "أهلاً بك في الدار يا <em>{n}</em>",
     "au.welcomeSub": "رفّك مفتوح الآن. كل معاينة، كل صفحة، كل اقتناء — محفوظ.",
     "au.welcomeSkip": "المس أي مكان للدخول",
@@ -891,6 +901,11 @@ const ZKI18N = {
 
   /* ---------------- FRENCH (merged at build) ---------------- */
   fr: {
+    "sr.label": "Rechercher",
+    "sr.placeholder": "Chercher livres, modèles, carnets…",
+    "sr.hint": "Tapez pour chercher dans toute la bibliothèque — titres, sujets, rayons, en toute langue.",
+    "sr.empty": "Rien sur les étagères pour « {q} » — essayez un autre mot.",
+    "sr.all": "Tous les résultats dans la Bibliothèque →",
     "au.welcomeTitle": "Bienvenue dans la maison, <em>{n}</em>",
     "au.welcomeSub": "Votre étagère est ouverte. Chaque extrait, chaque page, chaque achat — retenu.",
     "au.welcomeSkip": "Touchez pour entrer",

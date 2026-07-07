@@ -424,3 +424,109 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* =========================================================
+   Global instant search — every page, every language
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const actions = document.querySelector(".header-actions");
+  if (!actions || typeof ZK === "undefined") return;
+
+  /* header icon (before the account icon) */
+  const btn = document.createElement("button");
+  btn.className = "icon-btn search-open";
+  btn.setAttribute("aria-label", ZKT("sr.label"));
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+  const anchor = actions.querySelector('.icon-btn[href="account.html"]');
+  actions.insertBefore(btn, anchor || actions.firstChild);
+
+  /* overlay */
+  const veil = document.createElement("div");
+  veil.className = "search-veil";
+  veil.innerHTML = `
+    <div class="search-box" role="dialog" aria-label="${zkEsc(ZKT("sr.label"))}">
+      <div class="search-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="${zkEsc(ZKT("sr.placeholder"))}">
+        <span class="search-kbd"><i>↑↓</i><i>⏎</i><i>ESC</i></span>
+      </div>
+      <div class="search-results" id="srResults"><p class="search-hint">${zkEsc(ZKT("sr.hint"))}</p></div>
+    </div>`;
+  document.body.appendChild(veil);
+  const input = veil.querySelector(".search-input");
+  const results = veil.querySelector("#srResults");
+  let sel = -1, rows = [];
+
+  const open = () => {
+    veil.classList.add("open");
+    document.body.style.overflow = "hidden";
+    input.value = ""; render("");
+    setTimeout(() => input.focus(), 40);
+  };
+  const close = () => {
+    veil.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  btn.addEventListener("click", open);
+  veil.addEventListener("click", e => { if (e.target === veil) close(); });
+  addEventListener("keydown", e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); veil.classList.contains("open") ? close() : open(); }
+    if (!veil.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+    if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+    if (e.key === "Enter" && rows[sel]) { e.preventDefault(); location.href = rows[sel].dataset.href; }
+  });
+  const move = d => {
+    if (!rows.length) return;
+    sel = (sel + d + rows.length) % rows.length;
+    rows.forEach((r, i) => r.classList.toggle("sel", i === sel));
+    rows[sel].scrollIntoView({ block: "nearest" });
+  };
+
+  const norm = s => String(s || "").toLowerCase()
+    .replace(/[ً-ْـ]/g, "")             /* Arabic diacritics + tatweel */
+    .replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "");  /* Latin accents */
+
+  const TYPE_WORDS = { book: "book livre كتاب", template: "template notion modele قالب نظام", notebook: "notebook planner carnet دفتر مفكرة" };
+  const score = (p, q) => {
+    const t = norm(p.title);
+    if (t.startsWith(q)) return 100;
+    if (t.includes(q)) return 80;
+    const hay = norm([p.subtitle, p.category, zkCat(p.category), p.hook, TYPE_WORDS[p.type], p.lang].join(" "));
+    if (hay.includes(q)) return 40;
+    /* every word must appear somewhere */
+    const words = q.split(/\s+/).filter(Boolean);
+    if (words.length > 1 && words.every(w => (t + " " + hay).includes(w))) return 30;
+    return 0;
+  };
+
+  function render(qRaw) {
+    const q = norm(qRaw.trim());
+    sel = -1; rows = [];
+    if (!q) { results.innerHTML = `<p class="search-hint">${zkEsc(ZKT("sr.hint"))}</p>`; return; }
+    const hits = ZK.products
+      .map(p => ({ p, s: score(p, q) }))
+      .filter(x => x.s > 0)
+      .sort((a, b) => b.s - a.s || b.p.rating - a.p.rating)
+      .slice(0, 8);
+    if (!hits.length) {
+      results.innerHTML = `<p class="sr-empty">${zkEsc(ZKT("sr.empty", { q: qRaw.trim() }))}</p>`;
+      return;
+    }
+    results.innerHTML = hits.map(({ p }) => `
+      <a class="sr-row" data-href="product.html?id=${p.id}" href="product.html?id=${p.id}">
+        <span class="sr-cover">${zkCoverFace(p)}</span>
+        <span class="sr-main">
+          <span class="sr-title">${zkEsc(p.title)}</span>
+          <span class="sr-meta">${zkEsc(zkCat(p.category))} · ${zkEsc(ZKT("s.fLang" + (p.lang || "en").charAt(0).toUpperCase() + (p.lang || "en").slice(1)) || "")}</span>
+        </span>
+        <span class="sr-price">${ZK.fmt(p.price)}</span>
+      </a>`).join("")
+      + `<a class="sr-all" href="shop.html?q=${encodeURIComponent(qRaw.trim())}">${zkEsc(ZKT("sr.all"))}</a>`;
+    rows = [...results.querySelectorAll(".sr-row")];
+  }
+  let deb;
+  input.addEventListener("input", () => { clearTimeout(deb); deb = setTimeout(() => render(input.value), 120); });
+});
