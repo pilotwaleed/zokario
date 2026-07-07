@@ -35,7 +35,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--bg1)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -824,12 +824,6 @@ body::after{
 @keyframes zk-grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-2%)}60%{transform:translate(-2%,-4%)}80%{transform:translate(4%,2%)}}
 @media (prefers-reduced-motion:reduce){body::after{animation:none}}
 
-/* ---------- Cross-page view transitions (modern browsers) ---------- */
-@view-transition{navigation:auto}
-::view-transition-old(root){animation:zk-vt-out .28s var(--ease) both}
-::view-transition-new(root){animation:zk-vt-in .34s var(--ease) both}
-@keyframes zk-vt-out{to{opacity:0}}
-@keyframes zk-vt-in{from{opacity:0}}
 
 /* ---------- Language shelves (books page) ---------- */
 .shelf-lang{margin-top:3.5rem}
@@ -980,10 +974,88 @@ html[lang="ar"] .quote-inner blockquote{font-style:normal;line-height:1.9}
 .btn-gold::after{content:"";position:absolute;inset:-40% -60%;background:linear-gradient(115deg,transparent 44%,rgba(255,250,235,.35) 50%,transparent 56%);transform:translateX(-80%) rotate(2deg);transition:transform .9s var(--ease);pointer-events:none}
 .btn-gold:hover::after{transform:translateX(80%) rotate(2deg)}
 
-/* ---------- hero/room videos breathe in ---------- */
-.hero-media video{opacity:0;transition:opacity 1.4s ease}
-.hero-media video.on{opacity:.5}
-.room-media video{opacity:0;transition:opacity 1.4s ease}
-.room-media video.on{opacity:.55}
 /* hidden attribute must always win, whatever the display class says */
 [hidden]{display:none!important}
+
+
+/* ==========================================================================
+   V6 — cross-browser hardening + mobile overhaul
+   ========================================================================== */
+.hero-media,.room-media{background:var(--bg0)}
+.hero-media video,.room-media video{background:var(--bg0)}
+.cinema,.cinema-tile{background:var(--bg2)}
+.cinema-tile video{background:var(--bg2)}
+.room-door{background:var(--bg2)}
+
+/* brand lockup can never collapse (iOS Safari auto-width SVG bug) */
+.brand{flex:none}
+.brand-z{width:1.4rem;height:auto;min-width:1.4rem;flex:none}
+.site-footer .brand-z{width:1.32rem;min-width:1.32rem}
+
+/* press feedback on touch */
+@media (hover:none){
+  .btn:active{transform:scale(.97)}
+  .pcard:active{transform:translateY(-2px)}
+}
+
+/* ---------- mobile header: give every element room ---------- */
+@media (max-width:760px){
+  .header-inner{gap:1rem}
+  .brand-name{font-size:1.05rem;letter-spacing:.24em}
+  .header-actions{gap:.4rem}
+  .header-actions .lang-switch{display:none}   /* lives in the burger menu instead */
+  .icon-btn{width:38px;height:38px}
+  .lang-switch.mobile{display:flex}
+}
+@media (max-width:640px){
+  /* type + rhythm */
+  .display{font-size:clamp(2.1rem,9vw,2.7rem)}
+  .h2{font-size:clamp(1.55rem,6.4vw,2rem)}
+  .section{padding:3.4rem 0}
+  .room-hero{min-height:58svh;padding-top:calc(var(--header-h) + 2.2rem)}
+  .room-hero .display{font-size:clamp(1.9rem,8.4vw,2.4rem)}
+  .hero-ctas{gap:.7rem}
+  .hero-ctas .btn{padding:.95rem 1.6rem;font-size:.72rem}
+  .quote-inner blockquote{font-size:1.15rem}
+  /* rooms + doors */
+  .rooms-grid{max-width:340px}
+  .mini-doors{grid-template-columns:1fr;max-width:340px}
+  /* shelves */
+  .shelf-row{min-height:280px;gap:12px}
+  .shelf-lang-head{flex-wrap:wrap;padding:0 1rem;text-align:center}
+  .shelf-hint{padding:0 1.4rem;line-height:2}
+  /* studio blueprints */
+  .os-body{grid-template-columns:1fr}
+  .os-side{display:none}
+  .os-bar b{max-width:70vw}
+  .sys-meta{gap:1rem}
+  .sys-meta .btn{width:100%}
+  .sys-meta{flex-direction:column;align-items:stretch;text-align:center}
+  /* account + auth */
+  .auth-card{padding:2rem 1.4rem}
+  .account-head{flex-direction:column;gap:1.2rem;align-items:flex-start}
+  .reader-card{padding:1.6rem 1.4rem 1.2rem}
+  .rc-name{font-size:1.3rem}
+  .avatar-pick .av{width:42px;height:42px}
+  /* reviews */
+  .review{gap:.8rem}
+  .rv-avatar{width:38px;height:38px;font-size:1rem}
+  .star-input{font-size:1.9rem;gap:.5rem}
+  .review-form{padding:1.3rem 1.1rem}
+  /* welcome ceremony */
+  .wv-title{font-size:clamp(1.5rem,7.5vw,2rem);padding:0 1.2rem}
+  .wv-sub{padding:0 1.6rem;font-size:.9rem}
+  .wv-card{max-width:300px}
+  .wv-z{height:48px}
+  /* email preview */
+  .ep-code{font-size:1.8rem}
+  /* toolbar bits */
+  .shop-toolbar{gap:.8rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-brand{grid-column:1/-1}
+}
+@media (max-width:400px){
+  .brand-name{letter-spacing:.16em}
+  .trust-row{gap:.9rem 1.4rem}
+  .footer-grid{grid-template-columns:1fr}
+}

@@ -392,14 +392,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* videos breathe in instead of popping */
-  document.querySelectorAll(".hero-media video, .room-media video").forEach(v => {
-    const on = () => v.classList.add("on");
-    if (!v.paused && v.readyState >= 2) on();
-    v.addEventListener("playing", on, { once: true });
-    setTimeout(on, 1600); /* autoplay blocked → show poster rather than nothing */
-  });
-
   /* fly-to-cart: a little gilded book arcs into the bag */
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.body.addEventListener("click", e => {
