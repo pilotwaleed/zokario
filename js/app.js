@@ -74,7 +74,10 @@ const ZK_MOTIFS = {
   vault:     '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="16" y="14" width="48" height="52" rx="4"/><circle cx="40" cy="38" r="10"/><path d="M40 38v14M35 33l10 10M45 33 35 43" opacity=".7"/></svg>',
   check:     '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="40" r="26"/><path d="M28 41l8 8 16-18"/></svg>',
   bookmark:  '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M26 14h28v52L40 54 26 66V14Z"/><path d="M32 26h16" opacity=".7"/></svg>',
-  quarter:   '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="40" r="26"/><path d="M40 40V14A26 26 0 0 1 66 40H40Z" fill="currentColor" opacity=".28" stroke="none"/><path d="M40 40V14M40 40h26"/></svg>'
+  quarter:   '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="40" r="26"/><path d="M40 40V14A26 26 0 0 1 66 40H40Z" fill="currentColor" opacity=".28" stroke="none"/><path d="M40 40V14M40 40h26"/></svg>',
+  boat:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M40 18v26M40 20l16 22H40zM40 26 28 44h12"/><path d="M18 52h44l-6 10H24z"/><path d="M14 66c4-3 8-3 12 0s8 3 12 0 8-3 12 0 8 3 12 0" opacity=".6"/></svg>',
+  fox:       '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 20l6 12 12-4 12 4 6-12M22 20c-2 14 2 30 18 40 16-10 20-26 18-40M28 32l-6-12M52 32l6-12"/><path d="M34 44l6 6 6-6M40 50v6" opacity=".8"/><circle cx="33" cy="38" r="1.4" fill="currentColor" stroke="none"/><circle cx="47" cy="38" r="1.4" fill="currentColor" stroke="none"/></svg>',
+  star:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M40 14c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20Z"/><circle cx="20" cy="20" r="1.6" fill="currentColor" stroke="none"/><circle cx="62" cy="24" r="1.2" fill="currentColor" stroke="none"/><circle cx="58" cy="60" r="1.6" fill="currentColor" stroke="none"/><circle cx="22" cy="58" r="1.2" fill="currentColor" stroke="none"/></svg>'
 };
 
 /* ---------- Rendering helpers ---------- */
@@ -116,6 +119,7 @@ function zkPrice(p) {
 }
 
 function zkBadge(p) {
+  if (p.wonder) return `<span class="pcard-badge badge-bedtime">✶ ${ZKT("c.bedtime")}</span>`;
   if (p.badges?.includes("bestseller")) return `<span class="pcard-badge">${ZKT("c.bestseller")}</span>`;
   if (p.badges?.includes("new")) return `<span class="pcard-badge">${ZKT("c.new")}</span>`;
   return "";
@@ -124,6 +128,7 @@ function zkBadge(p) {
 function zkCard(p, delay) {
   return `<article class="pcard reveal ${delay ? "reveal-d" + delay : ""}">
     ${zkBadge(p)}
+    ${zkWishBtn(p.id)}
     <a class="pcard-stage" href="product.html?id=${p.id}" aria-label="${zkEsc(p.title)}">${zkBook3d(p)}</a>
     <div class="pcard-cat">${zkEsc(zkCat(p.category))}</div>
     <h3><a href="product.html?id=${p.id}">${zkEsc(p.title)}</a></h3>
@@ -530,3 +535,67 @@ document.addEventListener("DOMContentLoaded", () => {
   let deb;
   input.addEventListener("input", () => { clearTimeout(deb); deb = setTimeout(() => render(input.value), 120); });
 });
+
+
+/* =========================================================
+   Wishlist, recently-viewed, back-to-top, share
+   ========================================================= */
+const ZKWish = {
+  list() { return ZKStore.read("zk_wish", []); },
+  has(id) { return this.list().includes(id); },
+  toggle(id) {
+    let l = this.list();
+    const on = !l.includes(id);
+    l = on ? [...l, id] : l.filter(x => x !== id);
+    ZKStore.write("zk_wish", l);
+    return on;
+  }
+};
+
+function zkWishBtn(id, big) {
+  const on = ZKWish.has(id);
+  return `<button class="wish-btn ${big ? "wish-big" : ""} ${on ? "on" : ""}" data-wish="${id}" aria-label="${zkEsc(ZKT("wl.save"))}" aria-pressed="${on}">
+    <svg viewBox="0 0 24 24" fill="${on ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.7"><path d="M12 20s-7-4.6-9.2-9A5.2 5.2 0 0 1 12 6.4 5.2 5.2 0 0 1 21.2 11C19 15.4 12 20 12 20Z"/></svg>
+  </button>`;
+}
+
+const ZKRecent = {
+  list() { return ZKStore.read("zk_recent", []); },
+  push(id) {
+    const l = [id, ...this.list().filter(x => x !== id)].slice(0, 8);
+    ZKStore.write("zk_recent", l);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  /* wishlist toggles (delegated, works on injected cards too) */
+  document.body.addEventListener("click", e => {
+    const b = e.target.closest("[data-wish]");
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const on = ZKWish.toggle(b.dataset.wish);
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-pressed", on);
+    b.querySelector("svg").setAttribute("fill", on ? "currentColor" : "none");
+    zkToast(ZKT(on ? "wl.saved" : "wl.removed"));
+  });
+
+  /* back to top */
+  const tt = document.createElement("button");
+  tt.className = "to-top";
+  tt.setAttribute("aria-label", ZKT("tt.top"));
+  tt.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>';
+  document.body.appendChild(tt);
+  tt.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+  const ttWatch = () => tt.classList.toggle("show", scrollY > 1100);
+  addEventListener("scroll", ttWatch, { passive: true });
+  ttWatch();
+});
+
+/* share the current edition (native sheet on mobile, copy elsewhere) */
+async function zkShare(title) {
+  const data = { title: title + " — Zokario", url: location.href };
+  if (navigator.share) { try { await navigator.share(data); return; } catch {} }
+  try { await navigator.clipboard.writeText(location.href); zkToast(ZKT("p.shareCopied")); }
+  catch { zkToast(location.href); }
+}

@@ -1132,3 +1132,57 @@ html{text-size-adjust:100%}
   .search-kbd{display:none}
   .search-results{max-height:60vh}
 }
+
+/* ==========================================================================
+   V9 — Wonder Room, wishlist, to-top, share, recent
+   ========================================================================== */
+/* wishlist heart */
+.wish-btn{
+  position:absolute;top:1rem;inset-inline-end:1rem;z-index:3;width:34px;height:34px;
+  display:grid;place-items:center;border-radius:50%;color:var(--muted-2);
+  background:rgba(20,16,9,.55);border:1px solid var(--line-soft);
+  transition:color .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease);
+}
+.wish-btn svg{width:16px;height:16px}
+.wish-btn:hover{color:var(--champagne);border-color:var(--line);transform:scale(1.1)}
+.wish-btn.on{color:#D98E8E;border-color:rgba(217,142,142,.4)}
+.wish-btn.on:hover{color:#E5A5A5}
+.wish-big{position:static;width:42px;height:42px;background:rgba(30,24,19,.6)}
+.wish-big svg{width:19px;height:19px}
+.share-btn{border:1px solid var(--line-soft);width:42px;height:42px}
+.share-btn:hover{border-color:var(--line)}
+
+/* back to top */
+.to-top{
+  position:fixed;bottom:1.6rem;inset-inline-end:1.6rem;z-index:900;width:46px;height:46px;
+  border-radius:50%;display:grid;place-items:center;color:var(--champagne);
+  background:linear-gradient(180deg,var(--bg3),var(--bg2));border:1px solid var(--line);
+  box-shadow:var(--shadow-md);opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .4s var(--ease),transform .4s var(--ease),border-color .3s;
+}
+.to-top svg{width:18px;height:18px}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+/* bedtime badge */
+.badge-bedtime{background:rgba(232,217,168,.12);border-color:rgba(232,217,168,.4);color:#E8D9A8}
+
+/* four doors */
+.rooms-grid{grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.room-door{aspect-ratio:3/4.4}
+@media (max-width:1020px){.rooms-grid{grid-template-columns:repeat(2,1fr);max-width:640px;margin-inline:auto}}
+@media (max-width:640px){.rooms-grid{grid-template-columns:1fr;max-width:340px}}
+
+/* wonder room */
+.wonder-hero .room-media::after{background:linear-gradient(180deg,rgba(10,10,18,.7) 0%,rgba(10,10,18,.2) 42%,var(--bg1) 100%)}
+.wonder-note{
+  text-align:center;font-family:var(--font-display);font-style:italic;
+  color:#E8D9A8;font-size:clamp(1.05rem,2vw,1.3rem);letter-spacing:.04em;
+}
+html[lang="ar"] .wonder-note{font-style:normal}
+.wonder-grid .pcard{background:linear-gradient(180deg,#1B1B28,var(--bg1));border-color:rgba(232,217,168,.14)}
+.wonder-grid .pcard:hover{border-color:rgba(232,217,168,.3)}
+.wonder-quote{max-width:680px;margin-inline:auto;text-align:center}
+.wonder-quote blockquote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.7rem);line-height:1.55;color:var(--champagne)}
+html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
+.wonder-quote cite{display:block;margin-top:1rem;font-style:normal;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2)}

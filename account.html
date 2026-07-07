@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=35">
+<link rel="stylesheet" href="css/main.css?v=36">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -28,6 +28,7 @@
       <a href="books.html">Books</a>
       <a href="templates.html">Templates</a>
       <a href="notebooks.html">Notebooks</a>
+      <a href="wonder.html">Wonder</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -52,6 +53,7 @@
   <a href="books.html">Books</a>
   <a href="templates.html">Templates</a>
   <a href="notebooks.html">Notebooks</a>
+  <a href="wonder.html">Wonder</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -214,6 +216,11 @@
         <div id="continueCard"></div>
       </div>
 
+      <div id="wishWrap" hidden style="margin-bottom:3rem">
+        <div class="section-label"><h3 data-i18n="wl.title">Saved for later</h3></div>
+        <div class="grid-books" id="wishGrid"></div>
+      </div>
+
       <div class="section-label"><h3 data-i18n="a.library">Your titles</h3></div>
       <div class="lib-grid" id="libGrid"></div>
 
@@ -244,9 +251,9 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=31"></script>
-<script src="js/i18n.js?v=33"></script>
-<script src="js/app.js?v=33"></script>
+<script src="js/data.js?v=36"></script>
+<script src="js/i18n.js?v=36"></script>
+<script src="js/app.js?v=36"></script>
 <script src="js/auth.js?v=31"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -393,6 +400,10 @@ document.addEventListener("DOMContentLoaded", () => {
     $("helloLine").textContent = display ? ZKT("a.welcome", { n: display }) : ZKT("a.welcome", { n: "" }).replace(/[,،]\s*$/, "");
     const orders = ZKStore.orders();
     $("accountMeta").textContent = `${user.email} · ${orders.length} ${orders.length === 1 ? ZKT("au.order") : ZKT("au.orders")}`;
+
+    const wished = ZKWish.list().map(ZK.byId).filter(Boolean);
+    $("wishWrap").hidden = !wished.length;
+    if (wished.length) $("wishGrid").innerHTML = wished.map((w, i) => zkCard(w, i % 3)).join("");
 
     const owned = ZKStore.purchasedIds().map(ZK.byId).filter(Boolean);
     const progress = ZKStore.progress();
