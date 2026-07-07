@@ -16,6 +16,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+          timeout: 120000
           local-dir: ./
           server-dir: ../domains/zokario.com/public_html/
           exclude: |
