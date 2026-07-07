@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=36">
+<link rel="stylesheet" href="css/main.css?v=37">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -126,10 +126,10 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=36"></script>
-<script src="js/i18n.js?v=36"></script>
-<script src="js/app.js?v=36"></script>
-<script src="js/auth.js?v=31"></script>
+<script src="js/data.js?v=37"></script>
+<script src="js/i18n.js?v=37"></script>
+<script src="js/app.js?v=37"></script>
+<script src="js/auth.js?v=37"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const id = new URLSearchParams(location.search).get("id");
@@ -138,18 +138,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!p) {
     main.innerHTML = `<section class="section center container">
-      <p class="eyebrow center-eyebrow">Not found</p>
-      <h1 class="h2">This edition slipped off the shelf</h1>
-      <p class="lead" style="margin:1rem auto 2rem">It may have been moved, renamed, or retired.</p>
-      <a class="btn btn-gold" href="shop.html">Return to the Library</a></section>`;
+      <p class="eyebrow center-eyebrow">${ZKT("nf.eyebrow")}</p>
+      <h1 class="h2">${ZKT("nf.title")}</h1>
+      <p class="lead" style="margin:1rem auto 2rem">${ZKT("nf.lead")}</p>
+      <a class="btn btn-gold" href="shop.html">${ZKT("nf.back")}</a></section>`;
     return;
   }
 
   const owned = ZKStore.owns(p.id);
-  const typeName = p.type === "book" ? "Book" : p.type === "template" ? "Template" : "Notebook";
+  const typeName = ZKT(p.type === "book" ? "t.book" : p.type === "template" ? "t.template" : "t.notebook");
+  const typeLower = typeName.toLowerCase();
 
   /* SEO */
   document.title = `${p.title} — ${typeName} | Zokario`;
+  const canon = document.createElement("link");
+  canon.rel = "canonical";
+  canon.href = "https://zokario.com/product.html?id=" + p.id;
+  document.head.appendChild(canon);
   document.querySelector('meta[name="description"]').content = `${p.subtitle} Preview free, read online, download PDF & ePub. ${ZK.fmt(p.price)}.`;
   const ld = document.createElement("script");
   ld.type = "application/ld+json";
@@ -233,12 +238,12 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="section paper" id="inside">
     <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem" id="insideGrid">
       ${p.contents?.length ? `<div class="reveal">
-        <p class="eyebrow">Inside the ${typeName.toLowerCase()}</p>
+        <p class="eyebrow">${ZKT("p.inside", { type: typeLower })}</p>
         <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.contents")}</h2>
         <ol class="toc-list" style="margin-top:1.5rem">${p.contents.map(c => `<li>${zkEsc(c)}</li>`).join("")}</ol>
       </div>` : ""}
       <div class="reveal reveal-d1"${p.contents?.length ? "" : ' style="grid-column:1/-1;max-width:720px"'}>
-        <p class="eyebrow">About this edition</p>
+        <p class="eyebrow">${ZKT("p.aboutEd")}</p>
         <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.2rem)">${ZKT("p.note")}</h2>
         <div class="prose" style="margin-top:1.5rem">
           ${(p.desc || []).map(d => `<p>${zkEsc(d)}</p>`).join("")}
@@ -357,14 +362,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const pages = document.getElementById("pvPages");
   document.getElementById("pvTitle").textContent = p.title;
 
-  const previewChs = p.chapters.slice(0, p.previewCount);
-  const lockedChs = p.chapters.slice(p.previewCount);
+  const previewChs = (p.chapters || []).slice(0, p.previewCount);
+  const lockedChs = (p.chapters || []).slice(p.previewCount);
   const lockedTitles = (p.contents || []).slice(p.previewCount);
 
-  const teaser = (lockedChs[0]?.paras?.slice(0, 2)) || [
-    "The next chapter continues beyond the preview edge, where the full edition carries the argument into territory the sample can only gesture toward.",
-    "Every remaining page is typeset with the same care as the ones you have just read — and they are waiting."
-  ];
+  const teaser = (lockedChs[0]?.paras?.slice(0, 2)) || [ZKT("p.teaser1"), ZKT("p.teaser2")];
 
   pages.innerHTML =
     previewChs.map(ch => `
@@ -376,21 +378,21 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>`).join("") +
     `<div class="reader-locked">
       <div class="locked-preview" aria-hidden="true">
-        <p class="rp-kicker" style="filter:blur(4px)">${zkEsc(lockedChs[0]?.kicker || "Next chapter")}</p>
+        <p class="rp-kicker" style="filter:blur(4px)">${zkEsc(lockedChs[0]?.kicker || ZKT("p.nextCh"))}</p>
         ${teaser.map(x => `<p>${zkEsc(x)}</p>`).join("")}
       </div>
       <div class="locked-overlay">
         <span class="lock-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-        <h3>You’ve reached the end of the preview</h3>
-        <p>Unlock the full ${typeName.toLowerCase()} to continue reading — instantly, on this page or any device.</p>
+        <h3>${ZKT("p.pvEnd")}</h3>
+        <p>${ZKT("p.pvUnlockLead", { type: typeLower })}</p>
         ${lockedTitles.length ? `<div class="locked-includes">
           ${lockedTitles.slice(0, 4).map(t => `<span>${zkEsc(t)}</span>`).join("")}
           ${lockedTitles.length > 4 ? `<span>+ ${lockedTitles.length - 4} more</span>` : ""}
         </div>` : ""}
         ${owned
-          ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">Continue in your library</a>`
-          : `<button class="btn btn-gold btn-lg" id="unlockBtn">Unlock the full ${typeName.toLowerCase()} — ${ZK.fmt(p.price)}</button>`}
-        <p style="font-size:.78rem;color:#8A7B66;margin-top:1rem">Full version includes ${p.pages} pages · PDF &amp; ePub · lifetime online reading</p>
+          ? `<a class="btn btn-gold btn-lg" href="reader.html?id=${p.id}">${ZKT("p.pvContinue")}</a>`
+          : `<button class="btn btn-gold btn-lg" id="unlockBtn">${ZKT("p.pvUnlockBtn", { type: typeLower, price: ZK.fmt(p.price) })}</button>`}
+        <p style="font-size:.78rem;color:#8A7B66;margin-top:1rem">${ZKT("p.pvIncludes", { n: p.pages })}</p>
       </div>
     </div>`;
 

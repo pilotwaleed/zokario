@@ -13,14 +13,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=36">
+<link rel="stylesheet" href="css/main.css?v=37">
 <style>body{display:block}</style>
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="reader-page" id="readerPage">
 
   <div class="reader-topbar">
-    <a href="account.html">← My Shelf</a>
+    <a href="account.html" data-i18n="r.myShelf">← My Shelf</a>
     <button class="rt-btn" id="tocToggle" aria-label="Chapters" title="Chapters">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
     </button>
@@ -42,7 +42,7 @@
 
   <div class="reader-body">
     <aside class="reader-toc" id="readerToc" aria-label="Chapters">
-      <h4>Contents</h4>
+      <h4 data-i18n="r.contents">Contents</h4>
       <div id="tocList"></div>
     </aside>
     <div class="reader-content" id="readerContent"></div>
@@ -54,10 +54,10 @@
     <span id="pctLabel">0%</span>
   </div>
 
-<script src="js/data.js?v=36"></script>
-<script src="js/i18n.js?v=36"></script>
-<script src="js/app.js?v=36"></script>
-<script src="js/auth.js?v=31"></script>
+<script src="js/data.js?v=37"></script>
+<script src="js/i18n.js?v=37"></script>
+<script src="js/app.js?v=37"></script>
+<script src="js/auth.js?v=37"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const id = new URLSearchParams(location.search).get("id");
@@ -74,11 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="lock-ico" style="margin:0 auto 1.6rem;width:56px;height:56px;border-radius:50%;border:1px solid var(--r-kick);display:grid;place-items:center;color:var(--r-kick)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         </span>
-        <h1 style="font-family:var(--font-display);color:var(--r-head);font-size:1.8rem;margin-bottom:.8rem">This book isn’t on your shelf yet</h1>
-        <p style="color:var(--r-ink);margin-bottom:2rem">“${zkEsc(p.title)}” unlocks here the moment you own it. Until then, the opening chapters are free to read.</p>
+        <h1 style="font-family:var(--font-display);color:var(--r-head);font-size:1.8rem;margin-bottom:.8rem">${ZKT("r.lockTitle")}</h1>
+        <p style="color:var(--r-ink);margin-bottom:2rem">${ZKT("r.lockLead", { title: zkEsc(p.title) })}</p>
         <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
-          <a class="btn btn-gold" href="product.html?id=${p.id}#preview">Read the free preview</a>
-          <a class="btn btn-dark" href="product.html?id=${p.id}">View this edition</a>
+          <a class="btn btn-gold" href="product.html?id=${p.id}#preview">${ZKT("r.lockPreview")}</a>
+          <a class="btn btn-dark" href="product.html?id=${p.id}">${ZKT("r.lockView")}</a>
         </div>
       </div>`;
     document.getElementById("rtTitle").textContent = p.title;
@@ -103,11 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ${ch.paras.map(x => `<p>${zkEsc(x)}</p>`).join("")}
       ${i < p.chapters.length - 1 ? '<div class="rp-divider">✦ ✦ ✦</div>' : `
         <div style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--r-line);text-align:center">
-          <p class="rp-kicker">End of this edition</p>
-          <p style="font-size:.95rem!important">Thank you for reading. Your download formats are always available from the toolbar above, and this page remembers exactly where you stopped.</p>
-          <a class="btn btn-gold" style="margin-top:1rem" href="shop.html">Find your next book</a>
+          <p class="rp-kicker">${ZKT("r.endKicker")}</p>
+          <p style="font-size:.95rem!important">${ZKT("r.endThanks")}</p>
+          <a class="btn btn-gold" style="margin-top:1rem" href="shop.html">${ZKT("r.endNext")}</a>
         </div>`}
     </div>`).join("");
+
+  content.dir = p.lang === "ar" ? "rtl" : "ltr";
 
   /* ---------- table of contents + bookmarks ---------- */
   const tocList = document.getElementById("tocList");
@@ -157,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   bmBtn.addEventListener("click", () => {
     let bms = ZKStore.bookmarks(p.id);
-    if (bms.includes(current)) { bms = bms.filter(x => x !== current); zkToast("Bookmark removed"); }
-    else { bms.push(current); zkToast("Chapter bookmarked"); }
+    if (bms.includes(current)) { bms = bms.filter(x => x !== current); zkToast(ZKT("r.bmRemoved")); }
+    else { bms.push(current); zkToast(ZKT("r.bmAdded")); }
     ZKStore.setBookmarks(p.id, bms);
     renderToc(current); updateBmBtn();
   });
@@ -183,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (saved > 0.01 && saved < 0.98) {
     requestAnimationFrame(() => {
       content.scrollTop = saved * (content.scrollHeight - content.clientHeight);
-      zkToast("Welcome back — resuming where you left off");
+      zkToast(ZKT("r.resume"));
     });
   }
   onScroll();

@@ -341,7 +341,7 @@ ${chapters}<p class="note">This is your Zokario digital edition preview file. In
   a.download = p.id + "-zokario-edition.html";
   a.click();
   URL.revokeObjectURL(a.href);
-  zkToast("Your edition is downloading");
+  zkToast(ZKT("dl.start"));
 }
 
 /* =========================================================
