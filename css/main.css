@@ -681,7 +681,7 @@ select.input option{background:var(--bg2);color:var(--ivory)}
 
 /* ---------- The Shelf (books) ---------- */
 .shelf-section{background:radial-gradient(ellipse 70% 60% at 50% 20%,rgba(200,169,106,.07),transparent 60%),var(--bg0);overflow:hidden}
-.shelf-wrap{perspective:1700px;max-width:1080px;margin-inline:auto}
+.shelf-wrap{max-width:1080px;margin-inline:auto}
 .shelf-row{display:flex;align-items:flex-end;justify-content:center;gap:15px;min-height:330px;padding:2.5rem 2rem 0}
 .shelf-slot{width:var(--bd);height:var(--bh);position:relative;flex:none;perspective:1300px;z-index:1;outline-offset:8px;isolation:isolate}
 .shelf-slot .book3d{position:absolute;bottom:0;left:calc((var(--bd) - var(--bw))/2);transform:rotateY(84deg);transition:transform 1.05s cubic-bezier(.25,.9,.22,1);will-change:transform}
