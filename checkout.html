@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Secure Checkout | Zokario</title>
-<meta name="description" content="Zokario secure checkout — instant digital delivery, no shipping. Pay securely by card.">
+<meta name="description" content="Zokario secure checkout: instant digital delivery, no shipping. Pay securely by card.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -13,10 +13,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=37">
+<link rel="stylesheet" href="css/main.css?v=38">
 <!--
   ════════════════════════════════════════════════════════════════
-  STRIPE INTEGRATION — where the real thing plugs in
+  STRIPE INTEGRATION: where the real thing plugs in
   ════════════════════════════════════════════════════════════════
   This checkout ships Stripe-READY, not Stripe-LIVE. No real keys
   are included and no payment is processed until you connect them.
@@ -36,7 +36,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="Zokario — home">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
       <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
     </a>
     <div class="header-actions">
@@ -61,7 +61,7 @@
           <div class="co-block">
             <h3><span class="co-num">1</span><span data-i18n="o.contact">Contact</span></h3>
             <div class="field">
-              <label for="coEmail" data-i18n="o.emailLong">Email — your books are delivered here</label>
+              <label for="coEmail" data-i18n="o.emailLong">Email, where your books are delivered</label>
               <input class="input" type="email" id="coEmail" required placeholder="you@example.com" autocomplete="email">
             </div>
           </div>
@@ -102,7 +102,7 @@
             <div class="stripe-box" id="stripeBox">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 14.5h4"/></svg>
               <b style="display:block;color:var(--champagne);font-weight:500;letter-spacing:.06em">Stripe secure card payment</b>
-              <span style="display:block;margin-top:.4rem">Card, Apple Pay &amp; Google Pay appear here once Stripe keys are connected.<br>This build runs in <b style="color:var(--champagne)">demo mode</b> — no payment is taken.</span>
+              <span style="display:block;margin-top:.4rem">Card, Apple Pay &amp; Google Pay appear here once Stripe keys are connected.<br>This build runs in <b style="color:var(--champagne)">demo mode</b>, so no payment is taken.</span>
             </div>
             <label class="checkline" style="margin-top:1.4rem">
               <input type="checkbox" id="coTerms" required>
@@ -128,7 +128,7 @@
           </button>
           <div class="digital-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
-            Instant digital delivery — nothing ships, nothing waits.
+            Instant digital delivery: nothing ships, nothing waits.
           </div>
           <div class="secure-strip">
             <span class="trust-item">256-bit SSL</span>
@@ -139,7 +139,7 @@
       </form>
 
       <div class="empty-state" id="coEmpty" hidden style="max-width:560px;margin:0 auto">
-        <h3 class="h3">Nothing to check out — yet</h3>
+        <h3 class="h3">Nothing to check out just yet</h3>
         <p>Your cart is empty. The library, however, is full.</p>
         <a class="btn btn-gold" href="shop.html">Explore the Library</a>
       </div>
@@ -160,10 +160,10 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=37"></script>
-<script src="js/i18n.js?v=37"></script>
-<script src="js/app.js?v=37"></script>
-<script src="js/auth.js?v=37"></script>
+<script src="js/data.js?v=38"></script>
+<script src="js/i18n.js?v=38"></script>
+<script src="js/app.js?v=38"></script>
+<script src="js/auth.js?v=38"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("checkoutForm");

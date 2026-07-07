@@ -1,5 +1,5 @@
 /* =========================================================
-   ZOKARIO — accounts, profiles, password reset, reviews
+   ZOKARIO accounts, profiles, password reset, reviews
    Client-side demo engine: passwords hashed with WebCrypto
    SHA-256 + per-user salt, never stored in plain text.
    Swap points for a real backend are marked with @API.
@@ -108,7 +108,7 @@ const ZKAuth = {
 };
 
 /* =========================================================
-   Reviews — verified owners only (post-purchase)
+   Reviews: verified owners only (post-purchase)
    ========================================================= */
 const ZKReviews = {
   all() { return ZKStore.read("zk_reviews", {}); },

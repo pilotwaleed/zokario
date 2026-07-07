@@ -1,5 +1,5 @@
 /* =========================================================
-   ZOKARIO — shared engine
+   ZOKARIO shared engine
    Store (cart/orders/user), covers, 3D books, UI behaviours.
    ========================================================= */
 
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else zkToast(ZKT("c.toastInCart", { t: p.title }));
   });
 
-  /* 3D tilt on cards — lerped via rAF so it glides instead of fighting CSS transitions */
+  /* 3D tilt on cards, lerped via rAF so it glides instead of fighting CSS transitions */
   if (matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const tilts = new WeakMap(); /* book -> {x,y,tx,ty,raf,off} */
     const tick = book => {
@@ -328,7 +328,7 @@ function zkDownload(id) {
   const chapters = p.chapters.map(ch =>
     `<section><p class="k">${zkEsc(ch.kicker)}</p><h2>${zkEsc(ch.t)}</h2>${ch.paras.map(x => `<p>${zkEsc(x)}</p>`).join("")}</section>`
   ).join("");
-  const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${zkEsc(p.title)} — Zokario Edition</title>
+  const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${zkEsc(p.title)} · Zokario Edition</title>
 <style>body{background:#171210;color:#E9DFC8;font-family:Georgia,serif;max-width:680px;margin:0 auto;padding:60px 24px;line-height:1.85}
 h1{font-size:2.2rem;color:#F1E9D8}h2{color:#E4CFA3;margin:2.4em 0 .8em}.k{letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:#C8A96A;font-family:sans-serif}
 .cover{text-align:center;padding:80px 0;border-bottom:1px solid #3a2f22;margin-bottom:60px}.cover .k{margin-bottom:24px;display:block}
@@ -345,38 +345,38 @@ ${chapters}<p class="note">This is your Zokario digital edition preview file. In
 }
 
 /* =========================================================
-   Margin notes — literary quotes met on the way
+   Margin notes: literary quotes met on the way
    ========================================================= */
 const ZK_QUOTES = {
   en: [
     { q: "I have always imagined that Paradise will be a kind of library.", a: "Jorge Luis Borges" },
     { q: "A room without books is like a body without a soul.", a: "Cicero" },
     { q: "A book must be the axe for the frozen sea within us.", a: "Franz Kafka" },
-    { q: "The reading of all good books is like a conversation with the finest minds of past centuries.", a: "René Descartes" },
+    { q: "There is no frigate like a book to take us lands away.", a: "Emily Dickinson" },
     { q: "Books are a uniquely portable magic.", a: "Stephen King" },
     { q: "There is no friend as loyal as a book.", a: "Ernest Hemingway" },
     { q: "We read to know we are not alone.", a: "William Nicholson" },
-    { q: "A reader lives a thousand lives before he dies.", a: "George R. R. Martin" }
+    { q: "If there is a book that you want to read, but it has not been written yet, then you must write it.", a: "Toni Morrison" }
   ],
   ar: [
-    { q: "الكتابُ هو الجليس الذي لا يُطريك، والصديق الذي لا يُغريك.", a: "الجاحظ" },
-    { q: "أعزُّ مكانٍ في الدُّنى سرجُ سابحٍ، وخيرُ جليسٍ في الزمانِ كتابُ.", a: "المتنبي" },
-    { q: "العلمُ صيدٌ والكتابةُ قيدُه؛ قيِّد صيودَك بالحبال الواثقة.", a: "الإمام الشافعي" },
-    { q: "القراءة وحدها هي التي تعطي الإنسان أكثر من حياةٍ واحدة.", a: "عباس محمود العقاد" },
-    { q: "الكتابُ وعاءٌ مُلئ علماً، وظرفٌ حُشي ظَرفاً.", a: "الجاحظ" },
-    { q: "لم أرَ واعظاً أبلغَ من كتاب.", a: "من حكم العرب" },
+    { q: "الكتاب هو الجليس الذي لا يطريك، والصديق الذي لا يغريك.", a: "الجاحظ" },
+    { q: "أعز مكان في الدنى سرج سابح، وخير جليس في الزمان كتاب.", a: "المتنبي" },
+    { q: "انا من بدل بالكتب الصحابا، لم اجد لي وافيا الا الكتابا.", a: "من عيون الشعر العربي" },
+    { q: "القراءة وحدها هي التي تعطي الإنسان أكثر من حياة واحدة.", a: "عباس محمود العقاد" },
+    { q: "خير جليس في الزمان كتاب، تصحبه فيصحبك الصواب.", a: "من حكم القراء" },
+    { q: "لم أر واعظا أبلغ من كتاب.", a: "من حكم العرب" },
     { q: "الكتب هي الحياة التي لم نعشها بعد.", a: "طه حسين" },
-    { q: "نِعم الأنيسُ إذا خلوتَ كتابُ.", a: "من الشعر العربي" }
+    { q: "نعم الأنيس إذا خلوت كتاب.", a: "من الشعر العربي" }
   ],
   fr: [
     { q: "Une heure de lecture est le souverain remède contre les dégoûts de la vie.", a: "Montesquieu" },
     { q: "La lecture est une amitié.", a: "Marcel Proust" },
     { q: "Lisez pour vivre.", a: "Gustave Flaubert" },
-    { q: "Le paradis, je l’ai toujours imaginé comme une bibliothèque.", a: "Jorge Luis Borges" },
+    { q: "Lire, c’est boire et manger. L’esprit qui ne lit pas maigrit comme le corps qui ne mange pas.", a: "Victor Hugo" },
     { q: "On ne lit jamais un livre : on se lit à travers les livres.", a: "Romain Rolland" },
     { q: "Un livre est un ami qui ne trompe jamais.", a: "Guilbert de Pixérécourt" },
     { q: "La lecture agrandit l’âme.", a: "Voltaire" },
-    { q: "Chaque lecture est une seconde vie.", a: "Proverbe de lecteur" }
+    { q: "Le temps de lire, comme le temps d’aimer, dilate le temps de vivre.", a: "Daniel Pennac" }
   ]
 };
 
@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
       slot.innerHTML = `<div class="container quote-inner reveal">
         <span class="q-orn" aria-hidden="true">✦</span>
         <blockquote>${zkEsc(pick.q)}</blockquote>
-        <cite>— ${zkEsc(pick.a)}</cite>
+        <cite>${zkEsc(pick.a)}</cite>
       </div>`;
     });
   }
@@ -431,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================================================
-   Global instant search — every page, every language
+   Global instant search: every page, every language
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const actions = document.querySelector(".header-actions");
@@ -490,7 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const norm = s => String(s || "").toLowerCase()
-    .replace(/[ً-ْـ]/g, "")             /* Arabic diacritics + tatweel */
+    .replace(/[-ـ]/g, "")             /* Arabic diacritics + tatweel */
     .replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي")
     .normalize("NFD").replace(/[̀-ͯ]/g, "");  /* Latin accents */
 
@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* share the current edition (native sheet on mobile, copy elsewhere) */
 async function zkShare(title) {
-  const data = { title: title + " — Zokario", url: location.href };
+  const data = { title: title + " | Zokario", url: location.href };
   if (navigator.share) { try { await navigator.share(data); return; } catch {} }
   try { await navigator.clipboard.writeText(location.href); zkToast(ZKT("p.shareCopied")); }
   catch { zkToast(location.href); }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ZOKARIO — design system
+   ZOKARIO: design system
    Palette: espresso / warm ivory / champagne / muted gold. No pure black/white.
    Type: Fraunces (display serif) + Jost (geometric sans).
    ========================================================================== */
@@ -76,7 +76,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:420;letter-spacing:.005e
 .section{padding:clamp(4.5rem,9vw,8rem) 0;position:relative}
 .section-tight{padding:clamp(3rem,6vw,5rem) 0}
 
-/* Ivory “paper” sections — the interior of the book */
+/* Ivory “paper” sections: the interior of the book */
 .paper{background:linear-gradient(180deg,var(--cream) 0%,#EAE0CB 100%);color:var(--espresso)}
 .paper h1,.paper h2,.paper h3,.paper h4{color:var(--espresso)}
 .paper .lead,.paper p{color:var(--espresso-soft)}
@@ -132,7 +132,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:420;letter-spacing:.005e
     rgba(14,10,6,.42) 68%,
     rgba(14,10,6,0) 100%);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  /* the mask fades the blur itself, so the glass melts into the page — no hard edge */
+  /* the mask fades the blur itself, so the glass melts into the page, no hard edge */
   -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.35) 78%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.35) 78%,transparent 100%);
   pointer-events:none;                            /* the fade tail must never block clicks */
@@ -593,7 +593,7 @@ select.input option{background:var(--bg2);color:var(--ivory)}
 .legal-prose p,.legal-prose li{color:var(--muted);font-size:.97rem;margin-bottom:1rem}
 .legal-prose ul{list-style:none;padding-left:1.4rem}
 .legal-prose ul li{position:relative;margin-bottom:.6rem}
-.legal-prose ul li::before{content:"—";position:absolute;left:-1.4rem;color:var(--bronze)}
+.legal-prose ul li::before{content:"·";position:absolute;left:-1.4rem;color:var(--bronze)}
 .legal-updated{font-size:.8rem;color:var(--muted-2);letter-spacing:.1em;text-transform:uppercase}
 
 /* ---------- Steps (How it works) ---------- */
@@ -665,7 +665,7 @@ select.input option{background:var(--bg2);color:var(--ivory)}
 }
 
 /* ==========================================================================
-   THE ROOMS — dedicated section pages (Reading Room / Studio / Paper Room)
+   THE ROOMS: dedicated section pages (Reading Room / Studio / Paper Room)
    ========================================================================== */
 
 /* ---------- Room hero ---------- */
@@ -776,7 +776,7 @@ select.input option{background:var(--bg2);color:var(--ivory)}
 }
 
 /* ==========================================================================
-   V3 — integrated brand lockup, language switcher, RTL, cinematic finish
+   V3: integrated brand lockup, language switcher, RTL, cinematic finish
    ========================================================================== */
 
 /* ---------- Integrated logo: the Z mark IS the Z of ZOKARIO ---------- */
@@ -852,7 +852,7 @@ body::after{
 [dir="rtl"] .brand{direction:ltr}
 
 /* ==========================================================================
-   V4 — accounts, reader card, reviews
+   V4: accounts, reader card, reviews
    ========================================================================== */
 
 /* ---------- auth ---------- */
@@ -936,7 +936,7 @@ body::after{
 }
 
 /* ==========================================================================
-   V5 — margin-note quotes, fly-to-cart, welcome ceremony, final polish
+   V5: margin-note quotes, fly-to-cart, welcome ceremony, final polish
    ========================================================================== */
 
 /* ---------- quote bands ---------- */
@@ -985,7 +985,7 @@ html[lang="ar"] .quote-inner blockquote{font-style:normal;line-height:1.9}
 
 
 /* ==========================================================================
-   V6 — cross-browser hardening + mobile overhaul
+   V6: cross-browser hardening + mobile overhaul
    ========================================================================== */
 .hero-media,.room-media{background:var(--bg0)}
 .hero-media video,.room-media video{background:var(--bg0)}
@@ -1067,7 +1067,7 @@ html[lang="ar"] .quote-inner blockquote{font-style:normal;line-height:1.9}
 }
 
 /* ==========================================================================
-   V7 — currency audit fixes (prefix pairs, overscroll, standards)
+   V7: currency audit fixes (prefix pairs, overscroll, standards)
    ========================================================================== */
 html{text-size-adjust:100%}
 @media (max-width:900px){.shop-side{-webkit-backdrop-filter:blur(16px)}}
@@ -1079,7 +1079,7 @@ html{text-size-adjust:100%}
 .display,.h2{text-wrap:balance}
 
 /* ==========================================================================
-   V8 — global instant search
+   V8: global instant search
    ========================================================================== */
 .search-veil{
   position:fixed;inset:0;z-index:2147483400;display:none;
@@ -1134,7 +1134,7 @@ html{text-size-adjust:100%}
 }
 
 /* ==========================================================================
-   V9 — Wonder Room, wishlist, to-top, share, recent
+   V9: Wonder Room, wishlist, to-top, share, recent
    ========================================================================== */
 /* wishlist heart */
 .wish-btn{
@@ -1186,3 +1186,18 @@ html[lang="ar"] .wonder-note{font-style:normal}
 .wonder-quote blockquote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.7rem);line-height:1.55;color:var(--champagne)}
 html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
 .wonder-quote cite{display:block;margin-top:1rem;font-style:normal;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2)}
+
+/* ==========================================================
+   V10: owner hallmark, the last line of the homepage
+   ========================================================== */
+.owner-mark{
+  display:flex;align-items:center;justify-content:center;gap:1.1rem;
+  margin-top:2.4rem;padding-bottom:.4rem;
+  font-family:var(--font-body);font-size:.66rem;font-weight:500;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--bronze);
+}
+.owner-mark span{white-space:nowrap;opacity:.85}
+.owner-mark i{display:block;height:1px;width:56px;flex:none;
+  background:linear-gradient(90deg,transparent,rgba(200,169,106,.55));}
+.owner-mark i:last-child{transform:scaleX(-1)}
+@media (max-width:640px){ .owner-mark{letter-spacing:.22em;font-size:.6rem} .owner-mark i{width:34px} }
