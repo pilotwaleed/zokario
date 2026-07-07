@@ -1059,3 +1059,15 @@ html[lang="ar"] .quote-inner blockquote{font-style:normal;line-height:1.9}
   .trust-row{gap:.9rem 1.4rem}
   .footer-grid{grid-template-columns:1fr}
 }
+
+/* ==========================================================================
+   V7 — currency audit fixes (prefix pairs, overscroll, standards)
+   ========================================================================== */
+html{text-size-adjust:100%}
+@media (max-width:900px){.shop-side{-webkit-backdrop-filter:blur(16px)}}
+.locked-preview p{-webkit-user-select:none}
+.gchip{-webkit-user-select:none}
+.reader-pages,.reader-content,.mobile-nav,.shop-side{overscroll-behavior:contain}
+.reader-card::before{mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)}
+.reader-pages{scrollbar-color:rgba(90,72,50,.3) transparent}
+.display,.h2{text-wrap:balance}
