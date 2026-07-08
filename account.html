@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=40">
+<link rel="stylesheet" href="css/main.css?v=41">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -30,7 +30,7 @@
       <a href="notebooks.html">Notebooks</a>
       <a href="wonder.html">Wonder</a>
       <a href="monaliza.html">Monaliza</a>
-      <a href="forums.html">Majlis</a>
+      <a href="forums.html">Forums</a>
     </nav>
     <div class="header-actions">
       <a class="icon-btn" href="account.html" aria-label="My shelf">
@@ -55,7 +55,7 @@
   <a href="notebooks.html">Notebooks</a>
   <a href="wonder.html">Wonder</a>
   <a href="monaliza.html">Monaliza</a>
-  <a href="forums.html">Majlis</a>
+  <a href="forums.html">Forums</a>
   <a href="support.html">Support the house</a>
   <a href="custom.html">The Atelier</a>
   <a href="about.html">About</a>
@@ -334,12 +334,12 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=40"></script>
-<script src="js/i18n.js?v=40"></script>
-<script src="js/app.js?v=40"></script>
-<script src="js/auth.js?v=40"></script>
-<script src="js/seeds.js?v=40"></script>
-<script src="js/community.js?v=40"></script>
+<script src="js/data.js?v=41"></script>
+<script src="js/i18n.js?v=41"></script>
+<script src="js/app.js?v=41"></script>
+<script src="js/auth.js?v=41"></script>
+<script src="js/seeds.js?v=41"></script>
+<script src="js/community.js?v=41"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const $ = id => document.getElementById(id);
@@ -496,20 +496,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderCard(me) {
     const owned = ZKStore.purchasedIds().length;
-    const fav = (me.genres || [])[0] || "…";
-    const no = "ZK-" + (me.email || "").split("").reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 1e8, 7).toString().padStart(8, "0");
+    const role = ZKRole.of(me);
+    const isOwner = role === "owner";
+    const mNo = ZKMembers.numberOf(me.email) || ZKMembers.assign(me.email);
+    const gilded = ZKSub.isActive(me.email);
+    const tier = ZKLevels.tier(me.email);
+    const founding = ZKMembers.isFounding(me.email) && !isOwner;
+    const title = isOwner ? ZKT("mc.publisher") : gilded ? ZKT("mc.gilded") : tier.name;
     $("readerCard").innerHTML = `
+      <div class="rc-foil ${isOwner ? "rc-owner" : gilded ? "rc-gilded" : ""}"></div>
       <div class="rc-top">
         <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="currentColor"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/></svg>
         <span>${ZKT("au.cardTitle")}</span>
+        <b class="rc-memno" title="${ZKT("mc.numberT")}">№ ${mNo}</b>
       </div>
-      <div class="rc-avatar">${me.photo ? `<img src="${me.photo}" alt="">` : (me.avatar || "📖")}</div>
-      <div class="rc-name">${zkEsc(me.nick || me.name || "")}</div>
+      <div class="rc-avatar ${isOwner ? "rc-avatar-owner" : ""}">${me.photo ? `<img src="${me.photo}" alt="">` : (me.avatar || "📖")}</div>
+      <div class="rc-name ${isOwner ? "rc-name-owner" : ""}">${isOwner ? "👑 " : ""}${zkEsc(me.nick || me.name || "")}</div>
+      <div class="rc-title">${zkEsc(title)}${founding ? " · " + ZKT("mc.founding") : ""}</div>
       <div class="rc-meta">
         <span>${ZKT("au.cardMember")} ${zkEsc(me.joined || new Date().toISOString().slice(0, 10))}</span>
-        <span>${owned} ${owned === 1 ? ZKT("c.edition") : ZKT("c.editions")} · ${zkEsc(fav)}</span>
+        <span>${owned} ${owned === 1 ? ZKT("c.edition") : ZKT("c.editions")} · ${ZKLevels.points(me.email)} ${ZKT("lv.points")}</span>
       </div>
-      <div class="rc-no">${no}</div>`;
+      <div class="rc-no">ZK-${String(mNo).padStart(6, "0")}</div>`;
   }
 
   function renderProfile(me) {
@@ -575,6 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $("accountMeta").textContent = `${user.email} · ${orders.length} ${orders.length === 1 ? ZKT("au.order") : ZKT("au.orders")}`;
 
     /* ---- member standing strip ---- */
+    const me = isAccount ? user : null;
     if (me) {
       const email = me.email;
       const tier = ZKLevels.tier(email);

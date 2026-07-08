@@ -19,15 +19,14 @@ const ZK = {
 
   /* ---------------- BOOKS ---------------- */
   {
-    id: "the-quiet-ledger",
+    id: "the-quiet-ledger", pdf: "files/the-quiet-ledger.pdf",
     type: "book",
     title: "The Quiet Ledger",
     subtitle: "A calmer way to think about money: the habits, systems, and numbers that actually matter.",
     category: "Business & Money",
     price: 19, oldPrice: 26,
-    rating: 4.9, ratings: 214,
     pages: 184, readTime: "4½ hours",
-    badges: ["bestseller", "featured"],
+    badges: ["featured"],
     cover: { c1: "#25301F", c2: "#131A10", acc: "#D9C28C", motif: "ledger" },
     hook: "Money stops being stressful the moment you can see it clearly.",
     desc: [
@@ -91,15 +90,14 @@ const ZK = {
   },
 
   {
-    id: "deep-focus",
+    id: "deep-focus", pdf: "files/deep-focus.pdf",
     type: "book",
     title: "Deep Focus",
     subtitle: "Reclaiming sustained attention in a world engineered to interrupt you.",
     category: "Productivity",
     price: 17, oldPrice: 24,
-    rating: 4.8, ratings: 186,
     pages: 162, readTime: "4 hours",
-    badges: ["featured", "bestseller"],
+    badges: ["featured"],
     cover: { c1: "#1E2733", c2: "#0F141C", acc: "#CBB689", motif: "focus" },
     hook: "Attention is the last honest currency. This is how you stop spending it by accident.",
     desc: [
@@ -158,13 +156,12 @@ const ZK = {
   },
 
   {
-    id: "the-morning-architecture",
+    id: "the-morning-architecture", pdf: "files/the-morning-architecture.pdf",
     type: "book",
     title: "The Morning Architecture",
     subtitle: "Design the first ninety minutes of your day, and the rest begins to follow.",
     category: "Self-Improvement",
     price: 15,
-    rating: 4.7, ratings: 158,
     pages: 148, readTime: "3½ hours",
     badges: ["new"],
     cover: { c1: "#3A2E20", c2: "#1C130A", acc: "#E8CD96", motif: "morning" },
@@ -221,13 +218,12 @@ const ZK = {
   },
 
   {
-    id: "fuel",
+    id: "fuel", pdf: "files/fuel.pdf",
     type: "book",
     title: "Fuel",
     subtitle: "Eating for steady energy: a practical system for people who don't want food to be complicated.",
     category: "Health & Fitness",
     price: 16, oldPrice: 21,
-    rating: 4.8, ratings: 173,
     pages: 170, readTime: "4 hours",
     badges: [],
     cover: { c1: "#33251C", c2: "#170F0A", acc: "#D8A96B", motif: "fuel" },
@@ -280,15 +276,14 @@ const ZK = {
   },
 
   {
-    id: "the-last-lighthouse",
+    id: "the-last-lighthouse", pdf: "files/the-last-lighthouse.pdf",
     type: "book",
     title: "The Last Lighthouse",
     subtitle: "A novel about a keeper, an island, and the ships we refuse to stop waiting for.",
     category: "Stories & Fiction",
     price: 12,
-    rating: 4.9, ratings: 241,
     pages: 236, readTime: "6 hours",
-    badges: ["bestseller", "featured"],
+    badges: ["featured"],
     cover: { c1: "#1C2A33", c2: "#0C1319", acc: "#E3C989", motif: "lighthouse" },
     hook: "The light was decommissioned years ago. Maren keeps it burning anyway.",
     desc: [
@@ -335,13 +330,12 @@ const ZK = {
   },
 
   {
-    id: "slow-cities",
+    id: "slow-cities", pdf: "files/slow-cities.pdf",
     type: "book",
     title: "Slow Cities",
     subtitle: "Essays on travelling at the speed of noticing: eleven cities, unhurried.",
     category: "Travel & Lifestyle",
     price: 14,
-    rating: 4.7, ratings: 129,
     pages: 198, readTime: "5 hours",
     badges: ["new"],
     cover: { c1: "#2E2A22", c2: "#15120C", acc: "#D9BE8C", motif: "arch" },
@@ -395,13 +389,12 @@ const ZK = {
   },
 
   {
-    id: "thinking-with-machines",
+    id: "thinking-with-machines", pdf: "files/thinking-with-machines.pdf",
     type: "book",
     title: "Thinking With Machines",
     subtitle: "A practical guide to working alongside intelligent tools, without losing your judgement.",
     category: "AI & Technology",
     price: 21, oldPrice: 28,
-    rating: 4.8, ratings: 197,
     pages: 206, readTime: "5 hours",
     badges: ["featured", "new"],
     cover: { c1: "#20242E", c2: "#101218", acc: "#C9B283", motif: "nodes" },
@@ -454,13 +447,12 @@ const ZK = {
   },
 
   {
-    id: "the-honest-table",
+    id: "the-honest-table", pdf: "files/the-honest-table.pdf",
     type: "book",
     title: "The Honest Table",
     subtitle: "The conversations that hold people together, and how to stop avoiding them.",
     category: "Relationships",
     price: 15,
-    rating: 4.9, ratings: 168,
     pages: 156, readTime: "4 hours",
     badges: [],
     cover: { c1: "#33222A", c2: "#170D12", acc: "#DBB98E", motif: "rings" },
@@ -513,13 +505,12 @@ const ZK = {
   },
 
   {
-    id: "night-pages",
+    id: "night-pages", pdf: "files/night-pages.pdf",
     type: "book",
     title: "Night Pages",
     subtitle: "Nine short stories for the hour when the house goes quiet.",
     category: "Stories & Fiction",
     price: 11,
-    rating: 4.6, ratings: 112,
     pages: 142, readTime: "3½ hours",
     badges: ["new"],
     cover: { c1: "#232031", c2: "#100E18", acc: "#CBB081", motif: "moon" },
@@ -560,13 +551,12 @@ const ZK = {
   },
 
   {
-    id: "the-compound-path",
+    id: "the-compound-path", pdf: "files/the-compound-path.pdf",
     type: "book",
     title: "The Compound Path",
     subtitle: "Patience as a strategy: investing principles for people playing the long game.",
     category: "Business & Money",
     price: 18,
-    rating: 4.8, ratings: 145,
     pages: 178, readTime: "4½ hours",
     badges: [],
     cover: { c1: "#2A2E1E", c2: "#13160D", acc: "#D4BC85", motif: "steps" },
@@ -614,15 +604,14 @@ const ZK = {
   },
 
   {
-    id: "the-atlas-of-small-habits",
+    id: "the-atlas-of-small-habits", pdf: "files/the-atlas-of-small-habits.pdf",
     type: "book",
     title: "The Atlas of Small Habits",
     subtitle: "Field notes on the tiny behaviours that quietly run your life.",
     category: "Self-Improvement",
     price: 16, oldPrice: 22,
-    rating: 4.7, ratings: 203,
     pages: 188, readTime: "4½ hours",
-    badges: ["bestseller"],
+    badges: [],
     cover: { c1: "#2C2620", c2: "#14100B", acc: "#DFC793", motif: "compass" },
     hook: "You don't decide your days. Your defaults do.",
     desc: [
@@ -669,15 +658,14 @@ const ZK = {
 
   /* ---------------- TEMPLATES ---------------- */
   {
-    id: "founders-operating-system",
+    id: "founders-operating-system", pdf: "files/founders-operating-system.pdf",
     type: "template",
     title: "The Founder's Operating System",
     subtitle: "A complete Notion workspace for running an early-stage business, from strategy to Monday morning.",
     category: "Business & Money",
     price: 29, oldPrice: 39,
-    rating: 4.9, ratings: 87,
     pages: 40, readTime: "30-min setup",
-    badges: ["featured", "bestseller"],
+    badges: ["featured"],
     cover: { c1: "#1F2A2E", c2: "#0E1416", acc: "#CBB689", motif: "grid" },
     hook: "The structure your business was improvising toward.",
     desc: [
@@ -719,13 +707,12 @@ const ZK = {
   },
 
   {
-    id: "content-engine",
+    id: "content-engine", pdf: "files/content-engine.pdf",
     type: "template",
     title: "Content Engine",
     subtitle: "A publishing pipeline for consistent creators: plan, produce, repurpose, without the chaos.",
     category: "Productivity",
     price: 24,
-    rating: 4.8, ratings: 64,
     pages: 32, readTime: "25-min setup",
     badges: ["new"],
     cover: { c1: "#2E2418", c2: "#16100A", acc: "#DDBE7F", motif: "spokes" },
@@ -768,13 +755,12 @@ const ZK = {
   },
 
   {
-    id: "job-search-vault",
+    id: "job-search-vault", pdf: "files/job-search-vault.pdf",
     type: "template",
     title: "The Job Search Vault",
     subtitle: "Run your search like a campaign: tracker, scripts, and interview preparation in one system.",
     category: "Self-Improvement",
     price: 19,
-    rating: 4.7, ratings: 52,
     pages: 36, readTime: "20-min setup",
     badges: [],
     cover: { c1: "#26222E", c2: "#110F16", acc: "#C9B283", motif: "vault" },
@@ -818,13 +804,12 @@ const ZK = {
 
   /* ---------------- NOTEBOOKS ---------------- */
   {
-    id: "the-daily-review",
+    id: "the-daily-review", pdf: "files/the-daily-review.pdf",
     type: "notebook",
     title: "The Daily Review",
     subtitle: "A five-minute evening notebook: one page a day, digital and printable.",
     category: "Productivity",
     price: 13,
-    rating: 4.8, ratings: 91,
     pages: 190, readTime: "5 min daily",
     badges: ["featured"],
     cover: { c1: "#2A2117", c2: "#141009", acc: "#E4CFA3", motif: "check" },
@@ -867,13 +852,12 @@ const ZK = {
   },
 
   {
-    id: "the-reading-log",
+    id: "the-reading-log", pdf: "files/the-reading-log.pdf",
     type: "notebook",
     title: "The Reading Log",
     subtitle: "A reader's notebook for capturing books before they evaporate.",
     category: "Self-Improvement",
     price: 9,
-    rating: 4.7, ratings: 58,
     badges: [],
     pages: 120, readTime: "Per book",
     cover: { c1: "#20282E", c2: "#0E1316", acc: "#D9BE8C", motif: "bookmark" },
@@ -916,15 +900,14 @@ const ZK = {
   },
 
   {
-    id: "ninety-day-focus-planner",
+    id: "ninety-day-focus-planner", pdf: "files/ninety-day-focus-planner.pdf",
     type: "notebook",
     title: "The 90-Day Focus Planner",
     subtitle: "One quarter, one aim: a planning notebook for finishing what matters.",
     category: "Productivity",
     price: 15, oldPrice: 19,
-    rating: 4.9, ratings: 74,
     pages: 210, readTime: "Weekly rhythm",
-    badges: ["bestseller"],
+    badges: [],
     cover: { c1: "#302020", c2: "#170D0D", acc: "#DDBE7F", motif: "quarter" },
     hook: "A year is too long to steer. Ninety days is a voyage.",
     desc: [
@@ -967,15 +950,13 @@ const ZK = {
 
   /* ---------------- ARABIC & FRENCH SHELVES ---------------- */
   {
-    "id": "rasail-muntasaf-al-layl",
+    "id": "rasail-muntasaf-al-layl", pdf: "files/rasail-muntasaf-al-layl.pdf",
     "type": "book",
     "lang": "ar",
     "title": "رسائل منتصف الليل",
     "subtitle": "حارس ليل يكتب إلى قارئ لا يعرفه، عن الكتب المفتوحة والمدن بعد أن تنام.",
     "category": "Stories & Fiction",
     "price": 11,
-    "rating": 4.9,
-    "ratings": 132,
     "pages": 168,
     "readTime": "4 ساعات",
     "badges": [
@@ -1036,15 +1017,13 @@ const ZK = {
   },
 
   {
-    "id": "fann-al-julus-maa-al-nafs",
+    "id": "fann-al-julus-maa-al-nafs", pdf: "files/fann-al-julus-maa-al-nafs.pdf",
     "type": "book",
     "lang": "ar",
     "title": "فن الجلوس مع النفس",
     "subtitle": "دعوة هادئة إلى عشر دقائق من الخلوة الصادقة، بعيدا عن الشاشات وضجيج التحسين.",
     "category": "Self-Improvement",
     "price": 14,
-    "rating": 4.8,
-    "ratings": 98,
     "pages": 152,
     "readTime": "4 ساعات",
     "badges": [
@@ -1105,15 +1084,13 @@ const ZK = {
   },
 
   {
-    "id": "kharait-al-mudun-al-qadima",
+    "id": "kharait-al-mudun-al-qadima", pdf: "files/kharait-al-mudun-al-qadima.pdf",
     "type": "book",
     "lang": "ar",
     "title": "خرائط المدن القديمة",
     "subtitle": "رحلات مشي بطيئة في أزقة المدن العربية القديمة، حيث تحفظ الجدران ما ينساه العابرون.",
     "category": "Travel & Lifestyle",
     "price": 12,
-    "rating": 4.7,
-    "ratings": 76,
     "pages": 190,
     "readTime": "5 ساعات",
     "badges": [
@@ -1174,15 +1151,13 @@ const ZK = {
   },
 
   {
-    "id": "la-bibliotheque-de-minuit",
+    "id": "la-bibliotheque-de-minuit", pdf: "files/la-bibliotheque-de-minuit.pdf",
     "type": "book",
     "lang": "fr",
     "title": "La Bibliothèque de minuit",
     "subtitle": "Un court roman sur une bibliothèque qui n'ouvre qu'à minuit, et sur ceux que la nuit tient éveillés.",
     "category": "Stories & Fiction",
     "price": 12,
-    "rating": 4.8,
-    "ratings": 114,
     "pages": 176,
     "readTime": "4 heures",
     "badges": [
@@ -1243,15 +1218,13 @@ const ZK = {
   },
 
   {
-    "id": "l-art-de-finir",
+    "id": "l-art-de-finir", pdf: "files/l-art-de-finir.pdf",
     "type": "book",
     "lang": "fr",
     "title": "L'Art de finir",
     "subtitle": "Un essai sur la discipline discrète de l'achèvement, à l'usage des collectionneurs de commencements.",
     "category": "Productivity",
     "price": 15,
-    "rating": 4.9,
-    "ratings": 87,
     "pages": 148,
     "readTime": "4 heures",
     "badges": [
@@ -1312,15 +1285,13 @@ const ZK = {
   },
 
   {
-    "id": "cafes-et-autres-refuges",
+    "id": "cafes-et-autres-refuges", pdf: "files/cafes-et-autres-refuges.pdf",
     "type": "book",
     "lang": "fr",
     "title": "Cafés et autres refuges",
     "subtitle": "De Vienne à Paris, l'éloge discret du droit de s'attarder devant une tasse vide.",
     "category": "Travel & Lifestyle",
     "price": 11,
-    "rating": 4.7,
-    "ratings": 65,
     "pages": 132,
     "readTime": "4 heures",
     "badges": [
@@ -1383,7 +1354,7 @@ const ZK = {
 
   /* ---------------- THE WONDER ROOM (bedtime tales) ---------------- */
   {
-    "id": "the-moon-ferry",
+    "id": "the-moon-ferry", pdf: "files/the-moon-ferry.pdf",
     "contents": ["The Harbour Where the Rooftops End","A Ticket Paid in Wishes","The Lighthouse That Collected Echoes","Fog, and How to Be Brave in It","The Island of Almost-Morning","The Ferryman's Lantern","Home Before the Stars Go Out"],
     "type": "book",
     "lang": "en",
@@ -1392,8 +1363,6 @@ const ZK = {
     "subtitle": "A bedtime tale of leftover dreams and the quiet ferryman who carries them home",
     "category": "Stories & Fiction",
     "price": 9,
-    "rating": 4.9,
-    "ratings": 58,
     "pages": 44,
     "readTime": "20 min aloud",
     "badges": [
@@ -1452,7 +1421,7 @@ const ZK = {
   },
 
   {
-    "id": "the-paper-fox",
+    "id": "the-paper-fox", pdf: "files/the-paper-fox.pdf",
     "contents": ["The Fox on Page Forty","Ink Still Wet","The Margin Forest","A Bookmark for a Tail","The Library at the Edge of Sleep","The Unfinished Sentence","Back Between the Covers"],
     "type": "book",
     "lang": "en",
@@ -1461,8 +1430,6 @@ const ZK = {
     "subtitle": "A bedtime tale for small listeners who are not quite sure about the dark",
     "category": "Stories & Fiction",
     "price": 9,
-    "rating": 4.8,
-    "ratings": 44,
     "pages": 40,
     "readTime": "20 min aloud",
     "badges": [
@@ -1521,7 +1488,7 @@ const ZK = {
   },
 
   {
-    "id": "markab-al-ghaym",
+    "id": "markab-al-ghaym", pdf: "files/markab-al-ghaym.pdf",
     "contents": ["مركب لا يعرف الماء","شراع من ضوء المصباح","ميناء الوسائد","النجمة التي دلت الطريق","بحر الغيم الهادئ","الرسو عند حافة الحلم"],
     "type": "book",
     "lang": "ar",
@@ -1530,8 +1497,6 @@ const ZK = {
     "subtitle": "حكاية قبل النوم عن صبي يبحر فوق الغيم ليعيد الأحلام الضائعة إلى نوافذها",
     "category": "Stories & Fiction",
     "price": 9,
-    "rating": 4.9,
-    "ratings": 37,
     "pages": 42,
     "readTime": "20 دقيقة قراءة بصوت عال",
     "badges": [
@@ -1590,7 +1555,7 @@ const ZK = {
   },
 
   {
-    "id": "ou-dorment-les-etoiles",
+    "id": "ou-dorment-les-etoiles", pdf: "files/ou-dorment-les-etoiles.pdf",
     "contents": ["L'étoile qui refusait de dormir","La berceuse du phare","Le filet à constellations","Un nuage pour oreiller","Le gardien des veilleuses","Là où dorment les étoiles"],
     "type": "book",
     "lang": "fr",
@@ -1599,8 +1564,6 @@ const ZK = {
     "subtitle": "Un conte du soir à lire à voix haute, où la plus petite étoile du ciel apprend enfin à fermer les yeux",
     "category": "Stories & Fiction",
     "price": 9,
-    "rating": 4.8,
-    "ratings": 31,
     "pages": 38,
     "readTime": "20 min à voix haute",
     "badges": [
@@ -1661,7 +1624,7 @@ const ZK = {
 
   /* ---------------- THE MONALIZA SALON (vintage art) ---------------- */
   {
-    "id": "the-gilded-frame",
+    "id": "the-gilded-frame", pdf: "files/the-gilded-frame.pdf",
     "contents": [
       "The Window That Was Never a Window",
       "Gold Is an Instrument",
@@ -1679,8 +1642,6 @@ const ZK = {
     "subtitle": "How frames, light and rooms taught Europe to look at pictures",
     "category": "Art & Beauty",
     "price": 15,
-    "rating": 4.7,
-    "ratings": 16,
     "pages": 176,
     "readTime": "4h read",
     "badges": [
@@ -1738,7 +1699,7 @@ const ZK = {
   },
 
   {
-    "id": "one-hour-in-a-museum",
+    "id": "one-hour-in-a-museum", pdf: "files/one-hour-in-a-museum.pdf",
     "contents": [
       "Choose One Painting and Forgive the Rest",
       "The First Ten Minutes, or the Fog",
@@ -1755,8 +1716,6 @@ const ZK = {
     "subtitle": "One painting, sixty minutes and the art of coming away changed",
     "category": "Art & Beauty",
     "price": 12,
-    "rating": 4.8,
-    "ratings": 27,
     "pages": 128,
     "readTime": "3h read",
     "badges": [
@@ -1814,7 +1773,7 @@ const ZK = {
   },
 
   {
-    "id": "letters-to-a-young-painter",
+    "id": "letters-to-a-young-painter", pdf: "files/letters-to-a-young-painter.pdf",
     "contents": [
       "On Beginning Badly",
       "On the Discipline of Seeing",
@@ -1832,8 +1791,6 @@ const ZK = {
     "subtitle": "Letters on craft, doubt and beauty for an artist at the beginning of the road",
     "category": "Art & Beauty",
     "price": 14,
-    "rating": 4.9,
-    "ratings": 26,
     "pages": 152,
     "readTime": "4h read",
     "badges": [
@@ -1891,7 +1848,7 @@ const ZK = {
   },
 
   {
-    "id": "fi-madh-al-jamal",
+    "id": "fi-madh-al-jamal", pdf: "files/fi-madh-al-jamal.pdf",
     "contents": [
       "الجمال يبدأ بالنظر",
       "العين تتربى كما تتربى اليد",
@@ -1909,8 +1866,6 @@ const ZK = {
     "subtitle": "تأملات في الفن والنظر وتربية العين",
     "category": "Art & Beauty",
     "price": 13,
-    "rating": 4.9,
-    "ratings": 28,
     "pages": 136,
     "readTime": "3h read",
     "badges": [

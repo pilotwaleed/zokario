@@ -53,6 +53,7 @@ const ZKAuth = {
     };
     users[email] = user;
     this._save(users);            /* @API: POST /auth/signup */
+    if (typeof ZKMembers !== "undefined") user.memberNo = ZKMembers.assign(email);
     this._open(user);
     return user;
   },

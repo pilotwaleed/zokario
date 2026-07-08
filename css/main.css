@@ -1448,3 +1448,73 @@ html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
   .ap-form{grid-template-columns:1fr}
 }
 @media (max-width:1020px) and (min-width:641px){ .rooms-grid{grid-template-columns:repeat(2,1fr)} }
+
+/* ==========================================================
+   V13: round two. The Publisher's presence, real-numbers
+   pulse, richer topics, premium card, forum pill.
+   ========================================================== */
+
+/* owner name: larger, hotter gold, glowing crown */
+.mname-owner{font-size:1.12em;font-weight:600;letter-spacing:.03em;
+  background:linear-gradient(100deg,#F5E3B3,#FFF8E1 30%,#D9B36A 55%,#F5E3B3 80%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% 100%;animation:gildShift 2.4s linear infinite}
+.mname-owner .msym{font-size:1.02em;filter:drop-shadow(0 0 6px rgba(245,227,179,.9));animation:crownPulse 2.8s ease-in-out infinite}
+@keyframes crownPulse{0%,100%{filter:drop-shadow(0 0 4px rgba(245,227,179,.7))}50%{filter:drop-shadow(0 0 11px rgba(255,240,200,1))}}
+
+/* forum pill in the header: unmistakably the forums */
+.forum-pill{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem 1rem;border-radius:999px;
+  border:1px solid rgba(200,169,106,.55);color:var(--champagne);text-decoration:none;font-size:.82rem;
+  letter-spacing:.06em;background:linear-gradient(120deg,rgba(200,169,106,.12),transparent);transition:all .25s;white-space:nowrap}
+.forum-pill svg{width:15px;height:15px}
+.forum-pill:hover{background:rgba(200,169,106,.2);transform:translateY(-1px)}
+@media (max-width:900px){ .forum-pill span{display:none} .forum-pill{padding:.5rem .6rem} }
+
+/* the pulse bar: real numbers */
+.majlis-pulse{display:flex;gap:1.8rem;flex-wrap:wrap;align-items:center;padding:.9rem 1.4rem;margin-bottom:1.2rem;
+  border:1px solid var(--line);border-radius:12px;font-size:.84rem;color:var(--ink-mid);background:var(--bg1)}
+.pulse-fire{margin-inline-start:auto;color:#D9A05A;animation:firePulse 2.4s ease-in-out infinite}
+@keyframes firePulse{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* tonight's question */
+.prompt-card{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.4rem;margin-bottom:1.2rem;border-radius:14px;
+  border:1px solid rgba(217,160,90,.4);background:linear-gradient(120deg,rgba(217,160,90,.08),transparent 70%)}
+.prompt-flame{font-size:1.5rem;animation:firePulse 2.2s ease-in-out infinite}
+.prompt-card small{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#D9A05A;margin-bottom:.25rem}
+.prompt-card p{font-family:var(--font-display);font-size:1.05rem;color:var(--ink)}
+.prompt-card div{flex:1}
+.guest-ribbon{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem 1.4rem;margin-bottom:1.2rem;
+  border:1px dashed rgba(200,169,106,.5);border-radius:12px;font-size:.9rem;color:var(--ink-mid)}
+
+/* richer topic rows */
+.topic-avatar{position:relative;flex:none;width:44px;height:44px}
+.topic-avatar i,.topic-avatar img{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:1.2rem;
+  background:radial-gradient(circle at 35% 30%,rgba(200,169,106,.25),rgba(200,169,106,.06));border:1px solid var(--line);object-fit:cover}
+.topic-mini-ico{position:absolute;bottom:-4px;inset-inline-end:-4px;font-size:.85rem;font-style:normal;background:var(--bg1);border-radius:50%;padding:1px 2px;border:1px solid var(--line)}
+.topic-snip{display:block;font-size:.82rem;color:var(--ink-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:.15rem 0 .25rem}
+.topic-row.hot{border-color:rgba(217,160,90,.5)}
+.hot-mark{font-size:.8rem}
+.topic-row{align-items:flex-start;padding:1rem 1.2rem}
+.topic-row .topic-stats{padding-top:.3rem}
+
+/* premium member card */
+.reader-card{position:relative;overflow:hidden}
+.rc-foil{position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,244,214,.08) 45%,transparent 60%);background-size:250% 100%;animation:gildShift 4.5s linear infinite}
+.rc-foil.rc-owner{background:linear-gradient(115deg,transparent 25%,rgba(255,240,200,.16) 45%,transparent 62%),radial-gradient(ellipse 80% 60% at 50% -10%,rgba(228,200,140,.14),transparent);background-size:250% 100%,100% 100%}
+.rc-foil.rc-gilded{background:linear-gradient(115deg,transparent 28%,rgba(240,220,168,.12) 45%,transparent 60%);background-size:250% 100%}
+.rc-memno{margin-inline-start:auto;font-size:.72rem;letter-spacing:.14em;color:var(--champagne);border:1px solid rgba(200,169,106,.45);border-radius:999px;padding:.2rem .6rem;font-weight:500}
+.rc-title{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne);margin:.3rem 0 .6rem}
+.rc-name-owner{font-size:1.5rem;background:linear-gradient(100deg,#F5E3B3,#FFF8E1 35%,#D9B36A 60%,#F5E3B3);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% 100%;animation:gildShift 2.6s linear infinite}
+.rc-avatar-owner{box-shadow:0 0 0 2px rgba(228,200,140,.65),0 0 24px rgba(228,200,140,.35)}
+
+/* uploaded cover images */
+.cover-face.cover-img{padding:0;position:relative}
+.cover-face.cover-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover-face.cover-img .cover-pub{position:absolute;top:.7rem;left:0;right:0;text-align:center;z-index:1;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.ap-editor{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.2rem 0 1.6rem;border:1px solid rgba(200,169,106,.4);border-radius:16px;padding:1.6rem;background:var(--bg1)}
+.ap-editor input,.ap-editor select,.ap-editor textarea{background:var(--bg0);border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;color:var(--ink);font-family:inherit}
+.ap-editor textarea{grid-column:1/-1;resize:vertical}
+.ap-files{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.ap-file{display:flex;flex-direction:column;gap:.5rem;border:1px dashed rgba(200,169,106,.45);border-radius:12px;padding:1rem;font-size:.85rem;color:var(--ink-mid);cursor:pointer}
+.ap-file span{font-size:.75rem;color:var(--champagne)}
+@media (max-width:900px){ .ap-editor,.ap-files{grid-template-columns:1fr} }

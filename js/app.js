@@ -115,8 +115,12 @@ function zkBook3d(p, cls) {
 }
 
 function zkStars(p) {
-  const full = Math.round(p.rating);
-  return `<span class="stars" aria-label="Rated ${p.rating} out of 5">${"★".repeat(full)}${"☆".repeat(5 - full)} <small>${p.rating} (${p.ratings})</small></span>`;
+  /* only real, earned ratings are shown */
+  const rv = (typeof ZKReviews !== "undefined") ? ZKReviews.list(p.id) : [];
+  if (!rv.length) return "";
+  const avg = rv.reduce((a, r) => a + r.stars, 0) / rv.length;
+  const full = Math.round(avg);
+  return `<span class="stars" aria-label="Rated ${avg.toFixed(1)} out of 5">${"★".repeat(full)}${"☆".repeat(5 - full)} <small>${avg.toFixed(1)} (${rv.length})</small></span>`;
 }
 
 function zkPrice(p) {
@@ -125,7 +129,6 @@ function zkPrice(p) {
 
 function zkBadge(p) {
   if (p.wonder) return `<span class="pcard-badge badge-bedtime">✶ ${ZKT("c.bedtime")}</span>`;
-  if (p.badges?.includes("bestseller")) return `<span class="pcard-badge">${ZKT("c.bestseller")}</span>`;
   if (p.badges?.includes("new")) return `<span class="pcard-badge">${ZKT("c.new")}</span>`;
   return "";
 }
@@ -330,23 +333,21 @@ function zkDust(canvasId) {
 function zkDownload(id) {
   const p = ZK.byId(id);
   if (!p) return;
-  const chapters = p.chapters.map(ch =>
-    `<section><p class="k">${zkEsc(ch.kicker)}</p><h2>${zkEsc(ch.t)}</h2>${ch.paras.map(x => `<p>${zkEsc(x)}</p>`).join("")}</section>`
-  ).join("");
-  const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${zkEsc(p.title)} · Zokario Edition</title>
-<style>body{background:#171210;color:#E9DFC8;font-family:Georgia,serif;max-width:680px;margin:0 auto;padding:60px 24px;line-height:1.85}
-h1{font-size:2.2rem;color:#F1E9D8}h2{color:#E4CFA3;margin:2.4em 0 .8em}.k{letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:#C8A96A;font-family:sans-serif}
-.cover{text-align:center;padding:80px 0;border-bottom:1px solid #3a2f22;margin-bottom:60px}.cover .k{margin-bottom:24px;display:block}
-p{margin:0 0 1.1em}.note{margin-top:80px;padding-top:24px;border-top:1px solid #3a2f22;font-size:.85rem;color:#A89B86;font-style:italic}</style></head>
-<body><div class="cover"><span class="k">Zokario Editions</span><h1>${zkEsc(p.title)}</h1><p>${zkEsc(p.subtitle)}</p></div>
-${chapters}<p class="note">This is your Zokario digital edition preview file. In the production store, this download is replaced by the complete typeset PDF and ePub, delivered securely after purchase.</p></body></html>`;
-  const blob = new Blob([doc], { type: "text/html" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = p.id + "-zokario-edition.html";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  zkToast(ZKT("dl.start"));
+  /* 1. uploaded file in the browser vault (owner-added products) */
+  if (typeof ZKFiles !== "undefined") {
+    ZKFiles.get(p.id + ":pdf").then(blob => {
+      if (blob) {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = p.id + ".pdf";
+        a.click();
+      } else if (p.pdf) {
+        window.open(p.pdf, "_blank"); /* real hosted PDF */
+      }
+    });
+    return;
+  }
+  if (p.pdf) window.open(p.pdf, "_blank");
 }
 
 /* =========================================================
@@ -519,7 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hits = ZK.products
       .map(p => ({ p, s: score(p, q) }))
       .filter(x => x.s > 0)
-      .sort((a, b) => b.s - a.s || b.p.rating - a.p.rating)
+      .sort((a, b) => b.s - a.s)
       .slice(0, 8);
     if (!hits.length) {
       results.innerHTML = `<p class="sr-empty">${zkEsc(ZKT("sr.empty", { q: qRaw.trim() }))}</p>`;

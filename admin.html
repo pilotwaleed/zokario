@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=40">
+<link rel="stylesheet" href="css/main.css?v=41">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="shop.html">The Library</a>
-      <a href="forums.html">Majlis</a>
+      <a href="forums.html">Forums</a>
       <a href="admin.html">The Desk</a>
     </nav>
     <div class="header-actions">
@@ -38,7 +38,7 @@
 <nav class="mobile-nav" aria-label="Mobile">
   <button class="close-nav">Close</button>
   <a href="index.html">Home</a>
-  <a href="forums.html">Majlis</a>
+  <a href="forums.html">Forums</a>
   <a href="account.html">My Shelf</a>
 </nav>
 
@@ -87,20 +87,42 @@
 
         <!-- CATALOG -->
         <div class="desk-pane" id="pane-catalog" hidden>
-          <details class="add-product">
-            <summary class="btn btn-ghost">＋ Add a product</summary>
-            <div class="ap-form">
-              <input id="apTitle" placeholder="Title" maxlength="80">
-              <input id="apSubtitle" placeholder="Subtitle" maxlength="140">
-              <select id="apType"><option value="book">Book</option><option value="template">Template</option><option value="notebook">Notebook</option></select>
-              <select id="apCat"></select>
-              <input id="apPrice" type="number" step="0.01" min="1" placeholder="Price USD">
-              <input id="apPages" type="number" min="10" placeholder="Pages">
-              <textarea id="apHook" rows="2" placeholder="One-line hook"></textarea>
-              <textarea id="apDesc" rows="4" placeholder="Description (one paragraph per line)"></textarea>
-              <button class="btn btn-gold" id="apSave">Put it on the shelf</button>
+          <div class="pane-bar" style="justify-content:space-between">
+            <div>
+              <button class="btn btn-ghost btn-sm" id="apOpen">＋ Add a product</button>
+              <button class="btn-text" id="backupBtn">⤓ Backup everything (JSON)</button>
             </div>
-          </details>
+            <input id="catSearch" placeholder="Search the shelf" style="background:var(--bg0);border:1px solid var(--line);border-radius:10px;padding:.55rem 1rem;color:var(--ink);font-family:inherit;width:220px">
+          </div>
+          <div class="ap-editor" id="apEditor" hidden>
+            <h3 class="h3" id="apHeading" style="grid-column:1/-1">New edition</h3>
+            <input id="apTitle" placeholder="Title (public)" maxlength="80">
+            <input id="apSubtitle" placeholder="Subtitle (public)" maxlength="160">
+            <select id="apType"><option value="book">Book</option><option value="template">Template</option><option value="notebook">Notebook</option></select>
+            <select id="apCat"></select>
+            <input id="apPrice" type="number" step="0.01" min="1" placeholder="Price USD">
+            <input id="apPages" type="number" min="10" placeholder="Pages">
+            <textarea id="apHook" rows="2" placeholder="Hook: the one line under the title that sells it"></textarea>
+            <textarea id="apDesc" rows="5" placeholder="Description shown to the public. One paragraph per line."></textarea>
+            <textarea id="apLearn" rows="3" placeholder="What the reader gains. One bullet per line."></textarea>
+            <textarea id="apAudience" rows="2" placeholder="Who it is for. One bullet per line."></textarea>
+            <textarea id="apContents" rows="3" placeholder="Chapter titles. One per line."></textarea>
+            <div class="ap-files">
+              <label class="ap-file">🖼 Cover image (public face of the book)
+                <input type="file" id="apCover" accept="image/*">
+                <span id="apCoverState">none chosen</span>
+              </label>
+              <label class="ap-file">📄 The PDF itself (what buyers download)
+                <input type="file" id="apPdf" accept="application/pdf">
+                <span id="apPdfState">none chosen</span>
+              </label>
+            </div>
+            <p class="support-note" style="grid-column:1/-1">The cover shows everywhere the product appears. The PDF is stored in this browser's vault and served to buyers here; when you are ready to go fully live, upload the same PDF to /files/ on the server so every device gets it. @API</p>
+            <div style="grid-column:1/-1;display:flex;gap:.8rem">
+              <button class="btn btn-gold" id="apSave">Put it on the shelf</button>
+              <button class="btn btn-ghost" id="apCancel">Cancel</button>
+            </div>
+          </div>
           <div class="table-scroll"><table class="desk-table" id="catTable">
             <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Discount</th><th>Actions</th></tr></thead>
             <tbody></tbody>
@@ -140,12 +162,12 @@
   </section>
 </main>
 
-<script src="js/data.js?v=40"></script>
-<script src="js/i18n.js?v=40"></script>
-<script src="js/app.js?v=40"></script>
-<script src="js/auth.js?v=40"></script>
-<script src="js/seeds.js?v=40"></script>
-<script src="js/community.js?v=40"></script>
+<script src="js/data.js?v=41"></script>
+<script src="js/i18n.js?v=41"></script>
+<script src="js/app.js?v=41"></script>
+<script src="js/auth.js?v=41"></script>
+<script src="js/seeds.js?v=41"></script>
+<script src="js/community.js?v=41"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const me = ZKC.me();
@@ -235,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td><select class="cat-off" data-pid="${p.id}" ${isOwner ? "" : "disabled"}>
           ${[0, 10, 15, 20, 25, 30, 40, 50, 60].map(o => `<option value="${o}" ${(patches[p.id]?.set?.houseOff || 0) === o ? "selected" : ""}>${o ? o + "%" : "none"}</option>`).join("")}
         </select></td>
-        <td class="member-actions">${isOwner ? `<button data-retire="${p.id}">Retire</button>` : ""}</td>
+        <td class="member-actions">${isOwner ? `<button data-edit="${p.id}">Edit</button><button data-retire="${p.id}">Retire</button>` : ""}</td>
       </tr>`).join("");
   }
   document.querySelector("#catTable tbody").addEventListener("change", e => {
@@ -254,26 +276,107 @@ document.addEventListener("DOMContentLoaded", () => {
     const r = e.target.closest("[data-retire]");
     if (r && confirm("Retire this product from the shelves?")) { ZKCatalog.removeProduct(r.dataset.retire); location.reload(); }
   });
-  document.getElementById("apSave").addEventListener("click", () => {
-    const title = document.getElementById("apTitle").value.trim();
-    const price = +document.getElementById("apPrice").value;
-    if (!title || !price) { zkToast("Title and price, at least"); return; }
-    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    const motifs = ["ledger", "focus", "compass", "star", "rings", "bookmark"];
-    ZKCatalog.add({
-      id, type: document.getElementById("apType").value, title,
-      subtitle: document.getElementById("apSubtitle").value.trim(),
-      category: document.getElementById("apCat").value,
-      price, pages: +document.getElementById("apPages").value || 100,
-      rating: 5, ratings: 0, badges: ["new"],
-      cover: { c1: "#231A10", c2: "#140E08", acc: "#C8A96A", motif: motifs[Math.floor(Math.random() * motifs.length)] },
-      hook: document.getElementById("apHook").value.trim(),
-      desc: document.getElementById("apDesc").value.split("\n").filter(Boolean),
-      learn: [], audience: [], contents: [], faq: [],
-      chapters: [{ kicker: "Chapter One", t: "Opening pages", paras: ["The full edition is being prepared by the house."] }],
-      previewCount: 1
+  /* ---------- professional editor: add, edit, uploads, backup ---------- */
+  const $id = x => document.getElementById(x);
+  let editingId = null;
+  let pendingCover = null, pendingPdf = null;
+  function openEditor(p) {
+    editingId = p ? p.id : null;
+    $id("apHeading").textContent = p ? "Edit: " + p.title : "New edition";
+    $id("apTitle").value = p?.title || "";
+    $id("apSubtitle").value = p?.subtitle || "";
+    $id("apType").value = p?.type || "book";
+    $id("apCat").value = p?.category || $id("apCat").value;
+    $id("apPrice").value = p ? (p.oldPrice || p.price) : "";
+    $id("apPages").value = p?.pages || "";
+    $id("apHook").value = p?.hook || "";
+    $id("apDesc").value = (p?.desc || []).join("\n");
+    $id("apLearn").value = (p?.learn || []).join("\n");
+    $id("apAudience").value = (p?.audience || []).join("\n");
+    $id("apContents").value = (p?.contents || []).join("\n");
+    pendingCover = null; pendingPdf = null;
+    $id("apCoverState").textContent = p?.coverImg ? "already set" : "none chosen";
+    $id("apPdfState").textContent = p?.pdf ? "current: " + p.pdf : "none chosen";
+    $id("apEditor").hidden = false;
+    $id("apEditor").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  $id("apOpen").addEventListener("click", () => openEditor(null));
+  $id("apCancel").addEventListener("click", () => { $id("apEditor").hidden = true; });
+  $id("apCover").addEventListener("change", async () => {
+    const f = $id("apCover").files[0]; if (!f) return;
+    pendingCover = await new Promise(res => {
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement("canvas");
+        const k = Math.min(1, 480 / img.width);
+        c.width = img.width * k; c.height = img.height * k;
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        res(c.toDataURL("image/jpeg", 0.72));
+      };
+      img.onerror = () => res(null);
+      img.src = URL.createObjectURL(f);
     });
-    zkToast("On the shelf. Reload to see it.");
+    $id("apCoverState").textContent = pendingCover ? "ready ✓" : "could not read that image";
+  });
+  $id("apPdf").addEventListener("change", () => {
+    const f = $id("apPdf").files[0];
+    pendingPdf = f || null;
+    $id("apPdfState").textContent = f ? f.name + " (" + Math.round(f.size / 1024) + " KB) ✓" : "none chosen";
+  });
+  $id("apSave").addEventListener("click", async () => {
+    const title = $id("apTitle").value.trim();
+    const price = +$id("apPrice").value;
+    if (!title || !price) { zkToast("Title and price, at least"); return; }
+    const lines = el => $id(el).value.split("\n").map(x => x.trim()).filter(Boolean);
+    const fields = {
+      title, subtitle: $id("apSubtitle").value.trim(),
+      type: $id("apType").value, category: $id("apCat").value,
+      price, pages: +$id("apPages").value || 100,
+      hook: $id("apHook").value.trim(),
+      desc: lines("apDesc"), learn: lines("apLearn"),
+      audience: lines("apAudience"), contents: lines("apContents")
+    };
+    if (pendingCover) fields.coverImg = pendingCover;
+    const id = editingId || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    if (pendingPdf) { await ZKFiles.put(id + ":pdf", pendingPdf); fields.pdf = ""; }
+    if (editingId) {
+      ZKCatalog.patch(editingId, fields);
+      zkToast("Edition updated. Reload to see it everywhere.");
+    } else {
+      const motifs = ["ledger", "focus", "compass", "star", "rings", "bookmark"];
+      ZKCatalog.add({
+        id, badges: ["new"],
+        cover: { c1: "#231A10", c2: "#140E08", acc: "#C8A96A", motif: motifs[Math.floor(Math.random() * motifs.length)] },
+        faq: [], previewCount: 1,
+        chapters: [{ kicker: "Chapter One", t: fields.contents[0] || "Opening pages", paras: ["The full edition is on its way from the house."] }],
+        ...fields
+      });
+      zkToast("On the shelf. Reload to see it.");
+    }
+    $id("apEditor").hidden = true;
+  });
+  document.querySelector("#catTable tbody").addEventListener("click", e => {
+    const ed = e.target.closest("[data-edit]");
+    if (ed) openEditor(ZK.products.find(p => p.id === ed.dataset.edit));
+  });
+  $id("catSearch").addEventListener("input", () => {
+    const q = $id("catSearch").value.toLowerCase();
+    document.querySelectorAll("#catTable tbody tr").forEach(tr => {
+      tr.hidden = q && !tr.textContent.toLowerCase().includes(q);
+    });
+  });
+  $id("backupBtn").addEventListener("click", () => {
+    const dump = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k.startsWith("zk_")) dump[k] = localStorage.getItem(k);
+    }
+    const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "zokario-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.click();
+    zkToast("Everything zk_* exported.");
   });
 
   /* ---------- appeals ---------- */

@@ -84,19 +84,50 @@ const ZKLevels = {
     const role = ZKRole.of(typeof user === "object" ? user : { email, name });
     const sub = ZKSub.isActive(email);
     let color, sym, title;
-    if (role === "owner") { color = "owner"; sym = "♛"; title = "The Publisher"; }
+    const mNo = ZKMembers.numberOf(email);
+    if (role === "owner") { color = "owner"; sym = "👑"; title = "The Publisher · Member No 1"; }
     else if (role === "admin") { color = "#D97A7A"; sym = "⚜"; title = "House Admin"; }
-    else { const t = this.tier(email); color = sub ? "gilded" : t.color; sym = ZKSym.of(email) || t.sym; title = t.name; }
+    else { const t = this.tier(email); color = sub ? "gilded" : t.color; sym = ZKSym.of(email) || t.sym; title = t.name + (mNo ? " · Member No " + mNo : ""); }
     const cls = color === "owner" ? "mname mname-owner" : color === "gilded" ? "mname mname-gilded" : "mname";
     const style = (color !== "owner" && color !== "gilded") ? `style="color:${color}"` : "";
     return `<span class="${cls}" ${style} title="${ZKC.esc(title)}"><i class="msym">${sym}</i>${ZKC.esc(name)}</span>`;
   }
 };
 
+/* =========================================================
+   MEMBER NUMBERS: the Publisher is No 1, everyone after
+   joins the ledger in order. Low numbers carry seniority.
+   ========================================================= */
+const ZKMembers = {
+  map() { return ZKC.read("zk_member_no", {}); },
+  numberOf(email) {
+    const e = (email || "").toLowerCase();
+    if (ZK_OWNER_EMAILS.includes(e)) return 1;
+    return this.map()[e] || null;
+  },
+  assign(email) { /* @API server-side sequence */
+    const e = (email || "").toLowerCase();
+    if (ZK_OWNER_EMAILS.includes(e)) return 1;
+    const m = this.map();
+    if (m[e]) return m[e];
+    const next = Math.max(1, ...Object.values(m), 1) + 1;
+    m[e] = next;
+    ZKC.write("zk_member_no", m);
+    return next;
+  },
+  ensureAll() {
+    const users = ZKC.read("zk_accounts", {});
+    Object.values(users)
+      .sort((a, b) => (a.joined || "").localeCompare(b.joined || ""))
+      .forEach(u => this.assign(u.email));
+  },
+  isFounding(email) { const n = this.numberOf(email); return n !== null && n <= 100; }
+};
+
 /* member symbols: chosen figure next to name/topics. Some free, some Gilded-only */
 const ZK_SYMBOLS = {
-  free:   ["❧", "✎", "❦", "☾", "✶", "⚓", "🕊", "🌿"],
-  gilded: ["♛", "🦚", "🗝", "🕯", "🌙", "🎻", "🦢", "🏛"]
+  free:   ["♔", "❧", "✎", "❦", "☾", "✶", "⚓", "🕊", "🌿"],
+  gilded: ["♕", "🦚", "🗝", "🕯", "🌙", "🎻", "🦢", "🏛"]
 };
 const ZKSym = {
   of(email) { return ZKC.read("zk_symbols", {})[email]; },
@@ -117,7 +148,11 @@ const ZK_SUB_PLANS = {
 
 const ZKSub = {
   state(email) { return ZKC.read("zk_subs", {})[email || ZKC.me()?.email] || null; },
-  isActive(email) { const s = this.state(email); return !!s && s.until > ZKC.now(); },
+  isActive(email) {
+    const e = (email || ZKC.me()?.email || "").toLowerCase();
+    if (ZK_OWNER_EMAILS.includes(e)) return true; /* the Publisher holds a lifetime seat */
+    const s = this.state(email); return !!s && s.until > ZKC.now();
+  },
   start(plan) { /* demo checkout. @API payment gateway */
     const u = ZKC.me(); if (!u) return false;
     const p = ZK_SUB_PLANS[plan]; if (!p) return false;
@@ -157,7 +192,7 @@ const ZKSub = {
     const u = ZKC.me(); if (!u || !this.isActive(u.email)) return 0;
     const pick = this.picks().find(p => p.id === pid);
     if (!pick) return 0;
-    if (this.usedThisMonth(u.email) >= 2) return 0;
+    if (!ZK_OWNER_EMAILS.includes(u.email.toLowerCase()) && this.usedThisMonth(u.email) >= 2) return 0;
     return pick.off;
   },
   usedThisMonth(email) {
@@ -324,7 +359,12 @@ const ZKForum = {
    Rules shown first, auto-moderated, mutable.
    ========================================================= */
 const ZKChat = {
-  list(wing) { return ZKC.read("zk_chat_" + wing, []); },
+  TTL: 12 * 36e5, /* the fire keeps a voice for 12 hours */
+  list(wing) {
+    const l = ZKC.read("zk_chat_" + wing, []).filter(m => ZKC.now() - m.at < this.TTL);
+    ZKC.write("zk_chat_" + wing, l);
+    return l;
+  },
   send(wing, text) {
     const gate = ZKMod.check(text);
     if (!gate.ok) {
@@ -334,7 +374,7 @@ const ZKChat = {
     const u = ZKC.me();
     const l = this.list(wing);
     l.push({ id: ZKC.id(), author: u.email, text: text.slice(0, 280), at: ZKC.now() });
-    if (l.length > 60) l.splice(0, l.length - 60);
+    if (l.length > 200) l.splice(0, l.length - 200);
     ZKC.write("zk_chat_" + wing, l); /* @API websocket */
     ZKForum.rememberName(u.email, u.name);
     return { ok: true };
@@ -448,6 +488,20 @@ const ZKSupport = {
   wall() { return ZKC.read("zk_support", []).slice(0, 12); }
 };
 
+/* IndexedDB vault for owner-uploaded covers and PDFs. @API real storage */
+const ZKFiles = {
+  db() {
+    return new Promise((res, rej) => {
+      const rq = indexedDB.open("zokario-files", 1);
+      rq.onupgradeneeded = () => rq.result.createObjectStore("files");
+      rq.onsuccess = () => res(rq.result);
+      rq.onerror = () => rej(rq.error);
+    });
+  },
+  async put(key, blob) { const d = await this.db(); return new Promise((res, rej) => { const t = d.transaction("files", "readwrite"); t.objectStore("files").put(blob, key); t.oncomplete = res; t.onerror = () => rej(t.error); }); },
+  async get(key) { const d = await this.db(); return new Promise(res => { const rq = d.transaction("files").objectStore("files").get(key); rq.onsuccess = () => res(rq.result || null); rq.onerror = () => res(null); }); }
+};
+
 const ZKAtelier = {
   PRICE: 12.99,
   submit(req) { /* @API + file upload */
@@ -520,33 +574,20 @@ if (typeof ZK_MODWORDS !== "undefined") ZKMod.words = ZK_MODWORDS;
 
 /* first-run seeding: opening topics + pinned regulations per wing */
 (function seedForum() {
-  if (ZKC.read("zk_topics", []).length || typeof ZK_SEED_TOPICS === "undefined") return;
-  const l = [];
-  const names = {};
-  const mk = (wing, t, i) => {
-    const email = "seed:" + t.author.toLowerCase().replace(/\s/g, "");
-    names[email] = t.author;
-    l.push({ id: ZKC.id(), wing, section: t.section, icon: t.icon, title: t.title, author: email,
-      body: t.body.join("\n\n"), at: ZKC.now() - (i + 2) * 36e5 * 7, views: 14 + Math.floor(Math.random() * 90),
-      likes: [], replies: (t.replies || []).map(r => {
-        const re = "seed:" + r.author.toLowerCase().replace(/\s/g, "");
-        names[re] = r.author;
-        return { id: ZKC.id(), author: re, text: r.text, at: ZKC.now() - (i + 1) * 36e5 * 6, likes: [] };
-      }), pinned: 0, closed: false, seed: true });
-  };
-  for (const wing of ["en", "ar", "intl"]) (ZK_SEED_TOPICS[wing] || []).forEach((t, i) => mk(wing, t, i));
-  /* pinned regulations, visible in every section of the wing */
+  /* the house posts only what is real: the pinned regulations. No demo topics, no invented members. */
+  const existing = ZKC.read("zk_topics", []);
+  const cleaned = existing.filter(t => !t.seed || String(t.id).startsWith("regs-"));
   if (typeof ZK_REGS !== "undefined") for (const wing of ["en", "ar", "intl"]) {
     const r = ZK_REGS[wing];
-    if (!r) continue;
-    l.unshift({ id: "regs-" + wing, wing, section: "reading", all: true, icon: "📜", title: r.title,
-      author: "seed:thehouse", body: r.intro + "\n\n" + r.rules.map((x, i) => (i + 1) + ". " + x).join("\n") + "\n\n" + r.appeal,
-      at: ZKC.now(), views: 200, likes: [], replies: [], pinned: 1, closed: true, seed: true });
+    if (!r || cleaned.find(t => t.id === "regs-" + wing)) continue;
+    cleaned.unshift({ id: "regs-" + wing, wing, section: "reading", all: true, icon: "📜", title: r.title,
+      author: "house:zokario", body: r.intro + "\n\n" + r.rules.map((x, i) => (i + 1) + ". " + x).join("\n") + "\n\n" + r.appeal,
+      at: ZKC.now(), views: 0, likes: [], replies: [], pinned: 1, closed: true, seed: true });
   }
-  names["seed:thehouse"] = "Zokario";
-  ZKC.write("zk_topics", l);
-  const existing = ZKC.read("zk_names", {});
-  ZKC.write("zk_names", { ...existing, ...names });
+  if (cleaned.length !== existing.length || cleaned.some(t => !existing.find(e => e.id === t.id))) ZKC.write("zk_topics", cleaned);
+  const names = ZKC.read("zk_names", {});
+  if (!names["house:zokario"]) { names["house:zokario"] = "Zokario"; ZKC.write("zk_names", names); }
+  ZKMembers.ensureAll();
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -589,10 +630,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const actions = document.querySelector(".header-actions");
   if (actions && !document.querySelector(".forum-door-btn")) {
     const a = document.createElement("a");
-    a.className = "icon-btn forum-door-btn";
+    a.className = "forum-pill";
     a.href = "forums.html";
-    a.setAttribute("aria-label", "The Family Majlis");
-    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6a8 8 0 0 1 16 0v7a3 3 0 0 1-3 3h-2l-3 4-3-4H7a3 3 0 0 1-3-3z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></svg>';
+    a.setAttribute("aria-label", ZKT("nav.majlis"));
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6a8 8 0 0 1 16 0v7a3 3 0 0 1-3 3h-2l-3 4-3-4H7a3 3 0 0 1-3-3z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></svg><span>' + ZKT("nav.majlis") + '</span>';
     const cart = actions.querySelector('[href="cart.html"]');
     actions.insertBefore(a, cart);
   }

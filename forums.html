@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=40">
+<link rel="stylesheet" href="css/main.css?v=41">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
       <a href="notebooks.html">Notebooks</a>
       <a href="wonder.html">Wonder</a>
       <a href="monaliza.html">Monaliza</a>
-      <a href="forums.html">Majlis</a>
+      <a href="forums.html">Forums</a>
     </nav>
     <div class="header-actions">
       <a class="icon-btn" href="account.html" aria-label="My shelf">
@@ -60,7 +60,7 @@
   <a href="notebooks.html">Notebooks</a>
   <a href="wonder.html">Wonder</a>
   <a href="monaliza.html">Monaliza</a>
-  <a href="forums.html">Majlis</a>
+  <a href="forums.html">Forums</a>
   <a href="support.html">Support the house</a>
   <a href="account.html">My Shelf</a>
   <a href="cart.html">Cart</a>
@@ -112,6 +112,20 @@
         <button class="wing-tab active" data-wing="en">🕮 <span>The English Wing</span></button>
         <button class="wing-tab" data-wing="ar">☪ <span>الجناح العربي</span></button>
         <button class="wing-tab" data-wing="intl">🕊 <span>The International Salon</span></button>
+      </div>
+
+      <div class="majlis-pulse reveal" id="pulseBar"></div>
+      <div class="prompt-card reveal" id="promptCard" hidden>
+        <span class="prompt-flame" aria-hidden="true">🕯</span>
+        <div>
+          <small data-i18n="fx.prompt">Tonight's question from the house</small>
+          <p id="promptText"></p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="promptGo" data-i18n="fx.promptCta">Answer it</button>
+      </div>
+      <div class="guest-ribbon reveal" id="guestRibbon" hidden>
+        <span data-i18n="fx.guest">Reading the majlis is open to everyone. To speak, you need a shelf card.</span>
+        <a class="btn btn-gold btn-sm" href="account.html" data-i18n="fx.guestCta">Get your card, it takes a minute</a>
       </div>
 
       <div class="forum-layout">
@@ -172,12 +186,12 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=40"></script>
-<script src="js/i18n.js?v=40"></script>
-<script src="js/app.js?v=40"></script>
-<script src="js/auth.js?v=40"></script>
-<script src="js/seeds.js?v=40"></script>
-<script src="js/community.js?v=40"></script>
+<script src="js/data.js?v=41"></script>
+<script src="js/i18n.js?v=41"></script>
+<script src="js/app.js?v=41"></script>
+<script src="js/auth.js?v=41"></script>
+<script src="js/seeds.js?v=41"></script>
+<script src="js/community.js?v=41"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const me = ZKC.me();
@@ -202,13 +216,13 @@ document.addEventListener("DOMContentLoaded", () => {
     rulesList.innerHTML = (r?.chatRules || ["Be kind.", "No profanity, the keeper is listening.", "No spam or links without permission.", "What is said by the fire stays warm."]).map(x => `<li>${zkEsc(x)}</li>`).join("");
   }
   renderChatRules();
-  const agreed = () => sessionStorage.getItem("zk_chat_agreed") === "1";
+  const agreed = () => localStorage.getItem("zk_chat_agreed") === "1";
   function showChat() {
     document.getElementById("chatRules").hidden = true;
     document.getElementById("chatBody").hidden = false;
     renderChat();
   }
-  document.getElementById("chatAgree").addEventListener("click", () => { sessionStorage.setItem("zk_chat_agreed", "1"); showChat(); });
+  document.getElementById("chatAgree").addEventListener("click", () => { localStorage.setItem("zk_chat_agreed", "1"); showChat(); });
   if (agreed()) showChat();
 
   function renderChat() {
@@ -276,13 +290,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const topics = ZKForum.topics(wing, section);
     document.getElementById("forumEmpty").hidden = topics.length > 0;
+    const accounts = ZKStore.read("zk_accounts", {});
+    const avatarOf = email => {
+      const u = accounts[email];
+      if (u?.photo) return `<img src="${u.photo}" alt="">`;
+      return `<i>${u?.avatar || (email.startsWith("house:") ? "🕮" : "☾")}</i>`;
+    };
     list.innerHTML = topics.map(t => {
       const name = ZKForum.nameOf(t.author) || t.authorName || t.author.split("@")[0];
-      return `<a class="topic-row ${t.pinned ? "pinned" : ""}" href="topic.html?id=${t.id}">
-        <span class="topic-ico">${t.pinned ? "📌" : t.icon}</span>
+      const last = t.replies[t.replies.length - 1];
+      const lastName = last ? (last.author === (me?.email) ? ZKT("fx.you") : (ZKForum.nameOf(last.author) || last.author.split("@")[0])) : null;
+      const snippet = (t.body || "").split("\n")[0].slice(0, 110);
+      const hot = t.replies.length >= 3 || t.likes.length >= 3;
+      return `<a class="topic-row ${t.pinned ? "pinned" : ""} ${hot ? "hot" : ""}" href="topic.html?id=${t.id}">
+        <span class="topic-avatar">${avatarOf(t.author)}<em class="topic-mini-ico">${t.pinned ? "📌" : t.icon}</em></span>
         <span class="topic-mid">
-          <b>${zkEsc(t.title)} ${t.closed ? "🔒" : ""}</b>
-          <small>${ZKLevels.badge({ email: t.author, name })} · ${fmtWhen(t.at)}</small>
+          <b>${zkEsc(t.title)} ${t.closed ? "🔒" : ""}${hot ? ' <span class="hot-mark">🔥</span>' : ""}</b>
+          <span class="topic-snip">${zkEsc(snippet)}${(t.body || "").length > 110 ? "…" : ""}</span>
+          <small>${ZKLevels.badge({ email: t.author, name })} · ${fmtWhen(t.at)}${lastName ? ` · ${ZKT("fx.lastReply", { t: fmtWhen(last.at) })} (${zkEsc(lastName)})` : ""}</small>
         </span>
         <span class="topic-stats">
           <i title="${ZKT("fo.views")}">👁 ${t.views}</i>
@@ -343,6 +368,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const nudge = () => { if (v.paused) v.play().catch(() => {}); };
   v.addEventListener("loadeddata", nudge);
   ["pointerdown", "scroll", "touchstart", "keydown"].forEach(ev => addEventListener(ev, nudge, { once: true, passive: true }));
+
+  /* ---- the pulse: real numbers only ---- */
+  (function pulse() {
+    const members = Object.keys(ZKStore.read("zk_accounts", {})).length;
+    const all = ZKStore.read("zk_topics", []);
+    const today = Date.now() - 864e5;
+    const repliesToday = all.reduce((n, t) => n + t.replies.filter(r => r.at > today).length, 0);
+    document.getElementById("pulseBar").innerHTML = `
+      <span>🕮 ${ZKT("fx.membersReal", { n: members })}</span>
+      <span>💬 ${ZKT("fx.topicsReal", { n: all.length })}</span>
+      <span>✉ ${ZKT("fx.repliesToday", { n: repliesToday })}</span>
+      <span class="pulse-fire">🔥 ${ZKT("fx.online")}</span>`;
+  })();
+
+  /* ---- tonight's question, from the house itself ---- */
+  if (typeof ZK_PROMPTS !== "undefined") {
+    const pool = ZK_PROMPTS[wing === "ar" ? "ar" : "en"] || ZK_PROMPTS.en;
+    const day = Math.floor(Date.now() / 864e5);
+    const q = pool[day % pool.length];
+    document.getElementById("promptCard").hidden = false;
+    document.getElementById("promptText").textContent = q;
+    document.getElementById("promptGo").addEventListener("click", () => {
+      if (!me) { location.href = "account.html"; return; }
+      section = "club"; renderSections(); renderTopics();
+      document.getElementById("newTopicBtn").click();
+      document.getElementById("topicTitle").value = q;
+      document.getElementById("topicBody").focus();
+    });
+  }
+
+  if (!me) document.getElementById("guestRibbon").hidden = false;
 
   renderSections(); renderTopics();
 });
