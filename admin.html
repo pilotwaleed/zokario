@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Publisher's Desk | Zokario</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=40">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="forums.html">Majlis</a>
+      <a href="admin.html">The Desk</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="forums.html">Majlis</a>
+  <a href="account.html">My Shelf</a>
+</nav>
+
+<main>
+  <section class="section" style="padding-top:calc(var(--header-h) + 2.5rem)">
+    <div class="container">
+      <div id="deskDenied" hidden class="center" style="padding:6rem 0">
+        <p style="font-size:2.4rem">🗝</p>
+        <h1 class="h2">This desk belongs to the Publisher</h1>
+        <p class="lead" style="margin:1rem auto 2rem">Sign in with the house account to take your seat.</p>
+        <a class="btn btn-gold" href="account.html">Sign in</a>
+      </div>
+
+      <div id="desk" hidden>
+        <div class="desk-head reveal">
+          <div>
+            <p class="eyebrow">The Publisher's Desk</p>
+            <h1 class="h2">Good evening, <span id="deskName">Waleed</span> <span style="font-size:1.1rem">♛</span></h1>
+          </div>
+          <div class="desk-stats" id="deskStats"></div>
+        </div>
+
+        <div class="desk-tabs reveal" role="tablist">
+          <button class="desk-tab active" data-tab="reports">📮 Reports <em id="repCount"></em></button>
+          <button class="desk-tab" data-tab="members">👥 Members</button>
+          <button class="desk-tab" data-tab="catalog">📦 Catalog</button>
+          <button class="desk-tab" data-tab="appeals">🕊 Appeals <em id="appCount"></em></button>
+          <button class="desk-tab" data-tab="atelier">🖋 Paid requests <em id="atCount"></em></button>
+          <button class="desk-tab" data-tab="contest">🏆 Contest</button>
+          <button class="desk-tab" data-tab="forum">🏛 Forum</button>
+        </div>
+
+        <!-- REPORTS -->
+        <div class="desk-pane" id="pane-reports">
+          <div class="pane-bar"><button class="btn-text" id="markRead">Mark all read</button></div>
+          <div id="reportList" class="report-list"></div>
+        </div>
+
+        <!-- MEMBERS -->
+        <div class="desk-pane" id="pane-members" hidden>
+          <div class="table-scroll"><table class="desk-table" id="memberTable">
+            <thead><tr><th>Member</th><th>Joined</th><th>Points</th><th>Standing</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+        </div>
+
+        <!-- CATALOG -->
+        <div class="desk-pane" id="pane-catalog" hidden>
+          <details class="add-product">
+            <summary class="btn btn-ghost">＋ Add a product</summary>
+            <div class="ap-form">
+              <input id="apTitle" placeholder="Title" maxlength="80">
+              <input id="apSubtitle" placeholder="Subtitle" maxlength="140">
+              <select id="apType"><option value="book">Book</option><option value="template">Template</option><option value="notebook">Notebook</option></select>
+              <select id="apCat"></select>
+              <input id="apPrice" type="number" step="0.01" min="1" placeholder="Price USD">
+              <input id="apPages" type="number" min="10" placeholder="Pages">
+              <textarea id="apHook" rows="2" placeholder="One-line hook"></textarea>
+              <textarea id="apDesc" rows="4" placeholder="Description (one paragraph per line)"></textarea>
+              <button class="btn btn-gold" id="apSave">Put it on the shelf</button>
+            </div>
+          </details>
+          <div class="table-scroll"><table class="desk-table" id="catTable">
+            <thead><tr><th>Product</th><th>Type</th><th>Price</th><th>Discount</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+        </div>
+
+        <!-- APPEALS -->
+        <div class="desk-pane" id="pane-appeals" hidden><div id="appealList"></div></div>
+
+        <!-- ATELIER -->
+        <div class="desk-pane" id="pane-atelier" hidden><div id="atelierList"></div></div>
+
+        <!-- CONTEST -->
+        <div class="desk-pane" id="pane-contest" hidden>
+          <div class="ap-form" style="margin-bottom:2rem">
+            <input id="ctTheme" placeholder="Contest theme (English)">
+            <input id="ctThemeAr" placeholder="Contest theme (Arabic)" dir="rtl">
+            <input id="ctPrize" placeholder="Prize description">
+            <button class="btn btn-gold" id="ctSave">Set the quarter's theme</button>
+          </div>
+          <div id="entryList"></div>
+        </div>
+
+        <!-- FORUM -->
+        <div class="desk-pane" id="pane-forum" hidden>
+          <div class="ap-form">
+            <input id="fsKey" placeholder="Section key (letters only, e.g. poetry)" maxlength="20">
+            <input id="fsIcon" placeholder="Icon emoji" maxlength="4">
+            <input id="fsEn" placeholder="Name (English)">
+            <input id="fsAr" placeholder="Name (Arabic)" dir="rtl">
+            <button class="btn btn-gold" id="fsAdd">Open the new section</button>
+          </div>
+          <p class="support-note">Pinning, closing and removing topics is done inside each topic page; muting and suspending members lives in the Members tab. Your word is final everywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const me = ZKC.me();
+  if (!me || !ZKRole.canModerate()) { document.getElementById("deskDenied").hidden = false; return; }
+  document.getElementById("desk").hidden = false;
+  document.getElementById("deskName").textContent = me.name;
+  const isOwner = ZKRole.isOwner();
+
+  /* stats */
+  const users = ZKStore.read("zk_accounts", {});
+  const sales = ZKStore.orders().filter(o => !o.gift);
+  document.getElementById("deskStats").innerHTML = `
+    <span><b>${Object.keys(users).length}</b> members</span>
+    <span><b>${ZK.products.length}</b> products</span>
+    <span><b>${ZKStore.read("zk_topics", []).length}</b> topics</span>
+    <span><b>${ZKC.read("zk_support", []).length}</b> patrons</span>`;
+
+  /* tabs */
+  document.querySelectorAll(".desk-tab").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".desk-tab").forEach(x => x.classList.toggle("active", x === b));
+    document.querySelectorAll(".desk-pane").forEach(p => p.hidden = p.id !== "pane-" + b.dataset.tab);
+  }));
+
+  /* ---------- reports ---------- */
+  const KIND_ICO = { join: "🌱", sale: "💰", penalty: "⚖", appeal: "🕊", sub: "✦", support: "🕯", atelier: "🖋", contest: "🏆", catalog: "📦", admin: "♛", mod: "🧹", flash: "⚡" };
+  function renderReports() {
+    const l = ZKReports.list();
+    document.getElementById("repCount").textContent = ZKReports.unread() || "";
+    document.getElementById("reportList").innerHTML = l.length ? l.map(r => `
+      <div class="report-row ${r.read ? "" : "unread"}">
+        <span>${KIND_ICO[r.kind] || "•"}</span>
+        <p>${zkEsc(r.text)}</p>
+        <small>${new Date(r.at).toLocaleString()}</small>
+      </div>`).join("") : '<p class="forum-empty">Silence. A good sign, or a slow day.</p>';
+  }
+  document.getElementById("markRead").addEventListener("click", () => { ZKReports.markAll(); renderReports(); });
+
+  /* ---------- members ---------- */
+  function standing(email) {
+    const st = ZKMod.state(email);
+    if (st.banned) return '<b style="color:#D97A7A">banned</b>';
+    if (st.suspendedUntil > Date.now()) return '<b style="color:#D9A05A">suspended</b>';
+    if (st.mutedUntil > Date.now()) return "muted";
+    if (st.strikes) return st.strikes + " strike" + (st.strikes > 1 ? "s" : "");
+    return "clear";
+  }
+  function renderMembers() {
+    const tb = document.querySelector("#memberTable tbody");
+    tb.innerHTML = Object.values(users).map(u => {
+      const role = ZKRole.of(u);
+      const isAdmin = ZKC.read("zk_admins", []).includes(u.email);
+      return `<tr>
+        <td>${ZKLevels.badge(u)}<br><small>${zkEsc(u.email)}</small></td>
+        <td>${u.joined || ""}</td>
+        <td>${ZKLevels.points(u.email)}</td>
+        <td>${role === "owner" ? "♛ Publisher" : standing(u.email)}</td>
+        <td class="member-actions">${role === "owner" ? "" : `
+          ${isOwner ? `<button data-act="admin" data-e="${u.email}">${isAdmin ? "Remove admin" : "Make admin"}</button>` : ""}
+          <button data-act="mute" data-e="${u.email}">Mute 24h</button>
+          <button data-act="suspend" data-e="${u.email}">Suspend 30d</button>
+          <button data-act="ban" data-e="${u.email}">${ZKMod.state(u.email).banned ? "Restore" : "Ban"}</button>
+          <button data-act="clear" data-e="${u.email}">Clear record</button>`}</td>
+      </tr>`;
+    }).join("");
+  }
+  document.querySelector("#memberTable tbody").addEventListener("click", e => {
+    const b = e.target.closest("[data-act]"); if (!b) return;
+    const em = b.dataset.e;
+    if (b.dataset.act === "admin") ZKRole.setAdmin(em, !ZKC.read("zk_admins", []).includes(em));
+    if (b.dataset.act === "mute") ZKMod.mute(em, 1440);
+    if (b.dataset.act === "suspend") { const st = ZKMod.state(em); st.suspendedUntil = Date.now() + 30 * 864e5; ZKMod.save(em, st); ZKReports.log("penalty", em + " suspended 30d by the house"); }
+    if (b.dataset.act === "ban") ZKMod.ban(em, !ZKMod.state(em).banned);
+    if (b.dataset.act === "clear") ZKMod.clear(em);
+    renderMembers(); renderReports();
+  });
+
+  /* ---------- catalog ---------- */
+  const CATS = [...new Set(ZK.products.map(p => p.category))];
+  document.getElementById("apCat").innerHTML = CATS.map(c => `<option>${c}</option>`).join("");
+  function renderCatalog() {
+    const patches = ZKCatalog.patches();
+    document.querySelector("#catTable tbody").innerHTML = ZK.products.map(p => `
+      <tr>
+        <td>${zkEsc(p.title)}${patches[p.id] ? " <small>✎</small>" : ""}</td>
+        <td>${p.type}</td>
+        <td><input class="cat-price" data-pid="${p.id}" type="number" step="0.01" value="${p.deal ? p.oldPrice : p.price}" ${isOwner ? "" : "disabled"}></td>
+        <td><select class="cat-off" data-pid="${p.id}" ${isOwner ? "" : "disabled"}>
+          ${[0, 10, 15, 20, 25, 30, 40, 50, 60].map(o => `<option value="${o}" ${(patches[p.id]?.set?.houseOff || 0) === o ? "selected" : ""}>${o ? o + "%" : "none"}</option>`).join("")}
+        </select></td>
+        <td class="member-actions">${isOwner ? `<button data-retire="${p.id}">Retire</button>` : ""}</td>
+      </tr>`).join("");
+  }
+  document.querySelector("#catTable tbody").addEventListener("change", e => {
+    const pr = e.target.closest(".cat-price");
+    if (pr) { ZKCatalog.patch(pr.dataset.pid, { price: +pr.value }); zkToast("Price updated"); }
+    const off = e.target.closest(".cat-off");
+    if (off) {
+      const pid = off.dataset.pid, o = +off.value;
+      const base = ZKCatalog.patches()[pid]?.set?.price ?? ZK.products.find(p => p.id === pid)?.price;
+      if (o) ZKCatalog.patch(pid, { houseOff: o, oldPrice: base, price: Math.round(base * (100 - o)) / 100 });
+      else { const set = ZKCatalog.patches()[pid]?.set || {}; ZKCatalog.patch(pid, { houseOff: 0, price: set.oldPrice ?? base, oldPrice: undefined }); }
+      zkToast("Discount set. Reload to see it everywhere.");
+    }
+  });
+  document.querySelector("#catTable tbody").addEventListener("click", e => {
+    const r = e.target.closest("[data-retire]");
+    if (r && confirm("Retire this product from the shelves?")) { ZKCatalog.removeProduct(r.dataset.retire); location.reload(); }
+  });
+  document.getElementById("apSave").addEventListener("click", () => {
+    const title = document.getElementById("apTitle").value.trim();
+    const price = +document.getElementById("apPrice").value;
+    if (!title || !price) { zkToast("Title and price, at least"); return; }
+    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const motifs = ["ledger", "focus", "compass", "star", "rings", "bookmark"];
+    ZKCatalog.add({
+      id, type: document.getElementById("apType").value, title,
+      subtitle: document.getElementById("apSubtitle").value.trim(),
+      category: document.getElementById("apCat").value,
+      price, pages: +document.getElementById("apPages").value || 100,
+      rating: 5, ratings: 0, badges: ["new"],
+      cover: { c1: "#231A10", c2: "#140E08", acc: "#C8A96A", motif: motifs[Math.floor(Math.random() * motifs.length)] },
+      hook: document.getElementById("apHook").value.trim(),
+      desc: document.getElementById("apDesc").value.split("\n").filter(Boolean),
+      learn: [], audience: [], contents: [], faq: [],
+      chapters: [{ kicker: "Chapter One", t: "Opening pages", paras: ["The full edition is being prepared by the house."] }],
+      previewCount: 1
+    });
+    zkToast("On the shelf. Reload to see it.");
+  });
+
+  /* ---------- appeals ---------- */
+  function renderAppeals() {
+    const l = ZKC.read("zk_appeals", []);
+    document.getElementById("appCount").textContent = l.filter(a => a.status === "pending").length || "";
+    document.getElementById("appealList").innerHTML = l.length ? l.map(a => `
+      <div class="report-row ${a.status === "pending" ? "unread" : ""}">
+        <span>🕊</span>
+        <p><b>${zkEsc(a.name || a.email)}</b> · ${new Date(a.at).toLocaleDateString()} · <em>${a.status}</em><br>${zkEsc(a.text)}</p>
+        ${a.status === "pending" ? `<span class="member-actions">
+          <button data-ap="grant" data-id="${a.id}">Forgive</button>
+          <button data-ap="deny" data-id="${a.id}">Uphold</button></span>` : ""}
+      </div>`).join("") : '<p class="forum-empty">No appeals. The regulations are doing their quiet work.</p>';
+  }
+  document.getElementById("appealList").addEventListener("click", e => {
+    const b = e.target.closest("[data-ap]"); if (!b) return;
+    const l = ZKC.read("zk_appeals", []);
+    const a = l.find(x => x.id === b.dataset.id); if (!a) return;
+    a.status = b.dataset.ap === "grant" ? "granted" : "denied";
+    if (b.dataset.ap === "grant") ZKMod.clear(a.email);
+    ZKC.write("zk_appeals", l);
+    renderAppeals(); renderMembers();
+  });
+
+  /* ---------- atelier ---------- */
+  function renderAtelier() {
+    const l = ZKAtelier.list();
+    document.getElementById("atCount").textContent = l.filter(x => x.status === "paid").length || "";
+    document.getElementById("atelierList").innerHTML = l.length ? l.map(r => `
+      <div class="report-row unread">
+        <span>${r.kind === "notebook" ? "📓" : "🗂"}</span>
+        <p><b>${zkEsc(r.name)}</b> paid $${r.price} · ${new Date(r.at).toLocaleDateString()}<br>
+        ${r.recipient ? "<em>" + zkEsc(r.recipient) + "</em><br>" : ""}${zkEsc(r.brief)}
+        ${r.image ? `<br><img src="${r.image}" alt="" style="max-width:200px;border-radius:8px;margin-top:.6rem">` : ""}</p>
+      </div>`).join("") : '<p class="forum-empty">No commissions yet. The atelier waits with clean hands.</p>';
+  }
+
+  /* ---------- contest ---------- */
+  const c = ZKContest.current();
+  document.getElementById("ctTheme").value = c.theme;
+  document.getElementById("ctThemeAr").value = c.themeAr || "";
+  document.getElementById("ctPrize").value = c.prize || "";
+  document.getElementById("ctSave").addEventListener("click", () => {
+    ZKContest.setTheme(document.getElementById("ctTheme").value, document.getElementById("ctThemeAr").value, document.getElementById("ctPrize").value);
+    zkToast("Theme set for the quarter");
+  });
+  function renderEntries() {
+    const l = ZKContest.entries();
+    document.getElementById("entryList").innerHTML = l.length ? l.map(en => `
+      <div class="report-row">
+        <span>${en.winner ? "👑" : "🖋"}</span>
+        <p><b>${zkEsc(en.name)}</b> · “${zkEsc(en.title)}” · ${new Date(en.at).toLocaleDateString()}</p>
+        ${en.winner ? "<b>Winner</b>" : `<span class="member-actions"><button data-crown="${en.id}">Crown</button></span>`}
+      </div>`).join("") : '<p class="forum-empty">No entries this quarter yet.</p>';
+  }
+  document.getElementById("entryList").addEventListener("click", e => {
+    const b = e.target.closest("[data-crown]"); if (!b) return;
+    ZKContest.crown(b.dataset.crown); renderEntries();
+  });
+
+  /* ---------- forum section ---------- */
+  document.getElementById("fsAdd").addEventListener("click", () => {
+    const key = document.getElementById("fsKey").value.trim().toLowerCase().replace(/[^a-z]/g, "");
+    if (!key) return;
+    ZKForum.addSection(key, document.getElementById("fsIcon").value || "💬", {
+      en: document.getElementById("fsEn").value || key,
+      ar: document.getElementById("fsAr").value || key,
+      intl: document.getElementById("fsEn").value || key
+    });
+    zkToast("Section opened in all three wings");
+  });
+
+  renderReports(); renderMembers(); renderCatalog(); renderAppeals(); renderAtelier(); renderEntries();
+});
+</script>
+</body>
+</html>

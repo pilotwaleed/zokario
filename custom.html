@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Atelier · Commission a Custom Edition | Zokario</title>
+<meta name="description" content="Commission a custom notebook or template from the Zokario atelier: made to your brief, for a gift or for yourself, at $12.99.">
+<link rel="canonical" href="https://zokario.com/custom.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zokario">
+<meta property="og:title" content="The Atelier · Commission a Custom Edition | Zokario">
+<meta property="og:description" content="Tell the atelier what you dream of. A one-of-one edition, $12.99.">
+<meta property="og:image" content="https://zokario.com/assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=40">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
+      <a href="wonder.html">Wonder</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="custom.html">The Atelier</a>
+  <a href="forums.html">Majlis</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" data-i18n="at.eyebrow">The Atelier</p>
+      <h1 class="display" style="font-size:clamp(2.4rem,5.4vw,4rem)" data-i18n="at.title">Made for one pair<br>of <em>hands.</em></h1>
+      <p class="lead" style="max-width:62ch" data-i18n="at.lead">Commission a notebook or a template built to your exact wish: a gift with their name woven through it, a planner shaped like your week actually looks. Describe it, attach anything that inspires you, and the atelier takes it from there. One flat price: $12.99.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px">
+      <form class="atelier-form reveal" id="atForm">
+        <div class="at-row">
+          <label data-i18n="at.kind">What shall we make?</label>
+          <div class="at-kinds">
+            <button type="button" class="at-kind active" data-kind="notebook">📓 <span data-i18n="at.kNotebook">A notebook</span></button>
+            <button type="button" class="at-kind" data-kind="template">🗂 <span data-i18n="at.kTemplate">A template</span></button>
+          </div>
+        </div>
+        <div class="at-row">
+          <label for="atFor" data-i18n="at.for">Who is it for?</label>
+          <input id="atFor" maxlength="80" data-i18n-ph="at.forPh" placeholder="For my sister Noor, who starts medical school in September">
+        </div>
+        <div class="at-row">
+          <label for="atBrief" data-i18n="at.brief">Describe the dream</label>
+          <textarea id="atBrief" rows="6" maxlength="1500" data-i18n-ph="at.briefPh" placeholder="Colors you love, words that must appear, the mood, the purpose. The more you tell the atelier, the closer we get."></textarea>
+        </div>
+        <div class="at-row">
+          <label for="atFile" data-i18n="at.attach">Attach an inspiration (optional)</label>
+          <input type="file" id="atFile" accept="image/*">
+          <p class="at-hint" data-i18n="at.attachHint">A photo, a sketch, a screenshot of something you liked. One image, under 2 MB.</p>
+        </div>
+        <button type="submit" class="btn btn-gold btn-lg" style="width:100%"><span data-i18n="at.submit">Commission it</span> · $12.99</button>
+        <p class="support-note" data-i18n="at.note">Your brief lands on the Publisher's desk the moment you press the button. First draft within 5 working days, one round of revisions included. Demo mode: no real charge.</p>
+      </form>
+      <div class="atelier-done reveal" id="atDone" hidden>
+        <p style="font-size:2.4rem">🖋</p>
+        <h2 class="h2" data-i18n="at.doneTitle">The atelier has your brief</h2>
+        <p class="lead" data-i18n="at.doneLead">It is already on the Publisher's desk. Expect the first draft within five working days, delivered to your shelf.</p>
+        <a class="btn btn-ghost" href="shop.html" data-i18n="at.doneBtn">Browse while you wait</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let kind = "notebook";
+  document.querySelectorAll(".at-kind").forEach(b => b.addEventListener("click", () => {
+    kind = b.dataset.kind;
+    document.querySelectorAll(".at-kind").forEach(x => x.classList.toggle("active", x === b));
+  }));
+
+  document.getElementById("atForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const me = ZKC.me();
+    if (!me) { location.href = "account.html"; return; }
+    const brief = document.getElementById("atBrief").value.trim();
+    if (brief.length < 20) { zkToast(ZKT("at.tooShort")); return; }
+    let image = null;
+    const f = document.getElementById("atFile").files[0];
+    if (f && f.size < 2 * 1024 * 1024) {
+      image = await new Promise(res => {
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement("canvas");
+          const k = Math.min(1, 640 / img.width);
+          c.width = img.width * k; c.height = img.height * k;
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          res(c.toDataURL("image/jpeg", 0.7));
+        };
+        img.onerror = () => res(null);
+        img.src = URL.createObjectURL(f);
+      });
+    }
+    ZKAtelier.submit({ kind, recipient: document.getElementById("atFor").value.trim(), brief, image, price: ZKAtelier.PRICE });
+    document.getElementById("atForm").hidden = true;
+    document.getElementById("atDone").hidden = false;
+    scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+</script>
+</body>
+</html>

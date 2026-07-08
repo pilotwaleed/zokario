@@ -38,6 +38,7 @@ const ZKStore = {
   addOrder(o)   { const os = ZKStore.orders(); os.unshift(o); ZKStore.write("zk_orders", os); },
   purchasedIds(){ return [...new Set(ZKStore.orders().flatMap(o => o.items))]; },
   owns(id)      { return ZKStore.purchasedIds().includes(id); },
+  grant(id)     { ZKStore.addOrder({ id: "GIFT-" + Math.random().toString(36).slice(2, 8).toUpperCase(), items: [id], total: 0, at: Date.now(), gift: true }); }, /* @API */
 
   user()     { return ZKStore.read("zk_user", null); },
   setUser(u) { ZKStore.write("zk_user", u); },
@@ -77,7 +78,11 @@ const ZK_MOTIFS = {
   quarter:   '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="40" r="26"/><path d="M40 40V14A26 26 0 0 1 66 40H40Z" fill="currentColor" opacity=".28" stroke="none"/><path d="M40 40V14M40 40h26"/></svg>',
   boat:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M40 18v26M40 20l16 22H40zM40 26 28 44h12"/><path d="M18 52h44l-6 10H24z"/><path d="M14 66c4-3 8-3 12 0s8 3 12 0 8-3 12 0 8 3 12 0" opacity=".6"/></svg>',
   fox:       '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 20l6 12 12-4 12 4 6-12M22 20c-2 14 2 30 18 40 16-10 20-26 18-40M28 32l-6-12M52 32l6-12"/><path d="M34 44l6 6 6-6M40 50v6" opacity=".8"/><circle cx="33" cy="38" r="1.4" fill="currentColor" stroke="none"/><circle cx="47" cy="38" r="1.4" fill="currentColor" stroke="none"/></svg>',
-  star:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M40 14c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20Z"/><circle cx="20" cy="20" r="1.6" fill="currentColor" stroke="none"/><circle cx="62" cy="24" r="1.2" fill="currentColor" stroke="none"/><circle cx="58" cy="60" r="1.6" fill="currentColor" stroke="none"/><circle cx="22" cy="58" r="1.2" fill="currentColor" stroke="none"/></svg>'
+  star:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M40 14c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20Z"/><circle cx="20" cy="20" r="1.6" fill="currentColor" stroke="none"/><circle cx="62" cy="24" r="1.2" fill="currentColor" stroke="none"/><circle cx="58" cy="60" r="1.6" fill="currentColor" stroke="none"/><circle cx="22" cy="58" r="1.2" fill="currentColor" stroke="none"/></svg>',
+  frame:     '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="16" y="12" width="48" height="56" rx="2"/><rect x="24" y="20" width="32" height="40" opacity=".7"/><path d="M16 12l8 8M64 12l-8 8M16 68l8-8M64 68l-8-8" opacity=".5"/><circle cx="40" cy="40" r="6" opacity=".8"/></svg>',
+  eye:       '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 40c8-13 18-19 28-19s20 6 28 19c-8 13-18 19-28 19s-20-6-28-19Z"/><circle cx="40" cy="40" r="9"/><circle cx="40" cy="40" r="2.6" fill="currentColor" stroke="none"/><path d="M40 12v6M40 62v6" opacity=".45"/></svg>',
+  quillpen:  '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M58 14c-16 4-28 14-34 30l-4 18 18-4c16-6 26-18 30-34z"/><path d="M24 58 50 30" opacity=".7"/><path d="M18 66h22" opacity=".5"/></svg>',
+  rose:      '<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="40" cy="32" r="6"/><path d="M40 20a12 12 0 0 1 11 17 12 12 0 0 1-22 0 12 12 0 0 1 11-17Z" opacity=".75"/><path d="M40 12a20 20 0 0 1 17 29 20 20 0 0 1-34 0 20 20 0 0 1 17-29Z" opacity=".45"/><path d="M40 52v16M40 60c-4-2-8-2-12-1M40 56c4-2 8-2 12-1" opacity=".7"/></svg>'
 };
 
 /* ---------- Rendering helpers ---------- */

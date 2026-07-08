@@ -1657,6 +1657,315 @@ const ZK = {
       }
     ]
   }
+,
+
+  /* ---------------- THE MONALIZA SALON (vintage art) ---------------- */
+  {
+    "id": "the-gilded-frame",
+    "contents": [
+      "The Window That Was Never a Window",
+      "Gold Is an Instrument",
+      "The Cabinet of Small Wonders",
+      "Crimson Walls: The Salon Learns to Argue",
+      "North Light and the Painter's Room",
+      "The Museum Invents the Visitor",
+      "White Walls, Silent Rooms",
+      "What the Frame Still Knows"
+    ],
+    "type": "book",
+    "lang": "en",
+    "monaliza": true,
+    "title": "The Gilded Frame",
+    "subtitle": "How frames, light and rooms taught Europe to look at pictures",
+    "category": "Art & Beauty",
+    "price": 15,
+    "rating": 4.7,
+    "ratings": 16,
+    "pages": 176,
+    "readTime": "4h read",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#2A1F12",
+      "c2": "#17110A",
+      "acc": "#D4B36A",
+      "motif": "frame"
+    },
+    "hook": "Nobody is born knowing how to look at a painting. Europe learned it slowly, in candlelit chapels and crimson salons, and this book retraces the lesson room by room.",
+    "desc": [
+      "We like to believe that seeing is natural, that a person set before a masterpiece will simply feel its force. History says otherwise. For five centuries Europe built an elaborate apparatus around its pictures: gold frames that gathered candlelight, chapels that made you kneel to see, cabinets that made you lean close, salons that made you argue. The Gilded Frame is the story of that apparatus, and of how the rooms around paintings quietly taught whole generations where to stand, when to hush, and what to feel.",
+      "Moving from Florentine gilders' workshops to the velvet crush of the Paris salon and on to the white silence of the modern gallery, the book reads museums the way one reads literature: for plot, for character, for the telling detail. It is researched with care and written to be read in an armchair, and it leaves you with a permanent souvenir. After this book, you will never again see only the picture. You will see the whole patient machinery of looking that surrounds it."
+    ],
+    "learn": [
+      "Why gold frames were machines for light rather than displays of wealth",
+      "How the salon hang of Paris trained a century of arguing eyes",
+      "What the white walls of the modern gallery quietly ask of you",
+      "How to read any museum room like a text before you read a single label"
+    ],
+    "audience": [
+      "Museum lovers who suspect the walls are doing something to them",
+      "Readers who prefer rooms, light and human habit to theory and isms",
+      "Travelers who plan whole cities around a single collection"
+    ],
+    "faq": [
+      {
+        "q": "Do I need a background in art history?",
+        "a": "None at all. The book assumes curiosity and a working pair of eyes, and it supplies everything else as it goes."
+      },
+      {
+        "q": "Is it academic?",
+        "a": "It is carefully researched but written for the armchair, not the seminar. The notes stay in the back, where they belong."
+      },
+      {
+        "q": "Which places does it visit?",
+        "a": "Florence, Amsterdam, Paris and London among others, with detours into private cabinets, a painter's north lit studio, and one very crowded salon of 1785."
+      }
+    ],
+    "chapters": [
+      {
+        "kicker": "Chapter One",
+        "t": "The Window That Was Never a Window",
+        "paras": [
+          "In 1435, in a treatise slim enough to slip inside a coat, Leon Battista Alberti asked painters to think of a picture as an open window. It was a beautiful lie, and Europe believed it for five hundred years. A window admits whatever the weather sends; a painting admits only what a mind has chosen, weighed and quietly arranged. But the lie was useful, because it told people where to put their eyes. Stand here, said the window. Look through, not at. And so the first lesson in the long education of the European gaze was given by a piece of architecture that never existed.",
+          "The frame made the fiction respectable. In Florence and Siena, gilders laid gold leaf thinner than breath over gesso and bole, then burnished it with a wolf's tooth until the surface could hold the flames of a whole chapel in a single molding. We say ornate now and mean it as a mild insult, but ornament was never the point. Gold was an instrument, the way a bell is an instrument. In rooms lit by fire, a gilded frame gathered the trembling light and gave it back, so that the picture seemed to burn gently at its edges, set apart from the wall, from the evening, from the ordinary world that had made it.",
+          "The rooms were teachers too, and stricter ones. An altarpiece hung high and hemmed in incense could not be glanced at; to see it at all you knelt and lifted your chin, and the posture of your body became the posture of your attention. Nobody explained that the image was sacred. The height explained it, the smoke explained it, the ache in your tilted neck explained it. Centuries before wall labels and audio guides, architecture was already whispering its instructions, and the whisper worked precisely because no one noticed they were obeying.",
+          "This book is a walk through those rooms with the lights of history turned up. It moves from the chapel to the collector's cabinet, from the crimson crush of the Paris salon to the white hush of the modern gallery, asking at every threshold the same quiet question: who taught us to stand like this? By the last page you will not see paintings differently, or not only that. You will begin to notice everything around the painting, the frame, the light, the wall, the room, the whole patient apparatus that has been telling you, all your life, how to look."
+        ]
+      }
+    ],
+    "previewCount": 1
+  },
+
+  {
+    "id": "one-hour-in-a-museum",
+    "contents": [
+      "Choose One Painting and Forgive the Rest",
+      "The First Ten Minutes, or the Fog",
+      "How to Stand: A Small Physics of Attention",
+      "Questions to Ask a Picture",
+      "The Painting Begins to Look Back",
+      "Holding Your Ground in a Crowd",
+      "Leaving: How to Come Away Changed"
+    ],
+    "type": "book",
+    "lang": "en",
+    "monaliza": true,
+    "title": "One Hour in a Museum",
+    "subtitle": "One painting, sixty minutes and the art of coming away changed",
+    "category": "Art & Beauty",
+    "price": 12,
+    "rating": 4.8,
+    "ratings": 27,
+    "pages": 128,
+    "readTime": "3h read",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#1F262B",
+      "c2": "#11161A",
+      "acc": "#A8BFC8",
+      "motif": "eye"
+    },
+    "hook": "The average visitor gives a masterpiece less than half a minute. This small book asks for one hour, and shows you what the painting does with it.",
+    "desc": [
+      "Every lover of museums knows the strange arithmetic of a visit: miles of parquet, hundreds of pictures, sore feet, and a faint hollowness on the way out, as if one had attended a banquet and somehow never eaten. One Hour in a Museum proposes a small act of heresy. Choose a single painting, stay with it for a full hour, and let that hour be the visit. What sounds like penance turns out to be the most generous thing you can do for yourself in a gallery.",
+      "This is a practical manual written like an essay, gentle in tone and precise in method. It walks you through the difficult first minutes when boredom argues loudest, teaches you the questions that open a picture without a label or an audio guide, and shows you how to hold your ground politely in a crowded room. By the final chapter the hour no longer feels long. It feels like the only honest unit of looking, and it travels with you out of the museum and into the street."
+    ],
+    "learn": [
+      "A repeatable method for spending a full hour with one painting",
+      "What to do in the first ten minutes, when boredom argues loudest",
+      "Questions that open a picture without a label or an audio guide",
+      "How to leave a museum rested instead of ruined"
+    ],
+    "audience": [
+      "Anyone who has left a great museum exhausted and faintly guilty",
+      "Frequent visitors who want depth instead of mileage",
+      "Beginners who want one honest hour with art rather than a syllabus"
+    ],
+    "faq": [
+      {
+        "q": "Does the method work with any painting?",
+        "a": "Yes. It cares about your attention, not the artwork's fame. A minor still life will repay the hour as generously as a celebrated face."
+      },
+      {
+        "q": "Do I really need a full hour?",
+        "a": "The book builds up to it gently. Even twenty minutes practiced this way will change how you stand in front of pictures for good."
+      },
+      {
+        "q": "Can I use it in a crowded museum?",
+        "a": "That is exactly where it matters most. There is a whole chapter on keeping your spot with grace, and on letting the crowd become part of the picture."
+      }
+    ],
+    "chapters": [
+      {
+        "kicker": "Chapter One",
+        "t": "Choose One Painting and Forgive the Rest",
+        "paras": [
+          "Researchers armed with stopwatches have followed us through the great museums, and the news is humbling. The average visitor gives a painting somewhere between fifteen and thirty seconds, and a good share of that is spent on the label, hunting for the name, the date, the reassurance that we are looking at something important. We walk miles of parquet, we photograph what we do not stop for, and we exit through the gift shop with sore feet and a strange hollow feeling, as if we had attended a banquet and somehow never eaten. Nobody plans this. It is simply what happens when a building holds five thousand pictures and an afternoon holds three hours.",
+          "The remedy is a small act of heresy: choose one painting and let it be the visit. Not the famous one, or not necessarily. Fame draws crowds, and crowds set a rhythm of their own. Walk instead until something snags you, and it will be a snag, not a thunderclap: an odd green, a face turned the wrong way, a shadow that seems to know something. You will feel a faint reluctance to move on, no stronger than a sleeve caught on a nail. That reluctance is the whole secret. Trust the snag. It is your eye telling you, in the only language it has, that there is business between you and this picture.",
+          "Then comes the harder part, which is forgiving the rest. The other galleries will hum at your back like unanswered letters, and a voice will remind you that you came all this way, that the famous room is just upstairs, that everyone else is seeing more. Let the voice finish, and stay where you are. A museum is not an examination to be passed. It is closer to a sea, and no one reproaches a swimmer for spending the whole morning in one cove. The collection has waited a few hundred years for you; it can wait until your next visit. Whatever you renounce today, you renounce into safekeeping.",
+          "What happens in the hour itself is the subject of this book, and I will not spoil it beyond one promise. Somewhere past the fifteenth minute, when the first boredom has burned off like morning fog, the painting begins to move at your speed instead of demanding that you move at its own. Details arrive one by one, like guests who waited politely to be greeted. The picture stops being an image of something and becomes a place where you have been. And when you finally step back and give your painting a nod, the odd thing is how the rest of the museum looks on your way out: brighter, slower, and suddenly full of coves."
+        ]
+      }
+    ],
+    "previewCount": 1
+  },
+
+  {
+    "id": "letters-to-a-young-painter",
+    "contents": [
+      "On Beginning Badly",
+      "On the Discipline of Seeing",
+      "On Copying Without Shame",
+      "On Doubt, the Loyal Companion",
+      "On Materials and Modest Means",
+      "On Failure and the Wastepaper Basket",
+      "On Beauty, Since You Ask",
+      "On Keeping Going"
+    ],
+    "type": "book",
+    "lang": "en",
+    "monaliza": true,
+    "title": "Letters to a Young Painter",
+    "subtitle": "Letters on craft, doubt and beauty for an artist at the beginning of the road",
+    "category": "Art & Beauty",
+    "price": 14,
+    "rating": 4.9,
+    "ratings": 26,
+    "pages": 152,
+    "readTime": "4h read",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#2B2015",
+      "c2": "#19130C",
+      "acc": "#C8956A",
+      "motif": "quillpen"
+    },
+    "hook": "Eight letters to an artist at the start of the road: on bad drawings, borrowed courage, honest doubt, and the slow arrival of something like a style.",
+    "desc": [
+      "A young artist writes to an older painter asking the oldest question in the studio: do I have talent? The answers arrive as eight letters, warm, unhurried and quietly funny, written by someone who has spent a lifetime at the easel and kept every receipt. They speak of the drawer of terrible early drawings that every master hides, of copying without shame, of doubt as a loyal companion rather than an intruder, and of beauty as something you walk toward daily rather than wait for.",
+      "This is not a manual of technique, though craft runs through every page like a grain through wood. It is a book about the hand and the heart at the same desk, written for painters, and just as much for writers, musicians and anyone standing at the beginning of a long apprenticeship. Read one letter a week or all eight in an evening; either way, they end where all good letters end, with the feeling of having been personally addressed."
+    ],
+    "learn": [
+      "How to survive the years when your taste outruns your skill",
+      "What to copy from the masters, and what to leave in their century",
+      "How doubt can be put to work instead of put to sleep",
+      "A working definition of beauty you can actually paint toward"
+    ],
+    "audience": [
+      "Beginning painters, and those still circling the courage to begin",
+      "Artists in any medium who are tired of advice that shouts",
+      "Readers who love the studio letters of older centuries and want new ones"
+    ],
+    "faq": [
+      {
+        "q": "Am I too old to be the young painter of the title?",
+        "a": "No. Young here means early on the road, and the road does not check birthdays. Several of the letters are kindest to late beginners."
+      },
+      {
+        "q": "Are the letters technical?",
+        "a": "They touch on craft constantly but hold no diagrams. Expect advice on seeing, working and enduring rather than on brush numbers."
+      },
+      {
+        "q": "Who writes the letters?",
+        "a": "An older painter, composed for this book rather than borrowed from history, whose counsel is distilled from many real studios and many real lives. What matters is the voice, and the voice keeps its promises."
+      }
+    ],
+    "chapters": [
+      {
+        "kicker": "The First Letter",
+        "t": "On Beginning Badly",
+        "paras": [
+          "You ask, in a letter I have now read three times, whether you have talent, and you ask it the way a patient asks for a diagnosis, bracing for the worst. I will disappoint you at once: I cannot see talent, and neither can anyone else who is honest. At the beginning it does not exist in a visible form. What I can see in your pages is appetite, which is rarer than talent and far more useful, because appetite gets up in the morning. Talent is a rumor other people start about you years later, once the work is done. Do not wait for the rumor.",
+          "So begin, and begin badly, because there is no other door. Every painter you admire kept a drawer they showed no one, full of horses like dogs and hands like gloves left out in the rain. The drawer is not the shameful part of the story; it is the story. Those thousand poor drawings are the tuition, paid in the only currency the craft accepts. When your hand betrays you tonight, and it will, do not read it as a verdict. Read it as a receipt. You have paid another day toward an eye and a hand that will one day agree with each other.",
+          "As for what to draw, do not go looking for beauty yet; beauty is shy around beginners and it can smell ambition. Draw what is in front of you and beneath your notice. The kitchen chair. Your own left hand, that patient model who works without pay. The coat on the hook, hanging with more sorrow than most martyrdoms manage in oil. If you can be faithful to the chair, faithful to how its shadow pools on the floor and nowhere else in the world, you will have learned the whole trade in miniature. Everything I know about painting saints I learned from furniture.",
+          "I will not promise you success, since I have no idea what the word will mean by the time you deserve it. I promise you something better and stranger: the work will change you faster than you change the work. In a year you will see shadows where you now see nothing, and colors inside colors, like rooms opening off a corridor, and you will walk through the ordinary world as if it had been repainted overnight by someone who loved it. That is the wage, and it is paid daily. Write to me again when the paper wins, and it will win often. I will be here."
+        ]
+      }
+    ],
+    "previewCount": 1
+  },
+
+  {
+    "id": "fi-madh-al-jamal",
+    "contents": [
+      "الجمال يبدأ بالنظر",
+      "العين تتربى كما تتربى اليد",
+      "فن الوقوف أمام اللوحة",
+      "المتحف بيت البطء",
+      "دروس الأساتذة القدامى",
+      "الضوء رسام أول",
+      "جمال الأشياء العادية",
+      "خاتمة في مدح البطء"
+    ],
+    "type": "book",
+    "lang": "ar",
+    "monaliza": true,
+    "title": "في مدح الجمال",
+    "subtitle": "تأملات في الفن والنظر وتربية العين",
+    "category": "Art & Beauty",
+    "price": 13,
+    "rating": 4.9,
+    "ratings": 28,
+    "pages": 136,
+    "readTime": "3h read",
+    "badges": [
+      "new"
+    ],
+    "cover": {
+      "c1": "#291620",
+      "c2": "#170C12",
+      "acc": "#D9A3B0",
+      "motif": "rose"
+    },
+    "hook": "الجمال لا يطرق الأبواب، بل يمر بهدوء أمام الذين تعلموا النظر. هذا الكتاب دعوة إلى أن تكون منهم.",
+    "desc": [
+      "هذا كتاب في النظر قبل أن يكون كتابا في الفن. يمضي في فصوله من قاعات المتاحف إلى ضوء الصباح على جدار البيت، وفي يده سؤال واحد: كيف تتعلم العين أن ترى الجمال بدل أن تمر به؟ لا يعد قارئه بمعلومات تحفظ ولا أسماء تستظهر، بل بعادة جديدة في الالتفات، تجعل اللوحة العتيقة والشارع المألوف سواء في القدرة على المفاجأة.",
+      "كتب بلغة عربية تحب البطء وتصغي إلى الإيقاع، واستأنس بدروس الأساتذة القدامى من غير أن يثقل على قارئه بمصطلح أو حاشية. هو رفيق قصير للمتحف والمقهى والليل، يقرأ على مهل ويعاد إليه كما يعاد إلى الأماكن التي أحسنت ضيافتنا."
+    ],
+    "learn": [
+      "كيف تقف أمام لوحة واحدة فلا تغادرها كما جئت",
+      "لماذا تعلم القدامى الرؤية قبل أن يتعلموا الرسم",
+      "كيف يتحول المتحف من واجب ثقافي إلى موعد شخصي",
+      "كيف تقتنص عينك الجمال في يوم عادي تماما"
+    ],
+    "audience": [
+      "لمحبي الفن الذين يبحثون عن لغة عربية تليق به",
+      "لزوار المتاحف الذين يخرجون دائما بإحساس أن شيئا فاتهم",
+      "لكل من يريد أن يبطئ قليلا في عالم لا يتوقف"
+    ],
+    "faq": [
+      {
+        "q": "هل أحتاج إلى معرفة مسبقة بتاريخ الفن؟",
+        "a": "لا. يكفي أن تكون ممن يستوقفهم الجمال أحيانا ولا يعرفون لماذا. الكتاب يتكفل بالباقي."
+      },
+      {
+        "q": "هل هو كتاب أكاديمي؟",
+        "a": "هو تأمل أدبي يكتب بلغة قريبة، ويمشي مع قارئه كما يمشي صديق عارف، من غير حواش ولا مصطلحات ثقيلة."
+      },
+      {
+        "q": "هل يقتصر على الفن الغربي؟",
+        "a": "ينطلق من قاعات المتاحف الكبرى ويعود دائما إلى الضوء القريب: إلى الخط والزخرفة والظل في البيوت القديمة وجمال اليومي العربي."
+      }
+    ],
+    "chapters": [
+      {
+        "kicker": "الفصل الأول",
+        "t": "الجمال يبدأ بالنظر",
+        "paras": [
+          "يظن كثيرون أن الجمال صفة في الأشياء وحدها، كاللون والوزن والطول، وأنه ينتظرنا في اللوحات والحدائق وواجهات المدن كما ينتظر الكنز من يحفر. والحق أن الجمال نصفه في الشيء ونصفه الآخر في العين التي تنظر إليه. الوردة نفسها تمر بها يد مستعجلة فتكون زهرة من جملة الزهر، وتقف أمامها عين متأنية فتصير حادثة صغيرة من حوادث الضوء. لم يتغير في الوردة شيء، وإنما تغير مقدار ما أعطيناها من أنفسنا. ولهذا كان النظر، في حقيقته، عطاء قبل أن يكون أخذا.",
+          "والعين تتربى كما تتربى اليد على الخط والأذن على المقام. لم يولد أحد عارفا بالنظر، وإن ولدنا جميعا مبصرين. كان الرسامون القدامى يقضون سنوات في الورشة قبل أن يمسوا اللون، ينسخون ويحدقون ويخطئون، لا ليتعلموا الرسم أولا، بل ليتعلموا الرؤية. فالرؤية صنعة خفية تسبق كل صنعة ظاهرة. ومن دربت عينه على تمييز ظل عن ظل، ودرجة من درجة، صار العالم في ناظريه أغنى مما كان، من غير أن يزداد العالم شيئا.",
+          "وفي المتاحف درس لا يعلمه غيرها: أن تقف. نحن نمشي في حياتنا كلها، نمر بالوجوه والجدران والغيوم مرور من يطارده الوقت، حتى إذا دخلنا قاعة هادئة ووقفنا أمام لوحة، حدث الشيء النادر: توقفنا. والوقوف أمام الجمال ليس خمولا، بل هو أشد ضروب الانتباه يقظة. دقيقة صادقة أمام لوحة عتيقة قد تفتح فيك نافذة ظلت موصدة أعواما. فالصورة لا تتكلم لمن يمر، وإنما تبوح لمن يقيم.",
+          "هذا الكتاب مديح طويل لتلك الوقفة. لن تجد فيه تواريخ تحفظ ولا أسماء تستظهر، بل دعوة واحدة تتكرر في كل فصل بصيغة جديدة: أبطئ. انظر مرة ثانية. أعط الشيء الجميل ما يستحقه من وقتك، يعطك ما لا تتوقعه من نفسك. ومن تعلم النظر مرة واحدة لم يعد يرى العالم كما كان يراه، لأن العين التي عرفت الجمال لا تعود أبدا إلى عماها الأول."
+        ]
+      }
+    ],
+    "previewCount": 1
+  }
 
   ]
 };

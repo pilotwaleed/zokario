@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-book.jpg" fetchpriority="high">
-<link rel="stylesheet" href="css/main.css?v=39">
+<link rel="stylesheet" href="css/main.css?v=40">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Zokario","url":"https://zokario.com/","logo":"https://zokario.com/assets/logo-mark.jpg","description":"Digital-first publishing house: premium digital books, templates and notebooks.","sameAs":[]}
 </script>
@@ -39,8 +39,8 @@
       <a href="templates.html">Templates</a>
       <a href="notebooks.html">Notebooks</a>
       <a href="wonder.html">Wonder</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
     </nav>
     <div class="header-actions">
       <a class="icon-btn" href="account.html" aria-label="My shelf">
@@ -64,6 +64,10 @@
   <a href="templates.html">Templates</a>
   <a href="notebooks.html">Notebooks</a>
   <a href="wonder.html">Wonder</a>
+  <a href="monaliza.html">Monaliza</a>
+  <a href="forums.html">Majlis</a>
+  <a href="support.html">Support the house</a>
+  <a href="custom.html">The Atelier</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -172,7 +176,7 @@
     <div class="container">
       <div class="center reveal">
         <p class="eyebrow center-eyebrow" data-i18n="h.houseEyebrow">The house</p>
-        <h2 class="h2" data-i18n="h.houseTitle">Four rooms. Choose a <em>door.</em></h2>
+        <h2 class="h2" data-i18n="h.houseTitle">Five rooms. Choose a <em>door.</em></h2>
         <p class="lead" style="margin-inline:auto;margin-top:1rem" data-i18n="h.houseLead">Books to read, systems to run, pages to keep, tales to whisper. Each room has its own light.</p>
       </div>
       <div class="rooms-grid" style="margin-top:3.5rem">
@@ -212,7 +216,31 @@
             <span class="door-enter">Enter the room →</span>
           </span>
         </a>
+        <a class="room-door reveal reveal-d3" href="monaliza.html">
+          <img decoding="async" src="assets/monaliza-poster.jpg" alt="" loading="eager">
+          <span class="door-copy">
+            <span class="door-num" data-i18n="h.room5n">Room V</span>
+            <h3 data-i18n="h.room5">The Monaliza Salon</h3>
+            <p id="doorMz">Art volumes</p>
+            <span class="door-enter">Enter the room →</span>
+          </span>
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ THE FAMILY MAJLIS ============ -->
+  <section class="majlis-banner">
+    <div class="mb-media" aria-hidden="true">
+      <video muted loop playsinline autoplay poster="assets/majlis-poster.jpg" id="majlisVideo">
+        <source src="assets/majlis-fire.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container mb-inner reveal">
+      <p class="eyebrow" data-i18n="hm.eyebrow">Beyond the shelves</p>
+      <h2 class="display" style="font-size:clamp(2rem,4.6vw,3.4rem)" data-i18n="hm.title">The Family <em>Majlis</em></h2>
+      <p class="lead" data-i18n="hm.lead">A fireplace, three wings, and chairs that are never all empty. Members talk books in English, Arabic and every language in between.</p>
+      <a class="btn btn-gold btn-lg" href="forums.html" data-i18n="hm.cta">Pull up a chair</a>
     </div>
   </section>
 
@@ -335,6 +363,8 @@
         <a href="templates.html">Templates</a>
         <a href="notebooks.html">Notebooks</a>
         <a href="wonder.html">Wonder</a>
+        <a href="monaliza.html">Monaliza</a>
+        <a href="custom.html">The Atelier</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -346,6 +376,8 @@
       <div class="footer-col">
         <h4>Readers</h4>
         <a href="account.html">My shelf</a>
+        <a href="forums.html">The Majlis</a>
+        <a href="support.html">Support the house</a>
         <a href="cart.html">Cart</a>
         <a href="refunds.html">Refund policy</a>
         <a href="privacy.html">Privacy</a>
@@ -364,10 +396,12 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=39"></script>
-<script src="js/i18n.js?v=39"></script>
-<script src="js/app.js?v=39"></script>
-<script src="js/auth.js?v=39"></script>
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   /* featured grid */
@@ -407,6 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("doorTpl").textContent = ZKT("h.doorTpl", { n: nType("template") });
   document.getElementById("doorNb").textContent = ZKT("h.doorNb", { n: nType("notebook") });
   document.getElementById("doorWn").textContent = ZKT("h.doorWonder", { n: ZK.products.filter(p => p.wonder).length });
+  document.getElementById("doorMz").textContent = ZKT("h.doorMz", { n: ZK.products.filter(p => p.monaliza).length });
 
   /* dust + hero video fallback */
   zkDust("dust");

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Family Majlis · Member Forums | Zokario</title>
+<meta name="description" content="The Zokario family majlis: reading rooms, a members club and an open floor, in English, Arabic and French. Pull up a chair by the fireplace.">
+<link rel="canonical" href="https://zokario.com/forums.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zokario">
+<meta property="og:title" content="The Family Majlis · Member Forums | Zokario">
+<meta property="og:description" content="Reading rooms, a members club and an open floor. Pull up a chair by the fireplace.">
+<meta property="og:image" content="https://zokario.com/assets/majlis-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=40">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
+      <a href="wonder.html">Wonder</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="books.html">Books</a>
+  <a href="templates.html">Templates</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="wonder.html">Wonder</a>
+  <a href="monaliza.html">Monaliza</a>
+  <a href="forums.html">Majlis</a>
+  <a href="support.html">Support the house</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+
+  <!-- ============ MAJLIS HERO ============ -->
+  <section class="room-hero majlis-hero">
+    <div class="room-media" aria-hidden="true">
+      <video muted loop playsinline autoplay poster="assets/majlis-poster.jpg" id="roomVideo">
+        <source src="assets/majlis-fire.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container">
+      <span class="room-index reveal in" data-i18n="fo.index">The Family Majlis</span>
+      <h1 class="display reveal in" data-i18n="fo.title">Every library needs<br>a <em>living room.</em></h1>
+      <p class="lead reveal in reveal-d1" data-i18n="fo.lead">Three wings, one fireplace. Talk about what you read, meet the family, or just warm your hands. Members write; everyone is welcome to listen.</p>
+    </div>
+  </section>
+
+  <!-- ============ THE FIREPLACE (live chat) ============ -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="fireplace reveal" id="fireplace">
+        <div class="fireplace-head">
+          <h2>🔥 <span data-i18n="fc.title">The Fireplace</span> <small data-i18n="fc.sub">live, and lightly watched</small></h2>
+        </div>
+        <div class="fireplace-rules" id="chatRules">
+          <p class="fr-kicker" data-i18n="fc.rulesTitle">Before you speak by the fire</p>
+          <ol id="chatRulesList"></ol>
+          <button class="btn btn-gold" id="chatAgree" data-i18n="fc.agree">Understood, let me in</button>
+        </div>
+        <div class="fireplace-body" id="chatBody" hidden>
+          <div class="chat-scroll" id="chatScroll"></div>
+          <form class="chat-form" id="chatForm">
+            <input id="chatInput" maxlength="280" autocomplete="off" data-i18n-ph="fc.ph" placeholder="Say something warm">
+            <button class="btn btn-gold" type="submit" data-i18n="fc.send">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WINGS ============ -->
+  <section class="section" id="wings">
+    <div class="container">
+      <div class="wing-tabs reveal" role="tablist">
+        <button class="wing-tab active" data-wing="en">🕮 <span>The English Wing</span></button>
+        <button class="wing-tab" data-wing="ar">☪ <span>الجناح العربي</span></button>
+        <button class="wing-tab" data-wing="intl">🕊 <span>The International Salon</span></button>
+      </div>
+
+      <div class="forum-layout">
+        <aside class="forum-side reveal">
+          <nav id="sectionNav" aria-label="Sections"></nav>
+          <div class="side-card" id="contestCard">
+            <p class="eyebrow">🏆 <span data-i18n="ct2.eyebrow">The Quarterly Quill</span></p>
+            <p id="contestTheme" class="contest-theme"></p>
+            <p class="contest-meta" data-i18n="ct2.meta">Three to four pages on the theme. Entry $5. The Publisher reads every entry and crowns one winner.</p>
+            <button class="btn btn-ghost" id="contestEnter" data-i18n="ct2.enter">Enter the contest</button>
+          </div>
+          <div class="side-card gilded-card">
+            <p class="eyebrow">✦ <span data-i18n="gl.eyebrow">The Gilded Lounge</span></p>
+            <p data-i18n="gl.pitch">A private room for Circle members: early covers, monthly picks, the Publisher drops by.</p>
+            <a class="btn btn-ghost" href="account.html#gilded" data-i18n="gl.join">About the Circle</a>
+          </div>
+        </aside>
+
+        <div class="forum-main">
+          <div class="forum-toolbar reveal">
+            <h2 id="sectionTitle" class="h3"></h2>
+            <button class="btn btn-gold" id="newTopicBtn" data-i18n="fo.new">Light a new topic</button>
+          </div>
+
+          <!-- composer -->
+          <div class="composer" id="composer" hidden>
+            <div class="composer-row">
+              <button type="button" class="icon-pick" id="iconPick" aria-label="Pick a symbol">💬</button>
+              <input id="topicTitle" maxlength="120" data-i18n-ph="fo.titlePh" placeholder="A title worth clicking (emojis welcome)">
+            </div>
+            <div class="emoji-tray" id="emojiTray" hidden></div>
+            <textarea id="topicBody" rows="5" maxlength="4000" data-i18n-ph="fo.bodyPh" placeholder="Write it the way you would tell it in a majlis"></textarea>
+            <div class="composer-foot">
+              <span class="composer-note" data-i18n="fo.modNote">The house keeper reads every post. Kind words only.</span>
+              <button class="btn btn-gold" id="postTopic" data-i18n="fo.post">Post it</button>
+            </div>
+          </div>
+
+          <div id="topicList" class="topic-list"></div>
+          <p class="forum-empty" id="forumEmpty" hidden data-i18n="fo.empty">No topics here yet. The first chair is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const me = ZKC.me();
+  const lang = typeof ZKLang !== "undefined" ? ZKLang.code() : "en";
+  let wing = localStorage.getItem("zk_wing") || (lang === "ar" ? "ar" : "en");
+  let section = "reading";
+
+  const SEC_NAMES = {
+    reading:    { en: "📖 The Reading Room", ar: "📖 غرفة القراءة", intl: "📖 The Reading Room" },
+    club:       { en: "🫖 The Members Club", ar: "🫖 ديوانية الاعضاء", intl: "🫖 The Members Club" },
+    open:       { en: "🎙 The Open Floor", ar: "🎙 المنصة الحرة", intl: "🎙 The Open Floor" },
+    bookaholic: { en: "📚 The Bookaholic Club", ar: "📚 نادي مدمني الكتب", intl: "📚 The Bookaholic Club" },
+    contest:    { en: "🏆 The Quarterly Quill", ar: "🏆 ريشة الفصل", intl: "🏆 The Quarterly Quill" },
+    gilded:     { en: "✦ The Gilded Lounge", ar: "✦ صالة الدائرة الذهبية", intl: "✦ The Gilded Lounge" }
+  };
+
+  /* ---------- fireplace chat ---------- */
+  const regs = (typeof ZK_REGS !== "undefined") ? ZK_REGS[wing === "ar" ? "ar" : wing === "intl" ? "intl" : "en"] : null;
+  const rulesList = document.getElementById("chatRulesList");
+  function renderChatRules() {
+    const r = (typeof ZK_REGS !== "undefined") ? ZK_REGS[wing === "ar" ? "ar" : wing === "intl" ? "intl" : "en"] : null;
+    rulesList.innerHTML = (r?.chatRules || ["Be kind.", "No profanity, the keeper is listening.", "No spam or links without permission.", "What is said by the fire stays warm."]).map(x => `<li>${zkEsc(x)}</li>`).join("");
+  }
+  renderChatRules();
+  const agreed = () => sessionStorage.getItem("zk_chat_agreed") === "1";
+  function showChat() {
+    document.getElementById("chatRules").hidden = true;
+    document.getElementById("chatBody").hidden = false;
+    renderChat();
+  }
+  document.getElementById("chatAgree").addEventListener("click", () => { sessionStorage.setItem("zk_chat_agreed", "1"); showChat(); });
+  if (agreed()) showChat();
+
+  function renderChat() {
+    const box = document.getElementById("chatScroll");
+    const msgs = ZKChat.list(wing);
+    box.innerHTML = msgs.length ? msgs.map(m => `
+      <div class="chat-msg" data-mid="${m.id}">
+        ${ZKLevels.badge({ email: m.author, name: ZKForum.nameOf(m.author) || m.author.split("@")[0] })}
+        <span class="chat-text">${zkEsc(m.text)}</span>
+        ${ZKRole.canModerate() ? `<button class="chat-del" data-del="${m.id}" aria-label="Remove">×</button>` : ""}
+      </div>`).join("") : `<p class="chat-empty">${ZKT("fc.empty")}</p>`;
+    box.scrollTop = box.scrollHeight;
+  }
+  document.getElementById("chatForm").addEventListener("submit", e => {
+    e.preventDefault();
+    if (!me) { location.href = "account.html"; return; }
+    const inp = document.getElementById("chatInput");
+    const t = inp.value.trim(); if (!t) return;
+    const r = ZKChat.send(wing, t);
+    if (r.ok) { inp.value = ""; renderChat(); }
+    else if (r.reason === "modded") { inp.value = ""; zkToast(ZKT("md.chatWarn")); renderChat(); }
+    else if (r.reason === "muted") zkToast(ZKT("md.muted"));
+    else if (r.reason === "signin") location.href = "account.html";
+  });
+  document.getElementById("chatScroll").addEventListener("click", e => {
+    const d = e.target.closest("[data-del]");
+    if (d) { ZKChat.removeMsg(wing, d.dataset.del); renderChat(); }
+  });
+
+  /* ---------- sections nav ---------- */
+  function renderSections() {
+    const nav = document.getElementById("sectionNav");
+    const extra = ZKForum.extraSections();
+    const all = [...ZK_SECTIONS.filter(s => s.key !== "contest"), ...extra.map(x => ({ key: x.key, icon: x.icon, custom: x }))];
+    nav.innerHTML = all.map(s => {
+      const label = s.custom ? (s.custom.names[wing] || s.custom.names.en) : (SEC_NAMES[s.key]?.[wing === "ar" ? "ar" : wing] || SEC_NAMES[s.key]?.en || s.key);
+      const count = ZKForum.topics(wing, s.key).length;
+      const lock = s.gilded && !(me && (ZKSub.isActive(me.email) || ZKRole.canModerate()));
+      return `<button class="sec-link ${s.key === section ? "active" : ""} ${lock ? "locked" : ""}" data-sec="${s.key}">
+        ${label} <em>${count}</em>${lock ? " 🔒" : ""}</button>`;
+    }).join("");
+  }
+  document.getElementById("sectionNav").addEventListener("click", e => {
+    const b = e.target.closest("[data-sec]"); if (!b) return;
+    section = b.dataset.sec; renderSections(); renderTopics();
+  });
+
+  /* ---------- topics ---------- */
+  function fmtWhen(ts) {
+    const d = Math.round((Date.now() - ts) / 864e5);
+    return d <= 0 ? ZKT("fo.today") : d === 1 ? ZKT("fo.yesterday") : ZKT("fo.daysAgo", { n: d });
+  }
+  function renderTopics() {
+    const secObj = ZK_SECTIONS.find(s => s.key === section);
+    document.getElementById("sectionTitle").textContent =
+      (SEC_NAMES[section]?.[wing === "ar" ? "ar" : wing] || SEC_NAMES[section]?.en || section).replace(/^\S+\s/, "");
+    const locked = secObj?.gilded && !(me && (ZKSub.isActive(me.email) || ZKRole.canModerate()));
+    const list = document.getElementById("topicList");
+    if (locked) {
+      list.innerHTML = `<div class="gilded-locked">
+        <p>✦</p><h3>${ZKT("gl.lockedTitle")}</h3><p>${ZKT("gl.lockedLead")}</p>
+        <a class="btn btn-gold" href="account.html#gilded">${ZKT("gl.cta")}</a></div>`;
+      document.getElementById("forumEmpty").hidden = true;
+      return;
+    }
+    const topics = ZKForum.topics(wing, section);
+    document.getElementById("forumEmpty").hidden = topics.length > 0;
+    list.innerHTML = topics.map(t => {
+      const name = ZKForum.nameOf(t.author) || t.authorName || t.author.split("@")[0];
+      return `<a class="topic-row ${t.pinned ? "pinned" : ""}" href="topic.html?id=${t.id}">
+        <span class="topic-ico">${t.pinned ? "📌" : t.icon}</span>
+        <span class="topic-mid">
+          <b>${zkEsc(t.title)} ${t.closed ? "🔒" : ""}</b>
+          <small>${ZKLevels.badge({ email: t.author, name })} · ${fmtWhen(t.at)}</small>
+        </span>
+        <span class="topic-stats">
+          <i title="${ZKT("fo.views")}">👁 ${t.views}</i>
+          <i title="${ZKT("fo.replies")}">💬 ${t.replies.length}</i>
+          <i title="${ZKT("fo.likes")}">♥ ${t.likes.length}</i>
+        </span>
+      </a>`;
+    }).join("");
+  }
+
+  /* ---------- wing tabs ---------- */
+  document.querySelectorAll(".wing-tab").forEach(b => b.addEventListener("click", () => {
+    wing = b.dataset.wing; localStorage.setItem("zk_wing", wing);
+    document.querySelectorAll(".wing-tab").forEach(x => x.classList.toggle("active", x === b));
+    renderChatRules(); renderSections(); renderTopics(); renderChat();
+  }));
+
+  /* ---------- composer ---------- */
+  const EMOJIS = ["💬","📖","☕","🌙","✨","🖋","🎧","🌿","🔥","🗺","🎨","🏛","🕯","🐚","📚","🪶"];
+  const tray = document.getElementById("emojiTray");
+  tray.innerHTML = EMOJIS.map(e => `<button type="button" data-emo="${e}">${e}</button>`).join("");
+  document.getElementById("iconPick").addEventListener("click", () => tray.hidden = !tray.hidden);
+  tray.addEventListener("click", e => {
+    const b = e.target.closest("[data-emo]"); if (!b) return;
+    document.getElementById("iconPick").textContent = b.dataset.emo; tray.hidden = true;
+  });
+  document.getElementById("newTopicBtn").addEventListener("click", () => {
+    if (!me) { location.href = "account.html"; return; }
+    const c = document.getElementById("composer");
+    c.hidden = !c.hidden;
+    if (!c.hidden) document.getElementById("topicTitle").focus();
+  });
+  document.getElementById("postTopic").addEventListener("click", () => {
+    const title = document.getElementById("topicTitle").value.trim();
+    const body = document.getElementById("topicBody").value.trim();
+    if (title.length < 4 || body.length < 10) { zkToast(ZKT("fo.short")); return; }
+    const r = ZKForum.post(wing, section, title, body, document.getElementById("iconPick").textContent);
+    if (r.ok) { location.href = "topic.html?id=" + r.id; }
+    else if (r.reason === "modded") zkToast(ZKT("md.warn", { action: r.action }));
+    else if (r.reason === "gilded") zkToast(ZKT("gl.lockedTitle"));
+    else if (r.reason === "suspended" || r.reason === "banned") zkToast(ZKT("md.blocked"));
+  });
+
+  /* ---------- contest card ---------- */
+  const contest = ZKContest.current();
+  document.getElementById("contestTheme").textContent = "“" + (lang === "ar" ? (contest.themeAr || contest.theme) : contest.theme) + "”";
+  document.getElementById("contestEnter").addEventListener("click", () => {
+    if (!me) { location.href = "account.html"; return; }
+    const title = prompt(ZKT("ct2.prompt"));
+    if (!title) return;
+    const r = ZKContest.enter(title);
+    zkToast(r === "already" ? ZKT("ct2.already") : ZKT("ct2.entered"));
+  });
+
+  /* ---------- video nudge ---------- */
+  const v = document.getElementById("roomVideo");
+  v.addEventListener("error", () => v.remove(), true);
+  const nudge = () => { if (v.paused) v.play().catch(() => {}); };
+  v.addEventListener("loadeddata", nudge);
+  ["pointerdown", "scroll", "touchstart", "keydown"].forEach(ev => addEventListener(ev, nudge, { once: true, passive: true }));
+
+  renderSections(); renderTopics();
+});
+</script>
+</body>
+</html>

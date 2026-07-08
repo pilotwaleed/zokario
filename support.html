@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patron of the House · Support Zokario</title>
+<meta name="description" content="Keep the lamps of the house burning: support Zokario with any amount, and take a patron's candle for your name.">
+<link rel="canonical" href="https://zokario.com/support.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zokario">
+<meta property="og:title" content="Patron of the House · Support Zokario">
+<meta property="og:description" content="Keep the lamps burning. Any amount, always remembered.">
+<meta property="og:image" content="https://zokario.com/assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=40">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
+      <a href="wonder.html">Wonder</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="forums.html">Majlis</a>
+  <a href="support.html">Support the house</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" data-i18n="sp.eyebrow">Patron of the house</p>
+      <h1 class="display" style="font-size:clamp(2.4rem,5.4vw,4rem)" data-i18n="sp.title">Keep the lamps<br><em>burning.</em></h1>
+      <p class="lead" style="max-width:60ch" data-i18n="sp.lead">Zokario is a small independent house. If the rooms here have given you something, you can give a little back: any amount, once, whenever you like. Patrons carry a candle by their name, forever.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <div class="support-card reveal">
+        <div class="support-amounts" id="amounts">
+          <button data-amt="3">$3 <small data-i18n="sp.a1">a coffee for the editor</small></button>
+          <button data-amt="7" class="active">$7 <small data-i18n="sp.a2">an hour of lamplight</small></button>
+          <button data-amt="15">$15 <small data-i18n="sp.a3">a shelf of oak, someday</small></button>
+          <button data-amt="custom">✎ <small data-i18n="sp.a4">your own amount</small></button>
+        </div>
+        <div class="support-custom" id="customWrap" hidden>
+          <input type="number" id="customAmt" min="1" max="999" placeholder="25">
+        </div>
+        <button class="btn btn-gold btn-lg" id="giveBtn" style="width:100%;margin-top:1.6rem"><span data-i18n="sp.give">Light a candle</span> · $<span id="giveAmt">7</span></button>
+        <p class="support-note" data-i18n="sp.note">Contributions are voluntary and non-refundable; they buy nothing but our gratitude and a candle symbol by your name. Demo mode: no real charge.</p>
+      </div>
+
+      <div class="patron-wall reveal" id="patronWall" hidden>
+        <p class="eyebrow center-eyebrow" data-i18n="sp.wall">The patrons' mantel</p>
+        <div id="patronList"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let amt = 7;
+  const btns = document.querySelectorAll("#amounts button");
+  btns.forEach(b => b.addEventListener("click", () => {
+    btns.forEach(x => x.classList.toggle("active", x === b));
+    const isCustom = b.dataset.amt === "custom";
+    document.getElementById("customWrap").hidden = !isCustom;
+    if (!isCustom) { amt = +b.dataset.amt; document.getElementById("giveAmt").textContent = amt; }
+    else document.getElementById("customAmt").focus();
+  }));
+  document.getElementById("customAmt").addEventListener("input", e => {
+    amt = Math.max(1, Math.min(999, +e.target.value || 1));
+    document.getElementById("giveAmt").textContent = amt;
+  });
+  document.getElementById("giveBtn").addEventListener("click", () => {
+    ZKSupport.give(amt);
+    zkToast(ZKT("sp.thanks"));
+    renderWall();
+    const btn = document.getElementById("giveBtn");
+    btn.innerHTML = "🕯 " + ZKT("sp.lit");
+    btn.disabled = true;
+    setTimeout(() => { btn.disabled = false; btn.innerHTML = `<span>${ZKT("sp.give")}</span> · $<span id="giveAmt">${amt}</span>`; }, 4000);
+  });
+  function renderWall() {
+    const wall = ZKSupport.wall();
+    document.getElementById("patronWall").hidden = !wall.length;
+    document.getElementById("patronList").innerHTML = wall.map(w =>
+      `<span class="patron">🕯 ${ZKLevels.badge({ email: w.email, name: w.name })}</span>`).join("");
+  }
+  renderWall();
+});
+</script>
+</body>
+</html>

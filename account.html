@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=39">
+<link rel="stylesheet" href="css/main.css?v=40">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -29,8 +29,8 @@
       <a href="templates.html">Templates</a>
       <a href="notebooks.html">Notebooks</a>
       <a href="wonder.html">Wonder</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
     </nav>
     <div class="header-actions">
       <a class="icon-btn" href="account.html" aria-label="My shelf">
@@ -54,6 +54,10 @@
   <a href="templates.html">Templates</a>
   <a href="notebooks.html">Notebooks</a>
   <a href="wonder.html">Wonder</a>
+  <a href="monaliza.html">Monaliza</a>
+  <a href="forums.html">Majlis</a>
+  <a href="support.html">Support the house</a>
+  <a href="custom.html">The Atelier</a>
   <a href="about.html">About</a>
   <a href="how-it-works.html">How It Works</a>
   <a href="faq.html">FAQ</a>
@@ -92,6 +96,45 @@
             <label for="authPass" data-i18n="au.pass">Password</label>
             <input class="input" type="password" id="authPass" required minlength="8" autocomplete="current-password" placeholder="••••••••">
             <p class="field-hint" id="passHint" data-i18n="au.passHint" hidden>At least 8 characters. A line from a book you love works beautifully.</p>
+          </div>
+          <div class="field" id="fPass2" hidden>
+            <label for="authPass2" data-i18n="au.pass2">Password, once more</label>
+            <input class="input" type="password" id="authPass2" minlength="8" autocomplete="new-password" placeholder="••••••••">
+            <p class="field-hint" data-i18n="au.pass2Hint">Twice, so the shelf never locks you out by accident.</p>
+          </div>
+          <div class="signup-extra" id="signupExtra" hidden>
+            <div class="field-2col">
+              <div class="field">
+                <label for="authCountry" data-i18n="au.country">Where do you read from?</label>
+                <select class="input" id="authCountry"></select>
+              </div>
+              <div class="field">
+                <label for="authLang" data-i18n="au.lang">Your reading language</label>
+                <select class="input" id="authLang">
+                  <option value="en">English</option>
+                  <option value="ar">العربية</option>
+                  <option value="fr">Français</option>
+                  <option value="multi" data-i18n="au.langMulti">All of them, greedily</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label data-i18n="au.genres">What does your heart shelve?</label>
+              <div class="genre-chips" id="genreChips"></div>
+            </div>
+            <div class="field">
+              <label for="authAbout" data-i18n="au.about">A line about you</label>
+              <input class="input" id="authAbout" maxlength="140" data-i18n-ph="au.aboutPh" placeholder="Night reader, tea drinker, one chapter past bedtime">
+            </div>
+            <div class="field human-check" id="humanCheck">
+              <label id="humanQ"></label>
+              <input class="input" id="humanA" autocomplete="off" inputmode="text">
+              <p class="field-hint" id="humanHint" data-i18n="au.humanHint">Just proving you are flesh, blood and bookmarks.</p>
+            </div>
+            <label class="terms-check">
+              <input type="checkbox" id="acceptTerms">
+              <span data-i18n="au.terms">I have read and accept the <a href="terms.html" target="_blank">Terms</a>, the community regulations, and the release and indemnity they contain.</span>
+            </label>
           </div>
           <p class="auth-err" id="authErr" hidden></p>
           <button class="btn btn-gold btn-block" type="submit" id="authSubmit" data-i18n="au.login">Sign in</button>
@@ -181,6 +224,8 @@
             <div class="field">
               <span class="field-label" data-i18n="au.avatar">Your mark</span>
               <div class="avatar-pick" id="avatarPick"></div>
+              <label class="btn-text photo-up" for="pfPhoto" data-i18n="au.photo">or upload a photograph</label>
+              <input type="file" id="pfPhoto" accept="image/*" hidden>
             </div>
             <div class="field-row">
               <div class="field">
@@ -214,6 +259,44 @@
       <div id="continueWrap" hidden style="margin-bottom:3rem">
         <div class="section-label"><h3 data-i18n="a.continue">Continue reading</h3></div>
         <div id="continueCard"></div>
+      </div>
+
+      <!-- ============ READER STANDING + WHEEL + CIRCLE ============ -->
+      <div class="member-strip" id="memberStrip"></div>
+
+      <div class="wheel-wrap" id="wheel">
+        <div class="section-label"><h3 data-i18n="sw.title">The Wheel of Wonders</h3></div>
+        <div class="wheel-stage">
+          <div class="wheel-disc" id="wheelDisc" aria-hidden="true"></div>
+          <div class="wheel-pin" aria-hidden="true">▼</div>
+        </div>
+        <div class="wheel-side">
+          <p class="lead" data-i18n="sw.lead">One spin a day, on the house. Circle members spin twice. Whatever it lands on is yours before the page even settles.</p>
+          <button class="btn btn-gold btn-lg" id="spinBtn" data-i18n="sw.spin">Spin the wheel</button>
+          <p class="support-note" id="spinNote"></p>
+        </div>
+      </div>
+
+      <div class="gilded-panel" id="gilded">
+        <div class="gp-head">
+          <p class="eyebrow">✦ <span data-i18n="gc.eyebrow">The Gilded Circle</span></p>
+          <h3 class="h3" data-i18n="gc.title">Membership, the way old libraries meant it</h3>
+        </div>
+        <div class="gp-grid">
+          <ul class="gp-perks">
+            <li data-i18n="gc.p1">15 to 60 percent off six rotating gilded picks every month, two per month yours to claim</li>
+            <li data-i18n="gc.p2">One free edition of the house's choosing every month</li>
+            <li data-i18n="gc.p3">The Gilded Lounge in the majlis, where the Publisher drinks his coffee</li>
+            <li data-i18n="gc.p4">A gilded shimmer on your name everywhere you write</li>
+            <li data-i18n="gc.p5">Two spins a day on the Wheel of Wonders</li>
+            <li data-i18n="gc.p6">Rare symbols by your name, and $2 off every Atelier commission</li>
+          </ul>
+          <div class="gp-buy" id="gpBuy">
+            <button class="btn btn-gold" data-plan="monthly">$4.99 <small data-i18n="gc.monthly">a month</small></button>
+            <button class="btn btn-ghost" data-plan="yearly">$39 <small data-i18n="gc.yearly">a year, two months free</small></button>
+            <p class="support-note" data-i18n="gc.note">Cancel anytime; the gold stays until your period ends. Demo mode: no real charge.</p>
+          </div>
+        </div>
       </div>
 
       <div id="wishWrap" hidden style="margin-bottom:3rem">
@@ -251,10 +334,12 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=39"></script>
-<script src="js/i18n.js?v=39"></script>
-<script src="js/app.js?v=39"></script>
-<script src="js/auth.js?v=39"></script>
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const $ = id => document.getElementById(id);
@@ -264,8 +349,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ERR = {
     email: "au.errEmail", weakpass: "au.errWeak", exists: "au.errExists",
-    nouser: "au.errNoUser", badpass: "au.errBadPass", badcode: "au.errBadCode", expired: "au.errExpired"
-  };
+    nouser: "au.errNoUser", badpass: "au.errBadPass", badcode: "au.errBadCode", expired: "au.errExpired",
+    passmatch: "au.errMatch", human: "au.errHuman", terms: "au.errTerms"};
   const showErr = (el, e) => { el.textContent = ZKT(ERR[e.message] || "au.errGeneric"); el.hidden = false; };
 
   function show(view) {
@@ -291,14 +376,82 @@ document.addEventListener("DOMContentLoaded", () => {
     $("authErr").hidden = true;
   }));
 
+  /* ---------- playful signup extras ---------- */
+  const COUNTRIES = ["Bahrain 🇧🇭","Saudi Arabia 🇸🇦","Kuwait 🇰🇼","UAE 🇦🇪","Qatar 🇶🇦","Oman 🇴🇲","Egypt 🇪🇬","Jordan 🇯🇴","Morocco 🇲🇦","United Kingdom 🇬🇧","United States 🇺🇸","France 🇫🇷","Germany 🇩🇪","Japan 🇯🇵","Brazil 🇧🇷","Somewhere with a good armchair 🪑"];
+  $("authCountry").innerHTML = COUNTRIES.map(c => `<option>${c}</option>`).join("");
+  const GENRES = [["fiction","📖"],["business","💼"],["selfimp","🌱"],["art","🎨"],["travel","🗺"],["bedtime","🌙"],["poetry","🪶"],["food","🍳"]];
+  $("genreChips").innerHTML = GENRES.map(([g, e]) => `<button type="button" class="gchip" data-g="${g}">${e} <span data-i18n="au.g_${g}"></span></button>`).join("");
+  $("genreChips").addEventListener("click", e => { const b = e.target.closest(".gchip"); if (b) b.classList.toggle("on"); });
+
+  /* human riddles: silly on purpose */
+  const RIDDLES = [
+    { q: () => { const a = 2 + Math.floor(Math.random() * 6), b = 2 + Math.floor(Math.random() * 6); return { text: ZKT("au.rMath", { a, b }), ok: v => +v === a + b }; } },
+    { q: () => ({ text: ZKT("au.rBook"), ok: v => /book|كتاب|livre/i.test(v) }) },
+    { q: () => ({ text: ZKT("au.rCoffee"), ok: v => String(v).trim().length > 0 }) }
+  ];
+  let riddle = null;
+  function newRiddle() { riddle = RIDDLES[Math.floor(Math.random() * RIDDLES.length)].q(); $("humanQ").textContent = riddle.text; $("humanA").value = ""; }
+
+  const origTabHandler = () => {
+    $("fPass2").hidden = mode !== "signup";
+    $("signupExtra").hidden = mode !== "signup";
+    if (mode === "signup") newRiddle();
+  };
+  document.querySelectorAll(".auth-tab").forEach(t => t.addEventListener("click", origTabHandler));
+
+  /* email verification (demo: in-page envelope, like the reset flow) @API real email */
+  let pendingVerify = null;
+  function askVerify(email) {
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+    pendingVerify = { email, code };
+    const err = $("authErr");
+    err.hidden = false; err.classList.add("verify-mode");
+    err.innerHTML = `<span class="ep-envelope">✉</span> ${ZKT("au.verifySent")} <b>${code}</b><br>
+      <input class="input" id="verifyCode" maxlength="6" inputmode="numeric" style="margin:.7rem 0" placeholder="000000">
+      <button class="btn btn-gold btn-sm" id="verifyBtn">${ZKT("au.verifyBtn")}</button>`;
+    $("verifyBtn").addEventListener("click", async () => {
+      if ($("verifyCode").value.trim() === pendingVerify.code) {
+        await finishSignup();
+      } else { zkToast(ZKT("au.verifyBad")); }
+    });
+  }
+  let stash = null;
+  async function finishSignup() {
+    await ZKAuth.signup(stash.email, stash.pass, stash.name);
+    /* enrich the account with the ceremony answers. @API */
+    const users = ZKStore.read("zk_accounts", {});
+    const u = users[stash.email.toLowerCase().trim()];
+    if (u) {
+      u.country = stash.country; u.readLang = stash.lang; u.about = stash.about;
+      u.genres = stash.genres; u.verified = true;
+      u.termsAcceptedAt = new Date().toISOString(); /* recorded acceptance @API database */
+      ZKStore.write("zk_accounts", users);
+    }
+    ZKLevels.add(10, stash.email.toLowerCase().trim());
+    ZKReports.log("join", `New member: ${stash.name || stash.email} (${stash.country || "somewhere"})`);
+    sessionStorage.setItem("zk_welcome", "1");
+    location.reload();
+  }
+
   $("authForm").addEventListener("submit", async e => {
     e.preventDefault();
-    $("authErr").hidden = true;
+    $("authErr").hidden = true; $("authErr").classList.remove("verify-mode");
     const email = $("authEmail").value, pass = $("authPass").value;
     try {
       if (mode === "signup") {
-        await ZKAuth.signup(email, pass, $("authName").value);
-        sessionStorage.setItem("zk_welcome", "1");
+        if (pass !== $("authPass2").value) throw new Error("passmatch");
+        if (!riddle || !riddle.ok($("humanA").value)) { newRiddle(); throw new Error("human"); }
+        if (!$("acceptTerms").checked) throw new Error("terms");
+        const users = ZKStore.read("zk_accounts", {});
+        if (users[email.toLowerCase().trim()]) throw new Error("exists");
+        stash = {
+          email, pass, name: $("authName").value,
+          country: $("authCountry").value, lang: $("authLang").value,
+          about: $("authAbout").value.trim(),
+          genres: [...document.querySelectorAll(".gchip.on")].map(b => b.dataset.g)
+        };
+        askVerify(email);
+        return;
       } else { await ZKAuth.login(email, pass); zkToast(ZKT("au.loginOk")); }
       location.reload(); /* refresh header avatar + all state */
     } catch (err) { showErr($("authErr"), err); }
@@ -350,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="currentColor"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/></svg>
         <span>${ZKT("au.cardTitle")}</span>
       </div>
-      <div class="rc-avatar">${me.avatar || "📖"}</div>
+      <div class="rc-avatar">${me.photo ? `<img src="${me.photo}" alt="">` : (me.avatar || "📖")}</div>
       <div class="rc-name">${zkEsc(me.nick || me.name || "")}</div>
       <div class="rc-meta">
         <span>${ZKT("au.cardMember")} ${zkEsc(me.joined || new Date().toISOString().slice(0, 10))}</span>
@@ -374,6 +527,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const b = e.target.closest(".av"); if (!b) return;
       document.querySelectorAll(".av").forEach(x => x.classList.toggle("on", x === b));
     };
+
+    $("pfPhoto").addEventListener("change", async () => {
+      const f = $("pfPhoto").files[0]; if (!f || f.size > 3 * 1024 * 1024) return;
+      const data = await new Promise(res => {
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement("canvas");
+          const k = Math.min(1, 128 / Math.min(img.width, img.height));
+          c.width = img.width * k; c.height = img.height * k;
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          res(c.toDataURL("image/jpeg", 0.75));
+        };
+        img.onerror = () => res(null);
+        img.src = URL.createObjectURL(f);
+      });
+      if (!data) return;
+      ZKAuth.update({ photo: data }); /* @API upload */
+      zkToast(ZKT("au.photoSet"));
+      renderLib(ZKAuth.current(), true);
+    });
     $("genreChips").onchange = e => {
       const l = e.target.closest(".gchip"); if (l) l.classList.toggle("on", e.target.checked);
     };
@@ -400,6 +573,77 @@ document.addEventListener("DOMContentLoaded", () => {
     $("helloLine").textContent = display ? ZKT("a.welcome", { n: display }) : ZKT("a.welcome", { n: "" }).replace(/[,،]\s*$/, "");
     const orders = ZKStore.orders();
     $("accountMeta").textContent = `${user.email} · ${orders.length} ${orders.length === 1 ? ZKT("au.order") : ZKT("au.orders")}`;
+
+    /* ---- member standing strip ---- */
+    if (me) {
+      const email = me.email;
+      const tier = ZKLevels.tier(email);
+      const pts = ZKLevels.points(email);
+      const next = ZK_TIERS.find(t => t.min > pts);
+      const role = ZKRole.of(me);
+      const isSub = ZKSub.isActive(email);
+      $("memberStrip").innerHTML = `
+        <div class="ms-badge">${ZKLevels.badge(me)}</div>
+        <div class="ms-meta">
+          <b>${pts}</b> ${ZKT("lv.points")} · ${role === "owner" ? "♛ The Publisher" : tier.name}
+          ${next ? `<div class="ms-bar"><i style="width:${Math.min(100, Math.round(pts / next.min * 100))}%"></i></div>
+          <small>${ZKT("lv.next", { n: next.min - pts })}</small>` : `<small>${ZKT("lv.top")}</small>`}
+        </div>
+        <div class="ms-symbols">
+          <small>${ZKT("lv.symbol")}</small>
+          <div class="sym-row">${ZK_SYMBOLS.free.map(x => `<button class="sym ${ZKSym.of(email) === x ? "on" : ""}" data-sym="${x}">${x}</button>`).join("")}</div>
+          <div class="sym-row gilded-syms">${ZK_SYMBOLS.gilded.map(x => `<button class="sym ${ZKSym.of(email) === x ? "on" : ""} ${!isSub && role === "member" ? "locked" : ""}" data-sym="${x}">${x}</button>`).join("")}
+          <small>✦ ${ZKT("lv.gildedOnly")}</small></div>
+        </div>`;
+      $("memberStrip").addEventListener("click", e => {
+        const b = e.target.closest("[data-sym]"); if (!b) return;
+        const r = ZKSym.set(b.dataset.sym);
+        if (r === "locked") { zkToast(ZKT("lv.locked")); return; }
+        document.querySelectorAll(".sym").forEach(x => x.classList.toggle("on", x === b));
+        zkToast(ZKT("lv.symSet"));
+      });
+
+      /* ---- wheel ---- */
+      const PRIZE_LABELS = ["sw.pBook","sw.pC25","sw.pC10","sw.pGild","sw.pShim","sw.pSym","sw.pPts","sw.pQuote"];
+      $("wheelDisc").innerHTML = PRIZE_LABELS.map((k, i) =>
+        `<span class="wseg" style="--i:${i}">${["📕","🏷","🏷","✦","✨","🗝","➕","🪶"][i]}</span>`).join("");
+      const updateSpin = () => {
+        const left = ZKSpin.spinsToday() - ZKSpin.spun();
+        $("spinBtn").disabled = left <= 0;
+        $("spinNote").textContent = left > 0 ? ZKT("sw.left", { n: left }) : ZKT("sw.tomorrow");
+      };
+      updateSpin();
+      $("spinBtn").addEventListener("click", () => {
+        const prize = ZKSpin.spin();
+        if (!prize) { updateSpin(); return; }
+        const idx = ZK_PRIZES.indexOf(prize);
+        const disc = $("wheelDisc");
+        disc.style.transition = "transform 3.2s cubic-bezier(.15,.9,.25,1)";
+        disc.style.transform = `rotate(${1440 + (360 - idx * 45)}deg)`;
+        setTimeout(() => {
+          zkToast("🎉 " + ZKT(PRIZE_LABELS[idx]) + (prize.granted ? " · " + prize.granted : ""));
+          updateSpin(); renderLib(me, true);
+        }, 3400);
+      });
+
+      /* ---- gilded state ---- */
+      if (isSub) {
+        const st = ZKSub.state(email);
+        $("gpBuy").innerHTML = `<p class="gilded-active">✦ ${ZKT("gc.active", { d: new Date(st.until).toLocaleDateString() })}</p>
+          <a class="btn btn-ghost" href="forums.html">${ZKT("gc.lounge")}</a>`;
+      } else {
+        $("gpBuy").addEventListener("click", e => {
+          const b = e.target.closest("[data-plan]"); if (!b) return;
+          ZKSub.start(b.dataset.plan);
+          zkToast("✦ " + ZKT("gc.welcome"));
+          setTimeout(() => location.reload(), 900);
+        });
+      }
+    } else {
+      $("memberStrip").hidden = true;
+      $("wheel").hidden = true;
+      $("gilded").hidden = true;
+    }
 
     const wished = ZKWish.list().map(ZK.byId).filter(Boolean);
     $("wishWrap").hidden = !wished.length;

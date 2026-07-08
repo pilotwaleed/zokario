@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Topic · The Family Majlis | Zokario</title>
+<meta name="description" content="A conversation in the Zokario family majlis.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#141009">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=40">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Zokario, home">
+      <svg class="brand-z" viewBox="6 7 36 34" aria-hidden="true" fill="#C8A96A"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/><path d="M39.6 16.2 21.4 32h-2.8L36.1 16.2z" opacity=".72"/><path d="M40.6 19.9 26.6 32h-2.6l16.6-14.3z" opacity=".45"/></svg><span class="brand-name">okario</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="shop.html">The Library</a>
+      <a href="books.html">Books</a>
+      <a href="templates.html">Templates</a>
+      <a href="notebooks.html">Notebooks</a>
+      <a href="wonder.html">Wonder</a>
+      <a href="monaliza.html">Monaliza</a>
+      <a href="forums.html">Majlis</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="account.html" aria-label="My shelf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="Mobile">
+  <button class="close-nav">Close</button>
+  <a href="index.html">Home</a>
+  <a href="shop.html">The Library</a>
+  <a href="forums.html">Majlis</a>
+  <a href="account.html">My Shelf</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<main>
+  <section class="section" style="padding-top:calc(var(--header-h) + 3rem)">
+    <div class="container" style="max-width:860px">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="forums.html" data-i18n="tp.back">The Family Majlis</a><span id="crumbSection"></span></nav>
+
+      <article class="topic-view" id="topicView"></article>
+
+      <div class="replies" id="replies"></div>
+
+      <div class="composer" id="replyBox" style="margin-top:2.2rem">
+        <textarea id="replyText" rows="4" maxlength="2000" data-i18n-ph="tp.ph" placeholder="Add your voice to the majlis"></textarea>
+        <div class="composer-foot">
+          <span class="composer-note" data-i18n="fo.modNote">The house keeper reads every post. Kind words only.</span>
+          <button class="btn btn-gold" id="sendReply" data-i18n="tp.send">Reply</button>
+        </div>
+      </div>
+      <p class="forum-empty" id="closedNote" hidden data-i18n="tp.closed">This topic has been closed by the house. It stays readable, like all good stories.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js?v=40"></script>
+<script src="js/i18n.js?v=40"></script>
+<script src="js/app.js?v=40"></script>
+<script src="js/auth.js?v=40"></script>
+<script src="js/seeds.js?v=40"></script>
+<script src="js/community.js?v=40"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const id = new URLSearchParams(location.search).get("id");
+  const me = ZKC.me();
+  let t = ZKForum.byId(id);
+  if (!t) { location.href = "forums.html"; return; }
+  if (!sessionStorage.getItem("zk_seen_" + id)) { sessionStorage.setItem("zk_seen_" + id, "1"); ZKForum.view(id); t = ZKForum.byId(id); }
+
+  document.title = t.title + " · Majlis | Zokario";
+  document.getElementById("crumbSection").textContent = t.section;
+
+  const canMod = ZKRole.canModerate();
+  const fmt = ts => new Date(ts).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+
+  function renderTopic() {
+    t = ZKForum.byId(id);
+    const name = ZKForum.nameOf(t.author) || t.author.split("@")[0];
+    const liked = me && t.likes.includes(me.email);
+    document.getElementById("topicView").innerHTML = `
+      <div class="topic-head">
+        <span class="topic-ico big">${t.pinned ? "📌" : t.icon}</span>
+        <div>
+          <h1 class="h2">${zkEsc(t.title)} ${t.closed ? "🔒" : ""}</h1>
+          <p class="topic-byline">${ZKLevels.badge({ email: t.author, name })} · ${fmt(t.at)} ·
+            👁 ${t.views} · 💬 ${t.replies.length}</p>
+        </div>
+      </div>
+      <div class="topic-body">${t.body.split("\n").map(x => `<p>${zkEsc(x)}</p>`).join("")}</div>
+      <div class="topic-actions">
+        <button class="like-btn ${liked ? "on" : ""}" id="likeTopic">♥ <span>${t.likes.length}</span></button>
+        ${canMod ? `
+          <span class="mod-tools">
+            <button class="btn-text" id="modPin">${t.pinned ? ZKT("tp.unpin") : ZKT("tp.pin")}</button>
+            <button class="btn-text" id="modClose">${t.closed ? ZKT("tp.reopen") : ZKT("tp.close")}</button>
+            <button class="btn-text" id="modDel">${ZKT("tp.remove")}</button>
+          </span>` : ""}
+      </div>`;
+    document.getElementById("likeTopic").addEventListener("click", () => {
+      if (!me) { location.href = "account.html"; return; }
+      ZKForum.like(id); renderTopic();
+    });
+    if (canMod) {
+      document.getElementById("modPin").addEventListener("click", () => { ZKForum.pin(id, !t.pinned); renderTopic(); });
+      document.getElementById("modClose").addEventListener("click", () => { ZKForum.close(id, !t.closed); renderTopic(); renderReplyBox(); });
+      document.getElementById("modDel").addEventListener("click", () => { if (confirm("Remove this topic?")) { ZKForum.remove(id); location.href = "forums.html"; } });
+    }
+  }
+
+  function renderReplies() {
+    t = ZKForum.byId(id);
+    document.getElementById("replies").innerHTML = t.replies.map(r => {
+      const name = ZKForum.nameOf(r.author) || r.author.split("@")[0];
+      const liked = me && r.likes.includes(me.email);
+      return `<div class="reply-card">
+        <div class="reply-head">${ZKLevels.badge({ email: r.author, name })} <small>${fmt(r.at)}</small></div>
+        <p>${zkEsc(r.text)}</p>
+        <div class="reply-foot">
+          <button class="like-btn sm ${liked ? "on" : ""}" data-like="${r.id}">♥ <span>${r.likes.length}</span></button>
+          ${canMod ? `<button class="btn-text" data-rdel="${r.id}">${ZKT("tp.remove")}</button>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+  }
+  document.getElementById("replies").addEventListener("click", e => {
+    const lk = e.target.closest("[data-like]");
+    if (lk) { if (!me) { location.href = "account.html"; return; } ZKForum.like(id, lk.dataset.like); renderReplies(); return; }
+    const rd = e.target.closest("[data-rdel]");
+    if (rd) { ZKForum.removeReply(id, rd.dataset.rdel); renderReplies(); }
+  });
+
+  function renderReplyBox() {
+    t = ZKForum.byId(id);
+    document.getElementById("replyBox").hidden = t.closed;
+    document.getElementById("closedNote").hidden = !t.closed;
+  }
+  document.getElementById("sendReply").addEventListener("click", () => {
+    if (!me) { location.href = "account.html"; return; }
+    const txt = document.getElementById("replyText").value.trim();
+    if (txt.length < 2) return;
+    const r = ZKForum.reply(id, txt);
+    if (r.ok) { document.getElementById("replyText").value = ""; renderReplies(); renderTopic(); }
+    else if (r.reason === "modded") zkToast(ZKT("md.warn", { action: r.action }));
+    else if (r.reason === "suspended" || r.reason === "banned") zkToast(ZKT("md.blocked"));
+  });
+
+  renderTopic(); renderReplies(); renderReplyBox();
+});
+</script>
+</body>
+</html>
