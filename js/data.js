@@ -1194,7 +1194,7 @@ const ZK = {
       "acc": "#D6BE8C",
       "motif": "bookmark"
     },
-    "hook": "Elle prête à chacun le livre dont il ne savait avoir besoin.",
+    "hook": "Elle prête à chacun le livre dont il ne savait pas avoir besoin.",
     "desc": [
       "Dans une ville sans nom, une bibliothèque de quartier n'ouvre ses portes qu'entre minuit et l'aube. On y croise une infirmière qui rentre de garde, un veuf qui parle aux rayonnages, une adolescente qui a peur d'éteindre la lumière. Derrière le comptoir, madame Solane ne demande jamais de carte : elle observe, elle écoute, puis elle prête à chacun le livre dont il ne savait pas avoir besoin. Élias, qui ne dort plus depuis deux cent onze nuits, va recevoir le sien.",
       "Écrit dans une langue simple et lumineuse, La Bibliothèque de minuit est un roman court sur l'insomnie, le deuil et la douceur têtue des lieux qui restent ouverts quand tout ferme. Un réalisme à peine déplacé, où le merveilleux tient en une étiquette manuscrite et une lampe qu'on n'éteint pas. Cent soixante-seize pages à lire une nuit où le sommeil ne vient pas, ou à garder pour celles qui viendront."
