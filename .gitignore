@@ -25,3 +25,8 @@ package-lock.json
 
 # Stripe test keys (keep placeholders only)
 # .env with real keys should never be committed
+
+# Internal reports & dev tooling — repo is PUBLIC, keep these local only
+# (also excluded from the FTP deploy in .github/workflows/deploy.yml)
+docs/
+tools/

@@ -13,10 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=41">
+<link rel="stylesheet" href="css/main.css?v=44">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <header class="site-header">
   <div class="header-inner">
@@ -66,7 +67,7 @@
   <a href="cart.html">Cart</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
   <section class="order-hero container">
     <div class="order-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>
@@ -74,12 +75,13 @@
     <p class="eyebrow center-eyebrow" data-i18n="y.eyebrow">Order confirmed</p>
     <h1 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)" data-i18n="y.title">Your digital books<br>are <em>ready.</em></h1>
     <p class="order-num" id="orderNum" style="margin-top:1.2rem">Order …</p>
-    <p class="lead" style="margin:1.2rem auto 0" id="emailNote">A receipt and download links are on their way to your inbox.</p>
+    <p class="lead" style="margin:1.2rem auto 0" id="emailNote">Your receipt is available below, and your titles are already unlocked.</p>
 
     <div class="order-card" id="orderCard"></div>
 
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem">
       <a class="btn btn-gold btn-lg" href="account.html" data-i18n="y.goDl">Go to my downloads</a>
+      <button class="btn btn-ghost btn-lg" type="button" id="receiptBtn" hidden data-i18n="rc.title">Receipt</button>
       <a class="btn btn-ghost btn-lg" href="shop.html" data-i18n="y.browse">Browse more books</a>
     </div>
   </section>
@@ -93,17 +95,19 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="refunds.html">Refunds</a>
+        <a href="accessibility.html" data-i18n="f.a11y">Accessibility</a>
+        <a href="#" data-ck-open data-i18n="f.cookies">Cookie settings</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="js/data.js?v=41"></script>
-<script src="js/i18n.js?v=41"></script>
-<script src="js/app.js?v=41"></script>
-<script src="js/auth.js?v=41"></script>
-<script src="js/seeds.js?v=41"></script>
-<script src="js/community.js?v=41"></script>
+<script src="js/data.js?v=44" defer></script>
+<script src="js/i18n.js?v=44" defer></script>
+<script src="js/app.js?v=44" defer></script>
+<script src="js/auth.js?v=44" defer></script>
+<script src="js/seeds.js?v=44" defer></script>
+<script src="js/community.js?v=44" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const orderNo = new URLSearchParams(location.search).get("order");
@@ -112,31 +116,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const card = document.getElementById("orderCard");
 
   if (!order) {
-    document.getElementById("orderNum").textContent = "No recent order found";
-    document.getElementById("emailNote").textContent = "If you completed a purchase, open My Downloads. Your library remembers.";
-    card.innerHTML = `<p style="color:var(--muted);text-align:center">Nothing here yet. Your next book is one click away.</p>`;
+    document.getElementById("orderNum").textContent = ZKT("y.none");
+    document.getElementById("emailNote").textContent = ZKT("y.noneSub");
+    card.innerHTML = `<p style="color:var(--muted);text-align:center">${zkEsc(ZKT("y.noneCard"))}</p>`;
     return;
   }
 
-  document.getElementById("orderNum").textContent = "Order " + order.no;
+  const rBtn = document.getElementById("receiptBtn");
+  rBtn.hidden = false;
+  rBtn.addEventListener("click", () => zkReceipt(order.no || order.id));
+
+  document.getElementById("orderNum").textContent = ZKT("y.order", { n: order.no || order.id || "" });
+  /* honest copy: nothing is emailed until the mail service connects (@API) */
   document.getElementById("emailNote").textContent =
-    `A receipt and access links ${order.email ? "are on their way to " + order.email : "are on their way to your inbox"}. Your titles are already unlocked below.`;
+    order.email ? ZKT("y.sub", { e: order.email }) : ZKT("y.subNoEmail");
 
   card.innerHTML =
     order.items.map(id => {
       const p = ZK.byId(id);
-      if (!p) return "";
+      const snap = (order.lines || []).find(l => l.id === id); /* purchase-time snapshot */
+      if (!p && !snap) return "";
+      const title = p ? p.title : snap.title;
+      const cat = (p || snap).category, type = (p || snap).type;
       return `<div class="co-mini-item" style="align-items:center">
-        <span class="co-mini-thumb">${zkCoverFace(p)}</span>
-        <span style="min-width:0"><h4>${zkEsc(p.title)}</h4><span>${p.category} · digital ${p.type}</span></span>
-        <span style="margin-left:auto;display:flex;gap:1.2rem;flex-wrap:wrap">
+        <span class="co-mini-thumb">${p ? zkCoverFace(p) : ""}</span>
+        <span style="min-width:0"><h4>${zkEsc(title)}</h4><span>${zkEsc(cat ? zkCat(cat) : "")}${cat && type ? " · " : ""}${zkEsc(type ? zkType(type) : "")}</span></span>
+        ${p ? `<span style="margin-left:auto;display:flex;gap:1.2rem;flex-wrap:wrap">
           <a class="btn-text" style="font-size:.7rem" href="reader.html?id=${p.id}">${ZKT("y.read")}</a>
           <button class="btn-text" style="font-size:.7rem" onclick="zkDownload('${p.id}')">${ZKT("y.download")}</button>
-        </span>
+        </span>` : ""}
       </div>`;
     }).join("") +
     `<div class="sum-row total" style="margin-top:1rem"><span>${ZKT("y.paid")}</span><b>${ZK.fmt(order.total)}</b></div>
-     <p style="font-size:.8rem;color:var(--muted-2);margin-top:1rem">Formats: PDF · ePub · online reader. Your purchases live permanently in <a href="account.html">My Shelf</a>.</p>`;
+     <p style="font-size:.8rem;color:var(--muted-2);margin-top:1rem">${zkEsc(ZKT("y.note"))} <a href="account.html">${zkEsc(ZKT("y.myshelf"))}</a>.</p>`;
 });
 </script>
 </body>

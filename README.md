@@ -1,91 +1,157 @@
-# ZOKARIO — Premium Digital Bookstore
+# ZOKARIO — zokario.com
 
-A cinematic, luxury, static-first storefront for digital books, templates and notebooks.
-No build step, no framework, no database required to run — perfect for Hostinger shared hosting.
+Zokario is a trilingual (English / Arabic / French) luxury digital bookstore:
+27 public pages, 31 digital editions (books, Notion templates, notebooks, bedtime
+tales, vintage art books), an online reader, member accounts, a community majlis
+(forums, chat, memberships), and a private Publisher's Desk for the owner.
+
+**This repository IS the live website.** What is on the `main` branch is what
+visitors at https://zokario.com see, minus a small exclusion list (see Deploying).
+
+**Current state: preview commerce.** The whole purchase loop works end to end
+(cart, checkout, thank-you, library, reader, download), but no money moves, no
+emails are sent, and orders live only in each visitor's browser. Every point
+where a real backend plugs in is marked in the code with an `/* @API */` comment.
+See `docs/INTEGRATION-CHECKLIST.md` for exactly what turns the preview into a
+real store, and `docs/LAUNCH-CHECKLIST.md` for the launch runbook.
 
 ---
 
+## Tech approach
+
+- **Static-first, no build step.** Plain HTML + one CSS file + six JS files.
+  Nothing to compile; what you edit is what ships. Runs on Hostinger shared
+  hosting (or any static host).
+- **Demo commerce on localStorage.** Orders, accounts, reviews, forum posts and
+  the newsletter list are stored in the visitor's own browser so the full UX is
+  testable without a server.
+- **`/* @API */` markers.** Every place where a real backend must replace the
+  demo rail is marked in the code (about 60 markers across `js/` and the page
+  scripts): payments, email, contact delivery, file delivery, sessions, roles,
+  newsletter, chat, consent log. Grep `@API` to see them all.
+- **Stripe-ready scaffold.** `stripe-backend/` holds Hostinger-compatible PHP
+  endpoints (create-checkout-session + webhook) with `getenv()` placeholders —
+  no secrets in the repo. See `stripe-backend/README.md`.
+- **Trilingual by dictionary.** `js/i18n.js` holds identical EN/AR/FR key sets
+  (~910 keys per language) plus the engine (RTL flip, `?lang=` handling).
+
 ## Run locally
 
-Any static server works. From this folder:
+From this folder:
 
 ```bash
-# Python (preinstalled on macOS)
-python3 -m http.server 8000
-# then open http://localhost:8000
+node .claude/serve.mjs
+# → http://localhost:8123
 ```
 
-or `npx serve .` if you prefer Node.
+That is a tiny zero-dependency static server (with the site's 404 wired up).
+Any other static server also works, e.g. `python3 -m http.server 8000`.
+Don't open `index.html` via `file://` — query-string pages like
+`product.html?id=...` need a server to behave like production.
 
-> Opening `index.html` directly with `file://` also mostly works, but use a server
-> so fonts, videos and query-string pages (`product.html?id=...`) behave exactly like production.
+## Run the smoke tests
 
-## Pages
+```bash
+node tools/smoke-test.mjs
+```
 
-| Page | File |
+Zero dependencies, exits `0` on green / `1` on any failure (CI-friendly).
+Eight sections: JS syntax, inline-script syntax + JSON-LD validity, i18n
+parity across EN/AR/FR, i18n key usage, internal links + orphan pages,
+cache-bust version consistency, sitemap/robots sanity, and "honesty greps"
+(banned claims like "256-bit" or "ePub" can never sneak back in). The harness
+was mutation-tested (10 planted faults, all caught) — details in
+`docs/QA-REPORT.md`. Current status: **8/8 sections, 2550/2550 checks pass.**
+
+**Run this before every push.** Pushing to `main` deploys to production.
+
+## Repo map
+
+| Path | What it is |
 |---|---|
-| Home (cinematic hero, featured, categories, quality, testimonials, newsletter) | `index.html` |
-| Shop / Library (search, filters, sort, tabs, price range, mobile drawer) | `shop.html` |
-| Product (dynamic per title: `product.html?id=deep-focus`) + preview reader modal | `product.html` |
-| Cart (coupon, totals, digital-delivery note) | `cart.html` |
-| Checkout (Stripe-ready, demo mode) | `checkout.html` |
-| Thank You / order confirmation | `thank-you.html` |
-| My Shelf (account, library, downloads, continue reading, order history) | `account.html` |
-| Online reader (themes, font size, bookmarks, progress, chapters) | `reader.html?id=...` |
-| About / How It Works / FAQ / Contact | `about.html`, `how-it-works.html`, `faq.html`, `contact.html` |
-| Privacy / Terms / Refund Policy | `privacy.html`, `terms.html`, `refunds.html` |
-| Custom 404 | `404.html` (wired via `.htaccess`) |
+| `*.html` (27 files) | Every page of the site. `index`, `shop`, category rooms (`books`, `templates`, `notebooks`, `wonder`, `monaliza`), `product`, `cart`/`checkout`/`thank-you`, `account` (My Shelf), `reader`, community (`forums`, `topic`, `support`, `custom`), info/legal (`about`, `how-it-works`, `faq`, `contact`, `privacy`, `terms`, `refunds`, `accessibility`), `admin` (Publisher's Desk, deliberately unlinked), `404` |
+| `js/data.js` | **The catalog.** All 31 products, preview chapters, coupons. Single source of truth — edit here to add/change products (see `docs/OWNERS-MANUAL.md`) |
+| `js/i18n.js` | EN/AR/FR dictionaries + language engine (RTL, `?lang=`) |
+| `js/app.js` | Store layer (`ZKStore`), cards, cart/wishlist, search, cookies/consent, toasts, receipts |
+| `js/auth.js` | Accounts (salted+hashed passwords via WebCrypto), reviews |
+| `js/community.js` | Forums, roles, memberships, moderation, wheel, flash deals, Desk logic |
+| `js/seeds.js` | Forum seed content + moderation wordlists |
+| `css/main.css` | The single stylesheet (design tokens at the top) |
+| `assets/` | Images + ambient videos. `assets/.masters/` and `assets/source-1080p/` are offline originals — never deployed |
+| `files/` | The paid PDFs, renamed to unguessable hashed filenames, with a hardening `.htaccess` (no listing, noindex). **Interim protection only — see the launch blockers** |
+| `docs/` | All reports and owner docs (list below) |
+| `tools/smoke-test.mjs` | The automated smoke-test harness |
+| `stripe-backend/` | PHP scaffold for real payments (not yet connected) |
+| `.htaccess` | HTTPS redirect, security headers, caching, 404 wiring |
+| `.github/workflows/deploy.yml` | **The production deploy** (FTP to Hostinger on push to main) |
+| `.claude/serve.mjs` | Local preview server (never deployed) |
 
-**Demo commerce:** the full purchase loop works out of the box — add to cart → checkout
-(demo mode) → thank-you → My Shelf → full reader + download. Orders/library live in
-browser localStorage until Stripe + backend are connected.
-**Coupons:** `WELCOME10` (10%), `READERS15` (15%).
+## Deploying
 
-## Catalogue
+### This repo (the live site): GitHub Actions → Hostinger FTP
 
-All products and preview chapters live in **`js/data.js`** — one file, heavily commented
-by structure. Add a product there and it automatically appears in shop, homepage,
-related rails, cart, checkout, reader and sitemap-worthy URLs. Covers are generated
-by CSS (colors + motif per product) — no cover images to produce.
+> ### ⚠️ PUSHING TO `main` DEPLOYS TO PRODUCTION
+> Every push to the `main` branch triggers `.github/workflows/deploy.yml`,
+> which FTP-uploads the working tree to the live webroot
+> (`domains/zokario.com/public_html/`) within a minute or two. There is no
+> staging step and no confirmation prompt. Before any push:
+> 1. `node tools/smoke-test.mjs` must be green.
+> 2. Preview the change locally (`node .claude/serve.mjs`).
+> 3. If CSS/JS changed, bump the cache version (next section).
 
-## Deploy to Hostinger
+The workflow authenticates with three GitHub repo secrets: `FTP_SERVER`,
+`FTP_USER`, `FTP_PASS` (Settings → Secrets and variables → Actions). It
+**excludes** from upload: `.git/`, `.github/`, `.claude/`, `node_modules/`,
+`assets/source-1080p/`, `assets/.masters/`, `.gitignore`, and `*.md`.
+Check a deploy's result under the repo's **Actions** tab on GitHub.
 
-1. hPanel → **File Manager** (or FTP) → open `public_html`.
-2. Upload **everything in this folder** (including the hidden `.htaccess`).
-3. Enable SSL (hPanel → Security → SSL), then uncomment the HTTPS redirect in `.htaccess`.
-4. Replace `https://zokario.com` with your real domain in: all `<link rel="canonical">`,
-   `sitemap.xml`, `robots.txt`.
-5. Replace `support@zokario.com` with your real inbox (contact + legal pages).
-6. Done — the site is fully functional in demo-commerce mode.
+> **⚠️ Before committing the `docs/` folder:** the `*.md` exclude pattern
+> matches only root-level markdown (README, CHANGELOG). It does **not** cover
+> `docs/*.md` or `stripe-backend/README.md` — so committing `docs/` as-is
+> would upload the internal audit/security reports to the public webserver.
+> First add two lines to the `exclude:` list in
+> `.github/workflows/deploy.yml`:
+> `docs/**` and `**/*.md` (a developer or the workflow editor on GitHub can
+> do this in one minute). Same for `.env.example` if you prefer it private —
+> it contains only placeholders, but there is no reason to publish it.
 
-## Going live with payments (what remains)
+### Any other copy of this site: manual Hostinger upload
 
-1. **Stripe** — see `stripe-backend/README.md`. Keys are env placeholders
-   (`STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`);
-   PHP endpoint + webhook skeletons are included and Hostinger-compatible.
-2. **Real book files** — the demo "Download" generates a styled HTML edition from
-   `js/data.js`. Replace with your typeset PDF/ePub files served after webhook fulfilment.
-3. **Accounts** — My Shelf currently uses a browser-local email sign-in. Swap
-   `ZKStore` reads (js/app.js) for API calls when you add real auth; the UI is done.
-4. **Contact form + newsletter** — wire to your email provider or a form endpoint.
+1. hPanel → File Manager (or FTP) → open `public_html`.
+2. Upload everything **including the hidden `.htaccess`** and `files/.htaccess`,
+   **except**: `assets/source-1080p/`, `assets/.masters/`, `.git/`, `.github/`,
+   `.claude/`, `docs/`, `tools/`, and `*.md` files.
+3. Enable SSL (hPanel → Security → SSL). The HTTPS redirect in `.htaccess`
+   is already active.
+4. Swap `https://zokario.com` for your domain in canonicals, `sitemap.xml`,
+   `robots.txt` (not needed on this repo — zokario.com is the real domain).
 
-## Brand assets (generated with Higgsfield)
+## Cache-bust version bumping
 
-| Asset | File |
+Every CSS/JS reference carries `?v=44`. HTML is served `no-cache` while CSS/JS
+are cached for 6 months as immutable — so **changing the version number is the
+only way readers receive updated CSS/JS**. Whenever you change `css/main.css`
+or any `js/*.js` file:
+
+1. Replace the version in every page (189 references):
+   `perl -pi -e 's/\?v=44/\?v=45/g' *.html`
+2. Update `EXPECTED_VERSION` in `tools/smoke-test.mjs` (line ~34) to `"v=45"`.
+3. Run `node tools/smoke-test.mjs` — section 6 verifies all references match.
+4. Commit and push (which deploys).
+
+## Documentation index
+
+| Doc | Contents |
 |---|---|
-| Master hero image (floating book, champagne light) | `assets/hero-book.jpg` (+ `.png` master) |
-| Logo mark (Z of fanned book pages) | `assets/logo-mark.jpg` (+ `.png` master), `assets/favicon.svg` (hand-drawn SVG) |
-| Hero 3D book orbit (8s, Seedance 2.0) | `assets/hero-orbit.mp4` |
-| Futuristic library dolly (7s) | `assets/library.mp4` |
-| Page macro detail (6s) | `assets/pages-macro.mp4` |
-| Collection reveal (7s) | `assets/collection.mp4` |
-| 1080p masters | `assets/source-1080p/` (not referenced by the site — safe to keep offline) |
-
-Videos are served at 720p, muted, lazy-loaded (except the hero, which streams with a
-poster fallback). If a video is missing or fails, pages fall back to the hero image.
-
-## SEO
-
-Per-page titles + meta descriptions + canonical + Open Graph, JSON-LD
-(Organization, Product on product pages, FAQPage on FAQ), semantic headings,
-alt text, `sitemap.xml`, `robots.txt`, custom 404.
+| `docs/OWNERS-MANUAL.md` | **Start here.** Non-technical how-to: products, prices, coupons, copy in 3 languages, moderation, orders, what not to touch |
+| `docs/LAUNCH-CHECKLIST.md` | Everything between today and real commerce: placeholders, credentials, launch-day steps, post-launch care |
+| `docs/INTEGRATION-CHECKLIST.md` | The master table of every `@API` swap point → service needed → files → effort → blocking or not |
+| `docs/AUDIT-REPORT.md` | The definitive 56-finding audit (2026-07-13) with fix status; Section 0 lists the open owner decisions |
+| `docs/QA-REPORT.md` | Smoke-test harness spec + clean run + live-browser E2E results |
+| `docs/ACCESSIBILITY-REPORT.md` | WCAG 2.2 AA sweep: contrast table, fixes, remaining live-AT test items |
+| `docs/PERFORMANCE-REPORT.md` | Script loading, CLS, caching, localStorage profiling + fixes |
+| `docs/SEO-REPORT.md` | Page-by-page meta, JSON-LD, sitemap/robots, hreflang verification |
+| `docs/MEDIA-MANIFEST.md` | Every image/video/PDF with size, dimensions, references |
+| `stripe-backend/README.md` | Step-by-step Stripe hookup for when payments go live |
+| `.env.example` | Every backend credential the integrations will need, as placeholders |
+| `CHANGELOG.md` | Dated history of what changed and when |

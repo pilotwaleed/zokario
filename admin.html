@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Publisher's Desk | Zokario</title>
+<meta name="description" content="The private desk where the Zokario publisher runs the house.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#141009">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -11,9 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=41">
+<link rel="stylesheet" href="css/main.css?v=44">
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <header class="site-header">
   <div class="header-inner">
@@ -42,7 +44,7 @@
   <a href="account.html">My Shelf</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
   <section class="section" style="padding-top:calc(var(--header-h) + 2.5rem)">
     <div class="container">
       <div id="deskDenied" hidden class="center" style="padding:6rem 0">
@@ -56,25 +58,32 @@
         <div class="desk-head reveal">
           <div>
             <p class="eyebrow">The Publisher's Desk</p>
-            <h1 class="h2">Good evening, <span id="deskName">Waleed</span> <span style="font-size:1.1rem">♛</span></h1>
+            <h1 class="h2">Good evening, <span id="deskName"></span> <span style="font-size:1.1rem">♛</span></h1>
           </div>
           <div class="desk-stats" id="deskStats"></div>
         </div>
 
-        <div class="desk-tabs reveal" role="tablist">
-          <button class="desk-tab active" data-tab="reports">📮 Reports <em id="repCount"></em></button>
-          <button class="desk-tab" data-tab="members">👥 Members</button>
-          <button class="desk-tab" data-tab="catalog">📦 Catalog</button>
-          <button class="desk-tab" data-tab="appeals">🕊 Appeals <em id="appCount"></em></button>
-          <button class="desk-tab" data-tab="atelier">🖋 Paid requests <em id="atCount"></em></button>
-          <button class="desk-tab" data-tab="contest">🏆 Contest</button>
-          <button class="desk-tab" data-tab="forum">🏛 Forum</button>
+        <div class="desk-tabs reveal" role="group" aria-label="Desk sections">
+          <button class="desk-tab active" data-tab="reports" aria-pressed="true">📮 Reports <em id="repCount"></em></button>
+          <button class="desk-tab" data-tab="inbox" aria-pressed="false">✉ Inbox <em id="inboxCount"></em></button>
+          <button class="desk-tab" data-tab="members" aria-pressed="false">👥 Members</button>
+          <button class="desk-tab" data-tab="catalog" aria-pressed="false">📦 Catalog</button>
+          <button class="desk-tab" data-tab="appeals" aria-pressed="false">🕊 Appeals <em id="appCount"></em></button>
+          <button class="desk-tab" data-tab="atelier" aria-pressed="false">🖋 Paid requests <em id="atCount"></em></button>
+          <button class="desk-tab" data-tab="contest" aria-pressed="false">🏆 Contest</button>
+          <button class="desk-tab" data-tab="forum" aria-pressed="false">🏛 Forum</button>
         </div>
 
         <!-- REPORTS -->
         <div class="desk-pane" id="pane-reports">
           <div class="pane-bar"><button class="btn-text" id="markRead">Mark all read</button></div>
           <div id="reportList" class="report-list"></div>
+        </div>
+
+        <!-- INBOX: letters from the contact page (zk_inbox) -->
+        <div class="desk-pane" id="pane-inbox" hidden>
+          <div class="pane-bar"><button class="btn-text" id="inboxRead">Mark all read</button></div>
+          <div id="inboxList" class="report-list"></div>
         </div>
 
         <!-- MEMBERS -->
@@ -92,21 +101,21 @@
               <button class="btn btn-ghost btn-sm" id="apOpen">＋ Add a product</button>
               <button class="btn-text" id="backupBtn">⤓ Backup everything (JSON)</button>
             </div>
-            <input id="catSearch" placeholder="Search the shelf" style="background:var(--bg0);border:1px solid var(--line);border-radius:10px;padding:.55rem 1rem;color:var(--ink);font-family:inherit;width:220px">
+            <input id="catSearch" placeholder="Search the shelf" aria-label="Search the shelf" style="background:var(--bg0);border:1px solid var(--line);border-radius:10px;padding:.55rem 1rem;color:var(--ink);font-family:inherit;width:220px">
           </div>
           <div class="ap-editor" id="apEditor" hidden>
             <h3 class="h3" id="apHeading" style="grid-column:1/-1">New edition</h3>
-            <input id="apTitle" placeholder="Title (public)" maxlength="80">
-            <input id="apSubtitle" placeholder="Subtitle (public)" maxlength="160">
-            <select id="apType"><option value="book">Book</option><option value="template">Template</option><option value="notebook">Notebook</option></select>
-            <select id="apCat"></select>
-            <input id="apPrice" type="number" step="0.01" min="1" placeholder="Price USD">
-            <input id="apPages" type="number" min="10" placeholder="Pages">
-            <textarea id="apHook" rows="2" placeholder="Hook: the one line under the title that sells it"></textarea>
-            <textarea id="apDesc" rows="5" placeholder="Description shown to the public. One paragraph per line."></textarea>
-            <textarea id="apLearn" rows="3" placeholder="What the reader gains. One bullet per line."></textarea>
-            <textarea id="apAudience" rows="2" placeholder="Who it is for. One bullet per line."></textarea>
-            <textarea id="apContents" rows="3" placeholder="Chapter titles. One per line."></textarea>
+            <input id="apTitle" placeholder="Title (public)" aria-label="Title (public)" maxlength="80">
+            <input id="apSubtitle" placeholder="Subtitle (public)" aria-label="Subtitle (public)" maxlength="160">
+            <select id="apType" aria-label="Type"><option value="book">Book</option><option value="template">Template</option><option value="notebook">Notebook</option></select>
+            <select id="apCat" aria-label="Category"></select>
+            <input id="apPrice" type="number" step="0.01" min="1" placeholder="Price USD" aria-label="Price USD">
+            <input id="apPages" type="number" min="10" placeholder="Pages" aria-label="Pages">
+            <textarea id="apHook" rows="2" aria-label="Hook" placeholder="Hook: the one line under the title that sells it"></textarea>
+            <textarea id="apDesc" rows="5" aria-label="Description" placeholder="Description shown to the public. One paragraph per line."></textarea>
+            <textarea id="apLearn" rows="3" aria-label="What the reader gains" placeholder="What the reader gains. One bullet per line."></textarea>
+            <textarea id="apAudience" rows="2" aria-label="Who it is for" placeholder="Who it is for. One bullet per line."></textarea>
+            <textarea id="apContents" rows="3" aria-label="Chapter titles" placeholder="Chapter titles. One per line."></textarea>
             <div class="ap-files">
               <label class="ap-file">🖼 Cover image (public face of the book)
                 <input type="file" id="apCover" accept="image/*">
@@ -138,9 +147,9 @@
         <!-- CONTEST -->
         <div class="desk-pane" id="pane-contest" hidden>
           <div class="ap-form" style="margin-bottom:2rem">
-            <input id="ctTheme" placeholder="Contest theme (English)">
-            <input id="ctThemeAr" placeholder="Contest theme (Arabic)" dir="rtl">
-            <input id="ctPrize" placeholder="Prize description">
+            <input id="ctTheme" placeholder="Contest theme (English)" aria-label="Contest theme (English)">
+            <input id="ctThemeAr" placeholder="Contest theme (Arabic)" aria-label="Contest theme (Arabic)" dir="rtl">
+            <input id="ctPrize" placeholder="Prize description" aria-label="Prize description">
             <button class="btn btn-gold" id="ctSave">Set the quarter's theme</button>
           </div>
           <div id="entryList"></div>
@@ -149,10 +158,10 @@
         <!-- FORUM -->
         <div class="desk-pane" id="pane-forum" hidden>
           <div class="ap-form">
-            <input id="fsKey" placeholder="Section key (letters only, e.g. poetry)" maxlength="20">
-            <input id="fsIcon" placeholder="Icon emoji" maxlength="4">
-            <input id="fsEn" placeholder="Name (English)">
-            <input id="fsAr" placeholder="Name (Arabic)" dir="rtl">
+            <input id="fsKey" placeholder="Section key (letters only, e.g. poetry)" aria-label="Section key" maxlength="20">
+            <input id="fsIcon" placeholder="Icon emoji" aria-label="Icon emoji" maxlength="4">
+            <input id="fsEn" placeholder="Name (English)" aria-label="Name (English)">
+            <input id="fsAr" placeholder="Name (Arabic)" aria-label="Name (Arabic)" dir="rtl">
             <button class="btn btn-gold" id="fsAdd">Open the new section</button>
           </div>
           <p class="support-note">Pinning, closing and removing topics is done inside each topic page; muting and suspending members lives in the Members tab. Your word is final everywhere.</p>
@@ -162,12 +171,12 @@
   </section>
 </main>
 
-<script src="js/data.js?v=41"></script>
-<script src="js/i18n.js?v=41"></script>
-<script src="js/app.js?v=41"></script>
-<script src="js/auth.js?v=41"></script>
-<script src="js/seeds.js?v=41"></script>
-<script src="js/community.js?v=41"></script>
+<script src="js/data.js?v=44" defer></script>
+<script src="js/i18n.js?v=44" defer></script>
+<script src="js/app.js?v=44" defer></script>
+<script src="js/auth.js?v=44" defer></script>
+<script src="js/seeds.js?v=44" defer></script>
+<script src="js/community.js?v=44" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const me = ZKC.me();
@@ -187,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* tabs */
   document.querySelectorAll(".desk-tab").forEach(b => b.addEventListener("click", () => {
-    document.querySelectorAll(".desk-tab").forEach(x => x.classList.toggle("active", x === b));
+    document.querySelectorAll(".desk-tab").forEach(x => { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
     document.querySelectorAll(".desk-pane").forEach(p => p.hidden = p.id !== "pane-" + b.dataset.tab);
   }));
 
@@ -204,6 +213,24 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>`).join("") : '<p class="forum-empty">Silence. A good sign, or a slow day.</p>';
   }
   document.getElementById("markRead").addEventListener("click", () => { ZKReports.markAll(); renderReports(); });
+
+  /* ---------- inbox: letters from the contact page (zk_inbox) ---------- */
+  function renderInbox() {
+    const l = ZKStore.read("zk_inbox", []);
+    document.getElementById("inboxCount").textContent = l.filter(m => !m.read).length || "";
+    document.getElementById("inboxList").innerHTML = l.length ? l.map(m => `
+      <div class="report-row ${m.read ? "" : "unread"}">
+        <span>✉</span>
+        <p><b>${zkEsc(m.name)}</b> · <a href="mailto:${zkEsc(m.email)}" style="color:var(--bronze)">${zkEsc(m.email)}</a> · ${zkEsc(m.topic)}<br>${zkEsc(m.text)}</p>
+        <small>${new Date(m.at).toLocaleString()}</small>
+      </div>`).join("") : '<p class="forum-empty">No letters yet. When someone writes through the contact page, it lands here.</p>';
+  }
+  document.getElementById("inboxRead").addEventListener("click", () => {
+    const l = ZKStore.read("zk_inbox", []);
+    l.forEach(m => m.read = true);
+    ZKStore.write("zk_inbox", l);
+    renderInbox();
+  });
 
   /* ---------- members ---------- */
   function standing(email) {
@@ -226,6 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${role === "owner" ? "♛ Publisher" : standing(u.email)}</td>
         <td class="member-actions">${role === "owner" ? "" : `
           ${isOwner ? `<button data-act="admin" data-e="${u.email}">${isAdmin ? "Remove admin" : "Make admin"}</button>` : ""}
+          <select class="grant-color" data-e="${u.email}" title="Grant a name colour" aria-label="Grant a name colour">
+            <option value="">🎨 name colour</option>
+            ${Object.entries(ZK_GRANT_COLORS).map(([k, v]) =>
+              `<option value="${k}" style="color:${v}" ${ZKGrant.of(u.email) === k ? "selected" : ""}>${k}</option>`).join("")}
+            ${ZKGrant.of(u.email) ? '<option value="__off">remove colour</option>' : ""}
+          </select>
           <button data-act="mute" data-e="${u.email}">Mute 24h</button>
           <button data-act="suspend" data-e="${u.email}">Suspend 30d</button>
           <button data-act="ban" data-e="${u.email}">${ZKMod.state(u.email).banned ? "Restore" : "Ban"}</button>
@@ -233,6 +266,12 @@ document.addEventListener("DOMContentLoaded", () => {
       </tr>`;
     }).join("");
   }
+  document.querySelector("#memberTable tbody").addEventListener("change", e => {
+    const s = e.target.closest(".grant-color"); if (!s) return;
+    ZKGrant.set(s.dataset.e, s.value === "__off" ? null : s.value || null);
+    zkToast(s.value && s.value !== "__off" ? "Colour granted. It follows them everywhere." : "Colour removed.");
+    renderMembers(); renderReports();
+  });
   document.querySelector("#memberTable tbody").addEventListener("click", e => {
     const b = e.target.closest("[data-act]"); if (!b) return;
     const em = b.dataset.e;
@@ -253,8 +292,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <tr>
         <td>${zkEsc(p.title)}${patches[p.id] ? " <small>✎</small>" : ""}</td>
         <td>${p.type}</td>
-        <td><input class="cat-price" data-pid="${p.id}" type="number" step="0.01" value="${p.deal ? p.oldPrice : p.price}" ${isOwner ? "" : "disabled"}></td>
-        <td><select class="cat-off" data-pid="${p.id}" ${isOwner ? "" : "disabled"}>
+        <td><input class="cat-price" data-pid="${p.id}" type="number" step="0.01" aria-label="Price" value="${p.deal ? p.oldPrice : p.price}" ${isOwner ? "" : "disabled"}></td>
+        <td><select class="cat-off" data-pid="${p.id}" aria-label="Discount" ${isOwner ? "" : "disabled"}>
           ${[0, 10, 15, 20, 25, 30, 40, 50, 60].map(o => `<option value="${o}" ${(patches[p.id]?.set?.houseOff || 0) === o ? "selected" : ""}>${o ? o + "%" : "none"}</option>`).join("")}
         </select></td>
         <td class="member-actions">${isOwner ? `<button data-edit="${p.id}">Edit</button><button data-retire="${p.id}">Retire</button>` : ""}</td>
@@ -450,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     zkToast("Section opened in all three wings");
   });
 
-  renderReports(); renderMembers(); renderCatalog(); renderAppeals(); renderAtelier(); renderEntries();
+  renderReports(); renderInbox(); renderMembers(); renderCatalog(); renderAppeals(); renderAtelier(); renderEntries();
 });
 </script>
 </body>

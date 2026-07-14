@@ -6,6 +6,36 @@
       "runtimeExecutable": "node",
       "runtimeArgs": [".claude/serve.mjs"],
       "port": 8123
+    },
+    {
+      "name": "zokario-a",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../zokario-concept-a/tools/serve.mjs"],
+      "port": 8124
+    },
+    {
+      "name": "zokario-b",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../zokario-concept-b/tools/serve.mjs"],
+      "port": 8125
+    },
+    {
+      "name": "trendytech",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../trendytech-store/tools/serve.mjs"],
+      "port": 8126
+    },
+    {
+      "name": "mission-control",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../storefront-mission-control/server.mjs"],
+      "port": 8130
+    },
+    {
+      "name": "rayqa-brand-gate",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/waleedalansari/Documents/Codex/2026-07-14/i/work/brand-gate/serve.mjs"],
+      "port": 8140
     }
   ]
 }

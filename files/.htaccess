@@ -1,0 +1,20 @@
+# ZOKARIO /files/ — paid deliverables
+# IMPORTANT: on a static host this directory CANNOT be truly protected.
+# The unguessable filenames + no listing + noindex below are a speed bump,
+# not security. The real fix is signed, expiring download URLs issued by the
+# fulfilment backend (stripe-backend/webhook.php step 3); at that point move
+# these files out of public hosting entirely.
+
+# No directory listing: filenames are unguessable, so the listing is the
+# only practical way to enumerate them.
+Options -Indexes
+
+# Keep every file here out of search engines and link previews.
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>
+
+# Do not let referrers leak the unguessable URLs onward.
+<IfModule mod_headers.c>
+  Header set Referrer-Policy "no-referrer"
+</IfModule>

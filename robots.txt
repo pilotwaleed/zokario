@@ -5,5 +5,8 @@ Disallow: /checkout.html
 Disallow: /thank-you.html
 Disallow: /account.html
 Disallow: /reader.html
+Disallow: /admin.html
+Disallow: /topic.html
+Disallow: /files/
 
 Sitemap: https://zokario.com/sitemap.xml

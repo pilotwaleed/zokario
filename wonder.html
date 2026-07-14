@@ -6,8 +6,13 @@
 <title>The Wonder Room · Bedtime Tales | Zokario</title>
 <meta name="description" content="Stories that glow in the dark: bedtime tales written to be read aloud, for young listeners and the grown-ups who read to them. In English, Arabic and French.">
 <link rel="canonical" href="https://zokario.com/wonder.html">
+<link rel="alternate" hreflang="en" href="https://zokario.com/wonder.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://zokario.com/wonder.html?lang=ar">
+<link rel="alternate" hreflang="fr" href="https://zokario.com/wonder.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://zokario.com/wonder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Zokario">
+<meta property="og:url" content="https://zokario.com/wonder.html">
 <meta property="og:title" content="The Wonder Room · Bedtime Tales | Zokario">
 <meta property="og:description" content="Stories that glow in the dark. Read aloud. Twice, if requested.">
 <meta property="og:image" content="https://zokario.com/assets/wonder-poster.jpg">
@@ -19,10 +24,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=41">
+<link rel="preload" as="image" href="assets/wonder-poster.jpg" fetchpriority="high">
+<link rel="stylesheet" href="css/main.css?v=44">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <header class="site-header">
   <div class="header-inner">
@@ -72,7 +79,7 @@
   <a href="cart.html">Cart</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- ============ ROOM HERO ============ -->
   <section class="room-hero wonder-hero">
@@ -181,23 +188,38 @@
         <a href="privacy.html">Privacy</a>
       </div>
     </div>
+    <div class="pay-row">
+      <span class="pay-label" data-i18n="f.weAccept">We accept</span>
+      <div class="pay-badges">
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visa"><rect width="56" height="36" rx="5" fill="#fff" stroke="rgba(0,0,0,.14)"/><text x="28" y="23.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-style="italic" font-weight="800" letter-spacing=".5" fill="#1A1F71">VISA</text></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mastercard"><rect width="56" height="36" rx="5" fill="#fff" stroke="rgba(0,0,0,.14)"/><circle cx="23.5" cy="18" r="9" fill="#EB001B"/><circle cx="32.5" cy="18" r="9" fill="#F79E1B"/><path d="M28 11.2a9 9 0 0 1 0 13.6 9 9 0 0 1 0-13.6z" fill="#FF5F00"/></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="American Express"><rect width="56" height="36" rx="5" fill="#2E77BC"/><text x="28" y="22.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="800" letter-spacing=".6" fill="#fff">AMEX</text></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Pay"><rect width="56" height="36" rx="5" fill="#000"/><path fill="#fff" transform="translate(13.5,7.5) scale(0.9)" d="M15.8 12.6c0-2 1.6-3 1.7-3.1-.9-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2.1 2.6 2 1 0 1.4-.6 2.7-.6 1.2 0 1.6.6 2.7.6 1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.3 1.1-2.4 0 0-2.2-.9-2.5-2.9zM13.9 6.7c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/><text x="33" y="23" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#fff">Pay</text></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mada"><rect width="56" height="36" rx="5" fill="#fff" stroke="rgba(0,0,0,.14)"/><rect x="10" y="8" width="36" height="9.5" rx="2" fill="#27AAE1"/><rect x="10" y="19" width="36" height="9.5" rx="2" fill="#84B740"/><text x="28" y="15.4" text-anchor="middle" font-family="Tahoma, Arial, sans-serif" font-size="7" font-weight="700" fill="#fff">مدى</text><text x="28" y="26.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="7.5" font-weight="700" letter-spacing=".8" fill="#fff">mada</text></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Benefit"><rect width="56" height="36" rx="5" fill="#fff" stroke="rgba(0,0,0,.14)"/><text x="28" y="22.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8.5" font-weight="800" letter-spacing=".4" fill="#EC1C24">BENEFIT</text></svg>
+        <svg viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Google Pay"><rect width="56" height="36" rx="5" fill="#fff" stroke="rgba(0,0,0,.14)"/><text x="17" y="23" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#4285F4">G</text><text x="34" y="23" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="500" fill="#5F6368">Pay</text></svg>
+      </div>
+      <span class="pay-secure"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg><span data-i18n="f.secure">Encrypted HTTPS connection</span></span>
+    </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Zokario. All rights reserved.</span>
       <div class="footer-legal">
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="refunds.html">Refunds</a>
+        <a href="accessibility.html" data-i18n="f.a11y">Accessibility</a>
+        <a href="#" data-ck-open data-i18n="f.cookies">Cookie settings</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="js/data.js?v=41"></script>
-<script src="js/i18n.js?v=41"></script>
-<script src="js/app.js?v=41"></script>
-<script src="js/auth.js?v=41"></script>
-<script src="js/seeds.js?v=41"></script>
-<script src="js/community.js?v=41"></script>
+<script src="js/data.js?v=44" defer></script>
+<script src="js/i18n.js?v=44" defer></script>
+<script src="js/app.js?v=44" defer></script>
+<script src="js/auth.js?v=44" defer></script>
+<script src="js/seeds.js?v=44" defer></script>
+<script src="js/community.js?v=44" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const tales = ZK.products.filter(p => p.wonder);

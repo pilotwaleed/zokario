@@ -22,12 +22,12 @@ const ZKC = {
    The house account. Full authority lives here.
    ========================================================= */
 const ZK_OWNER_EMAILS = ["pilotwaleed93@gmail.com"]; /* @API server-side role check */
-const ZK_OWNER_NAME = "Waleed";
 
 const ZKRole = {
   of(user) {
     if (!user) return "guest";
-    if (ZK_OWNER_EMAILS.includes((user.email || "").toLowerCase()) || user.name === ZK_OWNER_NAME) return "owner";
+    /* owner is granted by email allowlist only; never by display name */
+    if (ZK_OWNER_EMAILS.includes((user.email || "").toLowerCase())) return "owner";
     if (ZKC.read("zk_admins", []).includes(user.email)) return "admin";
     return "member";
   },
@@ -49,13 +49,31 @@ const ZKRole = {
    Colors follow the member everywhere: reviews, forums, chat.
    ========================================================= */
 const ZK_TIERS = [
-  { key: "page",    min: 0,    name: "Page Turner",     ar: "مقلب الصفحات",   fr: "Tourneur de pages",  color: "#E8DCC5", sym: "❧" },
-  { key: "ink",     min: 60,   name: "Ink Apprentice",  ar: "متدرب الحبر",    fr: "Apprenti d'encre",   color: "#C89B6A", sym: "✎" },
-  { key: "chapter", min: 180,  name: "Chapter Chaser",  ar: "ملاحق الفصول",   fr: "Chasseur de chapitres", color: "#A8BF8F", sym: "❦" },
-  { key: "plot",    min: 420,  name: "Plot Weaver",     ar: "حائك الحكايات",  fr: "Tisseur d'intrigues", color: "#8FB3D9", sym: "✒" },
-  { key: "shelf",   min: 900,  name: "Shelf Master",    ar: "سيد الرف",       fr: "Maitre d'etagere",   color: "#B79BE0", sym: "⚜" },
-  { key: "keeper",  min: 1800, name: "Keeper of Tales", ar: "حارس الحكايات",  fr: "Gardien des contes", color: "#E0A3A3", sym: "♕" }
+  { key: "bronze",   min: 0,    name: "Bronze",   ar: "برونزي",  fr: "Bronze",   color: "#C08D5A", sym: "❧" },
+  { key: "silver",   min: 120,  name: "Silver",   ar: "فضي",     fr: "Argent",   color: "#C9CFD6", sym: "✎" },
+  { key: "gold",     min: 350,  name: "Gold",     ar: "ذهبي",    fr: "Or",       color: "#E4C070", sym: "⚜" },
+  { key: "platinum", min: 800,  name: "Platinum", ar: "بلاتيني", fr: "Platine",  color: "#AFC8DC", sym: "❖" },
+  { key: "diamond",  min: 1600, name: "Diamond",  ar: "ماسي",    fr: "Diamant",  color: "#A8E4E8", sym: "◈" },
+  { key: "elite",    min: 3200, name: "Elite",    ar: "النخبة",  fr: "Élite",    color: "elite",   sym: "♛" }
 ];
+
+/* name colours bestowed by the house: an honour, granted at the Desk */
+const ZK_GRANT_COLORS = {
+  rose:      "#E8A0B4", emerald:  "#8FD0A8", sapphire: "#8FB8E8", amethyst: "#C0A0E8",
+  coral:     "#F0A080", turquoise:"#7ED0CC", crimson:  "#E87878", pearl:    "#EDE6D6"
+};
+const ZKGrant = {
+  map() { return ZKC.read("zk_name_colors", {}); },
+  of(email) { return this.map()[(email || "").toLowerCase()] || null; },
+  set(email, key) { /* owner + admins. @API server-side role check */
+    if (!ZKRole.canModerate()) return false;
+    const m = this.map(); const e = (email || "").toLowerCase();
+    if (key && ZK_GRANT_COLORS[key]) m[e] = key; else delete m[e];
+    ZKC.write("zk_name_colors", m);
+    ZKReports.log("admin", key ? `Name colour "${key}" granted to ${email}` : `Name colour removed from ${email}`);
+    return true;
+  }
+};
 
 const ZKLevels = {
   points(email) { return ZKC.read("zk_points", {})[email || (ZKC.me()?.email)] || 0; },
@@ -76,20 +94,35 @@ const ZKLevels = {
     }
     return t;
   },
-  /* the colored signature: name + tier color + symbol, used site-wide */
+  /* localized tier name */
+  tierName(t) {
+    const l = typeof ZKLang !== "undefined" ? ZKLang.code() : "en";
+    return l === "ar" ? t.ar : l === "fr" ? t.fr : t.name;
+  },
+  /* the colored signature: name + tier color + symbol, used site-wide.
+     Priority: owner > admin > granted colour > gilded (paid) > tier colour. */
   badge(user, opts = {}) {
     if (!user) return "";
     const email = user.email || user;
     const name = user.name || ZKForum.nameOf(email) || email.split("@")[0];
     const role = ZKRole.of(typeof user === "object" ? user : { email, name });
     const sub = ZKSub.isActive(email);
+    const granted = ZKGrant.of(email);
     let color, sym, title;
     const mNo = ZKMembers.numberOf(email);
-    if (role === "owner") { color = "owner"; sym = "👑"; title = "The Publisher · Member No 1"; }
-    else if (role === "admin") { color = "#D97A7A"; sym = "⚜"; title = "House Admin"; }
-    else { const t = this.tier(email); color = sub ? "gilded" : t.color; sym = ZKSym.of(email) || t.sym; title = t.name + (mNo ? " · Member No " + mNo : ""); }
-    const cls = color === "owner" ? "mname mname-owner" : color === "gilded" ? "mname mname-gilded" : "mname";
-    const style = (color !== "owner" && color !== "gilded") ? `style="color:${color}"` : "";
+    if (role === "owner") { color = "owner"; sym = "👑"; title = ZKT("lv.tOwner"); }
+    else if (role === "admin") { color = "#D97A7A"; sym = "🦁"; title = ZKT("lv.tAdmin"); }
+    else {
+      const t = this.tier(email);
+      color = granted ? ZK_GRANT_COLORS[granted] : sub ? "gilded" : t.color;
+      sym = ZKSym.of(email) || t.sym;
+      title = this.tierName(t) + (sub ? " · " + ZKT("lv.tGilded") : "") + (granted ? " · " + ZKT("lv.tColour") : "") + (mNo ? " · " + ZKT("lv.tMember", { n: mNo }) : "");
+    }
+    const cls = color === "owner" ? "mname mname-owner"
+      : color === "gilded" ? "mname mname-gilded"
+      : color === "elite" ? "mname mname-elite"
+      : granted ? "mname mname-granted" : "mname";
+    const style = (color !== "owner" && color !== "gilded" && color !== "elite") ? `style="color:${color}"` : "";
     return `<span class="${cls}" ${style} title="${ZKC.esc(title)}"><i class="msym">${sym}</i>${ZKC.esc(name)}</span>`;
   }
 };
@@ -232,16 +265,16 @@ const ZKMod = {
     const st = this.state(email);
     const pts = level === "severe" ? 2 : 1;
     st.strikes += pts;
-    let action;
-    if (st.strikes >= 6) { st.banned = true; action = "permanent suspension"; }
-    else if (st.strikes >= 4) { st.suspendedUntil = ZKC.now() + 90 * 864e5; action = "3 month suspension"; }
-    else if (st.strikes >= 3) { st.suspendedUntil = ZKC.now() + 30 * 864e5; action = "1 month suspension"; }
-    else if (st.strikes >= 2) { st.demotedUntil = ZKC.now() + 30 * 864e5; action = "tier demotion for a month"; }
-    else { action = "formal warning"; }
+    let action, actionKey; /* action: English, kept for the desk log; actionKey: i18n key for the visitor-facing toast */
+    if (st.strikes >= 6) { st.banned = true; action = "permanent suspension"; actionKey = "md.aBan"; }
+    else if (st.strikes >= 4) { st.suspendedUntil = ZKC.now() + 90 * 864e5; action = "3 month suspension"; actionKey = "md.aSusp3"; }
+    else if (st.strikes >= 3) { st.suspendedUntil = ZKC.now() + 30 * 864e5; action = "1 month suspension"; actionKey = "md.aSusp1"; }
+    else if (st.strikes >= 2) { st.demotedUntil = ZKC.now() + 30 * 864e5; action = "tier demotion for a month"; actionKey = "md.aDemote"; }
+    else { action = "formal warning"; actionKey = "md.aWarn"; }
     st.log.push({ at: ZKC.now(), level, context: (context || "").slice(0, 80), action });
     this.save(email, st);
     ZKReports.log("penalty", `${ZKForum.nameOf(email) || email}: ${action} (${level}: "${context?.slice(0, 40)}")`);
-    return action;
+    return { action, actionKey };
   },
   /* gate every piece of user text through this */
   check(text) {
@@ -252,8 +285,8 @@ const ZKMod = {
     if (st.mutedUntil > ZKC.now()) return { ok: false, reason: "muted", until: st.mutedUntil };
     const hit = this.scan(text);
     if (hit) {
-      const action = this.penalize(u.email, hit.level, text);
-      return { ok: false, reason: "modded", action, level: hit.level };
+      const pen = this.penalize(u.email, hit.level, text);
+      return { ok: false, reason: "modded", action: pen.action, actionKey: pen.actionKey, level: hit.level };
     }
     return { ok: true };
   },
@@ -360,6 +393,7 @@ const ZKForum = {
    ========================================================= */
 const ZKChat = {
   TTL: 12 * 36e5, /* the fire keeps a voice for 12 hours */
+  REACTS: ["❤️", "😂", "🔥", "👏", "😮"],
   list(wing) {
     const l = ZKC.read("zk_chat_" + wing, []).filter(m => ZKC.now() - m.at < this.TTL);
     ZKC.write("zk_chat_" + wing, l);
@@ -373,11 +407,54 @@ const ZKChat = {
     }
     const u = ZKC.me();
     const l = this.list(wing);
-    l.push({ id: ZKC.id(), author: u.email, text: text.slice(0, 280), at: ZKC.now() });
+    l.push({ id: ZKC.id(), author: u.email, text: text.slice(0, 280), at: ZKC.now(), reacts: {} });
     if (l.length > 200) l.splice(0, l.length - 200);
     ZKC.write("zk_chat_" + wing, l); /* @API websocket */
     ZKForum.rememberName(u.email, u.name);
-    return { ok: true };
+    /* the fire rewards company: one point per message, ten a day */
+    const day = ZKC.day();
+    const cap = ZKC.read("zk_chat_pts", {});
+    const k = u.email + ":" + day;
+    if ((cap[k] || 0) < 10) { cap[k] = (cap[k] || 0) + 1; ZKC.write("zk_chat_pts", cap); ZKLevels.add(1, u.email); }
+    /* fire streak: consecutive days with at least one word by the fire */
+    const s = ZKC.read("zk_chat_streak", {});
+    const st = s[u.email] || { n: 0, last: "" };
+    let streakNew = false;
+    if (st.last !== day) {
+      const yesterday = new Date(ZKC.now() - 864e5).toDateString();
+      st.n = st.last === yesterday ? st.n + 1 : 1;
+      st.last = day;
+      s[u.email] = st; ZKC.write("zk_chat_streak", s);
+      streakNew = st.n > 1;
+      if (st.n % 7 === 0) ZKLevels.add(15, u.email); /* a full week earns a log on the fire */
+    }
+    return { ok: true, streak: st.n, streakNew };
+  },
+  streak(email) {
+    const st = ZKC.read("zk_chat_streak", {})[email];
+    if (!st) return 0;
+    const yesterday = new Date(ZKC.now() - 864e5).toDateString();
+    return (st.last === ZKC.day() || st.last === yesterday) ? st.n : 0;
+  },
+  react(wing, id, emoji) { /* @API */
+    const u = ZKC.me();
+    if (!u || !this.REACTS.includes(emoji)) return null;
+    const l = this.list(wing);
+    const m = l.find(x => x.id === id); if (!m) return null;
+    m.reacts = m.reacts || {};
+    const arr = m.reacts[emoji] = m.reacts[emoji] || [];
+    const i = arr.indexOf(u.email);
+    i === -1 ? arr.push(u.email) : arr.splice(i, 1);
+    if (!arr.length) delete m.reacts[emoji];
+    ZKC.write("zk_chat_" + wing, l);
+    /* a warm reaction warms the author too, once per reactor per day (cap 5) */
+    if (i === -1 && m.author !== u.email) {
+      const day = ZKC.day();
+      const cap = ZKC.read("zk_react_pts", {});
+      const k = m.author + ":" + day;
+      if ((cap[k] || 0) < 5) { cap[k] = (cap[k] || 0) + 1; ZKC.write("zk_react_pts", cap); ZKLevels.add(1, m.author); }
+    }
+    return i === -1;
   },
   removeMsg(wing, id) { if (!ZKRole.canModerate()) return; ZKC.write("zk_chat_" + wing, this.list(wing).filter(m => m.id !== id)); }
 };
@@ -418,7 +495,8 @@ const ZKSpin = {
       const c = ZKC.read("zk_spin_coupons", {}); c[u.email] = { off: prize.key === "c25" ? 25 : 10, until: ZKC.now() + 48 * 36e5 }; ZKC.write("zk_spin_coupons", c);
     }
     if (prize.key === "book") {
-      const pool = ZK.products.filter(p => p.type === "book" && !ZKStore.owns(p.id));
+      const owned = new Set(ZKStore.purchasedIds()); /* one read, not one per product */
+      const pool = ZK.products.filter(p => p.type === "book" && !owned.has(p.id));
       const pick = pool[Math.floor(Math.random() * pool.length)];
       if (pick) { ZKStore.grant(pick.id); prize.granted = pick.title; }
     }
@@ -463,7 +541,8 @@ const ZKFlash = {
     if (lastRoll[u.email] === ZKC.day()) return null;
     lastRoll[u.email] = ZKC.day(); ZKC.write("zk_flash_roll", lastRoll);
     if (Math.random() > 0.38) return null; /* lightning does not strike every day */
-    const pool = ZK.products.filter(p => !ZKStore.owns(p.id));
+    const owned = new Set(ZKStore.purchasedIds()); /* one read, not one per product */
+    const pool = ZK.products.filter(p => !owned.has(p.id));
     const pick = pool[Math.floor(Math.random() * pool.length)];
     if (!pick) return null;
     const deal = { id: pick.id, off: 15 + Math.floor(Math.random() * 10) * 5, until: ZKC.now() + 3 * 36e5 };
@@ -604,7 +683,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="lock-ico" style="margin:0 auto 1.2rem"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
             <h2 data-i18n="mb.title">This shelf is closed to you for now</h2>
             <p data-i18n="mb.lead">Your account has an active penalty under the house regulations (respect, no profanity, no harassment). You may appeal below; appeals receive an answer within 72 hours.</p>
-            <p class="ban-detail">${st.banned ? "Permanent suspension" : "Suspended until " + new Date(st.suspendedUntil).toLocaleDateString()}</p>
+            <p class="ban-detail">${st.banned ? ZKC.esc(ZKT("mb.perm")) : ZKC.esc(ZKT("mb.until", { d: new Date(st.suspendedUntil).toLocaleDateString(typeof ZKLang !== "undefined" ? ZKLang.code() : undefined) }))}</p>
             <textarea id="appealText" maxlength="800" placeholder="Write your appeal to the house" data-i18n-ph="mb.ph"></textarea>
             <button class="btn btn-gold" id="appealSend" data-i18n="mb.send">Send the appeal</button>
             <p class="ban-note" data-i18n="mb.note">Reading the open library remains available. Community and purchases are paused.</p>
@@ -644,7 +723,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const a = document.createElement("a");
     a.className = "icon-btn desk-btn";
     a.href = "admin.html";
-    a.setAttribute("aria-label", "The Publisher's Desk");
+    a.setAttribute("aria-label", ZKT("nav.desk"));
     a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.6-4.9-2.6-4.9 2.6.9-5.6-4-3.9 5.5-.8z"/></svg>${unread ? `<span class="cart-count show">${unread}</span>` : ""}`;
     actions.insertBefore(a, actions.querySelector(".forum-door-btn"));
   }
@@ -688,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (u && ZKSpin.spun() < ZKSpin.spinsToday() && !/account/.test(location.pathname) && !sessionStorage.getItem("zk_spin_nudge")) {
     sessionStorage.setItem("zk_spin_nudge", "1");
     document.body.insertAdjacentHTML("beforeend",
-      `<a class="spin-chip" href="account.html#wheel" aria-label="Daily wheel">🎡 <span data-i18n="sw.chip">${ZKT("sw.chip")}</span></a>`);
+      `<a class="spin-chip" href="account.html#wheel" aria-label="${ZKC.esc(ZKT("sw.chip"))}">🎡 <span data-i18n="sw.chip">${ZKT("sw.chip")}</span></a>`);
     setTimeout(() => document.querySelector(".spin-chip")?.classList.add("show"), 1400);
   }
 });

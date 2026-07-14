@@ -13,10 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=41">
+<link rel="stylesheet" href="css/main.css?v=44">
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/reader.html*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <header class="site-header">
   <div class="header-inner">
@@ -66,7 +67,7 @@
   <a href="cart.html">Cart</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html" data-i18n="p.home">Home</a><span data-i18n="nav.myshelf">My Shelf</span></nav>
@@ -79,14 +80,20 @@
   <section class="section-tight" id="authView" hidden>
     <div class="container">
       <div class="auth-card">
-        <div class="auth-tabs" role="tablist">
-          <button class="auth-tab on" data-mode="login" role="tab" data-i18n="au.login">Sign in</button>
-          <button class="auth-tab" data-mode="signup" role="tab" data-i18n="au.signup">Create account</button>
+        <div class="auth-tabs">
+          <button class="auth-tab on" data-mode="login" aria-pressed="true" data-i18n="au.login">Sign in</button>
+          <button class="auth-tab" data-mode="signup" aria-pressed="false" data-i18n="au.signup">Create account</button>
         </div>
         <form id="authForm" novalidate>
-          <div class="field" id="fName" hidden>
-            <label for="authName" data-i18n="au.name">Your name</label>
-            <input class="input" id="authName" autocomplete="name" placeholder="Maren Holt">
+          <div class="field-2col" id="fName" hidden>
+            <div class="field">
+              <label for="authFirst" data-i18n="au.first">First name</label>
+              <input class="input" id="authFirst" autocomplete="given-name" data-i18n-ph="au.firstPh" placeholder="Maren">
+            </div>
+            <div class="field">
+              <label for="authLast" data-i18n="au.last">Last name</label>
+              <input class="input" id="authLast" autocomplete="family-name" data-i18n-ph="au.lastPh" placeholder="Holt">
+            </div>
           </div>
           <div class="field">
             <label for="authEmail" data-i18n="o.email">Email address</label>
@@ -95,6 +102,7 @@
           <div class="field">
             <label for="authPass" data-i18n="au.pass">Password</label>
             <input class="input" type="password" id="authPass" required minlength="8" autocomplete="current-password" placeholder="••••••••">
+            <div class="pass-meter" id="passMeter" aria-live="polite" hidden><span class="pm-bar"><i></i></span><span class="pm-label"></span></div>
             <p class="field-hint" id="passHint" data-i18n="au.passHint" hidden>At least 8 characters. A line from a book you love works beautifully.</p>
           </div>
           <div class="field" id="fPass2" hidden>
@@ -119,7 +127,7 @@
               </div>
             </div>
             <div class="field">
-              <label data-i18n="au.genres">What does your heart shelve?</label>
+              <label data-i18n="au.genresAsk">What does your heart shelve?</label>
               <div class="genre-chips" id="genreChips"></div>
             </div>
             <div class="field">
@@ -127,16 +135,20 @@
               <input class="input" id="authAbout" maxlength="140" data-i18n-ph="au.aboutPh" placeholder="Night reader, tea drinker, one chapter past bedtime">
             </div>
             <div class="field human-check" id="humanCheck">
-              <label id="humanQ"></label>
+              <label id="humanQ" for="humanA"></label>
               <input class="input" id="humanA" autocomplete="off" inputmode="text">
               <p class="field-hint" id="humanHint" data-i18n="au.humanHint">Just proving you are flesh, blood and bookmarks.</p>
             </div>
+            <label class="terms-check">
+              <input type="checkbox" id="marketingOptIn">
+              <span data-i18n="au.marketing">Email me about new editions and quiet discounts. Rare letters, easy to leave.</span>
+            </label>
             <label class="terms-check">
               <input type="checkbox" id="acceptTerms">
               <span data-i18n="au.terms">I have read and accept the <a href="terms.html" target="_blank">Terms</a>, the community regulations, and the release and indemnity they contain.</span>
             </label>
           </div>
-          <p class="auth-err" id="authErr" hidden></p>
+          <p class="auth-err" id="authErr" role="alert" hidden></p>
           <button class="btn btn-gold btn-block" type="submit" id="authSubmit" data-i18n="au.login">Sign in</button>
         </form>
         <button class="btn-text" id="forgotLink" style="margin-top:1.3rem" data-i18n="au.forgot">Forgot your password?</button>
@@ -156,7 +168,7 @@
             <label for="resetEmail" data-i18n="o.email">Email address</label>
             <input class="input" type="email" id="resetEmail" required autocomplete="email" placeholder="you@example.com">
           </div>
-          <p class="auth-err" id="resetErr1" hidden></p>
+          <p class="auth-err" id="resetErr1" role="alert" hidden></p>
           <button class="btn btn-gold btn-block" type="submit" data-i18n="au.sendCode">Email me the code</button>
         </form>
 
@@ -185,7 +197,7 @@
               <label for="resetPass" data-i18n="au.newPass">New password</label>
               <input class="input" type="password" id="resetPass" required minlength="8" autocomplete="new-password" placeholder="••••••••">
             </div>
-            <p class="auth-err" id="resetErr2" hidden></p>
+            <p class="auth-err" id="resetErr2" role="alert" hidden></p>
             <button class="btn btn-gold btn-block" type="submit" data-i18n="au.doReset">Set new password</button>
           </form>
         </div>
@@ -239,7 +251,7 @@
             </div>
             <div class="field">
               <span class="field-label" data-i18n="au.genres">Shelves you love</span>
-              <div class="genre-chips" id="genreChips"></div>
+              <div class="genre-chips" id="pfGenreChips"></div>
             </div>
             <div class="field">
               <label for="pfRitual" data-i18n="au.ritual">Your reading ritual</label>
@@ -317,6 +329,66 @@
         <div class="section-label"><h3 data-i18n="a.orders">Order history</h3></div>
         <div id="ordersList"></div>
       </div>
+
+      <!-- ============ ACCOUNT SETTINGS ============ -->
+      <div style="margin-top:4rem" id="settingsWrap" hidden>
+        <div class="section-label"><h3 data-i18n="au.settings">Account settings</h3></div>
+        <div class="settings-grid">
+
+          <div class="settings-card">
+            <h4 data-i18n="au.chpwTitle">Change password</h4>
+            <form id="pwForm" novalidate>
+              <div class="field">
+                <label for="pwCur" data-i18n="au.chpwCur">Current password</label>
+                <input class="input" type="password" id="pwCur" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="field">
+                <label for="pwNew" data-i18n="au.chpwNew">New password</label>
+                <input class="input" type="password" id="pwNew" required minlength="8" autocomplete="new-password" placeholder="••••••••">
+                <div class="pass-meter" id="pwNewMeter" aria-live="polite" hidden><span class="pm-bar"><i></i></span><span class="pm-label"></span></div>
+              </div>
+              <p class="auth-err" id="pwErr" role="alert" hidden></p>
+              <button class="btn btn-gold btn-sm" type="submit" data-i18n="au.chpwBtn">Update password</button>
+            </form>
+          </div>
+
+          <div class="settings-card" id="comm">
+            <h4 data-i18n="au.commTitle">Communication preferences</h4>
+            <p class="settings-note" data-i18n="au.commLead">Choose what lands in your inbox. Silence is always an option.</p>
+            <form id="commForm">
+              <label class="checkline"><input type="checkbox" id="commOn"><span data-i18n="au.commMaster">Email me from the house</span></label>
+              <div class="comm-topics" id="commTopics">
+                <label class="checkline"><input type="checkbox" id="tEditions"><span data-i18n="au.tEditions">New editions</span></label>
+                <label class="checkline"><input type="checkbox" id="tOffers"><span data-i18n="au.tOffers">Quiet offers</span></label>
+                <label class="checkline"><input type="checkbox" id="tLetters"><span data-i18n="au.tLetters">Community letters</span></label>
+              </div>
+              <button class="btn btn-gold btn-sm" type="submit" data-i18n="au.commSave">Save preferences</button>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <h4 data-i18n="au.dataTitle">Your data</h4>
+            <p class="settings-note" data-i18n="au.dataLead">Everything the shelf knows about you: profile, orders, reviews, wishlist and preferences, in one JSON file.</p>
+            <button class="btn btn-ghost btn-sm" id="dlData" data-i18n="au.dataBtn">Download my data</button>
+            <hr class="settings-sep">
+            <h4 data-i18n="au.delTitle">Delete my account</h4>
+            <p class="settings-note" data-i18n="au.delLead">This deletes your account, profile and reader card from this browser. Order records stay, the account does not. There is no undo.</p>
+            <button class="btn btn-ghost btn-sm btn-danger" id="delOpen" data-i18n="au.delBtn">Delete my account</button>
+            <div id="delConfirm" hidden>
+              <div class="field" style="margin:1.2rem 0 .9rem">
+                <label for="delEmail" data-i18n="au.delConfirmLabel">Type your email to confirm</label>
+                <input class="input" id="delEmail" autocomplete="off" spellcheck="false" placeholder="you@example.com">
+              </div>
+              <p class="auth-err" id="delErr" role="alert" hidden></p>
+              <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+                <button class="btn btn-sm btn-danger-solid" id="delGo" disabled data-i18n="au.delConfirm2">Yes, delete it forever</button>
+                <button class="btn btn-ghost btn-sm" id="delCancel" data-i18n="au.delCancel">Keep my account</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -329,17 +401,19 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="refunds.html">Refunds</a>
+        <a href="accessibility.html" data-i18n="f.a11y">Accessibility</a>
+        <a href="#" data-ck-open data-i18n="f.cookies">Cookie settings</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="js/data.js?v=41"></script>
-<script src="js/i18n.js?v=41"></script>
-<script src="js/app.js?v=41"></script>
-<script src="js/auth.js?v=41"></script>
-<script src="js/seeds.js?v=41"></script>
-<script src="js/community.js?v=41"></script>
+<script src="js/data.js?v=44" defer></script>
+<script src="js/i18n.js?v=44" defer></script>
+<script src="js/app.js?v=44" defer></script>
+<script src="js/auth.js?v=44" defer></script>
+<script src="js/seeds.js?v=44" defer></script>
+<script src="js/community.js?v=44" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const $ = id => document.getElementById(id);
@@ -350,8 +424,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const ERR = {
     email: "au.errEmail", weakpass: "au.errWeak", exists: "au.errExists",
     nouser: "au.errNoUser", badpass: "au.errBadPass", badcode: "au.errBadCode", expired: "au.errExpired",
-    passmatch: "au.errMatch", human: "au.errHuman", terms: "au.errTerms"};
-  const showErr = (el, e) => { el.textContent = ZKT(ERR[e.message] || "au.errGeneric"); el.hidden = false; };
+    passmatch: "au.errMatch", human: "au.errHuman", terms: "au.errTerms", common: "au.errCommon"};
+  /* field a field belongs to each error, so aria-invalid + aria-describedby can point at it */
+  let lastBadField = null;
+  const clearFieldErr = () => {
+    if (lastBadField) {
+      lastBadField.removeAttribute("aria-invalid");
+      lastBadField.removeAttribute("aria-describedby");
+      lastBadField = null;
+    }
+  };
+  const showErr = (el, e, field) => {
+    el.textContent = ZKT(ERR[e.message] || "au.errGeneric");
+    el.hidden = false;
+    clearFieldErr();
+    if (field) {
+      field.setAttribute("aria-invalid", "true");
+      if (el.id) field.setAttribute("aria-describedby", el.id);
+      field.focus();
+      lastBadField = field;
+    }
+  };
+  /* map auth errors to the field that caused them */
+  const AUTH_FIELD = {
+    email: "authEmail", nouser: "authEmail", exists: "authEmail",
+    weakpass: "authPass", badpass: "authPass", common: "authPass",
+    passmatch: "authPass2", human: "humanA", terms: "acceptTerms"
+  };
+
+  /* password strength meter: length-based score + common-password blocklist */
+  function paintMeter(meter, pw) {
+    if (!pw) { meter.hidden = true; return; }
+    const s = ZKPass.score(pw);
+    meter.hidden = false;
+    meter.dataset.level = s.level;
+    meter.querySelector("i").style.width = (s.level === 0 ? 8 : s.level * 25) + "%";
+    meter.querySelector(".pm-label").textContent =
+      s.common ? ZKT("au.pwCommon") : s.level === 0 ? ZKT("au.pwShort") : ZKT("au.pw" + s.level);
+  }
 
   function show(view) {
     Object.values(views).forEach(v => v.hidden = true);
@@ -367,7 +477,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- login / signup ---------- */
   document.querySelectorAll(".auth-tab").forEach(t => t.addEventListener("click", () => {
-    document.querySelectorAll(".auth-tab").forEach(x => x.classList.toggle("on", x === t));
+    document.querySelectorAll(".auth-tab").forEach(x => {
+      x.classList.toggle("on", x === t);
+      x.setAttribute("aria-pressed", String(x === t));
+    });
     mode = t.dataset.mode;
     $("fName").hidden = mode !== "signup";
     $("passHint").hidden = mode !== "signup";
@@ -395,9 +508,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const origTabHandler = () => {
     $("fPass2").hidden = mode !== "signup";
     $("signupExtra").hidden = mode !== "signup";
+    paintMeter($("passMeter"), mode === "signup" ? $("authPass").value : "");
     if (mode === "signup") newRiddle();
   };
   document.querySelectorAll(".auth-tab").forEach(t => t.addEventListener("click", origTabHandler));
+  $("authPass").addEventListener("input", () => paintMeter($("passMeter"), mode === "signup" ? $("authPass").value : ""));
 
   /* email verification (demo: in-page envelope, like the reset flow) @API real email */
   let pendingVerify = null;
@@ -407,25 +522,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const err = $("authErr");
     err.hidden = false; err.classList.add("verify-mode");
     err.innerHTML = `<span class="ep-envelope">✉</span> ${ZKT("au.verifySent")} <b>${code}</b><br>
-      <input class="input" id="verifyCode" maxlength="6" inputmode="numeric" style="margin:.7rem 0" placeholder="000000">
+      <input class="input" id="verifyCode" maxlength="6" inputmode="numeric" aria-label="${ZKT("au.codeLabel")}" style="margin:.7rem 0" placeholder="000000">
       <button class="btn btn-gold btn-sm" id="verifyBtn">${ZKT("au.verifyBtn")}</button>`;
     $("verifyBtn").addEventListener("click", async () => {
       if ($("verifyCode").value.trim() === pendingVerify.code) {
-        await finishSignup();
+        try { await finishSignup(); }
+        catch (e2) {
+          /* surface signup failures instead of dead-ending on the verify screen */
+          const box = $("authErr");
+          box.classList.remove("verify-mode");
+          showErr(box, e2);
+        }
       } else { zkToast(ZKT("au.verifyBad")); }
     });
   }
   let stash = null;
+  const POLICY_V = "2026-07"; /* bump when the Terms change, so consent stays dated + versioned */
   async function finishSignup() {
     await ZKAuth.signup(stash.email, stash.pass, stash.name);
     /* enrich the account with the ceremony answers. @API */
     const users = ZKStore.read("zk_accounts", {});
     const u = users[stash.email.toLowerCase().trim()];
     if (u) {
+      u.firstName = stash.first; u.lastName = stash.last;
       u.country = stash.country; u.readLang = stash.lang; u.about = stash.about;
       u.genres = stash.genres; u.verified = true;
       u.termsAcceptedAt = new Date().toISOString(); /* recorded acceptance @API database */
+      u.consent = { at: new Date().toISOString(), v: POLICY_V }; /* terms consent record @API database */
+      u.marketingOptIn = { on: !!stash.marketing, at: new Date().toISOString() }; /* @API database */
       ZKStore.write("zk_accounts", users);
+      if (stash.marketing) { /* opted in: join the letters list @API newsletter service */
+        const list = ZKStore.read("zk_newsletter", []);
+        if (!list.includes(u.email)) { list.push(u.email); ZKStore.write("zk_newsletter", list); }
+      }
     }
     ZKLevels.add(10, stash.email.toLowerCase().trim());
     ZKReports.log("join", `New member: ${stash.name || stash.email} (${stash.country || "somewhere"})`);
@@ -436,25 +565,34 @@ document.addEventListener("DOMContentLoaded", () => {
   $("authForm").addEventListener("submit", async e => {
     e.preventDefault();
     $("authErr").hidden = true; $("authErr").classList.remove("verify-mode");
+    clearFieldErr();
     const email = $("authEmail").value, pass = $("authPass").value;
     try {
       if (mode === "signup") {
+        /* validate email + password BEFORE the verification step, so
+           ZKAuth.signup can no longer fail after the code is entered */
+        if (!ZKAuth.valid(ZKAuth.norm(email))) throw new Error("email");
+        if ((pass || "").length < 8) throw new Error("weakpass");
         if (pass !== $("authPass2").value) throw new Error("passmatch");
+        if (ZKPass.common(pass)) throw new Error("common");
         if (!riddle || !riddle.ok($("humanA").value)) { newRiddle(); throw new Error("human"); }
         if (!$("acceptTerms").checked) throw new Error("terms");
         const users = ZKStore.read("zk_accounts", {});
         if (users[email.toLowerCase().trim()]) throw new Error("exists");
+        const first = $("authFirst").value.trim(), last = $("authLast").value.trim();
         stash = {
-          email, pass, name: $("authName").value,
+          email, pass, first, last,
+          name: (first + " " + last).trim(), /* combined display name: every existing consumer keeps working */
+          marketing: $("marketingOptIn").checked,
           country: $("authCountry").value, lang: $("authLang").value,
           about: $("authAbout").value.trim(),
-          genres: [...document.querySelectorAll(".gchip.on")].map(b => b.dataset.g)
+          genres: [...document.querySelectorAll("#genreChips .gchip.on")].map(b => b.dataset.g)
         };
         askVerify(email);
         return;
       } else { await ZKAuth.login(email, pass); zkToast(ZKT("au.loginOk")); }
       location.reload(); /* refresh header avatar + all state */
-    } catch (err) { showErr($("authErr"), err); }
+    } catch (err) { showErr($("authErr"), err, $(AUTH_FIELD[err.message])); }
   });
 
   /* ---------- forgot password ---------- */
@@ -469,7 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $("epCode").textContent = code;             /* @API: remove, code arrives by real email */
       $("resetStep2").hidden = false;
       $("emailPreview").classList.add("arrive");
-    } catch (err) { showErr($("resetErr1"), err); }
+    } catch (err) { showErr($("resetErr1"), err, $("resetEmail")); }
   });
 
   $("resetStep2Form").addEventListener("submit", async e => {
@@ -479,7 +617,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await ZKAuth.resetPassword($("resetEmail").value, $("resetCode").value, $("resetPass").value);
       zkToast(ZKT("au.resetOk"));
       location.reload();
-    } catch (err) { showErr($("resetErr2"), err); }
+    } catch (err) { showErr($("resetErr2"), err, err.message === "weakpass" ? $("resetPass") : $("resetCode")); }
   });
 
   /* ---------- signed-in ---------- */
@@ -502,7 +640,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const gilded = ZKSub.isActive(me.email);
     const tier = ZKLevels.tier(me.email);
     const founding = ZKMembers.isFounding(me.email) && !isOwner;
-    const title = isOwner ? ZKT("mc.publisher") : gilded ? ZKT("mc.gilded") : tier.name;
+    const title = isOwner ? ZKT("mc.publisher") : gilded ? ZKT("mc.gilded") : ZKLevels.tierName(tier);
     $("readerCard").innerHTML = `
       <div class="rc-foil ${isOwner ? "rc-owner" : gilded ? "rc-gilded" : ""}"></div>
       <div class="rc-top">
@@ -525,9 +663,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCard(me);
     $("pfName").value = me.name || "";
     $("pfNick").value = me.nick || "";
-    $("avatarPick").innerHTML = AVATARS.map(a =>
-      `<button type="button" class="av ${me.avatar === a ? "on" : ""}" data-av="${a}">${a}</button>`).join("");
-    $("genreChips").innerHTML = ZK.categories.map(c =>
+    /* the lion walks only with the Publisher and the house admins */
+    const marks = ZKRole.canModerate() ? ["🦁", ...AVATARS] : AVATARS;
+    $("avatarPick").innerHTML = marks.map(a =>
+      `<button type="button" class="av ${a === "🦁" ? "av-lion" : ""} ${me.avatar === a ? "on" : ""}" data-av="${a}">${a}</button>`).join("");
+    $("pfGenreChips").innerHTML = ZK.categories.map(c =>
       `<label class="gchip ${me.genres?.includes(c) ? "on" : ""}"><input type="checkbox" value="${zkEsc(c)}" ${me.genres?.includes(c) ? "checked" : ""}>${zkEsc(c)}</label>`).join("");
     $("pfRitual").value = me.ritual || "";
 
@@ -536,7 +676,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".av").forEach(x => x.classList.toggle("on", x === b));
     };
 
-    $("pfPhoto").addEventListener("change", async () => {
+    $("pfPhoto").onchange = async () => {
       const f = $("pfPhoto").files[0]; if (!f || f.size > 3 * 1024 * 1024) return;
       const data = await new Promise(res => {
         const img = new Image();
@@ -554,17 +694,22 @@ document.addEventListener("DOMContentLoaded", () => {
       ZKAuth.update({ photo: data }); /* @API upload */
       zkToast(ZKT("au.photoSet"));
       renderLib(ZKAuth.current(), true);
-    });
-    $("genreChips").onchange = e => {
+    };
+    $("pfGenreChips").onchange = e => {
       const l = e.target.closest(".gchip"); if (l) l.classList.toggle("on", e.target.checked);
     };
     $("profileForm").onsubmit = e => {
       e.preventDefault();
+      const full = $("pfName").value.trim();
+      const sp = full.lastIndexOf(" ");
       const updated = ZKAuth.update({
-        name: $("pfName").value.trim(),
+        name: full,
+        /* keep the split names in step with the display name */
+        firstName: sp > 0 ? full.slice(0, sp) : full,
+        lastName: sp > 0 ? full.slice(sp + 1) : "",
         nick: $("pfNick").value.trim(),
         avatar: document.querySelector(".av.on")?.dataset.av || "📖",
-        genres: [...document.querySelectorAll("#genreChips input:checked")].map(i => i.value),
+        genres: [...document.querySelectorAll("#pfGenreChips input:checked")].map(i => i.value),
         ritual: $("pfRitual").value
       });
       zkToast(ZKT("au.profileSaved"));
@@ -573,9 +718,118 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  /* ---------- account settings: password, letters, data, deletion ---------- */
+  /* on* assignments throughout: renderLib re-runs, handlers must never stack */
+  function wireSettings(me) {
+    /* (a) change password: the current one is verified through the ZKAuth hash */
+    $("pwNew").oninput = () => paintMeter($("pwNewMeter"), $("pwNew").value);
+    $("pwForm").onsubmit = async e => {
+      e.preventDefault();
+      $("pwErr").hidden = true;
+      try {
+        if (ZKPass.common($("pwNew").value)) throw new Error("common");
+        await ZKAuth.changePassword($("pwCur").value, $("pwNew").value);
+        $("pwForm").reset();
+        paintMeter($("pwNewMeter"), "");
+        zkToast(ZKT("au.chpwOk"));
+      } catch (err) { showErr($("pwErr"), err, err.message === "badpass" ? $("pwCur") : $("pwNew")); }
+    };
+
+    /* (b) communication preferences, written to the account @API PATCH /me/preferences */
+    const acct = () => ZKStore.read("zk_accounts", {})[me.email] || {};
+    const saved = acct();
+    const optIn = saved.marketingOptIn || { on: false };
+    /* topics mirror recorded consent: the signup opt-in covered editions and offers.
+       Nothing is ever pre-ticked without that consent (GDPR: no silent opt-in). */
+    const topics = saved.commTopics || { editions: !!optIn.on, offers: !!optIn.on, letters: false };
+    $("commOn").checked = !!optIn.on;
+    $("tEditions").checked = !!topics.editions;
+    $("tOffers").checked = !!topics.offers;
+    $("tLetters").checked = !!topics.letters;
+    const paintTopics = () => $("commTopics").classList.toggle("off", !$("commOn").checked);
+    paintTopics();
+    $("commOn").onchange = () => {
+      paintTopics();
+      /* opting out is honored the moment the box unticks @API newsletter service */
+      if (!$("commOn").checked) ZKNews.remove(me.email);
+    };
+    $("commForm").onsubmit = e => {
+      e.preventDefault();
+      const on = $("commOn").checked;
+      ZKAuth.update({
+        marketingOptIn: { on, at: new Date().toISOString() },
+        commTopics: { editions: $("tEditions").checked, offers: $("tOffers").checked, letters: $("tLetters").checked }
+      });
+      /* keep the letters list in step: the account email was verified at signup,
+         so opting in here is a confirmed opt-in @API newsletter service */
+      if (on && !ZKNews.on(me.email)) {
+        const list = ZKNews.list();
+        list.push(me.email);
+        ZKStore.write("zk_newsletter", list);
+      }
+      if (!on) ZKNews.remove(me.email);
+      zkToast(ZKT("au.commSaved"));
+    };
+
+    /* (c) download my data: this member's zk_* records in one file @API GET /me/export */
+    $("dlData").onclick = () => {
+      const profile = { ...acct() };
+      delete profile.salt; delete profile.passHash; /* secrets stay home */
+      const reviews = {};
+      const allReviews = ZKStore.read("zk_reviews", {});
+      Object.keys(allReviews).forEach(pid => {
+        const mine = allReviews[pid].filter(r => r.email === me.email);
+        if (mine.length) reviews[pid] = mine;
+      });
+      const data = {
+        exportedAt: new Date().toISOString(),
+        profile,
+        orders: ZKStore.orders(),
+        reviews,
+        wishlist: ZKWish.list(),
+        preferences: {
+          siteLanguage: localStorage.getItem("zk_lang") || "en",
+          readingProgress: ZKStore.progress(),
+          readerPoints: ZKLevels.points(me.email)
+        }
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "zokario-my-data-" + new Date().toISOString().slice(0, 10) + ".json";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      zkToast(ZKT("au.dataOk"));
+    };
+
+    /* (d) delete my account: type-to-confirm, then truly gone @API DELETE /me */
+    $("delOpen").onclick = () => {
+      $("delConfirm").hidden = false; $("delOpen").hidden = true;
+      $("delEmail").focus();
+    };
+    $("delCancel").onclick = () => {
+      $("delConfirm").hidden = true; $("delOpen").hidden = false;
+      $("delEmail").value = ""; $("delGo").disabled = true; $("delErr").hidden = true;
+    };
+    $("delEmail").oninput = () => { $("delGo").disabled = ZKAuth.norm($("delEmail").value) !== me.email; };
+    $("delGo").onclick = () => {
+      if (ZKAuth.norm($("delEmail").value) !== me.email) return;
+      const users = ZKStore.read("zk_accounts", {});
+      delete users[me.email];
+      ZKStore.write("zk_accounts", users);
+      ZKNews.remove(me.email);
+      ZKAuth.logout();
+      ZKStore.setUser(null);
+      zkToast(ZKT("au.delDone"));
+      setTimeout(() => { location.href = "index.html"; }, 900);
+    };
+  }
+
   function renderLib(user, isAccount) {
     $("guestBanner").hidden = isAccount;
     if (isAccount) renderProfile(user); else $("profileWrap").hidden = true;
+    $("settingsWrap").hidden = !isAccount;
+    if (isAccount) wireSettings(user);
 
     const display = user.nick || user.name;
     $("helloLine").textContent = display ? ZKT("a.welcome", { n: display }) : ZKT("a.welcome", { n: "" }).replace(/[,،]\s*$/, "");
@@ -594,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $("memberStrip").innerHTML = `
         <div class="ms-badge">${ZKLevels.badge(me)}</div>
         <div class="ms-meta">
-          <b>${pts}</b> ${ZKT("lv.points")} · ${role === "owner" ? "♛ The Publisher" : tier.name}
+          <b>${pts}</b> ${ZKT("lv.points")} · ${role === "owner" ? "♛ " + ZKT("lv.publisher") : ZKLevels.tierName(tier)}
           ${next ? `<div class="ms-bar"><i style="width:${Math.min(100, Math.round(pts / next.min * 100))}%"></i></div>
           <small>${ZKT("lv.next", { n: next.min - pts })}</small>` : `<small>${ZKT("lv.top")}</small>`}
         </div>
@@ -604,13 +858,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="sym-row gilded-syms">${ZK_SYMBOLS.gilded.map(x => `<button class="sym ${ZKSym.of(email) === x ? "on" : ""} ${!isSub && role === "member" ? "locked" : ""}" data-sym="${x}">${x}</button>`).join("")}
           <small>✦ ${ZKT("lv.gildedOnly")}</small></div>
         </div>`;
-      $("memberStrip").addEventListener("click", e => {
+      $("memberStrip").onclick = e => {
         const b = e.target.closest("[data-sym]"); if (!b) return;
         const r = ZKSym.set(b.dataset.sym);
         if (r === "locked") { zkToast(ZKT("lv.locked")); return; }
         document.querySelectorAll(".sym").forEach(x => x.classList.toggle("on", x === b));
         zkToast(ZKT("lv.symSet"));
-      });
+      };
 
       /* ---- wheel ---- */
       const PRIZE_LABELS = ["sw.pBook","sw.pC25","sw.pC10","sw.pGild","sw.pShim","sw.pSym","sw.pPts","sw.pQuote"];
@@ -622,7 +876,7 @@ document.addEventListener("DOMContentLoaded", () => {
         $("spinNote").textContent = left > 0 ? ZKT("sw.left", { n: left }) : ZKT("sw.tomorrow");
       };
       updateSpin();
-      $("spinBtn").addEventListener("click", () => {
+      $("spinBtn").onclick = () => {
         const prize = ZKSpin.spin();
         if (!prize) { updateSpin(); return; }
         const idx = ZK_PRIZES.indexOf(prize);
@@ -633,7 +887,7 @@ document.addEventListener("DOMContentLoaded", () => {
           zkToast("🎉 " + ZKT(PRIZE_LABELS[idx]) + (prize.granted ? " · " + prize.granted : ""));
           updateSpin(); renderLib(me, true);
         }, 3400);
-      });
+      };
 
       /* ---- gilded state ---- */
       if (isSub) {
@@ -641,12 +895,12 @@ document.addEventListener("DOMContentLoaded", () => {
         $("gpBuy").innerHTML = `<p class="gilded-active">✦ ${ZKT("gc.active", { d: new Date(st.until).toLocaleDateString() })}</p>
           <a class="btn btn-ghost" href="forums.html">${ZKT("gc.lounge")}</a>`;
       } else {
-        $("gpBuy").addEventListener("click", e => {
+        $("gpBuy").onclick = e => {
           const b = e.target.closest("[data-plan]"); if (!b) return;
           ZKSub.start(b.dataset.plan);
           zkToast("✦ " + ZKT("gc.welcome"));
           setTimeout(() => location.reload(), 900);
-        });
+        };
       }
     } else {
       $("memberStrip").hidden = true;
@@ -703,14 +957,22 @@ document.addEventListener("DOMContentLoaded", () => {
       ow.hidden = false;
       $("ordersList").innerHTML = orders.map(o => `
         <div class="co-mini-item">
-          <span><h4 style="font-family:var(--font-display);font-style:italic">${o.no}</h4>
-          <span>${new Date(o.date).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })} · ${o.items.length} ${o.items.length === 1 ? ZKT("c.edition") : ZKT("c.editions")}</span></span>
-          <span class="price" style="margin-left:auto">${ZK.fmt(o.total)}</span>
+          <span><h4 style="font-family:var(--font-display);font-style:italic">${zkEsc(o.no || o.id || "")}</h4>
+          <span>${new Date(o.date || o.at || Date.now()).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })} · ${o.items.length} ${o.items.length === 1 ? ZKT("c.edition") : ZKT("c.editions")}</span></span>
+          <span style="margin-inline-start:auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <span class="price">${ZK.fmt(o.total)}</span>
+            <button class="btn btn-ghost btn-sm" type="button" data-receipt="${zkEsc(o.no || o.id || "")}">${zkEsc(ZKT("rc.title"))}</button>
+          </span>
         </div>`).join("");
     } else ow.hidden = true;
   }
 
   route();
+
+  /* footer "communication preferences" link lands here */
+  if (location.hash === "#comm" && !$("settingsWrap").hidden) {
+    setTimeout(() => $("comm")?.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+  }
 
   /* ---------- welcome ceremony after signup ---------- */
   if (sessionStorage.getItem("zk_welcome") && ZKAuth.current()) {

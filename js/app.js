@@ -25,13 +25,39 @@ const ZKStore = {
   coupon()      { return ZKStore.read("zk_coupon", null); },
   setCoupon(c)  { ZKStore.write("zk_coupon", c); },
 
+  /* Wheel of Wonders prize for the signed-in member: { off, until }.
+     Written by ZKSpin (zk_spin_coupons, keyed by email); honored here
+     while unexpired. @API server-side coupon validation at launch */
+  spinCoupon() {
+    const email = ZKStore.read("zk_session", null);
+    if (!email) return null;
+    const c = ZKStore.read("zk_spin_coupons", {})[email];
+    return (c && c.until > Date.now()) ? { off: c.off, until: c.until } : null;
+  },
+  clearSpinCoupon() {
+    const email = ZKStore.read("zk_session", null);
+    if (!email) return;
+    const all = ZKStore.read("zk_spin_coupons", {});
+    if (all[email]) { delete all[email]; ZKStore.write("zk_spin_coupons", all); }
+  },
+
   totals() {
     const items = ZKStore.cart().map(ZK.byId).filter(Boolean);
     const subtotal = items.reduce((s, p) => s + p.price, 0);
     const code = ZKStore.coupon();
     const rule = code && ZK.coupons[code];
-    const discount = rule ? subtotal * rule.pct / 100 : 0;
-    return { items, subtotal, discount, code: rule ? code : null, total: Math.max(0, subtotal - discount) };
+    const codeDiscount = rule ? subtotal * rule.pct / 100 : 0;
+    const spin = ZKStore.spinCoupon();
+    const spinDiscount = spin ? subtotal * spin.off / 100 : 0;
+    /* a typed code and the wheel prize never stack: the better one applies */
+    const useSpin = spinDiscount > codeDiscount;
+    const discount = useSpin ? spinDiscount : codeDiscount;
+    return {
+      items, subtotal, discount,
+      code: (!useSpin && rule) ? code : null,
+      spin: useSpin ? spin : null,
+      total: Math.max(0, subtotal - discount)
+    };
   },
 
   orders()      { return ZKStore.read("zk_orders", []); },
@@ -53,6 +79,12 @@ const ZKStore = {
     document.querySelectorAll(".cart-count").forEach(el => {
       el.textContent = n;
       el.classList.toggle("show", n > 0);
+      /* the badge is decorative for AT: the count lives in the link's label */
+      el.setAttribute("aria-hidden", "true");
+      const link = el.closest("a");
+      if (link && typeof ZKT === "function") {
+        link.setAttribute("aria-label", n > 0 ? ZKT("c.cartCount", { n }) : ZKT("nav.cart"));
+      }
     });
   }
 };
@@ -120,7 +152,7 @@ function zkStars(p) {
   if (!rv.length) return "";
   const avg = rv.reduce((a, r) => a + r.stars, 0) / rv.length;
   const full = Math.round(avg);
-  return `<span class="stars" aria-label="Rated ${avg.toFixed(1)} out of 5">${"★".repeat(full)}${"☆".repeat(5 - full)} <small>${avg.toFixed(1)} (${rv.length})</small></span>`;
+  return `<span class="stars" aria-label="${zkEsc(ZKT("c.rated", { r: avg.toFixed(1) }))}">${"★".repeat(full)}${"☆".repeat(5 - full)} <small>${avg.toFixed(1)} (${rv.length})</small></span>`;
 }
 
 function zkPrice(p) {
@@ -152,13 +184,85 @@ function zkCard(p, delay) {
 /* ---------- Toast ---------- */
 function zkToast(msg) {
   let wrap = document.querySelector(".toast-wrap");
-  if (!wrap) { wrap = document.createElement("div"); wrap.className = "toast-wrap"; document.body.appendChild(wrap); }
+  if (!wrap) {
+    wrap = document.createElement("div");
+    wrap.className = "toast-wrap";
+    /* live region: screen readers announce each toast without stealing focus */
+    wrap.setAttribute("role", "status");
+    wrap.setAttribute("aria-live", "polite");
+    document.body.appendChild(wrap);
+  }
   const t = document.createElement("div");
   t.className = "toast";
   t.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>${zkEsc(msg)}</span>`;
   wrap.appendChild(t);
   setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 450); }, 2600);
 }
+
+/* =========================================================
+   Focus containment for overlays (accessibility)
+   Traps Tab inside the layer, Escape calls onEscape, and
+   focus returns to the opening control on release.
+   ========================================================= */
+const ZK_FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+function zkFocusTrap(layer, opts = {}) {
+  const opener = document.activeElement;
+  const visible = el => !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  const onKey = e => {
+    if (e.key === "Escape" && opts.onEscape) { opts.onEscape(); return; }
+    if (e.key !== "Tab") return;
+    const items = [...layer.querySelectorAll(ZK_FOCUSABLE)].filter(visible);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !layer.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || !layer.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+  };
+  layer.addEventListener("keydown", onKey);
+  const target = opts.initial
+    ? layer.querySelector(opts.initial)
+    : [...layer.querySelectorAll(ZK_FOCUSABLE)].filter(visible)[0];
+  if (target) setTimeout(() => target.focus(), 30);
+  return {
+    release(restore = true) {
+      layer.removeEventListener("keydown", onKey);
+      if (restore && opener && document.contains(opener) && typeof opener.focus === "function") opener.focus();
+    }
+  };
+}
+
+/* =========================================================
+   Newsletter: double opt-in (demo)
+   zk_news_pending { email: { code, at } }  ->  zk_newsletter [emails]
+   Only confirmed addresses ever enter the letters list.
+   ========================================================= */
+const ZKNews = {
+  list()    { return ZKStore.read("zk_newsletter", []); },   /* confirmed only */
+  pending() { return ZKStore.read("zk_news_pending", {}); },
+  on(email) { return ZKNews.list().includes(email); },
+  request(email) {
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+    const p = ZKNews.pending();
+    p[email] = { code, at: Date.now() };
+    ZKStore.write("zk_news_pending", p);
+    /* @API: send the confirmation email here; in production the code never appears on screen */
+    return code;
+  },
+  confirm(email, code) {
+    const p = ZKNews.pending();
+    if (!p[email] || p[email].code !== String(code).trim()) return false;
+    delete p[email];
+    ZKStore.write("zk_news_pending", p);
+    const list = ZKNews.list();
+    if (!list.includes(email)) { list.push(email); ZKStore.write("zk_newsletter", list); }
+    return true;
+  },
+  remove(email) {
+    /* opt-out is honored instantly, pending or confirmed @API newsletter service */
+    ZKStore.write("zk_newsletter", ZKNews.list().filter(x => x !== email));
+    const p = ZKNews.pending();
+    if (p[email]) { delete p[email]; ZKStore.write("zk_news_pending", p); }
+  }
+};
 
 /* ---------- Global behaviours ---------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -172,12 +276,31 @@ document.addEventListener("DOMContentLoaded", () => {
     addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* mobile nav */
+  /* mobile nav: focus stays inside while open, Escape closes,
+     focus returns to the toggle on close */
   const mnav = document.querySelector(".mobile-nav");
-  document.querySelector(".menu-toggle")?.addEventListener("click", () => mnav?.classList.add("open"));
-  mnav?.addEventListener("click", e => {
-    if (e.target.closest("a") || e.target.closest(".close-nav")) mnav.classList.remove("open");
-  });
+  const menuToggle = document.querySelector(".menu-toggle");
+  if (mnav && menuToggle) {
+    if (!mnav.id) mnav.id = "zkMobileNav";
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-controls", mnav.id);
+    let mnavTrap = null;
+    const closeNav = (restore = true) => {
+      if (!mnav.classList.contains("open")) return;
+      mnav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      if (mnavTrap) { mnavTrap.release(restore); mnavTrap = null; }
+    };
+    menuToggle.addEventListener("click", () => {
+      mnav.classList.add("open");
+      menuToggle.setAttribute("aria-expanded", "true");
+      mnavTrap = zkFocusTrap(mnav, { onEscape: closeNav });
+    });
+    mnav.addEventListener("click", e => {
+      if (e.target.closest("a")) closeNav(false); /* navigating away: leave focus with the link */
+      else if (e.target.closest(".close-nav")) closeNav();
+    });
+  }
 
   /* active nav link */
   const path = location.pathname.split("/").pop() || "index.html";
@@ -244,20 +367,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* newsletter forms */
+  /* newsletter forms: double opt-in. The address only joins the list once
+     its 6-digit code is confirmed (demo shows the code in-page @API email) */
   document.querySelectorAll("[data-newsletter]").forEach(f => {
     f.addEventListener("submit", e => {
       e.preventDefault();
       const email = f.querySelector("input[type=email]")?.value.trim();
       if (!email) return;
-      const list = ZKStore.read("zk_newsletter", []);
-      if (!list.includes(email)) { list.push(email); ZKStore.write("zk_newsletter", list); }
-      f.reset();
-      zkToast(ZKT("c.toastNews"));
+      if (ZKNews.on(email)) { f.reset(); zkToast(ZKT("nl.already")); return; }
+      const code = ZKNews.request(email);
+      f.parentElement.querySelector(".news-confirm")?.remove();
+      const box = document.createElement("div");
+      box.className = "news-confirm";
+      box.innerHTML = `
+        <p><span class="ep-envelope">✉</span> ${ZKT("nl.sent", { e: zkEsc(email) })} <b class="nc-code">${code}</b></p>
+        <div class="nc-row">
+          <input class="input" inputmode="numeric" maxlength="6" placeholder="000000" aria-label="${zkEsc(ZKT("nl.codeLabel"))}">
+          <button class="btn btn-gold" type="button">${zkEsc(ZKT("nl.confirmBtn"))}</button>
+        </div>
+        <p class="auth-err nc-err" role="alert" id="ncErr-${Date.now()}" hidden></p>`;
+      f.hidden = true;
+      f.insertAdjacentElement("afterend", box);
+      const doConfirm = () => {
+        const codeInput = box.querySelector(".nc-row input");
+        if (ZKNews.confirm(email, codeInput.value)) {
+          box.remove();
+          f.hidden = false;
+          f.reset();
+          zkToast(ZKT("c.toastNews"));
+        } else {
+          const err = box.querySelector(".nc-err");
+          err.textContent = ZKT("nl.badCode");
+          err.hidden = false;
+          codeInput.setAttribute("aria-invalid", "true");
+          codeInput.setAttribute("aria-describedby", err.id);
+        }
+      };
+      box.querySelector(".nc-row button").addEventListener("click", doConfirm);
+      box.querySelector(".nc-row input").addEventListener("keydown", ev => {
+        if (ev.key === "Enter") { ev.preventDefault(); doConfirm(); }
+      });
+      box.querySelector(".nc-row input").focus();
     });
   });
 
-  /* accordions */
+  /* accordions: expose the collapsed/expanded state from the start */
+  document.querySelectorAll(".acc-head").forEach(h =>
+    h.setAttribute("aria-expanded", h.parentElement.classList.contains("open")));
   document.body.addEventListener("click", e => {
     const head = e.target.closest(".acc-head");
     if (!head) return;
@@ -271,9 +427,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /* footer year */
   document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
 
-  /* lazy videos: start playback only when visible */
+  /* reduced motion: ambient videos stay on their poster frame, nothing autoplays */
+  const zkNoMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (zkNoMotion) {
+    document.querySelectorAll("video[autoplay]").forEach(v => {
+      v.removeAttribute("autoplay");
+      try { v.pause(); } catch {}
+    });
+  }
+
+  /* lazy videos: start playback only when visible (and motion is welcome) */
   const vids = document.querySelectorAll("video[data-lazy]");
-  if (vids.length) {
+  if (vids.length && !zkNoMotion) {
     const vio = new IntersectionObserver(entries => {
       entries.forEach(en => {
         const v = en.target;
@@ -348,6 +513,66 @@ function zkDownload(id) {
     return;
   }
   if (p.pdf) window.open(p.pdf, "_blank");
+}
+
+/* =========================================================
+   Printable receipt: one order, one clean sheet of paper
+   Hidden on screen; @media print shows it alone. @API invoices
+   ========================================================= */
+function zkReceipt(ref) {
+  const orders = ZKStore.orders();
+  const o = orders.find(x => x.no === ref || x.id === ref);
+  if (!o) return;
+
+  /* prefer the {id,title,price} snapshot taken at purchase time so the
+     receipt never drifts with later catalog or discount changes; orders
+     recorded before the snapshot existed fall back to the live catalog */
+  const lines = (o.lines && o.lines.length)
+    ? o.lines
+    : (o.items || []).map(ZK.byId).filter(Boolean)
+        .map(p => ({ id: p.id, title: p.title, price: p.price, category: p.category, type: p.type }));
+  const when = new Date(o.date || o.at || Date.now());
+  const buyerBits = [o.name, o.email].filter(Boolean).map(zkEsc);
+  const buyer = buyerBits.join(" · ") || zkEsc((ZKStore.user() || {}).email || "");
+
+  document.querySelector(".zk-receipt")?.remove();
+  const node = document.createElement("div");
+  node.className = "zk-receipt";
+  node.innerHTML = `
+    <div class="zkr-head">
+      <svg viewBox="6 7 36 34" aria-hidden="true"><path d="M7 8h34v6H7z"/><path d="M7 34h34v6H7z"/><path d="M35.4 16.2 15.2 32h-5.4L30 16.2z"/></svg>
+      <div><b>ZOKARIO</b><span>zokario.com</span></div>
+      <h2>${zkEsc(ZKT("rc.title"))}</h2>
+    </div>
+    <div class="zkr-meta">
+      <div><b>${zkEsc(ZKT("y.order", { n: o.no || o.id || "" }))}</b></div>
+      <div><span>${zkEsc(ZKT("rc.date"))}</span><b>${zkEsc(when.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }))}</b></div>
+      ${buyer ? `<div><span>${zkEsc(ZKT("rc.buyer"))}</span><b>${buyer}</b></div>` : ""}
+    </div>
+    <table class="zkr-items">
+      <thead><tr><th>${zkEsc(ZKT("rc.item"))}</th><th>${zkEsc(ZKT("rc.price"))}</th></tr></thead>
+      <tbody>
+        ${lines.map(l => `<tr><td>${zkEsc(l.title)}<small>${zkEsc(l.category ? zkCat(l.category) : "")}${l.category && l.type ? " · " : ""}${zkEsc(l.type ? zkType(l.type) : "")}</small></td><td>${ZK.fmt(o.gift ? 0 : l.price)}</td></tr>`).join("")}
+      </tbody>
+    </table>
+    <div class="zkr-totals">
+      <div><span>${zkEsc(ZKT("k.subtotal"))}</span><span>${ZK.fmt(o.subtotal ?? o.total ?? 0)}</span></div>
+      ${o.discount > 0 ? `<div><span>${zkEsc(ZKT("k.discount"))}${o.coupon ? " · " + zkEsc(o.coupon) : ""}</span><span>−${ZK.fmt(o.discount)}</span></div>` : ""}
+      <div class="zkr-grand"><span>${zkEsc(ZKT("k.total"))}</span><span>${ZK.fmt(o.total ?? 0)}</span></div>
+    </div>
+    <p class="zkr-note">${zkEsc(ZKT("rc.digital"))}<br>${zkEsc(ZKT("rc.thanks"))}</p>
+    ${o.demo || o.gift ? `<p class="zkr-demo">${zkEsc(ZKT("rc.demoLine"))}</p>` : ""}`;
+
+  document.body.appendChild(node);
+  document.body.classList.add("zk-printing");
+  const done = () => {
+    document.body.classList.remove("zk-printing");
+    node.remove();
+    removeEventListener("afterprint", done);
+  };
+  addEventListener("afterprint", done);
+  window.print();
+  setTimeout(done, 400); /* safety for browsers that return before afterprint */
 }
 
 /* =========================================================
@@ -455,7 +680,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const veil = document.createElement("div");
   veil.className = "search-veil";
   veil.innerHTML = `
-    <div class="search-box" role="dialog" aria-label="${zkEsc(ZKT("sr.label"))}">
+    <div class="search-box" role="dialog" aria-modal="true" aria-label="${zkEsc(ZKT("sr.label"))}">
       <div class="search-head">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input class="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="${zkEsc(ZKT("sr.placeholder"))}">
@@ -466,17 +691,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(veil);
   const input = veil.querySelector(".search-input");
   const results = veil.querySelector("#srResults");
-  let sel = -1, rows = [];
+  let sel = -1, rows = [], srTrap = null;
 
   const open = () => {
     veil.classList.add("open");
     document.body.style.overflow = "hidden";
     input.value = ""; render("");
+    srTrap = zkFocusTrap(veil, { initial: ".search-input" }); /* Escape handled by the shared keydown below */
     setTimeout(() => input.focus(), 40);
   };
   const close = () => {
     veil.classList.remove("open");
     document.body.style.overflow = "";
+    if (srTrap) { srTrap.release(); srTrap = null; }
   };
   btn.addEventListener("click", open);
   veil.addEventListener("click", e => { if (e.target === veil) close(); });
@@ -547,13 +774,17 @@ document.addEventListener("DOMContentLoaded", () => {
    Wishlist, recently-viewed, back-to-top, share
    ========================================================= */
 const ZKWish = {
-  list() { return ZKStore.read("zk_wish", []); },
+  /* cached for the page lifetime: zkWishBtn runs once per rendered card,
+     and every write path lives in toggle(), which refreshes the cache */
+  _list: null,
+  list() { return this._list ?? (this._list = ZKStore.read("zk_wish", [])); },
   has(id) { return this.list().includes(id); },
   toggle(id) {
     let l = this.list();
     const on = !l.includes(id);
     l = on ? [...l, id] : l.filter(x => x !== id);
     ZKStore.write("zk_wish", l);
+    this._list = l;
     return on;
   }
 };
@@ -574,6 +805,29 @@ const ZKRecent = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* header wishlist door: a heart beside the shelf icon, on every page */
+  const wActions = document.querySelector(".header-actions");
+  if (wActions && !wActions.querySelector(".wish-open")) {
+    const a = document.createElement("a");
+    a.className = "icon-btn wish-open";
+    a.href = "account.html#wishWrap";
+    a.setAttribute("aria-label", ZKT("wl.title"));
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.6-9.2-9A5.2 5.2 0 0 1 12 6.4 5.2 5.2 0 0 1 21.2 11C19 15.4 12 20 12 20Z"/></svg><span class="wish-count"></span>';
+    const wAnchor = wActions.querySelector('.icon-btn[href="account.html"]');
+    wActions.insertBefore(a, wAnchor || wActions.querySelector(".menu-toggle"));
+  }
+  const paintWishCount = () => {
+    const n = ZKWish.list().length;
+    document.querySelectorAll(".wish-count").forEach(el => {
+      el.textContent = n;
+      el.classList.toggle("show", n > 0);
+      el.setAttribute("aria-hidden", "true");
+      const link = el.closest("a");
+      if (link) link.setAttribute("aria-label", n > 0 ? ZKT("wl.count", { n }) : ZKT("wl.title"));
+    });
+  };
+  paintWishCount();
+
   /* wishlist toggles (delegated, works on injected cards too) */
   document.body.addEventListener("click", e => {
     const b = e.target.closest("[data-wish]");
@@ -583,7 +837,14 @@ document.addEventListener("DOMContentLoaded", () => {
     b.classList.toggle("on", on);
     b.setAttribute("aria-pressed", on);
     b.querySelector("svg").setAttribute("fill", on ? "currentColor" : "none");
+    paintWishCount();
     zkToast(ZKT(on ? "wl.saved" : "wl.removed"));
+  });
+
+  /* receipt buttons (delegated: order history, thank-you page) */
+  document.body.addEventListener("click", e => {
+    const b = e.target.closest("[data-receipt]");
+    if (b) zkReceipt(b.dataset.receipt);
   });
 
   /* back to top */
@@ -596,6 +857,276 @@ document.addEventListener("DOMContentLoaded", () => {
   const ttWatch = () => tt.classList.toggle("show", scrollY > 1100);
   addEventListener("scroll", ttWatch, { passive: true });
   ttWatch();
+});
+
+/* =========================================================
+   Cookie consent: ask once, remember politely
+   Receipt: zk_consent { at, v, choices }. Optional choices are
+   unchecked by default; "necessary" is always on.
+   ========================================================= */
+const ZKConsent = {
+  V: "2026-07",
+  get()      { return ZKStore.read("zk_consent", null); },
+  answered() { const c = ZKConsent.get(); return !!(c && c.choices && c.v === ZKConsent.V); },
+  allows(cat) {
+    /* @API: gate analytics / marketing / tag loaders with ZKConsent.allows("analytics") etc. */
+    if (cat === "necessary") return true;
+    const c = ZKConsent.get();
+    return !!(c && c.choices && c.choices[cat]);
+  },
+  save(choices) {
+    ZKStore.write("zk_consent", {
+      at: Date.now(),
+      v: ZKConsent.V,
+      choices: {
+        necessary:  true,
+        functional: !!choices.functional,
+        analytics:  !!choices.analytics,
+        marketing:  !!choices.marketing
+      }
+    });
+    /* @API: forward the consent receipt to the consent log / tag manager once one exists */
+    document.dispatchEvent(new CustomEvent("zk:consent"));
+  },
+  open() { zkConsentBanner(true); }
+};
+
+function zkConsentBanner(managing) {
+  const prev = document.querySelector(".ck-bar");
+  if (prev) prev.remove();
+  /* reopened from "Cookie settings": remember the opener so focus can return */
+  const ckOpener = managing ? document.activeElement : null;
+
+  const saved = (ZKConsent.get() || {}).choices || {};
+  const cats = [
+    { id: "necessary", locked: true },
+    { id: "functional" },
+    { id: "analytics" },
+    { id: "marketing" }
+  ];
+  const rows = cats.map(c => {
+    const K = "ck.cat" + c.id.charAt(0).toUpperCase() + c.id.slice(1);
+    const on = c.locked || !!saved[c.id]; /* optional categories start unchecked */
+    return `<label class="ck-cat">
+      <input type="checkbox" data-ckcat="${c.id}"${on ? " checked" : ""}${c.locked ? " disabled" : ""}>
+      <span class="ck-cat-copy"><b>${zkEsc(ZKT(K))}${c.locked ? `<i class="ck-lock">${zkEsc(ZKT("ck.always"))}</i>` : ""}</b><span>${zkEsc(ZKT(K + "D"))}</span></span>
+    </label>`;
+  }).join("");
+
+  const bar = document.createElement("div");
+  bar.className = "ck-bar";
+  bar.innerHTML = `
+    <div class="ck-card" role="dialog" aria-modal="false" aria-label="${zkEsc(ZKT("ck.title"))}">
+      ${managing ? `<button class="ck-close" type="button" aria-label="${zkEsc(ZKT("ck.close"))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button>` : ""}
+      <p class="ck-title">${zkEsc(ZKT("ck.title"))}</p>
+      <p class="ck-text">${zkEsc(ZKT("ck.text"))} <a href="privacy.html">${zkEsc(ZKT("ck.more"))}</a></p>
+      <div class="ck-actions">
+        <button type="button" class="btn btn-gold btn-sm" data-ck="all">${zkEsc(ZKT("ck.acceptAll"))}</button>
+        <button type="button" class="btn btn-gold btn-sm" data-ck="essential">${zkEsc(ZKT("ck.essential"))}</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-ck="manage" aria-expanded="false">${zkEsc(ZKT("ck.manage"))}</button>
+      </div>
+      <div class="ck-panel" hidden>
+        ${rows}
+        <div class="ck-save"><button type="button" class="btn btn-ghost btn-sm" data-ck="save">${zkEsc(ZKT("ck.save"))}</button></div>
+      </div>
+    </div>`;
+
+  const done = () => {
+    bar.classList.remove("open");
+    document.removeEventListener("keydown", onCkEsc);
+    if (ckOpener && document.contains(ckOpener) && typeof ckOpener.focus === "function") ckOpener.focus();
+    setTimeout(() => bar.remove(), 450);
+  };
+  /* Escape dismisses the reopened panel (the first-visit notice waits for a choice) */
+  const onCkEsc = e => { if (e.key === "Escape" && managing) done(); };
+  document.addEventListener("keydown", onCkEsc);
+  bar.addEventListener("click", e => {
+    if (e.target.closest(".ck-close")) { done(); return; }
+    const b = e.target.closest("[data-ck]");
+    if (!b) return;
+    const act = b.dataset.ck;
+    if (act === "manage") {
+      const panel = bar.querySelector(".ck-panel");
+      panel.hidden = !panel.hidden;
+      b.setAttribute("aria-expanded", String(!panel.hidden));
+      return;
+    }
+    if (act === "all")            ZKConsent.save({ functional: true, analytics: true, marketing: true });
+    else if (act === "essential") ZKConsent.save({});
+    else if (act === "save") {
+      const out = {};
+      bar.querySelectorAll("[data-ckcat]").forEach(i => { out[i.dataset.ckcat] = i.checked; });
+      ZKConsent.save(out);
+    }
+    zkToast(ZKT("ck.saved"));
+    done();
+  });
+
+  document.body.appendChild(bar);
+  if (managing) {
+    bar.querySelector(".ck-panel").hidden = false;
+    bar.querySelector('[data-ck="manage"]').setAttribute("aria-expanded", "true");
+  }
+  bar.offsetHeight; /* commit start styles so the entrance transitions */
+  bar.classList.add("open");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  /* footer "Cookie settings" links reopen the panel on every page */
+  document.body.addEventListener("click", e => {
+    const a = e.target.closest("[data-ck-open]");
+    if (!a) return;
+    e.preventDefault();
+    ZKConsent.open();
+  });
+  if (!ZKConsent.answered()) zkConsentBanner(false);
+});
+
+/* =========================================================
+   Welcome gift: join the list, take 25% off the first edition
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof ZK === "undefined") return;
+  const page = location.pathname.split("/").pop() || "index.html";
+  /* never interrupt reading or paying */
+  if (["reader.html", "checkout.html", "thank-you.html", "admin.html", "404.html"].includes(page)) return;
+
+  const CODE = "ZOKARIO25";
+
+  /* gentle reminder pill: gift claimed but not yet spent */
+  const giftPill = () => {
+    if (ZKStore.coupon() !== CODE || ZKStore.orders().length || ZKStore.read("zk_gift_pill_off", false)) return;
+    if (document.querySelector(".gift-pill")) return;
+    const el = document.createElement("div");
+    el.className = "gift-pill";
+    el.innerHTML = `<a href="shop.html"><span class="gp-orn" aria-hidden="true">✦</span>${zkEsc(ZKT("wp.pill"))}</a>
+      <button aria-label="${zkEsc(ZKT("wp.close"))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    el.querySelector("button").addEventListener("click", () => {
+      ZKStore.write("zk_gift_pill_off", true);
+      el.remove();
+    });
+    document.body.appendChild(el);
+  };
+  giftPill();
+
+  /* the doorway popup: once per guest, never for subscribers, owners or signed-in members */
+  if (ZKStore.read("zk_welcome_done", false)) return;
+  if (ZKStore.read("zk_newsletter", []).length || ZKStore.orders().length) return;
+  if (ZKStore.read("zk_session", null)) return;
+
+  const flagship = ZK.byId("the-last-lighthouse") || ZK.products[0];
+  const veil = document.createElement("div");
+  veil.className = "wp-veil";
+  veil.innerHTML = `
+    <div class="wp-card" role="dialog" aria-modal="true" aria-label="${zkEsc(ZKT("wp.eyebrow"))}">
+      <button class="wp-close" aria-label="${zkEsc(ZKT("wp.close"))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <div class="wp-stage" aria-hidden="true"><div class="book-wrap book-float">${zkBook3d(flagship)}</div></div>
+      <div class="wp-body">
+        <p class="wp-eyebrow">${zkEsc(ZKT("wp.eyebrow"))}</p>
+        <h3 class="wp-title">${ZKT("wp.title")}</h3>
+        <p class="wp-lead">${zkEsc(ZKT("wp.lead"))}</p>
+        <form class="wp-form">
+          <input class="input" type="email" required placeholder="${zkEsc(ZKT("wp.ph"))}" aria-label="${zkEsc(ZKT("wp.ph"))}">
+          <button class="btn btn-gold" type="submit">${zkEsc(ZKT("wp.btn"))}</button>
+        </form>
+        <button class="wp-later" type="button">${zkEsc(ZKT("wp.later"))}</button>
+      </div>
+    </div>`;
+
+  const book = veil.querySelector(".book3d");
+  if (book) {
+    book.style.setProperty("--bw", "92px");
+    book.style.setProperty("--bh", "132px");
+    book.style.setProperty("--bd", "14px");
+    book.style.transform = "rotateY(-24deg) rotateX(4deg)";
+  }
+
+  let wpTrap = null;
+  const close = () => {
+    ZKStore.write("zk_welcome_done", 1);
+    veil.classList.remove("open");
+    document.body.style.overflow = "";
+    if (wpTrap) { wpTrap.release(); wpTrap = null; }
+    setTimeout(() => { veil.remove(); giftPill(); }, 420);
+  };
+
+  veil.querySelector(".wp-close").addEventListener("click", close);
+  veil.querySelector(".wp-later").addEventListener("click", close);
+  veil.addEventListener("click", e => { if (e.target === veil) close(); });
+  addEventListener("keydown", e => { if (e.key === "Escape" && veil.classList.contains("open")) close(); });
+
+  /* the gift waits for the double opt-in: coupon lands only once the code confirms */
+  const finishGift = () => {
+    ZKStore.setCoupon(CODE);
+    const body = veil.querySelector(".wp-body");
+    body.innerHTML = `
+      <p class="wp-eyebrow">${zkEsc(ZKT("wp.eyebrow"))}</p>
+      <h3 class="wp-title">${zkEsc(ZKT("wp.doneTitle"))}</h3>
+      <div class="wp-code" role="status"><span>${CODE}</span><button class="wp-copy" type="button">${zkEsc(ZKT("wp.copy"))}</button></div>
+      <p class="wp-lead">${zkEsc(ZKT("wp.doneLead", { code: CODE }))}</p>
+      <a class="btn btn-gold wp-cta" href="shop.html">${zkEsc(ZKT("wp.cta"))}</a>`;
+    body.querySelector(".wp-copy").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(CODE); zkToast(ZKT("wp.copied")); }
+      catch { zkToast(CODE); }
+    });
+  };
+
+  veil.querySelector(".wp-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const email = veil.querySelector("input[type=email]").value.trim();
+    if (!email) return;
+    ZKStore.write("zk_welcome_done", 1); /* one visit, one ask */
+    if (ZKNews.on(email)) { finishGift(); return; }
+    const code = ZKNews.request(email); /* @API real confirmation email */
+    const body = veil.querySelector(".wp-body");
+    body.innerHTML = `
+      <p class="wp-eyebrow">${zkEsc(ZKT("wp.eyebrow"))}</p>
+      <h3 class="wp-title">${zkEsc(ZKT("nl.confirmTitle"))}</h3>
+      <p class="wp-lead"><span class="ep-envelope">✉</span> ${ZKT("nl.sent", { e: zkEsc(email) })} <b class="nc-code">${code}</b></p>
+      <form class="wp-form">
+        <input class="input" inputmode="numeric" maxlength="6" required placeholder="000000" aria-label="${zkEsc(ZKT("nl.codeLabel"))}">
+        <button class="btn btn-gold" type="submit">${zkEsc(ZKT("nl.confirmBtn"))}</button>
+      </form>
+      <p class="auth-err" id="wpErr" role="alert" hidden></p>`;
+    body.querySelector(".wp-form").addEventListener("submit", ev => {
+      ev.preventDefault();
+      const codeInput = body.querySelector(".wp-form input");
+      if (ZKNews.confirm(email, codeInput.value)) finishGift();
+      else {
+        const err = body.querySelector(".auth-err");
+        err.textContent = ZKT("nl.badCode");
+        err.hidden = false;
+        codeInput.setAttribute("aria-invalid", "true");
+        codeInput.setAttribute("aria-describedby", "wpErr");
+      }
+    });
+  });
+
+  /* arrive after a polite pause, or once the guest has started browsing */
+  let shown = false;
+  let awaitingConsent = false;
+  const show = () => {
+    if (shown) return;
+    /* the cookie notice speaks first: hold the gift until it is answered */
+    if (!ZKConsent.answered()) {
+      if (!awaitingConsent) {
+        awaitingConsent = true;
+        document.addEventListener("zk:consent", () => setTimeout(show, 800), { once: true });
+      }
+      return;
+    }
+    shown = true;
+    clearTimeout(timer);
+    removeEventListener("scroll", onScroll);
+    document.body.appendChild(veil);
+    veil.offsetHeight; /* commit start styles so the entrance transitions */
+    veil.classList.add("open");
+    document.body.style.overflow = "hidden";
+    wpTrap = zkFocusTrap(veil, { initial: "input[type=email]" }); /* Escape handled by the listener above */
+  };
+  const onScroll = () => { if (scrollY > innerHeight * 0.55) show(); };
+  const timer = setTimeout(show, 6000);
+  addEventListener("scroll", onScroll, { passive: true });
 });
 
 /* share the current edition (native sheet on mobile, copy elsewhere) */

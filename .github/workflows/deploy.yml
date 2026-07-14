@@ -25,5 +25,10 @@ jobs:
             .claude/**
             node_modules/**
             assets/source-1080p/**
+            assets/.masters/**
             .gitignore
+            .env*
             *.md
+            **/*.md
+            docs/**
+            tools/**

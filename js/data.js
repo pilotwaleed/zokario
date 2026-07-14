@@ -7,7 +7,8 @@ const ZK = {
 
   coupons: {
     WELCOME10: { pct: 10, label: "Welcome offer: 10% off" },
-    READERS15: { pct: 15, label: "Private reading list: 15% off" }
+    READERS15: { pct: 15, label: "Private reading list: 15% off" },
+    ZOKARIO25: { pct: 25, label: "Welcome gift: 25% off" }
   },
 
   categories: [
@@ -19,13 +20,13 @@ const ZK = {
 
   /* ---------------- BOOKS ---------------- */
   {
-    id: "the-quiet-ledger", pdf: "files/the-quiet-ledger.pdf",
+    id: "the-quiet-ledger", pdf: "files/the-quiet-ledger-4c086ba16a.pdf",
     type: "book",
     title: "The Quiet Ledger",
     subtitle: "A calmer way to think about money: the habits, systems, and numbers that actually matter.",
     category: "Business & Money",
-    price: 19, oldPrice: 26,
-    pages: 184, readTime: "4½ hours",
+    price: 19,
+    pages: 12, readTime: "25 min",
     badges: ["featured"],
     cover: { c1: "#25301F", c2: "#131A10", acc: "#D9C28C", motif: "ledger" },
     hook: "Money stops being stressful the moment you can see it clearly.",
@@ -55,7 +56,7 @@ const ZK = {
     faq: [
       { q: "Is this book beginner-friendly?", a: "Yes. It assumes no financial background and avoids jargon entirely. Every concept is introduced from zero and built up slowly." },
       { q: "Does it cover investing?", a: "One full chapter introduces long-horizon investing principles, calmly and without stock tips. It is a book about systems, not speculation." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library on any device." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library on any device." }
     ],
     previewCount: 2,
     chapters: [
@@ -90,13 +91,13 @@ const ZK = {
   },
 
   {
-    id: "deep-focus", pdf: "files/deep-focus.pdf",
+    id: "deep-focus", pdf: "files/deep-focus-a18aa902ba.pdf",
     type: "book",
     title: "Deep Focus",
     subtitle: "Reclaiming sustained attention in a world engineered to interrupt you.",
     category: "Productivity",
-    price: 17, oldPrice: 24,
-    pages: 162, readTime: "4 hours",
+    price: 17,
+    pages: 10, readTime: "20 min",
     badges: ["featured"],
     cover: { c1: "#1E2733", c2: "#0F141C", acc: "#CBB689", motif: "focus" },
     hook: "Attention is the last honest currency. This is how you stop spending it by accident.",
@@ -124,8 +125,8 @@ const ZK = {
     ],
     faq: [
       { q: "Is this another 'delete your apps' book?", a: "No. It treats tools as neutral and environments as decisive. You will change defaults and structures, not take vows." },
-      { q: "How long are the chapters?", a: "Ten chapters, each readable in 20 to 25 minutes, each ending with one concrete change." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "How long are the chapters?", a: "Ten compact chapters, about twenty minutes end to end, each ending with one concrete change." },
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -156,13 +157,13 @@ const ZK = {
   },
 
   {
-    id: "the-morning-architecture", pdf: "files/the-morning-architecture.pdf",
+    id: "the-morning-architecture", pdf: "files/the-morning-architecture-c9c5a8a000.pdf",
     type: "book",
     title: "The Morning Architecture",
     subtitle: "Design the first ninety minutes of your day, and the rest begins to follow.",
     category: "Self-Improvement",
     price: 15,
-    pages: 148, readTime: "3½ hours",
+    pages: 9, readTime: "20 min",
     badges: ["new"],
     cover: { c1: "#3A2E20", c2: "#1C130A", acc: "#E8CD96", motif: "morning" },
     hook: "Not a 5 AM sermon. A blueprint for mornings that belong to you.",
@@ -191,7 +192,7 @@ const ZK = {
     faq: [
       { q: "Do I have to wake up earlier?", a: "No. The book is explicitly against arbitrary early rising. It works with the wake time your life actually allows." },
       { q: "Is there a program to follow?", a: "The final chapter offers a gentle 90-day build, but the framework works à la carte." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -218,13 +219,13 @@ const ZK = {
   },
 
   {
-    id: "fuel", pdf: "files/fuel.pdf",
+    id: "fuel", pdf: "files/fuel-4aaa73da23.pdf",
     type: "book",
     title: "Fuel",
     subtitle: "Eating for steady energy: a practical system for people who don't want food to be complicated.",
     category: "Health & Fitness",
-    price: 16, oldPrice: 21,
-    pages: 170, readTime: "4 hours",
+    price: 16,
+    pages: 7, readTime: "15 min",
     badges: [],
     cover: { c1: "#33251C", c2: "#170F0A", acc: "#D8A96B", motif: "fuel" },
     hook: "Stop eating for rules. Start eating for energy.",
@@ -253,7 +254,7 @@ const ZK = {
     faq: [
       { q: "Is this a diet book?", a: "No. There are no forbidden foods, no phases, and no weigh-ins. It is a system for eating in a way that produces steady energy." },
       { q: "Does it include recipes?", a: "It includes default meal templates rather than recipes: flexible patterns you can fill with foods you already like." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -276,13 +277,13 @@ const ZK = {
   },
 
   {
-    id: "the-last-lighthouse", pdf: "files/the-last-lighthouse.pdf",
+    id: "the-last-lighthouse", pdf: "files/the-last-lighthouse-a1e189d48d.pdf",
     type: "book",
     title: "The Last Lighthouse",
     subtitle: "A novel about a keeper, an island, and the ships we refuse to stop waiting for.",
     category: "Stories & Fiction",
     price: 12,
-    pages: 236, readTime: "6 hours",
+    pages: 9, readTime: "20 min",
     badges: ["featured"],
     cover: { c1: "#1C2A33", c2: "#0C1319", acc: "#E3C989", motif: "lighthouse" },
     hook: "The light was decommissioned years ago. Maren keeps it burning anyway.",
@@ -301,9 +302,9 @@ const ZK = {
       "Part One: The Keeper", "Part Two: The Letter", "Part Three: The Crossing", "Part Four: What the Light Was For"
     ],
     faq: [
-      { q: "How long is the novel?", a: "About 236 pages: a deliberate, single-sitting-tempting read of roughly six hours." },
+      { q: "How long is the novel?", a: "This is a deliberately short edition of nine pages, written to be read in a single sitting of about twenty minutes." },
       { q: "Is it part of a series?", a: "No. It is a complete, standalone story." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -330,13 +331,13 @@ const ZK = {
   },
 
   {
-    id: "slow-cities", pdf: "files/slow-cities.pdf",
+    id: "slow-cities", pdf: "files/slow-cities-58c8bfc736.pdf",
     type: "book",
     title: "Slow Cities",
     subtitle: "Essays on travelling at the speed of noticing: eleven cities, unhurried.",
     category: "Travel & Lifestyle",
     price: 14,
-    pages: 198, readTime: "5 hours",
+    pages: 7, readTime: "15 min",
     badges: ["new"],
     cover: { c1: "#2E2A22", c2: "#15120C", acc: "#D9BE8C", motif: "arch" },
     hook: "You can cross a city in an hour, or you can let one cross you.",
@@ -366,7 +367,7 @@ const ZK = {
     faq: [
       { q: "Is this a guidebook?", a: "No. There are no hotel picks or maps. It is a book of essays about a way of travelling, useful before any trip to anywhere." },
       { q: "Can I read the essays out of order?", a: "Absolutely. Each stands alone; the final essay is the only one best saved for last." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -389,13 +390,13 @@ const ZK = {
   },
 
   {
-    id: "thinking-with-machines", pdf: "files/thinking-with-machines.pdf",
+    id: "thinking-with-machines", pdf: "files/thinking-with-machines-00e599b568.pdf",
     type: "book",
     title: "Thinking With Machines",
     subtitle: "A practical guide to working alongside intelligent tools, without losing your judgement.",
     category: "AI & Technology",
-    price: 21, oldPrice: 28,
-    pages: 206, readTime: "5 hours",
+    price: 21,
+    pages: 8, readTime: "15 min",
     badges: ["featured", "new"],
     cover: { c1: "#20242E", c2: "#101218", acc: "#C9B283", motif: "nodes" },
     hook: "The tools are astonishing. Your judgement is still the product.",
@@ -424,7 +425,7 @@ const ZK = {
     faq: [
       { q: "Do I need a technical background?", a: "None. The book explains the machinery with analogies, then focuses on working methods anyone can apply." },
       { q: "Will this date quickly?", a: "The tools chapter will age; the methods of delegation, verification, and taste are designed to outlast product cycles, and the book is updated when it matters." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library, including updated editions." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library, including updated editions." }
     ],
     previewCount: 2,
     chapters: [
@@ -447,13 +448,13 @@ const ZK = {
   },
 
   {
-    id: "the-honest-table", pdf: "files/the-honest-table.pdf",
+    id: "the-honest-table", pdf: "files/the-honest-table-0e1767f0de.pdf",
     type: "book",
     title: "The Honest Table",
     subtitle: "The conversations that hold people together, and how to stop avoiding them.",
     category: "Relationships",
     price: 15,
-    pages: 156, readTime: "4 hours",
+    pages: 7, readTime: "15 min",
     badges: [],
     cover: { c1: "#33222A", c2: "#170D12", acc: "#DBB98E", motif: "rings" },
     hook: "Every relationship has a table. The question is what stays unsaid across it.",
@@ -482,7 +483,7 @@ const ZK = {
     faq: [
       { q: "Is this only for romantic relationships?", a: "No. The frameworks apply equally to family, friendship, and even working relationships. Examples are drawn from all four." },
       { q: "Is it script-based?", a: "It offers language to start from, then teaches the principles underneath so your own words can take over." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 2,
     chapters: [
@@ -505,19 +506,19 @@ const ZK = {
   },
 
   {
-    id: "night-pages", pdf: "files/night-pages.pdf",
+    id: "night-pages", pdf: "files/night-pages-0fad02bde9.pdf",
     type: "book",
     title: "Night Pages",
     subtitle: "Nine short stories for the hour when the house goes quiet.",
     category: "Stories & Fiction",
     price: 11,
-    pages: 142, readTime: "3½ hours",
+    pages: 7, readTime: "15 min",
     badges: ["new"],
     cover: { c1: "#232031", c2: "#100E18", acc: "#CBB081", motif: "moon" },
     hook: "Nine stories, each the length of a late cup of tea.",
     desc: [
       "A night-shift nurse who has started receiving other people's dreams. A lighthouse converted to a bed-and-breakfast where one guest refuses to check out. A translator hired to interpret a language only two people ever spoke. Night Pages collects nine stories built for the last hour of the day: strange, humane, and quietly luminous.",
-      "Each story runs 12 to 20 pages: long enough to leave somewhere, short enough to finish tonight."
+      "Each story runs a page or so: long enough to leave somewhere, short enough to finish tonight."
     ],
     learn: [],
     audience: [
@@ -533,7 +534,7 @@ const ZK = {
     faq: [
       { q: "Are the stories connected?", a: "They stand alone, though attentive readers will notice one object that travels between them." },
       { q: "What genre is this?", a: "Literary with a thin silver thread of the strange, closer to fable than fantasy." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 1,
     chapters: [
@@ -551,13 +552,13 @@ const ZK = {
   },
 
   {
-    id: "the-compound-path", pdf: "files/the-compound-path.pdf",
+    id: "the-compound-path", pdf: "files/the-compound-path-a3f7b9cb73.pdf",
     type: "book",
     title: "The Compound Path",
     subtitle: "Patience as a strategy: investing principles for people playing the long game.",
     category: "Business & Money",
     price: 18,
-    pages: 178, readTime: "4½ hours",
+    pages: 7, readTime: "15 min",
     badges: [],
     cover: { c1: "#2A2E1E", c2: "#13160D", acc: "#D4BC85", motif: "steps" },
     hook: "The market rewards temperament. This book trains it.",
@@ -586,7 +587,7 @@ const ZK = {
     faq: [
       { q: "Does this recommend specific investments?", a: "No. It teaches principles and structures, then points you to the questions worth asking any provider. No tickers, no tips." },
       { q: "Do I need The Quiet Ledger first?", a: "No. This book stands alone, though the two are designed to sit well together." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 1,
     chapters: [
@@ -604,13 +605,13 @@ const ZK = {
   },
 
   {
-    id: "the-atlas-of-small-habits", pdf: "files/the-atlas-of-small-habits.pdf",
+    id: "the-atlas-of-small-habits", pdf: "files/the-atlas-of-small-habits-bd015d5558.pdf",
     type: "book",
     title: "The Atlas of Small Habits",
     subtitle: "Field notes on the tiny behaviours that quietly run your life.",
     category: "Self-Improvement",
-    price: 16, oldPrice: 22,
-    pages: 188, readTime: "4½ hours",
+    price: 16,
+    pages: 7, readTime: "15 min",
     badges: [],
     cover: { c1: "#2C2620", c2: "#14100B", acc: "#DFC793", motif: "compass" },
     hook: "You don't decide your days. Your defaults do.",
@@ -639,7 +640,7 @@ const ZK = {
     faq: [
       { q: "How is this different from Atomic Habits?", a: "It is narrower and deeper: entirely about defaults and environment, treated with an essayist's eye. It complements the classics rather than repeating them." },
       { q: "Is there a workbook element?", a: "Each territory ends with a one-page mapping exercise. The companion Daily Review notebook pairs well but is not required." },
-      { q: "Which formats are included?", a: "PDF and ePub downloads, plus unlimited online reading in your Zokario library." }
+      { q: "Which formats are included?", a: "A PDF download, plus unlimited online reading in your Zokario library." }
     ],
     previewCount: 1,
     chapters: [
@@ -658,13 +659,13 @@ const ZK = {
 
   /* ---------------- TEMPLATES ---------------- */
   {
-    id: "founders-operating-system", pdf: "files/founders-operating-system.pdf",
+    id: "founders-operating-system", pdf: "files/founders-operating-system-37e6d841be.pdf",
     type: "template",
     title: "The Founder's Operating System",
     subtitle: "A complete Notion workspace for running an early-stage business, from strategy to Monday morning.",
     category: "Business & Money",
-    price: 29, oldPrice: 39,
-    pages: 40, readTime: "30-min setup",
+    price: 29,
+    pages: 6, readTime: "30-min setup",
     badges: ["featured"],
     cover: { c1: "#1F2A2E", c2: "#0E1416", acc: "#CBB689", motif: "grid" },
     hook: "The structure your business was improvising toward.",
@@ -688,7 +689,7 @@ const ZK = {
     contents: [
       "Strategy Page", "Quarterly Goals Board", "Weekly Cadence Dashboard", "Projects Board",
       "Pipeline / CRM", "Decision Log", "Meeting Notes System", "Metrics Page",
-      "SOP Library", "Field Manual (40 pages)"
+      "SOP Library", "Field Manual"
     ],
     faq: [
       { q: "What do I need to use this?", a: "A free Notion account. Duplicate the workspace with one click, then follow the 30-minute setup chapter in the field manual." },
@@ -707,13 +708,13 @@ const ZK = {
   },
 
   {
-    id: "content-engine", pdf: "files/content-engine.pdf",
+    id: "content-engine", pdf: "files/content-engine-0cca1f11fa.pdf",
     type: "template",
     title: "Content Engine",
     subtitle: "A publishing pipeline for consistent creators: plan, produce, repurpose, without the chaos.",
     category: "Productivity",
     price: 24,
-    pages: 32, readTime: "25-min setup",
+    pages: 6, readTime: "25-min setup",
     badges: ["new"],
     cover: { c1: "#2E2418", c2: "#16100A", acc: "#DDBE7F", motif: "spokes" },
     hook: "Consistency isn't a personality trait. It's a pipeline.",
@@ -736,7 +737,7 @@ const ZK = {
     ],
     contents: [
       "Idea Bank", "Development Board", "Editorial Calendar", "Production Checklists",
-      "Platform Templates", "Repurposing Matrix", "Analytics Page", "Editorial Manual (32 pages)"
+      "Platform Templates", "Repurposing Matrix", "Analytics Page", "Editorial Manual"
     ],
     faq: [
       { q: "Which platforms does it cover?", a: "The pipeline is platform-agnostic; included checklists cover newsletters, YouTube, podcasts, and short-form social." },
@@ -755,13 +756,13 @@ const ZK = {
   },
 
   {
-    id: "job-search-vault", pdf: "files/job-search-vault.pdf",
+    id: "job-search-vault", pdf: "files/job-search-vault-25d89f5da0.pdf",
     type: "template",
     title: "The Job Search Vault",
     subtitle: "Run your search like a campaign: tracker, scripts, and interview preparation in one system.",
     category: "Self-Improvement",
     price: 19,
-    pages: 36, readTime: "20-min setup",
+    pages: 5, readTime: "20-min setup",
     badges: [],
     cover: { c1: "#26222E", c2: "#110F16", acc: "#C9B283", motif: "vault" },
     hook: "A job search is a project. Manage it like one.",
@@ -784,7 +785,7 @@ const ZK = {
     ],
     contents: [
       "Application Pipeline", "Company Dossiers", "Outreach Scripts", "Interview Prep Sheets",
-      "Story Bank (STAR)", "Offer Comparison Tool", "Reference Tracker", "Strategy Manual (36 pages)"
+      "Story Bank (STAR)", "Offer Comparison Tool", "Reference Tracker", "Strategy Manual"
     ],
     faq: [
       { q: "Does it work for any industry?", a: "Yes. The system is industry-agnostic. Example dossiers cover tech, design, finance, and healthcare." },
@@ -804,19 +805,19 @@ const ZK = {
 
   /* ---------------- NOTEBOOKS ---------------- */
   {
-    id: "the-daily-review", pdf: "files/the-daily-review.pdf",
+    id: "the-daily-review", pdf: "files/the-daily-review-bc47c7d038.pdf",
     type: "notebook",
     title: "The Daily Review",
     subtitle: "A five-minute evening notebook: one page a day, digital and printable.",
     category: "Productivity",
     price: 13,
-    pages: 190, readTime: "5 min daily",
+    pages: 5, readTime: "5 min daily",
     badges: ["featured"],
     cover: { c1: "#2A2117", c2: "#141009", acc: "#E4CFA3", motif: "check" },
     hook: "The day happened. Five minutes decides what it meant.",
     desc: [
       "The Daily Review is a beautifully typeset notebook built around one evening page: three prompts, one line of gratitude, tomorrow's heading. Nothing that takes more than five minutes; nothing you will dread by Thursday.",
-      "Delivered as a hyperlinked PDF for tablets (GoodNotes, Notability, and similar) and a printable edition, with monthly dividers, review spreads, and a design calm enough to end days inside: 190 pages, six months of evenings."
+      "Delivered as a hyperlinked PDF for tablets (GoodNotes, Notability, and similar) and a printable edition, with monthly dividers, review spreads, and a design calm enough to end days inside. Duplicate the evening page for as many nights as you need."
     ],
     learn: [
       "The three-prompt evening page: went well, got hard, learned",
@@ -846,25 +847,25 @@ const ZK = {
         "This notebook makes one promise: five minutes, at the end of the day, and no page will ever ask more of you than that. It is built on the observation that most journaling practices fail not from lack of depth but from excess of it: the blank page demands an essay, the essay demands energy, and by Thursday the notebook has joined its ancestors in the drawer.",
         "The daily page asks three things. What went well: one to three lines, and yes, small counts. What got hard: named plainly, because named things shrink. What you learned: about the work, the people, or yourself, and 'nothing today' is an honest entry. Beneath them, one line of gratitude and one sentence for tomorrow: the heading your next morning will be glad to find.",
         "Write badly. Write in fragments. The page does not grade. Its entire function is to place a small full stop at the end of the day, so the day stops running in the background all night.",
-        "The preview ends here. The full notebook contains 180 daily pages, monthly dividers and review spreads, the year compass, and the printable edition."
+        "The preview ends here. The full notebook contains the daily page, monthly dividers and review spreads, the year compass, and the printable edition."
       ]}
     ]
   },
 
   {
-    id: "the-reading-log", pdf: "files/the-reading-log.pdf",
+    id: "the-reading-log", pdf: "files/the-reading-log-3633307eaf.pdf",
     type: "notebook",
     title: "The Reading Log",
     subtitle: "A reader's notebook for capturing books before they evaporate.",
     category: "Self-Improvement",
     price: 9,
     badges: [],
-    pages: 120, readTime: "Per book",
+    pages: 5, readTime: "Per book",
     cover: { c1: "#20282E", c2: "#0E1316", acc: "#D9BE8C", motif: "bookmark" },
     hook: "You read the book. Keep what it gave you.",
     desc: [
       "A month after finishing most books, we retain a mood and two anecdotes. The Reading Log is a notebook designed to interrupt that evaporation: per-book spreads for passages, arguments, disagreements, and the one-paragraph review future-you will actually reread.",
-      "Includes an annual reading map, a to-read pipeline with honest priorities, and quote index pages, delivered as a hyperlinked tablet PDF and printable edition. Room for sixty books; enough for two ambitious years."
+      "Includes an annual reading map, a to-read pipeline with honest priorities, and quote index pages, delivered as a hyperlinked tablet PDF and printable edition. Duplicate the per-book spread for as many books as you read."
     ],
     learn: [
       "The per-book spread: capture while reading, distil after",
@@ -900,19 +901,19 @@ const ZK = {
   },
 
   {
-    id: "ninety-day-focus-planner", pdf: "files/ninety-day-focus-planner.pdf",
+    id: "ninety-day-focus-planner", pdf: "files/ninety-day-focus-planner-0b76632918.pdf",
     type: "notebook",
     title: "The 90-Day Focus Planner",
     subtitle: "One quarter, one aim: a planning notebook for finishing what matters.",
     category: "Productivity",
-    price: 15, oldPrice: 19,
-    pages: 210, readTime: "Weekly rhythm",
+    price: 15,
+    pages: 5, readTime: "Weekly rhythm",
     badges: [],
     cover: { c1: "#302020", c2: "#170D0D", acc: "#DDBE7F", motif: "quarter" },
     hook: "A year is too long to steer. Ninety days is a voyage.",
     desc: [
       "New Year's plans die of distance: December cannot see February clearly, let alone October. The 90-Day Focus Planner works at the range where planning actually functions: one quarter, one primary aim, thirteen weekly reviews, and daily pages that keep the aim in peripheral vision.",
-      "Built as a hyperlinked tablet PDF with printable edition: quarter-setting spreads, weekly plan/review pairs, ninety daily pages, and a closing retrospective that sets up the next voyage. Undated: begin any Monday."
+      "Built as a hyperlinked tablet PDF with printable edition: quarter-setting spreads, weekly plan/review pairs, a repeatable daily page, and a closing retrospective that sets up the next voyage. Undated: begin any Monday."
     ],
     learn: [
       "Choosing one primary aim, and surviving the fear of choosing",
@@ -942,7 +943,7 @@ const ZK = {
         "Every January, millions of intelligent people write down seven goals, and by March the seven have quietly negotiated themselves down to zero. The failure is not ambition; it is arithmetic. Seven goals across ninety usable days is under two weeks of attention each: enough to start anything, enough to finish nothing.",
         "This planner enforces a different arithmetic: one primary aim per quarter. Not one project but one aim, the single sentence that, if true in ninety days, would make this quarter unmistakably worth it. Everything else goes on the 'meanwhile' list, where maintenance lives: the gym you keep attending, the inbox you keep answering. Meanwhile items get systems. The aim gets you.",
         "Choosing one aim is frightening in a way seven goals never are, because one aim can visibly fail. That fear is worth examining on paper, and the quarter-setting spread will make you do exactly that, because a goal that cannot fail was never a goal, only a decoration.",
-        "The preview ends here. The full planner contains the quarter-setting spreads, thirteen weekly pairs, ninety daily pages, and the retrospective."
+        "The preview ends here. The full planner contains the quarter-setting spreads, the weekly pairs, the repeatable daily page, and the retrospective."
       ]}
     ]
   }
@@ -950,15 +951,15 @@ const ZK = {
 
   /* ---------------- ARABIC & FRENCH SHELVES ---------------- */
   {
-    "id": "rasail-muntasaf-al-layl", pdf: "files/rasail-muntasaf-al-layl.pdf",
+    "id": "rasail-muntasaf-al-layl", pdf: "files/rasail-muntasaf-al-layl-b65ee8a231.pdf",
     "type": "book",
     "lang": "ar",
     "title": "رسائل منتصف الليل",
     "subtitle": "حارس ليل يكتب إلى قارئ لا يعرفه، عن الكتب المفتوحة والمدن بعد أن تنام.",
     "category": "Stories & Fiction",
     "price": 11,
-    "pages": 168,
-    "readTime": "4 ساعات",
+    "pages": 6,
+    "readTime": "12 دقيقة",
     "badges": [
       "new"
     ],
@@ -989,7 +990,7 @@ const ZK = {
     "faq": [
       {
         "q": "بأي صيغة يصلني الكتاب؟",
-        "a": "فور إتمام الشراء تصلك نسختان بصيغتي PDF وePub، تقرأهما على أي جهاز أو تطبيق قراءة تفضله."
+        "a": "فور إتمام الشراء تصلك نسخة PDF، تقرأها على أي جهاز أو تطبيق قراءة تفضله."
       },
       {
         "q": "هل أستطيع القراءة دون تحميل ملفات؟",
@@ -1017,15 +1018,15 @@ const ZK = {
   },
 
   {
-    "id": "fann-al-julus-maa-al-nafs", pdf: "files/fann-al-julus-maa-al-nafs.pdf",
+    "id": "fann-al-julus-maa-al-nafs", pdf: "files/fann-al-julus-maa-al-nafs-3010ddcdea.pdf",
     "type": "book",
     "lang": "ar",
     "title": "فن الجلوس مع النفس",
     "subtitle": "دعوة هادئة إلى عشر دقائق من الخلوة الصادقة، بعيدا عن الشاشات وضجيج التحسين.",
     "category": "Self-Improvement",
     "price": 14,
-    "pages": 152,
-    "readTime": "4 ساعات",
+    "pages": 6,
+    "readTime": "12 دقيقة",
     "badges": [
       "new"
     ],
@@ -1056,7 +1057,7 @@ const ZK = {
     "faq": [
       {
         "q": "بأي صيغة أحصل على الكتاب بعد الشراء؟",
-        "a": "يصلك الكتاب فور إتمام الشراء بصيغتي PDF وePub معا، لتقرأه على أي جهاز تفضله."
+        "a": "يصلك الكتاب فور إتمام الشراء بصيغة PDF، لتقرأه على أي جهاز تفضله."
       },
       {
         "q": "هل أحتاج إلى تحميل الملفات لأبدأ القراءة؟",
@@ -1084,15 +1085,15 @@ const ZK = {
   },
 
   {
-    "id": "kharait-al-mudun-al-qadima", pdf: "files/kharait-al-mudun-al-qadima.pdf",
+    "id": "kharait-al-mudun-al-qadima", pdf: "files/kharait-al-mudun-al-qadima-edd1f2a585.pdf",
     "type": "book",
     "lang": "ar",
     "title": "خرائط المدن القديمة",
     "subtitle": "رحلات مشي بطيئة في أزقة المدن العربية القديمة، حيث تحفظ الجدران ما ينساه العابرون.",
     "category": "Travel & Lifestyle",
     "price": 12,
-    "pages": 190,
-    "readTime": "5 ساعات",
+    "pages": 6,
+    "readTime": "12 دقيقة",
     "badges": [
       "new"
     ],
@@ -1123,7 +1124,7 @@ const ZK = {
     "faq": [
       {
         "q": "بأي صيغة أحصل على الكتاب بعد الشراء؟",
-        "a": "يصلك الكتاب فور إتمام الشراء بصيغتي PDF وePub معا، لتقرأه على أي جهاز تفضله."
+        "a": "يصلك الكتاب فور إتمام الشراء بصيغة PDF، لتقرأه على أي جهاز تفضله."
       },
       {
         "q": "هل أستطيع القراءة دون تحميل أي ملفات؟",
@@ -1151,15 +1152,15 @@ const ZK = {
   },
 
   {
-    "id": "la-bibliotheque-de-minuit", pdf: "files/la-bibliotheque-de-minuit.pdf",
+    "id": "la-bibliotheque-de-minuit", pdf: "files/la-bibliotheque-de-minuit-8a0d4084bc.pdf",
     "type": "book",
     "lang": "fr",
     "title": "La Bibliothèque de minuit",
     "subtitle": "Un court roman sur une bibliothèque qui n'ouvre qu'à minuit, et sur ceux que la nuit tient éveillés.",
     "category": "Stories & Fiction",
     "price": 12,
-    "pages": 176,
-    "readTime": "4 heures",
+    "pages": 6,
+    "readTime": "12 min",
     "badges": [
       "new"
     ],
@@ -1172,7 +1173,7 @@ const ZK = {
     "hook": "Elle prête à chacun le livre dont il ne savait pas avoir besoin.",
     "desc": [
       "Dans une ville sans nom, une bibliothèque de quartier n'ouvre ses portes qu'entre minuit et l'aube. On y croise une infirmière qui rentre de garde, un veuf qui parle aux rayonnages, une adolescente qui a peur d'éteindre la lumière. Derrière le comptoir, madame Solane ne demande jamais de carte : elle observe, elle écoute, puis elle prête à chacun le livre dont il ne savait pas avoir besoin. Élias, qui ne dort plus depuis deux cent onze nuits, va recevoir le sien.",
-      "Écrit dans une langue simple et lumineuse, La Bibliothèque de minuit est un roman court sur l'insomnie, le deuil et la douceur têtue des lieux qui restent ouverts quand tout ferme. Un réalisme à peine déplacé, où le merveilleux tient en une étiquette manuscrite et une lampe qu'on n'éteint pas. Cent soixante-seize pages à lire une nuit où le sommeil ne vient pas, ou à garder pour celles qui viendront."
+      "Écrit dans une langue simple et lumineuse, La Bibliothèque de minuit est un roman court sur l'insomnie, le deuil et la douceur têtue des lieux qui restent ouverts quand tout ferme. Un réalisme à peine déplacé, où le merveilleux tient en une étiquette manuscrite et une lampe qu'on n'éteint pas. Un texte bref, à lire une nuit où le sommeil ne vient pas, ou à garder pour celles qui viendront."
     ],
     "learn": [
       "Un court roman complet, à lire en une ou deux nuits blanches",
@@ -1190,7 +1191,7 @@ const ZK = {
     "faq": [
       {
         "q": "Dans quels formats le livre est-il disponible ?",
-        "a": "Le roman est livré en PDF et en ePub, sans protection contraignante, pour le lire sur liseuse, tablette ou ordinateur."
+        "a": "Le roman est livré en PDF, sans protection contraignante, pour le lire sur liseuse, tablette ou ordinateur."
       },
       {
         "q": "Puis-je lire sans rien télécharger ?",
@@ -1218,15 +1219,15 @@ const ZK = {
   },
 
   {
-    "id": "l-art-de-finir", pdf: "files/l-art-de-finir.pdf",
+    "id": "l-art-de-finir", pdf: "files/l-art-de-finir-bbab888e7d.pdf",
     "type": "book",
     "lang": "fr",
     "title": "L'Art de finir",
     "subtitle": "Un essai sur la discipline discrète de l'achèvement, à l'usage des collectionneurs de commencements.",
     "category": "Productivity",
     "price": 15,
-    "pages": 148,
-    "readTime": "4 heures",
+    "pages": 7,
+    "readTime": "15 min",
     "badges": [
       "new"
     ],
@@ -1257,7 +1258,7 @@ const ZK = {
     "faq": [
       {
         "q": "Sous quels formats le livre est-il disponible ?",
-        "a": "Vous recevez le livre en PDF et en ePub, sans protection contraignante, pour le lire confortablement sur tous vos appareils."
+        "a": "Vous recevez le livre en PDF, sans protection contraignante, pour le lire confortablement sur tous vos appareils."
       },
       {
         "q": "Puis-je le lire sans rien télécharger ?",
@@ -1285,15 +1286,15 @@ const ZK = {
   },
 
   {
-    "id": "cafes-et-autres-refuges", pdf: "files/cafes-et-autres-refuges.pdf",
+    "id": "cafes-et-autres-refuges", pdf: "files/cafes-et-autres-refuges-2f51208397.pdf",
     "type": "book",
     "lang": "fr",
     "title": "Cafés et autres refuges",
     "subtitle": "De Vienne à Paris, l'éloge discret du droit de s'attarder devant une tasse vide.",
     "category": "Travel & Lifestyle",
     "price": 11,
-    "pages": 132,
-    "readTime": "4 heures",
+    "pages": 6,
+    "readTime": "12 min",
     "badges": [
       "new"
     ],
@@ -1324,7 +1325,7 @@ const ZK = {
     "faq": [
       {
         "q": "Dans quels formats le livre est-il proposé ?",
-        "a": "Vous recevez le livre en PDF et en ePub, lisibles sur tous vos appareils. Les deux formats sont inclus dans le prix, sans supplément."
+        "a": "Vous recevez le livre en PDF, lisible sur tous vos appareils et inclus dans le prix, sans supplément."
       },
       {
         "q": "Le livre sera-t-il enrichi au fil du temps ?",
@@ -1354,7 +1355,7 @@ const ZK = {
 
   /* ---------------- THE WONDER ROOM (bedtime tales) ---------------- */
   {
-    "id": "the-moon-ferry", pdf: "files/the-moon-ferry.pdf",
+    "id": "the-moon-ferry", pdf: "files/the-moon-ferry-3d609d4f34.pdf",
     "contents": ["The Harbour Where the Rooftops End","A Ticket Paid in Wishes","The Lighthouse That Collected Echoes","Fog, and How to Be Brave in It","The Island of Almost-Morning","The Ferryman's Lantern","Home Before the Stars Go Out"],
     "type": "book",
     "lang": "en",
@@ -1363,8 +1364,8 @@ const ZK = {
     "subtitle": "A bedtime tale of leftover dreams and the quiet ferryman who carries them home",
     "category": "Stories & Fiction",
     "price": 9,
-    "pages": 44,
-    "readTime": "20 min aloud",
+    "pages": 6,
+    "readTime": "10 min aloud",
     "badges": [
       "new"
     ],
@@ -1394,7 +1395,7 @@ const ZK = {
     "faq": [
       {
         "q": "How long does it take to read aloud, and what age is it for?",
-        "a": "One unhurried crossing takes about twenty minutes aloud, or you can split it into three or four short voyages over several nights. The tale is tuned for listeners aged four to nine, with sentences shaped so the grown-up doing the reading falls a little under the spell too."
+        "a": "One unhurried crossing takes about ten minutes aloud, or you can split it into two short voyages over two nights. The tale is tuned for listeners aged four to nine, with sentences shaped so the grown-up doing the reading falls a little under the spell too."
       },
       {
         "q": "Is this a picture book?",
@@ -1402,7 +1403,7 @@ const ZK = {
       },
       {
         "q": "What formats do I receive?",
-        "a": "Your purchase includes the tale as both PDF and ePub, plus instant access in our online reader on any device. Every future refinement of the edition is yours as a free update, forever. Buy it once, and the ferry keeps sailing."
+        "a": "Your purchase includes the tale as a PDF, plus instant access in our online reader on any device. Every future refinement of the edition is yours as a free update, forever. Buy it once, and the ferry keeps sailing."
       }
     ],
     "previewCount": 1,
@@ -1421,7 +1422,7 @@ const ZK = {
   },
 
   {
-    "id": "the-paper-fox", pdf: "files/the-paper-fox.pdf",
+    "id": "the-paper-fox", pdf: "files/the-paper-fox-29fbe6b02a.pdf",
     "contents": ["The Fox on Page Forty","Ink Still Wet","The Margin Forest","A Bookmark for a Tail","The Library at the Edge of Sleep","The Unfinished Sentence","Back Between the Covers"],
     "type": "book",
     "lang": "en",
@@ -1430,8 +1431,8 @@ const ZK = {
     "subtitle": "A bedtime tale for small listeners who are not quite sure about the dark",
     "category": "Stories & Fiction",
     "price": 9,
-    "pages": 40,
-    "readTime": "20 min aloud",
+    "pages": 6,
+    "readTime": "10 min aloud",
     "badges": [
       "new"
     ],
@@ -1461,7 +1462,7 @@ const ZK = {
     "faq": [
       {
         "q": "How long does it take to read aloud, and what age is it for?",
-        "a": "Read gently, the whole tale takes about twenty minutes aloud, or two ten-minute nights, since it rests naturally at the halfway fold. It is written for listeners aged four to nine, with enough music in the sentences that older readers rarely mind staying."
+        "a": "Read gently, the whole tale takes about ten minutes aloud, or two five-minute nights, since it rests naturally at the halfway fold. It is written for listeners aged four to nine, with enough music in the sentences that older readers rarely mind staying."
       },
       {
         "q": "Is this an illustrated picture book?",
@@ -1469,7 +1470,7 @@ const ZK = {
       },
       {
         "q": "What formats do I receive?",
-        "a": "Your purchase includes the tale as both PDF and ePub, plus instant access in our online reader on any device. Every future refinement of the edition is yours as a free update, forever."
+        "a": "Your purchase includes the tale as a PDF, plus instant access in our online reader on any device. Every future refinement of the edition is yours as a free update, forever."
       }
     ],
     "previewCount": 1,
@@ -1488,7 +1489,7 @@ const ZK = {
   },
 
   {
-    "id": "markab-al-ghaym", pdf: "files/markab-al-ghaym.pdf",
+    "id": "markab-al-ghaym", pdf: "files/markab-al-ghaym-cda1530fb5.pdf",
     "contents": ["مركب لا يعرف الماء","شراع من ضوء المصباح","ميناء الوسائد","النجمة التي دلت الطريق","بحر الغيم الهادئ","الرسو عند حافة الحلم"],
     "type": "book",
     "lang": "ar",
@@ -1497,8 +1498,8 @@ const ZK = {
     "subtitle": "حكاية قبل النوم عن صبي يبحر فوق الغيم ليعيد الأحلام الضائعة إلى نوافذها",
     "category": "Stories & Fiction",
     "price": 9,
-    "pages": 42,
-    "readTime": "20 دقيقة قراءة بصوت عال",
+    "pages": 6,
+    "readTime": "10 دقائق قراءة بصوت عال",
     "badges": [
       "new"
     ],
@@ -1528,7 +1529,7 @@ const ZK = {
     "faq": [
       {
         "q": "كم تستغرق قراءتها، ولأي عمر تناسب؟",
-        "a": "صممت الحكاية لتقرأ في نحو عشرين دقيقة بصوت عال، ويمكن تقسيمها بيسر على ليلتين أو ثلاث. لغتها ومعانيها تناسب المصغين من أربع سنوات إلى تسع، على أن الكبار الذين يقرؤونها كثيرا ما يسهرون معها أيضا."
+        "a": "صممت الحكاية لتقرأ في نحو عشر دقائق بصوت عال، ويمكن تقسيمها بيسر على ليلتين. لغتها ومعانيها تناسب المصغين من أربع سنوات إلى تسع، على أن الكبار الذين يقرؤونها كثيرا ما يسهرون معها أيضا."
       },
       {
         "q": "هل الكتاب مصور بالرسوم؟",
@@ -1536,7 +1537,7 @@ const ZK = {
       },
       {
         "q": "بأي صيغة أحصل على الكتاب؟",
-        "a": "تصلكم فور الشراء نسختا PDF وePub معا، مع قارئ إلكتروني أنيق عبر المتصفح تفتحونه من أي جهاز، وتحديثات مجانية مدى الحياة كلما صقلنا الطبعة وزدناها جمالا."
+        "a": "تصلكم فور الشراء نسخة PDF، مع قارئ إلكتروني أنيق عبر المتصفح تفتحونه من أي جهاز، وتحديثات مجانية مدى الحياة كلما صقلنا الطبعة وزدناها جمالا."
       }
     ],
     "previewCount": 1,
@@ -1555,7 +1556,7 @@ const ZK = {
   },
 
   {
-    "id": "ou-dorment-les-etoiles", pdf: "files/ou-dorment-les-etoiles.pdf",
+    "id": "ou-dorment-les-etoiles", pdf: "files/ou-dorment-les-etoiles-eb92aa09f0.pdf",
     "contents": ["L'étoile qui refusait de dormir","La berceuse du phare","Le filet à constellations","Un nuage pour oreiller","Le gardien des veilleuses","Là où dorment les étoiles"],
     "type": "book",
     "lang": "fr",
@@ -1564,8 +1565,8 @@ const ZK = {
     "subtitle": "Un conte du soir à lire à voix haute, où la plus petite étoile du ciel apprend enfin à fermer les yeux",
     "category": "Stories & Fiction",
     "price": 9,
-    "pages": 38,
-    "readTime": "20 min à voix haute",
+    "pages": 6,
+    "readTime": "10 min à voix haute",
     "badges": [
       "new"
     ],
@@ -1595,7 +1596,7 @@ const ZK = {
     "faq": [
       {
         "q": "Pour quel âge, et combien de temps dure la lecture à voix haute ?",
-        "a": "Le conte est écrit pour les écouteurs de 4 à 9 ans et se lit en une vingtaine de minutes à voix haute : un soir entier, ou deux soirs si l'on veut faire durer le plaisir. Les phrases sont rythmées pour la voix, avec des refrains que les enfants reprennent vite en chœur."
+        "a": "Le conte est écrit pour les écouteurs de 4 à 9 ans et se lit en une dizaine de minutes à voix haute : un soir entier, ou deux soirs si l'on veut faire durer le plaisir. Les phrases sont rythmées pour la voix, avec des refrains que les enfants reprennent vite en chœur."
       },
       {
         "q": "Le livre est-il illustré ?",
@@ -1603,7 +1604,7 @@ const ZK = {
       },
       {
         "q": "Sous quels formats le conte est-il livré ?",
-        "a": "Vous recevez le PDF et l'ePub, ainsi qu'un accès à notre liseuse en ligne pour lire depuis n'importe quel écran. Toutes les mises à jour futures de l'édition sont incluses, sans frais supplémentaires."
+        "a": "Vous recevez le PDF, ainsi qu'un accès à notre liseuse en ligne pour lire depuis n'importe quel écran. Toutes les mises à jour futures de l'édition sont incluses, sans frais supplémentaires."
       }
     ],
     "previewCount": 1,
@@ -1624,7 +1625,7 @@ const ZK = {
 
   /* ---------------- THE MONALIZA SALON (vintage art) ---------------- */
   {
-    "id": "the-gilded-frame", pdf: "files/the-gilded-frame.pdf",
+    "id": "the-gilded-frame", pdf: "files/the-gilded-frame-523c167256.pdf",
     "contents": [
       "The Window That Was Never a Window",
       "Gold Is an Instrument",
@@ -1642,8 +1643,8 @@ const ZK = {
     "subtitle": "How frames, light and rooms taught Europe to look at pictures",
     "category": "Art & Beauty",
     "price": 15,
-    "pages": 176,
-    "readTime": "4h read",
+    "pages": 6,
+    "readTime": "12 min read",
     "badges": [
       "new"
     ],
@@ -1699,7 +1700,7 @@ const ZK = {
   },
 
   {
-    "id": "one-hour-in-a-museum", pdf: "files/one-hour-in-a-museum.pdf",
+    "id": "one-hour-in-a-museum", pdf: "files/one-hour-in-a-museum-1dee1e7243.pdf",
     "contents": [
       "Choose One Painting and Forgive the Rest",
       "The First Ten Minutes, or the Fog",
@@ -1716,8 +1717,8 @@ const ZK = {
     "subtitle": "One painting, sixty minutes and the art of coming away changed",
     "category": "Art & Beauty",
     "price": 12,
-    "pages": 128,
-    "readTime": "3h read",
+    "pages": 6,
+    "readTime": "12 min read",
     "badges": [
       "new"
     ],
@@ -1773,7 +1774,7 @@ const ZK = {
   },
 
   {
-    "id": "letters-to-a-young-painter", pdf: "files/letters-to-a-young-painter.pdf",
+    "id": "letters-to-a-young-painter", pdf: "files/letters-to-a-young-painter-b95385b25d.pdf",
     "contents": [
       "On Beginning Badly",
       "On the Discipline of Seeing",
@@ -1791,8 +1792,8 @@ const ZK = {
     "subtitle": "Letters on craft, doubt and beauty for an artist at the beginning of the road",
     "category": "Art & Beauty",
     "price": 14,
-    "pages": 152,
-    "readTime": "4h read",
+    "pages": 6,
+    "readTime": "12 min read",
     "badges": [
       "new"
     ],
@@ -1848,7 +1849,7 @@ const ZK = {
   },
 
   {
-    "id": "fi-madh-al-jamal", pdf: "files/fi-madh-al-jamal.pdf",
+    "id": "fi-madh-al-jamal", pdf: "files/fi-madh-al-jamal-7ea9c99e22.pdf",
     "contents": [
       "الجمال يبدأ بالنظر",
       "العين تتربى كما تتربى اليد",
@@ -1866,8 +1867,8 @@ const ZK = {
     "subtitle": "تأملات في الفن والنظر وتربية العين",
     "category": "Art & Beauty",
     "price": 13,
-    "pages": 136,
-    "readTime": "3h read",
+    "pages": 6,
+    "readTime": "12 min read",
     "badges": [
       "new"
     ],

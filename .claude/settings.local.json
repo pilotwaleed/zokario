@@ -85,7 +85,12 @@
       "Bash(node -e \"const s=require\\('fs'\\).readFileSync\\('js/data.js','utf8'\\); eval\\(s.replace\\('const ZK','globalThis.ZK'\\)\\); console.log\\('products:', ZK.products.length, '| ar toc:', ZK.byId\\('rasail-muntasaf-al-layl'\\).contents.length, '| fr toc:', ZK.byId\\('l-art-de-finir'\\).contents.length\\)\")",
       "Bash(node /private/tmp/claude-501/-Users-waleedalansari-Desktop-website/5dba2f91-2384-418a-ac5b-507ab098efb3/scratchpad/js-literals.mjs)",
       "Bash(node /private/tmp/claude-501/-Users-waleedalansari-Desktop-website/5dba2f91-2384-418a-ac5b-507ab098efb3/scratchpad/commerce-i18n.mjs)",
-      "Bash(sed -i '' 's/content=\"#171210\"/content=\"#141009\"/' *.html && grep -l 'theme-color' *.html | wc -l | xargs echo \"theme-color updated in files:\")"
+      "Bash(sed -i '' 's/content=\"#171210\"/content=\"#141009\"/' *.html && grep -l 'theme-color' *.html | wc -l | xargs echo \"theme-color updated in files:\")",
+      "Read(//Users/waleedalansari/Desktop/all website designs/**)",
+      "Read(//Users/waleedalansari/Desktop/all website designs/zokario-concept-a/**)",
+      "Read(//Users/waleedalansari/Desktop/all website designs/zokario-concept-b/**)",
+      "Read(//Users/waleedalansari/Desktop/all website designs/trendytech-store/**)",
+      "Read(//Users/waleedalansari/Desktop/all website designs/storefront-mission-control/**)"
     ]
   }
 }

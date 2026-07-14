@@ -6,8 +6,13 @@
 <title>The Family Majlis · Member Forums | Zokario</title>
 <meta name="description" content="The Zokario family majlis: reading rooms, a members club and an open floor, in English, Arabic and French. Pull up a chair by the fireplace.">
 <link rel="canonical" href="https://zokario.com/forums.html">
+<link rel="alternate" hreflang="en" href="https://zokario.com/forums.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://zokario.com/forums.html?lang=ar">
+<link rel="alternate" hreflang="fr" href="https://zokario.com/forums.html?lang=fr">
+<link rel="alternate" hreflang="x-default" href="https://zokario.com/forums.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Zokario">
+<meta property="og:url" content="https://zokario.com/forums.html">
 <meta property="og:title" content="The Family Majlis · Member Forums | Zokario">
 <meta property="og:description" content="Reading rooms, a members club and an open floor. Pull up a chair by the fireplace.">
 <meta property="og:image" content="https://zokario.com/assets/majlis-poster.jpg">
@@ -19,9 +24,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=41">
+<link rel="preload" as="image" href="assets/majlis-poster.jpg" fetchpriority="high">
+<link rel="stylesheet" href="css/main.css?v=44">
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <header class="site-header">
   <div class="header-inner">
@@ -66,7 +73,7 @@
   <a href="cart.html">Cart</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- ============ MAJLIS HERO ============ -->
   <section class="room-hero majlis-hero">
@@ -88,6 +95,7 @@
       <div class="fireplace reveal" id="fireplace">
         <div class="fireplace-head">
           <h2>🔥 <span data-i18n="fc.title">The Fireplace</span> <small data-i18n="fc.sub">live, and lightly watched</small></h2>
+          <div class="fire-meta" id="fireMeta"></div>
         </div>
         <div class="fireplace-rules" id="chatRules">
           <p class="fr-kicker" data-i18n="fc.rulesTitle">Before you speak by the fire</p>
@@ -96,8 +104,10 @@
         </div>
         <div class="fireplace-body" id="chatBody" hidden>
           <div class="chat-scroll" id="chatScroll"></div>
+          <div class="chat-emoji-tray" id="chatEmojiTray" hidden></div>
           <form class="chat-form" id="chatForm">
-            <input id="chatInput" maxlength="280" autocomplete="off" data-i18n-ph="fc.ph" placeholder="Say something warm">
+            <button type="button" class="chat-emoji-btn" id="chatEmojiBtn" aria-label="Emojis">😊</button>
+            <input id="chatInput" maxlength="280" autocomplete="off" aria-label="Message" data-i18n-label="fc.ph" data-i18n-ph="fc.ph" placeholder="Say something warm">
             <button class="btn btn-gold" type="submit" data-i18n="fc.send">Send</button>
           </form>
         </div>
@@ -108,10 +118,10 @@
   <!-- ============ WINGS ============ -->
   <section class="section" id="wings">
     <div class="container">
-      <div class="wing-tabs reveal" role="tablist">
-        <button class="wing-tab active" data-wing="en">🕮 <span>The English Wing</span></button>
-        <button class="wing-tab" data-wing="ar">☪ <span>الجناح العربي</span></button>
-        <button class="wing-tab" data-wing="intl">🕊 <span>The International Salon</span></button>
+      <div class="wing-tabs reveal" role="group" aria-label="Wings">
+        <button class="wing-tab active" data-wing="en" aria-pressed="true">🕮 <span>The English Wing</span></button>
+        <button class="wing-tab" data-wing="ar" aria-pressed="false">☪ <span>الجناح العربي</span></button>
+        <button class="wing-tab" data-wing="intl" aria-pressed="false">🕊 <span>The International Salon</span></button>
       </div>
 
       <div class="majlis-pulse reveal" id="pulseBar"></div>
@@ -154,10 +164,10 @@
           <div class="composer" id="composer" hidden>
             <div class="composer-row">
               <button type="button" class="icon-pick" id="iconPick" aria-label="Pick a symbol">💬</button>
-              <input id="topicTitle" maxlength="120" data-i18n-ph="fo.titlePh" placeholder="A title worth clicking (emojis welcome)">
+              <input id="topicTitle" maxlength="120" aria-label="Topic title" data-i18n-label="fo.titlePh" data-i18n-ph="fo.titlePh" placeholder="A title worth clicking (emojis welcome)">
             </div>
             <div class="emoji-tray" id="emojiTray" hidden></div>
-            <textarea id="topicBody" rows="5" maxlength="4000" data-i18n-ph="fo.bodyPh" placeholder="Write it the way you would tell it in a majlis"></textarea>
+            <textarea id="topicBody" rows="5" maxlength="4000" aria-label="Topic body" data-i18n-label="fo.bodyPh" data-i18n-ph="fo.bodyPh" placeholder="Write it the way you would tell it in a majlis"></textarea>
             <div class="composer-foot">
               <span class="composer-note" data-i18n="fo.modNote">The house keeper reads every post. Kind words only.</span>
               <button class="btn btn-gold" id="postTopic" data-i18n="fo.post">Post it</button>
@@ -181,17 +191,19 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="refunds.html">Refunds</a>
+        <a href="accessibility.html" data-i18n="f.a11y">Accessibility</a>
+        <a href="#" data-ck-open data-i18n="f.cookies">Cookie settings</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="js/data.js?v=41"></script>
-<script src="js/i18n.js?v=41"></script>
-<script src="js/app.js?v=41"></script>
-<script src="js/auth.js?v=41"></script>
-<script src="js/seeds.js?v=41"></script>
-<script src="js/community.js?v=41"></script>
+<script src="js/data.js?v=44" defer></script>
+<script src="js/i18n.js?v=44" defer></script>
+<script src="js/app.js?v=44" defer></script>
+<script src="js/auth.js?v=44" defer></script>
+<script src="js/seeds.js?v=44" defer></script>
+<script src="js/community.js?v=44" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const me = ZKC.me();
@@ -225,32 +237,101 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("chatAgree").addEventListener("click", () => { localStorage.setItem("zk_chat_agreed", "1"); showChat(); });
   if (agreed()) showChat();
 
+  function chatAvatar(email) {
+    const u = ZKStore.read("zk_accounts", {})[email];
+    if (u?.photo) return `<img src="${u.photo}" alt="">`;
+    return u?.avatar || (email.startsWith("house:") ? "🕮" : "☾");
+  }
+  function fmtClock(ts) { return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }
+
+  function renderFireMeta() {
+    const el = document.getElementById("fireMeta");
+    const lastHour = ZKChat.list(wing).filter(m => Date.now() - m.at < 36e5).length;
+    const streak = me ? ZKChat.streak(me.email) : 0;
+    el.innerHTML =
+      (lastHour ? `<span class="ember-live"><i></i>${ZKT("fc.embers", { n: lastHour })}</span>` : "") +
+      (streak > 1 ? `<span class="streak-chip">🔥 ${ZKT("fc.streak", { n: streak })}</span>` : "");
+  }
+
   function renderChat() {
     const box = document.getElementById("chatScroll");
     const msgs = ZKChat.list(wing);
-    box.innerHTML = msgs.length ? msgs.map(m => `
-      <div class="chat-msg" data-mid="${m.id}">
-        ${ZKLevels.badge({ email: m.author, name: ZKForum.nameOf(m.author) || m.author.split("@")[0] })}
-        <span class="chat-text">${zkEsc(m.text)}</span>
-        ${ZKRole.canModerate() ? `<button class="chat-del" data-del="${m.id}" aria-label="Remove">×</button>` : ""}
-      </div>`).join("") : `<p class="chat-empty">${ZKT("fc.empty")}</p>`;
-    box.scrollTop = box.scrollHeight;
+    const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 80 || !box.innerHTML;
+    box.innerHTML = msgs.length ? msgs.map(m => {
+      const mine = me && m.author === me.email;
+      const counts = Object.entries(m.reacts || {}).map(([em, who]) =>
+        `<button class="chat-react ${me && who.includes(me.email) ? "on" : ""}" data-react="${em}" data-mid="${m.id}">${em}<b>${who.length}</b></button>`).join("");
+      return `
+      <div class="chat-msg ${mine ? "mine" : ""}" data-mid="${m.id}">
+        <span class="chat-ava" aria-hidden="true">${chatAvatar(m.author)}</span>
+        <div class="chat-bubble">
+          <div class="chat-head">
+            ${ZKLevels.badge({ email: m.author, name: ZKForum.nameOf(m.author) || m.author.split("@")[0] })}
+            <time>${fmtClock(m.at)}</time>
+            ${ZKRole.canModerate() ? `<button class="chat-del" data-del="${m.id}" aria-label="Remove">×</button>` : ""}
+          </div>
+          <span class="chat-text">${zkEsc(m.text)}</span>
+          ${counts ? `<div class="chat-reacts">${counts}</div>` : ""}
+        </div>
+        ${me ? `<div class="react-bar" aria-label="${ZKT("fc.react")}">${ZKChat.REACTS.map(em =>
+          `<button data-react="${em}" data-mid="${m.id}">${em}</button>`).join("")}</div>` : ""}
+      </div>`;
+    }).join("") : `<p class="chat-empty">${ZKT("fc.empty")}</p>`;
+    if (nearBottom) box.scrollTop = box.scrollHeight;
+    renderFireMeta();
   }
+
+  /* emoji tray: tap to sprinkle into the message */
+  const CHAT_EMOJIS = ["😀","😂","🥰","😍","🤩","😎","🤔","😴","🥳","😭","👍","👏","🙌","🤝","💪","🙏","❤️","🔥","✨","⭐","🎉","📚","📖","☕","🌙","🕯","🪶","🌿","🎨","🏆"];
+  const chatTray = document.getElementById("chatEmojiTray");
+  chatTray.innerHTML = CHAT_EMOJIS.map(e => `<button type="button" data-ce="${e}">${e}</button>`).join("");
+  document.getElementById("chatEmojiBtn").addEventListener("click", () => { chatTray.hidden = !chatTray.hidden; });
+  chatTray.addEventListener("click", e => {
+    const b = e.target.closest("[data-ce]"); if (!b) return;
+    const inp = document.getElementById("chatInput");
+    const at = inp.selectionStart ?? inp.value.length;
+    inp.value = inp.value.slice(0, at) + b.dataset.ce + inp.value.slice(at);
+    inp.focus();
+    inp.selectionStart = inp.selectionEnd = at + b.dataset.ce.length;
+  });
+  document.addEventListener("click", e => {
+    if (!chatTray.hidden && !e.target.closest("#chatEmojiTray, #chatEmojiBtn")) chatTray.hidden = true;
+  });
+
   document.getElementById("chatForm").addEventListener("submit", e => {
     e.preventDefault();
     if (!me) { location.href = "account.html"; return; }
     const inp = document.getElementById("chatInput");
     const t = inp.value.trim(); if (!t) return;
     const r = ZKChat.send(wing, t);
-    if (r.ok) { inp.value = ""; renderChat(); }
+    if (r.ok) {
+      inp.value = ""; chatTray.hidden = true; renderChat();
+      if (r.streakNew) zkToast("🔥 " + ZKT("fc.streakToast", { n: r.streak }));
+    }
     else if (r.reason === "modded") { inp.value = ""; zkToast(ZKT("md.chatWarn")); renderChat(); }
     else if (r.reason === "muted") zkToast(ZKT("md.muted"));
     else if (r.reason === "signin") location.href = "account.html";
   });
   document.getElementById("chatScroll").addEventListener("click", e => {
     const d = e.target.closest("[data-del]");
-    if (d) { ZKChat.removeMsg(wing, d.dataset.del); renderChat(); }
+    if (d) { ZKChat.removeMsg(wing, d.dataset.del); renderChat(); return; }
+    const rc = e.target.closest("[data-react]");
+    if (rc) {
+      if (!me) { location.href = "account.html"; return; }
+      ZKChat.react(wing, rc.dataset.mid, rc.dataset.react);
+      renderChat();
+      return;
+    }
+    /* tap a bubble to open the reaction bar (touch screens) */
+    const msg = e.target.closest(".chat-msg");
+    if (msg && me) {
+      document.querySelectorAll(".chat-msg.picker").forEach(x => { if (x !== msg) x.classList.remove("picker"); });
+      msg.classList.toggle("picker");
+    }
   });
+  /* the fire stays live: sync across tabs, tick the clock */
+  addEventListener("storage", e => { if (e.key === "zk_chat_" + wing) renderChat(); });
+  setInterval(renderFireMeta, 60000);
 
   /* ---------- sections nav ---------- */
   function renderSections() {
@@ -321,7 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- wing tabs ---------- */
   document.querySelectorAll(".wing-tab").forEach(b => b.addEventListener("click", () => {
     wing = b.dataset.wing; localStorage.setItem("zk_wing", wing);
-    document.querySelectorAll(".wing-tab").forEach(x => x.classList.toggle("active", x === b));
+    document.querySelectorAll(".wing-tab").forEach(x => { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
     renderChatRules(); renderSections(); renderTopics(); renderChat();
   }));
 
@@ -346,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (title.length < 4 || body.length < 10) { zkToast(ZKT("fo.short")); return; }
     const r = ZKForum.post(wing, section, title, body, document.getElementById("iconPick").textContent);
     if (r.ok) { location.href = "topic.html?id=" + r.id; }
-    else if (r.reason === "modded") zkToast(ZKT("md.warn", { action: r.action }));
+    else if (r.reason === "modded") zkToast(ZKT("md.warn", { action: r.actionKey ? ZKT(r.actionKey) : r.action }));
     else if (r.reason === "gilded") zkToast(ZKT("gl.lockedTitle"));
     else if (r.reason === "suspended" || r.reason === "banned") zkToast(ZKT("md.blocked"));
   });

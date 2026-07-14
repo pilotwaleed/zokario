@@ -3,6 +3,9 @@
 # Custom 404
 ErrorDocument 404 /404.html
 
+# No directory listings anywhere (covers /files/ and every other folder)
+Options -Indexes
+
 # Force HTTPS (SSL active on Hostinger)
 RewriteEngine On
 RewriteCond %{HTTPS} off
@@ -15,6 +18,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(self)"
+  # CSP: self + Google Fonts + Stripe (script/frame/connect, for launch). Inline style/script
+  # stay allowed because the site ships inline <script>/<style> blocks by design.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'"
 </IfModule>
 
 # Compression
@@ -23,6 +29,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # Cache static assets
+# CSS/JS are referenced with a version query (?v=44) from the HTML, so they can
+# be cached long and immutable: any change ships under a new version number.
+# HTML must revalidate on every visit so a version bump reaches readers at once.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg "access plus 6 months"
@@ -30,7 +39,14 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresByType image/webp "access plus 6 months"
   ExpiresByType image/svg+xml "access plus 6 months"
   ExpiresByType video/mp4 "access plus 6 months"
-  ExpiresByType text/html "access plus 60 seconds"
-  ExpiresByType text/css "access plus 1 hour"
-  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/css "access plus 6 months"
+  ExpiresByType application/javascript "access plus 6 months"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=15552000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
 </IfModule>
