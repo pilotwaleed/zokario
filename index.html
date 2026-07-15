@@ -48,7 +48,6 @@
       <a href="templates.html">Templates</a>
       <a href="notebooks.html">Notebooks</a>
       <a href="wonder.html">Wonder</a>
-      <a href="monaliza.html">Monaliza</a>
       <a href="forums.html">Forums</a>
     </nav>
     <div class="header-actions">
@@ -73,7 +72,6 @@
   <a href="templates.html">Templates</a>
   <a href="notebooks.html">Notebooks</a>
   <a href="wonder.html">Wonder</a>
-  <a href="monaliza.html">Monaliza</a>
   <a href="forums.html">Forums</a>
   <a href="support.html">Support the house</a>
   <a href="custom.html">The Atelier</a>
@@ -225,15 +223,6 @@
             <span class="door-enter" data-i18n="h.enter">Enter the room →</span>
           </span>
         </a>
-        <a class="room-door reveal reveal-d3" href="monaliza.html">
-          <img decoding="async" src="assets/monaliza-poster.jpg" alt="" width="1376" height="768" loading="lazy">
-          <span class="door-copy">
-            <span class="door-num" data-i18n="h.room5n">Room V</span>
-            <h3 data-i18n="h.room5">The Monaliza Salon</h3>
-            <p id="doorMz">Art volumes</p>
-            <span class="door-enter" data-i18n="h.enter">Enter the room →</span>
-          </span>
-        </a>
       </div>
     </div>
   </section>
@@ -348,7 +337,6 @@
         <a href="templates.html">Templates</a>
         <a href="notebooks.html">Notebooks</a>
         <a href="wonder.html">Wonder</a>
-        <a href="monaliza.html">Monaliza</a>
         <a href="custom.html">The Atelier</a>
       </div>
       <div class="footer-col">
@@ -439,7 +427,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("doorTpl").textContent = ZKT("h.doorTpl", { n: nType("template") });
   document.getElementById("doorNb").textContent = ZKT("h.doorNb", { n: nType("notebook") });
   document.getElementById("doorWn").textContent = ZKT("h.doorWonder", { n: ZK.products.filter(p => p.wonder).length });
-  document.getElementById("doorMz").textContent = ZKT("h.doorMz", { n: ZK.products.filter(p => p.monaliza).length });
 
   /* dust + hero video fallback */
   zkDust("dust");

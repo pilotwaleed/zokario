@@ -1213,7 +1213,7 @@ html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
 /* ==========================================================
    V12: the community build
    Colored names, forums, fireplace chat, wheel, gilded,
-   admin desk, atelier, support, monaliza, ban wall
+   admin desk, atelier, support, ban wall
    ========================================================== */
 
 /* ---- member names: the colored signature ---- */
@@ -1237,7 +1237,7 @@ html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
 .mb-inner .lead{margin:1.2rem auto 2.2rem}
 
 /* ---- forum layout ---- */
-.majlis-hero .room-media video,.monaliza-hero .room-media video{filter:brightness(.62)}
+.majlis-hero .room-media video{filter:brightness(.62)}
 .fireplace{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(200,169,106,.05),transparent);overflow:hidden}
 .fireplace-head{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;border-bottom:1px solid var(--line)}
 .fireplace-head h2{font-size:1.15rem;display:flex;align-items:center;gap:.5rem}
@@ -1390,13 +1390,6 @@ html[lang="ar"] .wonder-quote blockquote{font-style:normal;line-height:1.9}
 .atelier-form textarea{resize:vertical}
 .at-hint{font-size:.74rem;color:var(--ink-dim);margin-top:.5rem}
 .atelier-done{text-align:center;padding:4rem 1rem}
-
-/* ---- monaliza plaque ---- */
-.plaque{border:1px solid rgba(212,179,106,.4);border-radius:20px;padding:3rem 2.6rem;background:linear-gradient(160deg,rgba(212,179,106,.07),transparent 55%);position:relative}
-.plaque-orn{position:absolute;top:-1rem;left:50%;transform:translateX(-50%);background:var(--bg0);padding:0 1rem;color:var(--champagne);font-size:1.3rem}
-.plaque .h2{text-align:center;margin-bottom:1.6rem}
-.plaque-prose p{color:var(--ink-mid);line-height:1.95;margin-bottom:1.1rem;font-size:1.02rem}
-.plaque-prose p:last-child{margin-bottom:0}
 
 /* ---- admin desk ---- */
 .desk-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.8rem}

@@ -1623,7 +1623,7 @@ const ZK = {
   }
 ,
 
-  /* ---------------- THE MONALIZA SALON (vintage art) ---------------- */
+  /* ---------------- ART & BEAUTY (vintage art) ---------------- */
   {
     "id": "the-gilded-frame", pdf: "files/the-gilded-frame-523c167256.pdf",
     "contents": [
@@ -1638,7 +1638,6 @@ const ZK = {
     ],
     "type": "book",
     "lang": "en",
-    "monaliza": true,
     "title": "The Gilded Frame",
     "subtitle": "How frames, light and rooms taught Europe to look at pictures",
     "category": "Art & Beauty",
@@ -1712,7 +1711,6 @@ const ZK = {
     ],
     "type": "book",
     "lang": "en",
-    "monaliza": true,
     "title": "One Hour in a Museum",
     "subtitle": "One painting, sixty minutes and the art of coming away changed",
     "category": "Art & Beauty",
@@ -1787,7 +1785,6 @@ const ZK = {
     ],
     "type": "book",
     "lang": "en",
-    "monaliza": true,
     "title": "Letters to a Young Painter",
     "subtitle": "Letters on craft, doubt and beauty for an artist at the beginning of the road",
     "category": "Art & Beauty",
@@ -1862,7 +1859,6 @@ const ZK = {
     ],
     "type": "book",
     "lang": "ar",
-    "monaliza": true,
     "title": "في مدح الجمال",
     "subtitle": "تأملات في الفن والنظر وتربية العين",
     "category": "Art & Beauty",
